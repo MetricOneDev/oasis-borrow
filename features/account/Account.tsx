@@ -95,6 +95,46 @@ export function AccountButton() {
     return null
   }
 
+  if (context.chainId === 106) {
+    return (
+      <Flex
+        sx={{
+          position: 'relative',
+          justifyContent: 'flex-end',
+          minWidth: 'auto',
+        }}
+      >
+        <Button
+          variant="secondary"
+          sx={{
+            boxSizing: 'border-box',
+            minWidth: buttonMinWidth,
+            zIndex: 1,
+            background: 'white',
+            boxShadow: 'table_hovered',
+            p: 1,
+            display: 'flex',
+            alignItems: 'center',
+            transition: 'border-color ease-in 0.2s',
+            borderWidth: '1px',
+            borderStyle: 'solid',
+            borderColor: '#D8E0E300',
+            '&:hover, &:focus-visible': {
+              borderColor: '#D8E0E3FF',
+            },
+            ':focus': {
+              outline: 'none',
+            },
+          }}
+          onClick={() => openModal(AccountModal)}
+        >
+          <AccountIndicator address={context.account} />
+          <UsdvIndicator usdvBalance={accountData.usdvBalance} />
+        </Button>
+      </Flex>
+    )
+  }
+
   return (
     <Flex
       sx={{
@@ -181,16 +221,6 @@ async function createUtorgUrl(web3: Web3, account: string, chainId: number): Pro
   }
 }
 
-function getUtorgUrl(web3: Web3, account: string, chainId: number): string {
-  if (sessionStorage.getItem(`utorgUrl/${account}`) === null) {
-    void createUtorgUrl(web3, account, chainId).then(result => { sessionStorage.setItem(`utorgUrl/${account}`, result) })
-  }
-
-  const url = sessionStorage.getItem(`utorgUrl/${account}`) as string
-  sessionStorage.removeItem(`utorgUrl/${account}`)
-  return url
-}
-
 export function BuyUsdvOnUtorgModal({ close }: ModalProps) {
   const { web3Context$ } = useAppContext()
   const web3Context = useObservable(web3Context$)
@@ -198,6 +228,14 @@ export function BuyUsdvOnUtorgModal({ close }: ModalProps) {
 
   if (web3Context?.status !== 'connected') return null
   const { account, web3, chainId } = web3Context
+
+  setTimeout(() => {
+    void createUtorgUrl(web3, account, chainId).then(result => {
+      setTimeout(() => {
+        document.getElementById(`utorgURL`)?.setAttribute('href', result)
+      })
+    })
+  })
 
   return (
     <Modal close={close} sx={{ maxWidth: '530px', margin: '0px auto' }}>
@@ -214,16 +252,18 @@ export function BuyUsdvOnUtorgModal({ close }: ModalProps) {
           }}
         >
           <Heading mb={3}>{t('your-wallet')}</Heading>
-          <Card variant="secondary">
-            <AppLink
-              sx={{ color: 'primary', mr: 3 }}
-              withAccountPrefix={false}
-              href={ getUtorgUrl(web3, account, chainId) }
-              onClick={close}
-            >
+          <a
+            href="/"
+            onClick={close}
+            id="utorgURL"
+            color="primary"
+            target="_blank"
+            style={{ color: "black", textDecoration: "none", alignContent: "center" }}
+          >
+            <Card variant="secondary">
               {t('buy-usdv-utorg')}
-            </AppLink>
-          </Card>
+            </Card>
+          </a>
         </Box>
       </Grid>
     </Modal>
