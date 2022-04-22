@@ -254,12 +254,17 @@
     "contact": "Contact",
     "blog": "Blog",
     "faq": "FAQ",
+    "chat": "Chat",
+    "gov": "Governance",
+    "liquidations": "Liquidations",
+    "site": "Official Site",
     "knowledge-centre": "Knowledge Centre",
     "learn": "Learn",
     "oracles": "Oracles",
     "usdv-wallet": "USDV Wallet",
     "borrow": "Borrow",
-    "oasis-borrow": "Velero Borrow"
+    "oasis-borrow": "Velero Borrow",
+    "save": "Velero Save"
   },
   "new-to-velas": "New to Velas? ",
   "next": "Next",

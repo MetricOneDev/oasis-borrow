@@ -224,7 +224,12 @@
     "contact": "联系方式",
     "faq": "常见问题",
     "privacy": "隐私",
-    "terms": "条款"
+    "terms": "条款",
+    "chat": "Chat",
+    "gov": "Governance",
+    "liquidations": "Liquidations",
+    "site": "Velero",
+    "save": "Velero Save"
   },
   "new-to-velas": "刚接触以太坊？",
   "next": "下一步",

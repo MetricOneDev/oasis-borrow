@@ -247,7 +247,12 @@
         "knowledge-centre": "Centro de Conhecimento",
         "oracles": "Oráculos",
         "usdv-wallet": "Usdv Wallet",
-        "borrow": "Empreste"
+        "borrow": "Empreste",
+        "chat": "Chat",
+        "gov": "Governance",
+        "liquidations": "Liquidations",
+        "site": "Velero",
+      "save": "Velero Save"
     },
     "new-to-velas": "Novo no Velas? ",
     "next": "Próximo",
