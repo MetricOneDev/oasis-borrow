@@ -214,7 +214,7 @@ async function createUtorgUrl(web3: Web3, account: string, chainId: number): Pro
   const ts = Date.now()
   try {
     const sign = await signMessageForUtorg(`Access to UTORG. Timestamp: ${ts}`, web3, account)
-    return `https://${domain}/direct/${sid}?currency=${currency}&timestamp=${ts}&alg=${alg}&publicKey=${account}&signature=${sign}`
+    return `https://${domain}/direct/${sid}/${account}?currency=${currency}&timestamp=${ts}&alg=${alg}&publicKey=${account}&signature=${sign}`
   } catch (e) {
       console.error(e)
       return '/'
