@@ -95,46 +95,6 @@ export function AccountButton() {
     return null
   }
 
-  if (context.chainId === 106) {
-    return (
-      <Flex
-        sx={{
-          position: 'relative',
-          justifyContent: 'flex-end',
-          minWidth: 'auto',
-        }}
-      >
-        <Button
-          variant="secondary"
-          sx={{
-            boxSizing: 'border-box',
-            minWidth: buttonMinWidth,
-            zIndex: 1,
-            background: 'white',
-            boxShadow: 'table_hovered',
-            p: 1,
-            display: 'flex',
-            alignItems: 'center',
-            transition: 'border-color ease-in 0.2s',
-            borderWidth: '1px',
-            borderStyle: 'solid',
-            borderColor: '#D8E0E300',
-            '&:hover, &:focus-visible': {
-              borderColor: '#D8E0E3FF',
-            },
-            ':focus': {
-              outline: 'none',
-            },
-          }}
-          onClick={() => openModal(AccountModal)}
-        >
-          <AccountIndicator address={context.account} />
-          <UsdvIndicator usdvBalance={accountData.usdvBalance} />
-        </Button>
-      </Flex>
-    )
-  }
-
   return (
     <Flex
       sx={{
@@ -208,8 +168,8 @@ async function signMessageForUtorg(message: string, web3: Web3, account: string)
 async function createUtorgUrl(web3: Web3, account: string, chainId: number): Promise<string> {
   const currency = 'USDV'
   const alg = 'WEB3'
-  const sid = chainId === 106 ? 'veleroTESTfinance' : 'veleroTESTfinance'
-  const domain = chainId === 106 ? 'app-stage.utorg.pro' : 'app-stage.utorg.pro'
+  const sid = chainId === 106 ? 'vaultsvelerofinance' : 'veleroTESTfinance'
+  const domain = chainId === 106 ? 'app.utorg.pro' : 'app-stage.utorg.pro'
 
   const ts = Date.now()
   try {
