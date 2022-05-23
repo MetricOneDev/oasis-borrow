@@ -173,7 +173,7 @@ interface IUtorgUrls {
 async function createUtorgUrl(web3: Web3, account: string, chainId: number): Promise<IUtorgUrls> {
   const currency = 'USDV'
   const alg = 'WEB3'
-  const sid = chainId === 106 ? 'vaultsvelerofinance' : 'veleroTESTfinance'
+  const sid = chainId === 106 ? 'vaultsVelerofinance' : 'veleroTESTfinance'
   const domain = chainId === 106 ? 'app.utorg.pro' : 'app-stage.utorg.pro'
 
   const ts = Date.now()
