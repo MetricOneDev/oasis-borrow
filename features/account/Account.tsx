@@ -181,7 +181,7 @@ async function createUtorgUrl(web3: Web3, account: string, chainId: number): Pro
     const sign = await signMessageForUtorg(`Access to UTORG. Timestamp: ${ts}`, web3, account)
     return {
       usdv: `https://${domain}/direct/${sid}/${account}?currency=${currency}&timestamp=${ts}&alg=${alg}&publicKey=${account}&signature=${sign}`,
-      vlx: `https://${domain}/direct/${sid}/${account}?currency=vlxeth&timestamp=${ts}&alg=${alg}&publicKey=${account}&signature=${sign}`,
+      vlx: `https://${domain}/direct/${sid}/${account}?currency=VLXETH&timestamp=${ts}&alg=${alg}&publicKey=${account}&signature=${sign}`,
     }
   } catch (e) {
       console.error(e)
@@ -203,7 +203,7 @@ export function BuyUsdvOnUtorgModal({ close }: ModalProps) {
   setTimeout(() => {
     void createUtorgUrl(web3, account, chainId).then(result => {
       setTimeout(() => {
-        // document.getElementById(`utorgURL`)?.setAttribute('href', result.usdv)
+        document.getElementById(`utorgURL`)?.setAttribute('href', result.usdv)
         document.getElementById(`utorgURLBuyVLX`)?.setAttribute('href', result.vlx)
       })
     })
