@@ -154,7 +154,7 @@ export function AccountButton() {
         }}
         onClick={() => openModal(BuyUsdvOnUtorgModal)}
       >
-        {t('buy-usdv-utorg')}
+        {t('buy-utorg')}
       </Button>
     </Flex>
   )
@@ -165,7 +165,13 @@ async function signMessageForUtorg(message: string, web3: Web3, account: string)
   return web3.eth.personal.sign(message, account)
 }
 
-async function createUtorgUrl(web3: Web3, account: string, chainId: number): Promise<string> {
+interface IUtorgUrls {
+  usdv: string;
+  vlx: string;
+}
+
+
+async function createUtorgUrl(web3: Web3, account: string, chainId: number): Promise<IUtorgUrls> {
   const currency = 'USDV'
   const alg = 'WEB3'
   const sid = chainId === 106 ? 'vaultsvelerofinance' : 'veleroTESTfinance'
@@ -174,10 +180,16 @@ async function createUtorgUrl(web3: Web3, account: string, chainId: number): Pro
   const ts = Date.now()
   try {
     const sign = await signMessageForUtorg(`Access to UTORG. Timestamp: ${ts}`, web3, account)
-    return `https://${domain}/direct/${sid}/${account}?currency=${currency}&timestamp=${ts}&alg=${alg}&publicKey=${account}&signature=${sign}`
+    return {
+      usdv: `https://${domain}/direct/${sid}/${account}?currency=${currency}&timestamp=${ts}&alg=${alg}&publicKey=${account}&signature=${sign}`,
+      vlx: `https://${domain}/direct/${sid}/${account}?currency=VLX&timestamp=${ts}&alg=${alg}&publicKey=${account}&signature=${sign}`,
+    }
   } catch (e) {
       console.error(e)
-      return '/'
+      return {
+        usdv: '/',
+        vlx: '/',
+      }
   }
 }
 
@@ -192,7 +204,8 @@ export function BuyUsdvOnUtorgModal({ close }: ModalProps) {
   setTimeout(() => {
     void createUtorgUrl(web3, account, chainId).then(result => {
       setTimeout(() => {
-        document.getElementById(`utorgURL`)?.setAttribute('href', result)
+        document.getElementById(`utorgURL`)?.setAttribute('href', result.usdv)
+        document.getElementById(`utorgURLBuyVLX`)?.setAttribute('href', result.vlx)
       })
     })
   })
@@ -222,6 +235,19 @@ export function BuyUsdvOnUtorgModal({ close }: ModalProps) {
           >
             <Card variant="secondary">
               {t('buy-usdv-utorg')}
+            </Card>
+          </a>
+          <br/>
+          <a
+            href="/"
+            onClick={close}
+            id="utorgURLBuyVLX"
+            color="primary"
+            target="_blank"
+            style={{ color: "black", textDecoration: "none", alignContent: "center" }}
+          >
+            <Card variant="secondary">
+              {t('buy-vlx-utorg')}
             </Card>
           </a>
         </Box>
