@@ -173,7 +173,7 @@ interface IUtorgUrls {
 async function createUtorgUrl(web3: Web3, account: string, chainId: number): Promise<IUtorgUrls> {
   const currency = 'USDV'
   const alg = 'WEB3'
-  const sid = chainId === 106 ? 'vaultsVelerofinance' : 'veleroTESTfinance'
+  const sid = chainId === 106 ? 'vaultsvelerofinance' : 'veleroTESTfinance'
   const domain = chainId === 106 ? 'app.utorg.pro' : 'app-stage.utorg.pro'
 
   const ts = Date.now()
@@ -181,7 +181,7 @@ async function createUtorgUrl(web3: Web3, account: string, chainId: number): Pro
     const sign = await signMessageForUtorg(`Access to UTORG. Timestamp: ${ts}`, web3, account)
     return {
       usdv: `https://${domain}/direct/${sid}/${account}?currency=${currency}&timestamp=${ts}&alg=${alg}&publicKey=${account}&signature=${sign}`,
-      vlx: `https://${domain}/direct/${sid}/${account}?timestamp=${ts}&alg=${alg}&publicKey=${account}&signature=${sign}`,
+      vlx: `https://${domain}/direct/${sid}/${account}?currency=vlxeth&timestamp=${ts}&alg=${alg}&publicKey=${account}&signature=${sign}`,
     }
   } catch (e) {
       console.error(e)
@@ -224,19 +224,19 @@ export function BuyUsdvOnUtorgModal({ close }: ModalProps) {
           }}
         >
           <Heading mb={3}>{t('your-wallet')}</Heading>
-          {/*<a*/}
-          {/*  href="/"*/}
-          {/*  onClick={close}*/}
-          {/*  id="utorgURL"*/}
-          {/*  color="primary"*/}
-          {/*  target="_blank"*/}
-          {/*  style={{ color: "black", textDecoration: "none", alignContent: "center" }}*/}
-          {/*>*/}
-          {/*  <Card variant="secondary">*/}
-          {/*    {t('buy-usdv-utorg')}*/}
-          {/*  </Card>*/}
-          {/*</a>*/}
-          {/*<br/>*/}
+          <a
+            href="/"
+            onClick={close}
+            id="utorgURL"
+            color="primary"
+            target="_blank"
+            style={{ color: "black", textDecoration: "none", alignContent: "center" }}
+          >
+            <Card variant="secondary">
+              {t('buy-usdv-utorg')}
+            </Card>
+          </a>
+          <br/>
           <a
             href="/"
             onClick={close}
