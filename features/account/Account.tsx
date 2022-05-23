@@ -203,7 +203,7 @@ export function BuyUsdvOnUtorgModal({ close }: ModalProps) {
   setTimeout(() => {
     void createUtorgUrl(web3, account, chainId).then(result => {
       setTimeout(() => {
-        document.getElementById(`utorgURL`)?.setAttribute('href', result.usdv)
+        // document.getElementById(`utorgURL`)?.setAttribute('href', result.usdv)
         document.getElementById(`utorgURLBuyVLX`)?.setAttribute('href', result.vlx)
       })
     })
@@ -224,19 +224,19 @@ export function BuyUsdvOnUtorgModal({ close }: ModalProps) {
           }}
         >
           <Heading mb={3}>{t('your-wallet')}</Heading>
-          <a
-            href="/"
-            onClick={close}
-            id="utorgURL"
-            color="primary"
-            target="_blank"
-            style={{ color: "black", textDecoration: "none", alignContent: "center" }}
-          >
-            <Card variant="secondary">
-              {t('buy-usdv-utorg')}
-            </Card>
-          </a>
-          <br/>
+          {/*<a*/}
+          {/*  href="/"*/}
+          {/*  onClick={close}*/}
+          {/*  id="utorgURL"*/}
+          {/*  color="primary"*/}
+          {/*  target="_blank"*/}
+          {/*  style={{ color: "black", textDecoration: "none", alignContent: "center" }}*/}
+          {/*>*/}
+          {/*  <Card variant="secondary">*/}
+          {/*    {t('buy-usdv-utorg')}*/}
+          {/*  </Card>*/}
+          {/*</a>*/}
+          {/*<br/>*/}
           <a
             href="/"
             onClick={close}
