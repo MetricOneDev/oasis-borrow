@@ -170,7 +170,6 @@ interface IUtorgUrls {
   vlx: string;
 }
 
-
 async function createUtorgUrl(web3: Web3, account: string, chainId: number): Promise<IUtorgUrls> {
   const currency = 'USDV'
   const alg = 'WEB3'
@@ -182,7 +181,7 @@ async function createUtorgUrl(web3: Web3, account: string, chainId: number): Pro
     const sign = await signMessageForUtorg(`Access to UTORG. Timestamp: ${ts}`, web3, account)
     return {
       usdv: `https://${domain}/direct/${sid}/${account}?currency=${currency}&timestamp=${ts}&alg=${alg}&publicKey=${account}&signature=${sign}`,
-      vlx: `https://${domain}/direct/${sid}/${account}?currency=VLX&timestamp=${ts}&alg=${alg}&publicKey=${account}&signature=${sign}`,
+      vlx: `https://${domain}/direct/${sid}/${account}?timestamp=${ts}&alg=${alg}&publicKey=${account}&signature=${sign}`,
     }
   } catch (e) {
       console.error(e)
