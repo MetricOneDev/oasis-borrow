@@ -667,6 +667,49 @@ export const tokenIcons = {
     ),
     viewBox: '0 0 32 32',
   },
+  bnb_circle_color: {
+    path: (
+      <>
+        <svg width="32px" height="32px" version="1.1">
+          <g id="surface1">
+            <path fillRule="nonzero" stroke="none" fill="rgb(95.294118%,72.941176%,18.431373%)" fillOpacity="1" d="M 9.785156 13.445312 L 16 7.230469 L 22.21875 13.449219 L 25.835938 9.832031 L 16 0 L 6.167969 9.832031 L 9.785156 13.445312 M 0 16 L 3.617188 12.382812 L 7.230469 16 L 3.617188 19.617188 Z M 9.785156 18.554688 L 16 24.769531 L 22.21875 18.550781 L 25.835938 22.164062 L 16 32 L 6.167969 22.171875 L 6.164062 22.164062 L 9.785156 18.554688 M 24.769531 16 L 28.382812 12.386719 L 32 16 L 28.386719 19.617188 Z M 24.769531 16 "/>
+            <path fillRule="nonzero" stroke="none" fill="rgb(95.294118%,72.941176%,18.431373%)" fillOpacity="1" d="M 19.667969 16 L 16 12.328125 L 12.328125 16 L 16 19.671875 L 19.667969 16.003906 "/>
+          </g>
+        </svg>
+      </>
+    ),
+    viewBox: '0 0 32 32',
+  },
+  ftm_circle_color: {
+    path: (
+      <>
+        <svg width="32px" height="32px" version="1.1">
+          <defs>
+            <filter id="alpha" filterUnits="objectBoundingBox" x="0%" y="0%" width="100%" height="100%">
+              <feColorMatrix type="matrix" in="SourceGraphic" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"/>
+            </filter>
+            <image id="image7" width="32" height="32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAANUlEQVRYhe3OsQ0AIAwDwUD23xgprABFqtzXlnUR0vTW67BOVgdgd5wCAAAAAAAAAABI+ukC+hEDJYep79kAAAAASUVORK5CYII="/>
+            <mask id="mask0">
+              <g filter="url(#alpha)">
+                <use href="#image7"/>
+              </g>
+            </mask>
+            <clipPath id="clip1">
+              <rect x="0" y="0" width="32" height="32"/>
+            </clipPath>
+            <g id="surface6" clipPath="url(#clip1)">
+              <path stroke="none" fillRule="evenodd" fill="rgb(100%,100%,100%)" fillOpacity="1" d="M 17.199219 12.898438 L 20.800781 10.800781 L 20.800781 15 Z M 20.800781 21.898438 L 16 24.699219 L 11.199219 21.898438 L 11.199219 17 L 16 19.800781 L 20.800781 17 Z M 11.199219 10.800781 L 14.800781 12.898438 L 11.199219 15 Z M 16.601562 13.898438 L 20.199219 16 L 16.601562 18.101562 Z M 15.398438 18.101562 L 11.800781 16 L 15.398438 13.898438 Z M 20.199219 9.800781 L 16 12.199219 L 11.800781 9.800781 L 16 7.300781 Z M 10 9.398438 L 10 22.5 L 16 25.898438 L 22 22.5 L 22 9.398438 L 16 6 Z M 10 9.398438 "/>
+            </g>
+          </defs>
+          <g id="surface1">
+            <path stroke="none" fillRule="nonzero" fill="rgb(7.45098%,70.980392%,92.54902%)" fillOpacity="1" d="M 32 16 C 32 24.835938 24.835938 32 16 32 C 7.164062 32 0 24.835938 0 16 C 0 7.164062 7.164062 0 16 0 C 24.835938 0 32 7.164062 32 16 Z M 32 16 "/>
+            <use href="#surface6" mask="url(#mask0)"/>
+          </g>
+        </svg>
+      </>
+    ),
+    viewBox: '0 0 32 32',
+  },
   busd_circle_color: {
     path: (
       <g>
