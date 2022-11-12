@@ -80,7 +80,7 @@ export interface Vault {
   collateralizationRatio: BigNumber
   collateralizationRatioAtNextPrice: BigNumber
   liquidationPrice: BigNumber
-  usdvYieldFromLockedCollateral: BigNumber
+  stblYieldFromLockedCollateral: BigNumber
 
   atRiskLevelWarning: boolean
   atRiskLevelDanger: boolean
@@ -188,7 +188,7 @@ export function createVault$(
               ? zero
               : debt.times(liquidationRatio).div(collateral)
 
-            const usdvYieldFromLockedCollateral = availableDebt.lt(ilkDebtAvailable)
+            const stblYieldFromLockedCollateral = availableDebt.lt(ilkDebtAvailable)
               ? availableDebt
               : ilkDebtAvailable.gt(zero)
               ? ilkDebtAvailable
@@ -243,7 +243,7 @@ export function createVault$(
               collateralizationRatio,
               collateralizationRatioAtNextPrice,
               liquidationPrice,
-              usdvYieldFromLockedCollateral,
+              stblYieldFromLockedCollateral: stblYieldFromLockedCollateral,
 
               atRiskLevelWarning,
               atRiskLevelDanger,

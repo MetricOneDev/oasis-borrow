@@ -5,6 +5,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Grid, Text } from 'theme-ui'
 
+import { stblName } from "../../blockchain/config";
 import { OpenVaultState } from './openVault'
 import { TxStatusCardProgress, TxStatusCardSuccess } from './TxStatusCard'
 
@@ -22,7 +23,7 @@ export function OpenVaultConfirmation({
   const afterBalance = formatCryptoBalance(afterCollateralBalance)
 
   const intoVault = formatCryptoBalance(depositAmount || zero)
-  const usdvToBeGenerated = formatCryptoBalance(generateAmount || zero)
+  const stblToBeGenerated = formatCryptoBalance(generateAmount || zero)
   const afterCollRatio = afterCollateralizationRatio.eq(zero)
     ? '--'
     : formatPercent(afterCollateralizationRatio.times(100), { precision: 2 })
@@ -42,7 +43,7 @@ export function OpenVaultConfirmation({
         <Details.Item label={t('system.in-your-wallet')} value={`${balance} ${token}`} />
         <Details.Item label={t('moving-into-vault')} value={`${intoVault} ${token}`} />
         <Details.Item label={t('remaining-in-wallet')} value={`${afterBalance} ${token}`} />
-        <Details.Item label={t('usdv-being-generated')} value={`${usdvToBeGenerated} USDV`} />
+        <Details.Item label={t('stbl-being-generated')} value={`${stblToBeGenerated} ${stblName}`} />
         <Details.Item
           label={t('system.collateral-ratio')}
           value={<Text sx={{ color: vaultRiskColor }}>{afterCollRatio}</Text>}

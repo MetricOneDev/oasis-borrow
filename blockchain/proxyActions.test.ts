@@ -7,7 +7,7 @@ import { getWithdrawAndPaybackCallData } from './calls/proxyActions'
 import { TxMetaKind } from './calls/txMeta'
 
 interface ConstructWithdrawAndPaybackProps {
-  token: 'VLX' | 'WBTC'
+  token: 'MTR' | 'WBTC'
   withdrawAmount?: BigNumber
   paybackAmount?: BigNumber
   shouldPaybackAll?: boolean
@@ -36,21 +36,21 @@ function constructWithdrawAndPayback({
 
 describe('ProxyActions', () => {
   describe('WithdrawAndPayback', () => {
-    it('should call wipeAllAndFreeVLX() when withdrawAmount & paybackAmount is greater than zero, token is VLX and the shouldPaybackAll flag is true', () => {
+    it('should call wipeAllAndFreeCoin() when withdrawAmount & paybackAmount is greater than zero, token is COIN and the shouldPaybackAll flag is true', () => {
       expect(
         constructWithdrawAndPayback({
-          token: 'VLX',
+          token: 'MTR',
           withdrawAmount: one,
           paybackAmount: new BigNumber('2000'),
           shouldPaybackAll: true,
         }),
-      ).to.deep.equal('wipeAllAndFreeVLX')
+      ).to.deep.equal('wipeAllAndFreeCoin')
     })
 
-    it('should call wipeAndFreeETH() when withdrawAmount & paybackAmount is greater than zero, token is VLX and the shouldPaybackAll flag is false', () => {
+    it('should call wipeAndFreeETH() when withdrawAmount & paybackAmount is greater than zero, token is COIN and the shouldPaybackAll flag is false', () => {
       expect(
         constructWithdrawAndPayback({
-          token: 'VLX',
+          token: 'MTR',
           withdrawAmount: one,
           paybackAmount: new BigNumber('2000'),
         }),
@@ -78,10 +78,10 @@ describe('ProxyActions', () => {
       ).to.deep.equal('wipeAndFreeGem')
     })
 
-    it('should call freeETH() when withdrawAmount is greater than zero, paybackAmount is zero, token is VLX and the shouldPaybackAll flag is false', () => {
+    it('should call freeETH() when withdrawAmount is greater than zero, paybackAmount is zero, token is COIN and the shouldPaybackAll flag is false', () => {
       expect(
         constructWithdrawAndPayback({
-          token: 'VLX',
+          token: 'MTR',
           withdrawAmount: one,
         }),
       ).to.deep.equal('freeETH')
@@ -96,7 +96,7 @@ describe('ProxyActions', () => {
       ).to.deep.equal('freeGem')
     })
 
-    it('should call wipeAll() when withdrawAmount is zero, paybackAmount is greater than zero, token is VLX/WBTC and the shouldPaybackAll flag is true', () => {
+    it('should call wipeAll() when withdrawAmount is zero, paybackAmount is greater than zero, token is MTR/WBTC and the shouldPaybackAll flag is true', () => {
       expect(
         constructWithdrawAndPayback({
           token: 'WBTC',
@@ -106,14 +106,14 @@ describe('ProxyActions', () => {
       ).to.deep.equal('wipeAll')
       expect(
         constructWithdrawAndPayback({
-          token: 'VLX',
+          token: 'MTR',
           paybackAmount: new BigNumber('1000'),
           shouldPaybackAll: true,
         }),
       ).to.deep.equal('wipeAll')
     })
 
-    it('should call wipe() when withdrawAmount is zero, paybackAmount is greater than zero, token is VLX/WBTC and the shouldPaybackAll flag is false', () => {
+    it('should call wipe() when withdrawAmount is zero, paybackAmount is greater than zero, token is MTR/WBTC and the shouldPaybackAll flag is false', () => {
       expect(
         constructWithdrawAndPayback({
           token: 'WBTC',
@@ -122,7 +122,7 @@ describe('ProxyActions', () => {
       ).to.deep.equal('wipe')
       expect(
         constructWithdrawAndPayback({
-          token: 'VLX',
+          token: 'MTR',
           paybackAmount: new BigNumber('1000'),
         }),
       ).to.deep.equal('wipe')

@@ -19,6 +19,7 @@ import React, { useCallback } from 'react'
 import { Box, Card, Flex, Grid, Heading, Text } from 'theme-ui'
 import { Dictionary } from 'ts-essentials'
 
+import { stblName } from "../../blockchain/config";
 import { Filters } from './Filters'
 import { VaultsFilterState, VaultsWithFilters } from './vaultsFilters'
 import { VaultsOverview } from './vaultsOverview'
@@ -87,13 +88,13 @@ const vaultsColumns: ColumnDef<Vault, VaultsFilterState>[] = [
     ),
   },
   {
-    headerLabel: 'system.usdv-debt',
+    headerLabel: 'system.stbl-debt',
     header: ({ label, ...filters }) => (
       <TableSortHeader sx={{ ml: 'auto' }} filters={filters} sortBy="debt">
         {label}
       </TableSortHeader>
     ),
-    cell: ({ debt }) => <Text sx={{ textAlign: 'right' }}>{formatCryptoBalance(debt)} USDV</Text>,
+    cell: ({ debt }) => <Text sx={{ textAlign: 'right' }}>{formatCryptoBalance(debt)} `${stblName}`</Text>,
   },
   {
     headerLabel: '',
@@ -165,8 +166,8 @@ export function Summary({ summary }: { summary: VaultSummary }) {
             {t('vaults-overview.total-debt')}
           </Text>
           <Text variant="header2" sx={{ mt: 2 }}>
-            {formatCryptoBalance(summary.totalUsdvDebt)}
-            <Text sx={{ fontSize: '20px', display: 'inline', ml: 2 }}>USDV</Text>
+            {formatCryptoBalance(summary.totalStblDebt)}
+            <Text sx={{ fontSize: '20px', display: 'inline', ml: 2 }}>`${stblName}`</Text>
           </Text>
         </Box>
         <Box sx={{ gridRow: ['initial', '2/3', 'auto'] }}>

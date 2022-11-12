@@ -7,8 +7,8 @@ export interface OpenVaultCalculations {
   afterLiquidationPrice: BigNumber
   afterCollateralizationRatio: BigNumber
   afterCollateralizationRatioAtNextPrice: BigNumber
-  usdvYieldFromDepositingCollateral: BigNumber
-  usdvYieldFromDepositingCollateralAtNextPrice: BigNumber
+  stblYieldFromDepositingCollateral: BigNumber
+  stblYieldFromDepositingCollateralAtNextPrice: BigNumber
   afterFreeCollateral: BigNumber
   maxDepositAmount: BigNumber
   maxDepositAmountUSD: BigNumber
@@ -26,8 +26,8 @@ export const defaultOpenVaultStateCalculations: OpenVaultCalculations = {
   maxGenerateAmountNextPrice: zero,
   afterCollateralizationRatio: zero,
   afterCollateralizationRatioAtNextPrice: zero,
-  usdvYieldFromDepositingCollateral: zero,
-  usdvYieldFromDepositingCollateralAtNextPrice: zero,
+  stblYieldFromDepositingCollateral: zero,
+  stblYieldFromDepositingCollateralAtNextPrice: zero,
   afterLiquidationPrice: zero,
   afterFreeCollateral: zero,
   afterCollateralBalance: zero,
@@ -56,23 +56,23 @@ export function applyOpenVaultCalculations(state: OpenVaultState): OpenVaultStat
   const maxDepositAmount = collateralBalance
   const maxDepositAmountUSD = collateralBalance.times(currentCollateralPrice)
 
-  const usdvYieldFromDepositingCollateral = depositAmount
+  const stblYieldFromDepositingCollateral = depositAmount
     ? depositAmount.times(currentCollateralPrice).div(liquidationRatio)
     : zero
 
-  const usdvYieldFromDepositingCollateralAtNextPrice = depositAmount
+  const stblYieldFromDepositingCollateralAtNextPrice = depositAmount
     ? depositAmount.times(nextCollateralPrice).div(liquidationRatio)
     : zero
 
-  const maxGenerateAmountCurrentPrice = usdvYieldFromDepositingCollateral.gt(ilkDebtAvailable)
+  const maxGenerateAmountCurrentPrice = stblYieldFromDepositingCollateral.gt(ilkDebtAvailable)
     ? ilkDebtAvailable
-    : usdvYieldFromDepositingCollateral
+    : stblYieldFromDepositingCollateral
 
-  const maxGenerateAmountNextPrice = usdvYieldFromDepositingCollateralAtNextPrice.gt(
+  const maxGenerateAmountNextPrice = stblYieldFromDepositingCollateralAtNextPrice.gt(
     ilkDebtAvailable,
   )
     ? ilkDebtAvailable
-    : usdvYieldFromDepositingCollateralAtNextPrice
+    : stblYieldFromDepositingCollateralAtNextPrice
 
   const maxGenerateAmount = BigNumber.minimum(
     maxGenerateAmountCurrentPrice,
@@ -107,8 +107,8 @@ export function applyOpenVaultCalculations(state: OpenVaultState): OpenVaultStat
     maxGenerateAmountNextPrice,
     afterCollateralizationRatio,
     afterCollateralizationRatioAtNextPrice,
-    usdvYieldFromDepositingCollateral,
-    usdvYieldFromDepositingCollateralAtNextPrice,
+    stblYieldFromDepositingCollateral: stblYieldFromDepositingCollateral,
+    stblYieldFromDepositingCollateralAtNextPrice: stblYieldFromDepositingCollateralAtNextPrice,
     afterLiquidationPrice,
     afterFreeCollateral,
     afterCollateralBalance,

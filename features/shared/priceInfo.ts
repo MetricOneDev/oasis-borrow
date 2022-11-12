@@ -2,30 +2,31 @@ import { BigNumber } from 'bignumber.js'
 import { OraclePriceData } from 'blockchain/prices'
 import { combineLatest, Observable, of } from 'rxjs'
 import { map, shareReplay, switchMap } from 'rxjs/operators'
+import {coinName} from "../../blockchain/config";
 
 export interface PriceInfo {
   currentCollateralPrice: BigNumber
-  currentVlxPrice: BigNumber
+  currentCoinPrice: BigNumber
   nextCollateralPrice: BigNumber
-  nextVlxPrice: BigNumber
+  nextCoinPrice: BigNumber
 
   dateLastCollateralPrice?: Date
   dateNextCollateralPrice?: Date
-  dateLastVlxPrice?: Date
-  dateNextVlxPrice?: Date
+  dateLastCoinPrice?: Date
+  dateNextCoinPrice?: Date
 
   isStaticCollateralPrice: boolean
-  isStaticVlxPrice: boolean
+  isStaticCoinPrice: boolean
 
   collateralPricePercentageChange: BigNumber
-  vlxPricePercentageChange: BigNumber
+  coinPricePercentageChange: BigNumber
 }
 
 export function createPriceInfo$(
   oraclePriceData$: (token: string) => Observable<OraclePriceData>,
   token: string,
 ): Observable<PriceInfo> {
-  return combineLatest(oraclePriceData$(token), oraclePriceData$('VLX')).pipe(
+  return combineLatest(oraclePriceData$(token), oraclePriceData$(coinName)).pipe(
     switchMap(
       ([
         {
@@ -37,30 +38,30 @@ export function createPriceInfo$(
           percentageChange: collateralPricePercentageChange,
         },
         {
-          currentPrice: currentVlxPrice,
-          nextPrice: nextVlxPrice,
-          isStaticPrice: isStaticVlxPrice,
-          currentPriceUpdate: dateLastVlxPrice,
-          nextPriceUpdate: dateNextVlxPrice,
-          percentageChange: vlxPricePercentageChange,
+          currentPrice: currentCoinPrice,
+          nextPrice: nextCoinPrice,
+          isStaticPrice: isStaticCoinPrice,
+          currentPriceUpdate: dateLastCoinPrice,
+          nextPriceUpdate: dateNextCoinPrice,
+          percentageChange: coinPricePercentageChange,
         },
       ]) =>
         of({
           currentCollateralPrice,
-          currentVlxPrice,
+          currentCoinPrice,
           nextCollateralPrice,
-          nextVlxPrice,
+          nextCoinPrice,
 
           dateLastCollateralPrice,
           dateNextCollateralPrice,
-          dateLastVlxPrice,
-          dateNextVlxPrice,
+          dateLastCoinPrice,
+          dateNextCoinPrice,
 
           isStaticCollateralPrice,
-          isStaticVlxPrice,
+          isStaticCoinPrice,
 
           collateralPricePercentageChange,
-          vlxPricePercentageChange,
+          coinPricePercentageChange,
         }),
     ),
     shareReplay(1),

@@ -3,6 +3,7 @@ import { formatCryptoBalance, formatPercent } from 'helpers/formatters/format'
 import { useTranslation } from 'next-i18next'
 import React from 'react'
 
+import { stblName } from "../../blockchain/config";
 import { OpenVaultState } from './openVault'
 export function OpenVaultIlkDetails({
   inputAmountsEmpty,
@@ -15,8 +16,8 @@ export function OpenVaultIlkDetails({
   return (
     <Details>
       <Details.Item
-        label={t('manage-vault.usdv-available')}
-        value={`${formatCryptoBalance(ilkDebtAvailable)} USDV`}
+        label={t('manage-vault.stbl-available')}
+        value={`${formatCryptoBalance(ilkDebtAvailable)} ${stblName}`}
       />
       <Details.Item
         label={t('manage-vault.min-collat-ratio')}
@@ -32,7 +33,7 @@ export function OpenVaultIlkDetails({
       />
       <Details.Item
         label={t('manage-vault.dust-limit')}
-        value={`${formatCryptoBalance(debtFloor)} USDV`}
+        value={`${formatCryptoBalance(debtFloor)} ${stblName}`}
       />
     </Details>
   )

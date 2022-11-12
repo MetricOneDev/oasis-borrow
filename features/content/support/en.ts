@@ -3,34 +3,34 @@ import { ContentTypeSupport } from './support'
 export const content: ContentTypeSupport = {
   title: 'FAQ',
   navigation: [
-    { title: 'vaults.velero.finance', id: 'using-oasis' },
-    // { title: 'Using Usdv Wallet', id: 'using-usdvwallet' },
+    { title: 'vaults.metric.one', id: 'using-oasis' },
+    // { title: 'Using MONE Wallet', id: 'using-stblwallet' },
     { title: 'Security', id: 'security' },
-    { title: 'Buying Usdv', id: 'buying-usdv' },
+    { title: 'Buying MONE', id: 'buying-stbl' },
   ],
   sections: [
     {
-      title: 'Using vaults.velero.finance',
+      title: 'Using vaults.metric.one',
       id: 'using-oasis',
       questions: [
         {
           question: 'What assets can I use as collateral?',
-          answer: `You can use many different collateral types which are voted in by Velero Governance to the Velero Protocol, including VLX and wrapped BTC. You can see each one by visiting vaults.velero.finance with the corresponding Stability Fees and Minimum Collateralization Ratios.`,
+          answer: `You can use many different collateral types which are voted in by MetricOne Governance to the MetricOne Protocol, including MTR and wrapped BTC. You can see each one by visiting vaults.metric.one with the corresponding Stability Fees and Minimum Collateralization Ratios.`,
         },
 
         {
           question: 'How much does it cost?',
-          answer: `Opening and managing a Vault is free on vaults.velero.finance except for gas costs and Stability Fees. The Stability Fee is charged on the amount of Usdv you have generated and goes directly to the Velero Protocol.`,
+          answer: `Opening and managing a Vault is free on vaults.metric.one except for gas costs and Stability Fees. The Stability Fee is charged on the amount of MONE you have generated and goes directly to the MetricOne Protocol.`,
         },
 
         {
           question: 'How do I open a Vault?',
-          answer: `To open a Vault, select the relevant Collateral and sub-type (e.g. VLX-A) from the homepage (vaults.velero.finance) and connect your preferred wallet and follow the on screen instructions that will guide you through.`,
+          answer: `To open a Vault, select the relevant Collateral and sub-type (e.g. MTR-A) from the homepage (vaults.metric.one) and connect your preferred wallet and follow the on screen instructions that will guide you through.`,
         },
 
         {
           question: 'What is the Stability Fee?',
-          answer: `The Stability Fee is the variable annual rate (shown as a percentage) added to your debt that you will need to pay back. This can be seen as the cost to generate USDV, which is paid directly to the Velero Protocol.`,
+          answer: `The Stability Fee is the variable annual rate (shown as a percentage) added to your debt that you will need to pay back. This can be seen as the cost to generate MONE, which is paid directly to the MetricOne Protocol.`,
         },
 
         {
@@ -40,12 +40,12 @@ export const content: ContentTypeSupport = {
 
         {
           question: 'What is a Proxy? Why do I need to generate one?',
-          answer: `A Proxy is a smart contract that allows you to easily interact with supported protocols, including the Velero Protocol, to manage your Vaults, generate USDV and so on. You will only need to do this once per wallet and all your Vaults will be managed through this single Proxy. Please never send any funds to this Proxy address though.`,
+          answer: `A Proxy is a smart contract that allows you to easily interact with supported protocols, including the MetricOne Protocol, to manage your Vaults, generate MONE and so on. You will only need to do this once per wallet and all your Vaults will be managed through this single Proxy. Please never send any funds to this Proxy address though.`,
         },
 
         {
           question: 'Why do I need to approve tokens? What is allowance?',
-          answer: `Token allowances let you control how much the proxy contract can do with the token balance in your wallet. To allow the Proxy contract to pay back USDV, or interact with the collaterals in your wallet, you will need to authorize it by setting an allowance with each token that you want to use with vaults.velero.finance. You can set the allowance to the amount you want to use each time or you can set a higher allowance for future interactions with vaults.velero.finance. This will all be presented to you within the flows inside vaults.velero.finance, and you won’t have to do anything extra if you don’t see any prompts.`,
+          answer: `Token allowances let you control how much the proxy contract can do with the token balance in your wallet. To allow the Proxy contract to pay back MONE, or interact with the collaterals in your wallet, you will need to authorize it by setting an allowance with each token that you want to use with vaults.metric.one. You can set the allowance to the amount you want to use each time or you can set a higher allowance for future interactions with vaults.metric.one. This will all be presented to you within the flows inside vaults.metric.one, and you won’t have to do anything extra if you don’t see any prompts.`,
         },
 
         {
@@ -55,27 +55,27 @@ export const content: ContentTypeSupport = {
 
         {
           question: 'What is the Liquidation Price?',
-          answer: `The Liquidation Price is the price that your Vault will be at risk of liquidation based on the ‘Current Price’ from the Oracle Security Module of the Velero Procol. It is a helpful indicator to allow you to know when you could get liquidated. Please note however that if your Vault has a positive Stability Fee (i.e. >0) then your liquidation price will continually increase as more debt is added to your Vault.`,
+          answer: `The Liquidation Price is the price that your Vault will be at risk of liquidation based on the ‘Current Price’ from the Oracle Security Module of the MetricOne Procol. It is a helpful indicator to allow you to know when you could get liquidated. Please note however that if your Vault has a positive Stability Fee (i.e. >0) then your liquidation price will continually increase as more debt is added to your Vault.`,
         },
 
         {
           question: 'What is the Liquidation Penalty?',
-          answer: `The Liquidation Penalty is the amount added to your debt once your Vault is liquidated. Each collateral and sub-type (e.g. VLX-A and VLX-B) can have their own liquidation penalties set by Velero Governance. This penalty is also paid directly to the Velero Protocol, and vaults.velero.finance does not charge you any additional fees for being liquidated.`,
+          answer: `The Liquidation Penalty is the amount added to your debt once your Vault is liquidated. Each collateral and sub-type (e.g. MTR-A and MTR-B) can have their own liquidation penalties set by MetricOne Governance. This penalty is also paid directly to the MetricOne Protocol, and vaults.metric.one does not charge you any additional fees for being liquidated.`,
         },
 
         {
           question: 'What is the minimum Vault Debt?',
-          answer: `The minimum Vault Debt, also called Dust, is the minimum amount of Usdv you must generate to open a new Vault, and maintain. This minimum Vault Debt value is set and can be adjusted at any time by Velero Governance. If the minimum is increased to a value above your current Debt, then you will experience reduced functionality of your Vault until you increase it to above the minimum again.`,
+          answer: `The minimum Vault Debt, also called Dust, is the minimum amount of MONE you must generate to open a new Vault, and maintain. This minimum Vault Debt value is set and can be adjusted at any time by MetricOne Governance. If the minimum is increased to a value above your current Debt, then you will experience reduced functionality of your Vault until you increase it to above the minimum again.`,
         },
 
         {
           question: 'What is the next price and how do you know?',
-          answer: `Within the Velero Protocol, there are always two prices for the collateral, the current price and the next price. To protect the system and users from ‘bad actors’ and flash crashes, the Velero Protocol uses an ‘Oracle Security Module’. This means that all prices that go into the system are delayed by one hour, and only updated once per hour - roughly on the hour. The next price is the price that will come into the system as the ‘Current Price’. It is the Current Price that your Vault is always measured against, so you can only be liquidated once the ‘Current Price’ goes below your  ‘Liquidation Price’. This also means you have up to one hour to react if there is a big price drop and the next price is below your Liquidation Price.`,
+          answer: `Within the MetricOne Protocol, there are always two prices for the collateral, the current price and the next price. To protect the system and users from ‘bad actors’ and flash crashes, the MetricOne Protocol uses an ‘Oracle Security Module’. This means that all prices that go into the system are delayed by one hour, and only updated once per hour - roughly on the hour. The next price is the price that will come into the system as the ‘Current Price’. It is the Current Price that your Vault is always measured against, so you can only be liquidated once the ‘Current Price’ goes below your  ‘Liquidation Price’. This also means you have up to one hour to react if there is a big price drop and the next price is below your Liquidation Price.`,
         },
 
         {
           question: 'What is gas?',
-          answer: `Gas is the unit of measure for paying for transactions on the Velas Blockchain. Gas prices are charged in VLX and you will always need to have VLX in your wallet to be able to interact with vaults.velero.finance. This Gas fee goes directly to Velas Miners who keep Velas running. vaults.velero.finance does not charge any fees for basic Vault management.`,
+          answer: `Gas is the unit of measure for paying for transactions on the Meter Blockchain. Gas prices are charged in MTR and you will always need to have MTR in your wallet to be able to interact with vaults.metric.one. This Gas fee goes directly to Meter Miners who keep Meter running. vaults.metric.one does not charge any fees for basic Vault management.`,
         },
 
         {
@@ -84,41 +84,41 @@ export const content: ContentTypeSupport = {
         },
 
         {
-          question: 'How can I contact the Velero team?',
+          question: 'How can I contact the MetricOne team?',
           answer:
-            'If you have any questions, reach out to us through our [Contact page](/usdvwallet/contact) or on [Twitter](https://twitter.com/VeleroDAO).',
+            'If you have any questions, reach out to us through our [Contact page](/stblwallet/contact) or on [Twitter](https://twitter.com/MetricOne).',
         },
       ],
     },
     // {
-    //   title: 'Using Usdv Wallet',
-    //   id: 'using-usdvwallet',
+    //   title: 'Using MONE Wallet',
+    //   id: 'using-stblwallet',
     //   questions: [
     //     {
-    //       question: 'What is Usdv Wallet?',
-    //       answer: `Usdv Wallet is the home for everything you want to accomplish with Usdv. A decentralized application that runs on the Velas blockchain, Velero Usdv Wallet enables you to Buy, Send, and Manage your Usdv all in one place.`,
+    //       question: 'What is MONE Wallet?',
+    //       answer: `MONE Wallet is the home for everything you want to accomplish with MONE. A decentralized application that runs on the Meter blockchain, MetricOne MONE Wallet enables you to Buy, Send, and Manage your MONE all in one place.`,
     //     },
     //     {
-    //       question: 'What is Usdv?',
-    //       answer: `Usdv is a better, smarter digital currency for everyone. It is the world’s first unbiased currency and its value consistently tracks the US Dollar, which means it doesn't suffer from the volatility associated with many other digital currencies. To learn more about Usdv, read our [short primer](/usdvwallet/usdv).`,
+    //       question: 'What is MONE?',
+    //       answer: `MONE is a better, smarter digital currency for everyone. It is the world’s first unbiased currency and its value consistently tracks the US Dollar, which means it doesn't suffer from the volatility associated with many other digital currencies. To learn more about MONE, read our [short primer](/stblwallet/stbl).`,
     //     },
     //     {
     //       question: 'Do I need an account?',
-    //       answer: `No. You do not need to create a new account to use Usdv Wallet. You can get started with almost any Velas wallet, including Metamask or Coinbase Wallet, or you can use our new Magic.Link feature -- where you provide an email address, click a link in the email we send you in response, and you're logged in.`,
+    //       answer: `No. You do not need to create a new account to use MONE Wallet. You can get started with almost any Meter wallet, including Metamask or Coinbase Wallet, or you can use our new Magic.Link feature -- where you provide an email address, click a link in the email we send you in response, and you're logged in.`,
     //     },
     //     {
     //       question: 'Will I be charged fees?',
     //       answer:
-    //         'Our Usdv Wallet is currently free to use. However, you will have to pay transaction fees and, depending on the features you use, fees associated with Velero and other protocols, such as Stability or exchange fees.',
+    //         'Our MONE Wallet is currently free to use. However, you will have to pay transaction fees and, depending on the features you use, fees associated with MetricOne and other protocols, such as Stability or exchange fees.',
     //     },
     //     {
-    //       question: 'Why do I need VLX to send or save my Usdv?',
-    //       answer: `To complete any transaction on the Velas blockchain, you need to pay a transaction fee using VLX, its default token. This fee is referred to as 'gas', and much like the gas that powers your car, this gas fee powers your transaction.`,
+    //       question: 'Why do I need MTR to send or save my MONE?',
+    //       answer: `To complete any transaction on the Meter blockchain, you need to pay a transaction fee using MTR, its default token. This fee is referred to as 'gas', and much like the gas that powers your car, this gas fee powers your transaction.`,
     //     },
     //     {
-    //       question: 'How can I contact the Velero team?',
+    //       question: 'How can I contact the MetricOne team?',
     //       answer:
-    //         'If you have any questions, reach out to us through our [Contact page](/usdvwallet/contact) or on [Twitter](https://twitter.com/VeleroDAO).',
+    //         'If you have any questions, reach out to us through our [Contact page](/stblwallet/contact) or on [Twitter](https://twitter.com/MetricOne).',
     //     },
     //   ],
     // },
@@ -127,24 +127,24 @@ export const content: ContentTypeSupport = {
       id: 'security',
       questions: [
         {
-          question: 'Is Velero Secure?',
+          question: 'Is MetricOne Secure?',
           answer:
-            'Security is our top priority. We stringently follow the best security practices, and regularly conduct smart contract and code audits. In addition, Velero code is open-source, giving everyone in the community the ability to pressure test and audit the core technology.',
+            'Security is our top priority. We stringently follow the best security practices, and regularly conduct smart contract and code audits. In addition, MetricOne code is open-source, giving everyone in the community the ability to pressure test and audit the core technology.',
         },
         {
-          question: 'Can Velero access the funds in my account or wallet?',
+          question: 'Can MetricOne access the funds in my account or wallet?',
           answer:
-            'No. With Usdv, you - and only you - have access and control over your Usdv. Usdv uses blockchain technology to ensure the highest level of trust and transparency, and because of the way blockchain technology works, you ultimately get to decide just how secure you want it to be. This does mean you are your own security ultimately, so it is very important you keep access to your Usdv and Velero account secure.',
+            'No. With MONE, you - and only you - have access and control over your MONE. MONE uses blockchain technology to ensure the highest level of trust and transparency, and because of the way blockchain technology works, you ultimately get to decide just how secure you want it to be. This does mean you are your own security ultimately, so it is very important you keep access to your MONE and MetricOne account secure.',
         },
       ],
     },
     {
-      title: 'Buying Usdv',
-      id: 'buying-usdv',
+      title: 'Buying MONE',
+      id: 'buying-stbl',
       questions: [
         {
-          question: 'Where can I buy USDV?',
-          answer: `You can buy USDV at [wagyuswap](https://www.wagyuswap.app/)`,
+          question: 'Where can I buy MONE?',
+          answer: `You can buy MONE at [wagyuswap](https://www.wagyuswap.app/)`,
         },
       ],
     },

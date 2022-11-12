@@ -228,15 +228,16 @@ export function WithTermsOfService({ children }: WithTermsOfServiceProps) {
   if (!web3ContextConnected) {
     return null
   }
+  return <>{children}</>
 
-  if (web3ContextConnected.status === 'connectedReadonly' || !shouldUseTermsOfService) {
-    return <>{children}</>
-  }
-
-  return (
-    <>
-      {children}
-      <TermsOfService />
-    </>
-  )
+  // if (web3ContextConnected.status === 'connectedReadonly' || !shouldUseTermsOfService) {
+  //   return <>{children}</>
+  // }
+  //
+  // return (
+  //   <>
+  //     {children}
+  //     <TermsOfService />
+  //   </>
+  // )
 }

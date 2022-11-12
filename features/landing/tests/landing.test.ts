@@ -18,13 +18,13 @@ describe('Landing', () => {
         ilkDebt: new BigNumber(10),
       })(),
       mockIlkData({
-        ilk: 'VLX-MOST-POPULAR',
+        ilk: 'MTR-MOST-POPULAR',
         debtCeiling: new BigNumber(200),
         ilkDebt: new BigNumber(100),
       })(),
       ...new Array(20).fill(
         mockIlkData({
-          ilk: 'VLX-A',
+          ilk: 'MTR-A',
           debtCeiling: new BigNumber(20),
           ilkDebt: new BigNumber(10),
         })(),

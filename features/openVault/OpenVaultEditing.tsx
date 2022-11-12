@@ -5,6 +5,7 @@ import { useTranslation } from 'next-i18next'
 import React from 'react'
 import { Box, Button, Grid, Text } from 'theme-ui'
 
+import { stblName } from "../../blockchain/config";
 import { OpenVaultState } from './openVault'
 
 export const PlusIcon = () => (
@@ -79,7 +80,7 @@ export function OpenVaultEditing(props: OpenVaultState) {
             <Text pr={1}>
               {t('manage-vault.action-option', {
                 action: t('vault-actions.generate'),
-                token: 'USDV',
+                token: stblName,
               })}
             </Text>
           </Button>
@@ -89,7 +90,7 @@ export function OpenVaultEditing(props: OpenVaultState) {
           <VaultActionInput
             action="Generate"
             amount={generateAmount}
-            token={'USDV'}
+            token={stblName}
             showMax={true}
             maxAmount={maxGenerateAmount}
             maxAmountLabel={'Max'}

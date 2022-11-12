@@ -35,7 +35,7 @@ import {
   createProxy,
   ManageVaultTransactionChange,
   setCollateralAllowance,
-  setUsdvAllowance,
+  setStblAllowance,
 } from './manageVaultTransactions'
 import {
   applyManageVaultTransition,
@@ -48,6 +48,7 @@ import {
   validateErrors,
   validateWarnings,
 } from './manageVaultValidations'
+import {stblName} from "../../blockchain/config";
 
 interface ManageVaultInjectedOverrideChange {
   kind: 'injectStateOverride'
@@ -87,7 +88,7 @@ function apply(state: ManageVaultState, change: ManageVaultChange) {
   return applyManageVaultSummary(s10)
 }
 
-export type ManageVaultEditingStage = 'collateralEditing' | 'usdvEditing'
+export type ManageVaultEditingStage = 'collateralEditing' | 'stblEditing'
 
 export type ManageVaultStage =
   | ManageVaultEditingStage
@@ -101,11 +102,11 @@ export type ManageVaultStage =
   | 'collateralAllowanceInProgress'
   | 'collateralAllowanceFailure'
   | 'collateralAllowanceSuccess'
-  | 'usdvAllowanceWaitingForConfirmation'
-  | 'usdvAllowanceWaitingForApproval'
-  | 'usdvAllowanceInProgress'
-  | 'usdvAllowanceFailure'
-  | 'usdvAllowanceSuccess'
+  | 'stblAllowanceWaitingForConfirmation'
+  | 'stblAllowanceWaitingForApproval'
+  | 'stblAllowanceInProgress'
+  | 'stblAllowanceFailure'
+  | 'stblAllowanceSuccess'
   | 'manageWaitingForConfirmation'
   | 'manageWaitingForApproval'
   | 'manageInProgress'
@@ -124,9 +125,9 @@ export interface MutableManageVaultState {
   generateAmount?: BigNumber
   paybackAmount?: BigNumber
   collateralAllowanceAmount?: BigNumber
-  usdvAllowanceAmount?: BigNumber
+  stblAllowanceAmount?: BigNumber
   selectedCollateralAllowanceRadio: 'unlimited' | 'depositAmount' | 'custom'
-  selectedUsdvAllowanceRadio: 'unlimited' | 'paybackAmount' | 'custom'
+  selectedStblAllowanceRadio: 'unlimited' | 'paybackAmount' | 'custom'
 }
 
 export interface ManageVaultEnvironment {
@@ -134,7 +135,7 @@ export interface ManageVaultEnvironment {
   accountIsController: boolean
   proxyAddress?: string
   collateralAllowance?: BigNumber
-  usdvAllowance?: BigNumber
+  stblAllowance?: BigNumber
   vault: Vault
   ilkData: IlkData
   balanceInfo: BalanceInfo
@@ -161,16 +162,16 @@ interface ManageVaultFunctions {
   setCollateralAllowanceAmountUnlimited?: () => void
   setCollateralAllowanceAmountToDepositAmount?: () => void
   resetCollateralAllowanceAmount?: () => void
-  updateUsdvAllowanceAmount?: (amount?: BigNumber) => void
-  setUsdvAllowanceAmountUnlimited?: () => void
-  setUsdvAllowanceAmountToPaybackAmount?: () => void
-  resetUsdvAllowanceAmount?: () => void
+  updateStblAllowanceAmount?: (amount?: BigNumber) => void
+  setStblAllowanceAmountUnlimited?: () => void
+  setStblAllowanceAmountToPaybackAmount?: () => void
+  resetStblAllowanceAmount?: () => void
   injectStateOverride: (state: Partial<MutableManageVaultState>) => void
 }
 
 interface ManageVaultTxInfo {
   collateralAllowanceTxHash?: string
-  usdvAllowanceTxHash?: string
+  stblAllowanceTxHash?: string
   proxyTxHash?: string
   manageTxHash?: string
   txError?: any
@@ -196,7 +197,7 @@ function addTransitions(
   change: (ch: ManageVaultChange) => void,
   state: ManageVaultState,
 ): ManageVaultState {
-  if (state.stage === 'collateralEditing' || state.stage === 'usdvEditing') {
+  if (state.stage === 'collateralEditing' || state.stage === 'stblEditing') {
     return {
       ...state,
       updateDeposit: (depositAmount?: BigNumber) => {
@@ -280,25 +281,25 @@ function addTransitions(
   }
 
   if (
-    state.stage === 'usdvAllowanceWaitingForConfirmation' ||
-    state.stage === 'usdvAllowanceFailure'
+    state.stage === 'stblAllowanceWaitingForConfirmation' ||
+    state.stage === 'stblAllowanceFailure'
   ) {
     return {
       ...state,
-      updateUsdvAllowanceAmount: (usdvAllowanceAmount?: BigNumber) =>
-        change({ kind: 'usdvAllowance', usdvAllowanceAmount }),
-      setUsdvAllowanceAmountUnlimited: () => change({ kind: 'usdvAllowanceUnlimited' }),
-      setUsdvAllowanceAmountToPaybackAmount: () => change({ kind: 'usdvAllowanceAsPaybackAmount' }),
-      resetUsdvAllowanceAmount: () =>
+      updateStblAllowanceAmount: (stblAllowanceAmount?: BigNumber) =>
+        change({ kind: 'stblAllowance', stblAllowanceAmount: stblAllowanceAmount }),
+      setStblAllowanceAmountUnlimited: () => change({ kind: 'stblAllowanceUnlimited' }),
+      setStblAllowanceAmountToPaybackAmount: () => change({ kind: 'stblAllowanceAsPaybackAmount' }),
+      resetStblAllowanceAmount: () =>
         change({
-          kind: 'usdvAllowanceReset',
+          kind: 'stblAllowanceReset',
         }),
-      progress: () => setUsdvAllowance(txHelpers$, change, state),
-      regress: () => change({ kind: 'regressUsdvAllowance' }),
+      progress: () => setStblAllowance(txHelpers$, change, state),
+      regress: () => change({ kind: 'regressStblAllowance' }),
     }
   }
 
-  if (state.stage === 'usdvAllowanceSuccess') {
+  if (state.stage === 'stblAllowanceSuccess') {
     return {
       ...state,
       progress: () => change({ kind: 'backToEditing' }),
@@ -329,9 +330,9 @@ export const defaultMutableManageVaultState: MutableManageVaultState = {
   showDepositAndGenerateOption: false,
   showPaybackAndWithdrawOption: false,
   collateralAllowanceAmount: maxUint256,
-  usdvAllowanceAmount: maxUint256,
+  stblAllowanceAmount: maxUint256,
   selectedCollateralAllowanceRadio: 'unlimited' as 'unlimited',
-  selectedUsdvAllowanceRadio: 'unlimited' as 'unlimited',
+  selectedStblAllowanceRadio: 'unlimited' as 'unlimited',
 }
 
 export function createManageVault$(
@@ -363,12 +364,12 @@ export function createManageVault$(
                 account && proxyAddress
                   ? allowance$(vault.token, account, proxyAddress)
                   : of(undefined)
-              const usdvAllowance$ =
-                account && proxyAddress ? allowance$('USDV', account, proxyAddress) : of(undefined)
+              const stblAllowance$ =
+                account && proxyAddress ? allowance$(stblName, account, proxyAddress) : of(undefined)
 
-              return combineLatest(collateralAllowance$, usdvAllowance$).pipe(
+              return combineLatest(collateralAllowance$, stblAllowance$).pipe(
                 first(),
-                switchMap(([collateralAllowance, usdvAllowance]) => {
+                switchMap(([collateralAllowance, stblAllowance]) => {
                   const change$ = new Subject<ManageVaultChange>()
 
                   function change(ch: ManageVaultChange) {
@@ -391,7 +392,7 @@ export function createManageVault$(
                     account,
                     proxyAddress,
                     collateralAllowance,
-                    usdvAllowance,
+                    stblAllowance: stblAllowance,
                     safeConfirmations: context.safeConfirmations,
                     etherscan: context.etherscan.url,
                     errorMessages: [],

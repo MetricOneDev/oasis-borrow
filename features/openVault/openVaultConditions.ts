@@ -2,6 +2,7 @@ import { maxUint256 } from 'blockchain/calls/erc20'
 import { UnreachableCaseError } from 'helpers/UnreachableCaseError'
 import { zero } from 'helpers/zero'
 
+import { coinName } from "../../blockchain/config";
 import { OpenVaultStage, OpenVaultState } from './openVault'
 
 const defaultOpenVaultStageCategories = {
@@ -70,10 +71,10 @@ export interface OpenVaultConditions {
   vaultWillBeAtRiskLevelDangerAtNextPrice: boolean
   vaultWillBeUnderCollateralizedAtNextPrice: boolean
 
-  depositingAllVlxBalance: boolean
+  depositingAllCoinBalance: boolean
   depositAmountExceedsCollateralBalance: boolean
-  generateAmountExceedsUsdvYieldFromDepositingCollateral: boolean
-  generateAmountExceedsUsdvYieldFromDepositingCollateralAtNextPrice: boolean
+  generateAmountExceedsStblYieldFromDepositingCollateral: boolean
+  generateAmountExceedsStblYieldFromDepositingCollateralAtNextPrice: boolean
   generateAmountExceedsDebtCeiling: boolean
   generateAmountLessThanDebtFloor: boolean
 
@@ -99,10 +100,10 @@ export const defaultOpenVaultConditions: OpenVaultConditions = {
   vaultWillBeAtRiskLevelDangerAtNextPrice: false,
   vaultWillBeUnderCollateralizedAtNextPrice: false,
 
-  depositingAllVlxBalance: false,
+  depositingAllCoinBalance: false,
   depositAmountExceedsCollateralBalance: false,
-  generateAmountExceedsUsdvYieldFromDepositingCollateral: false,
-  generateAmountExceedsUsdvYieldFromDepositingCollateralAtNextPrice: false,
+  generateAmountExceedsStblYieldFromDepositingCollateral: false,
+  generateAmountExceedsStblYieldFromDepositingCollateralAtNextPrice: false,
   generateAmountExceedsDebtCeiling: false,
   generateAmountLessThanDebtFloor: false,
 
@@ -126,8 +127,8 @@ export function applyOpenVaultConditions(state: OpenVaultState): OpenVaultState 
     token,
     balanceInfo: { collateralBalance },
     depositAmount,
-    usdvYieldFromDepositingCollateral,
-    usdvYieldFromDepositingCollateralAtNextPrice,
+    stblYieldFromDepositingCollateral,
+    stblYieldFromDepositingCollateralAtNextPrice,
     selectedAllowanceRadio,
     allowanceAmount,
     allowance,
@@ -171,16 +172,16 @@ export function applyOpenVaultConditions(state: OpenVaultState): OpenVaultState 
       !afterCollateralizationRatioAtNextPrice.isZero()
     )
 
-  const depositingAllVlxBalance = token === 'VLX' && !!depositAmount?.eq(collateralBalance)
+  const depositingAllCoinBalance = token === coinName && !!depositAmount?.eq(collateralBalance)
   const depositAmountExceedsCollateralBalance = !!depositAmount?.gt(collateralBalance)
 
-  const generateAmountExceedsUsdvYieldFromDepositingCollateral = !!generateAmount?.gt(
-    usdvYieldFromDepositingCollateral,
+  const generateAmountExceedsStblYieldFromDepositingCollateral = !!generateAmount?.gt(
+    stblYieldFromDepositingCollateral,
   )
 
-  const generateAmountExceedsUsdvYieldFromDepositingCollateralAtNextPrice =
-    !generateAmountExceedsUsdvYieldFromDepositingCollateral &&
-    !!generateAmount?.gt(usdvYieldFromDepositingCollateralAtNextPrice)
+  const generateAmountExceedsStblYieldFromDepositingCollateralAtNextPrice =
+    !generateAmountExceedsStblYieldFromDepositingCollateral &&
+    !!generateAmount?.gt(stblYieldFromDepositingCollateralAtNextPrice)
 
   const generateAmountExceedsDebtCeiling = !!generateAmount?.gt(ilkData.ilkDebtAvailable)
 
@@ -213,7 +214,7 @@ export function applyOpenVaultConditions(state: OpenVaultState): OpenVaultState 
   )
 
   const insufficientAllowance =
-    token !== 'VLX' &&
+    token !== coinName &&
     !!(depositAmount && !depositAmount.isZero() && (!allowance || depositAmount.gt(allowance)))
 
   const canProgress =
@@ -222,7 +223,7 @@ export function applyOpenVaultConditions(state: OpenVaultState): OpenVaultState 
       isLoadingStage ||
       vaultWillBeUnderCollateralized ||
       vaultWillBeUnderCollateralizedAtNextPrice ||
-      depositingAllVlxBalance ||
+      depositingAllCoinBalance ||
       depositAmountExceedsCollateralBalance ||
       generateAmountExceedsDebtCeiling ||
       generateAmountLessThanDebtFloor ||
@@ -251,10 +252,10 @@ export function applyOpenVaultConditions(state: OpenVaultState): OpenVaultState 
     vaultWillBeUnderCollateralized,
     vaultWillBeUnderCollateralizedAtNextPrice,
 
-    depositingAllVlxBalance,
+    depositingAllCoinBalance,
     depositAmountExceedsCollateralBalance,
-    generateAmountExceedsUsdvYieldFromDepositingCollateral,
-    generateAmountExceedsUsdvYieldFromDepositingCollateralAtNextPrice,
+    generateAmountExceedsStblYieldFromDepositingCollateral,
+    generateAmountExceedsStblYieldFromDepositingCollateralAtNextPrice,
     generateAmountExceedsDebtCeiling,
     generateAmountLessThanDebtFloor,
 

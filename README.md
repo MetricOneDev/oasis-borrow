@@ -6,7 +6,7 @@
 
 [comment]: <> (<div align="center">)
 
-[comment]: <> (  <img src="https://github.com/velasfinance/oasis-borrow/blob/pm/readme-updates/public/static/img/logo.svg" width="500" height="500">)
+[comment]: <> (  <img src="https://github.com/MetriOneDev/oasis-borrow/blob/pm/readme-updates/public/static/img/logo.svg" width="500" height="500">)
 
 [comment]: <> (</div>)
 
@@ -27,7 +27,7 @@
 
 [Velero Borrow](https://vaults.velero.finance) is the most popular user-interface to interact with the
 
-[comment]: <> ([Velero protocol]&#40;https://docs.makerdao.com/&#41;. It enables users to generate USDV, the most used and)
+[comment]: <> ([Velero protocol]&#40;https://docs.makerdao.com/&#41;. It enables users to generate MONE, the most used and)
 decentralized stablecoin, using a variety of crypto assets as collateral.
 
 <br>

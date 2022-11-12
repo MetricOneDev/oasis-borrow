@@ -5,11 +5,11 @@ import { content as es } from './es'
 import { content as pt } from './pt'
 
 export type ContentSectionId =
-  | 'buying-usdv'
-  | 'saving-lending-usdv'
+  | 'buying-stbl'
+  | 'saving-lending-stbl'
   | 'using-oasis'
   | 'security'
-  | 'using-usdvwallet'
+  | 'using-stblwallet'
 
 export interface ContentQuestion {
   question: string

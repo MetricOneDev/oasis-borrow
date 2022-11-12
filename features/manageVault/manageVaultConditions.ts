@@ -3,20 +3,21 @@ import { isNullish } from 'helpers/functions'
 import { UnreachableCaseError } from 'helpers/UnreachableCaseError'
 import { zero } from 'helpers/zero'
 
+import { coinName } from "../../blockchain/config";
 import { ManageVaultStage, ManageVaultState } from './manageVault'
 
 const defaultManageVaultStageCategories = {
   isEditingStage: false,
   isProxyStage: false,
   isCollateralAllowanceStage: false,
-  isUsdvAllowanceStage: false,
+  isStblAllowanceStage: false,
   isManageStage: false,
 }
 
 export function applyManageVaultStageCategorisation(state: ManageVaultState) {
   switch (state.stage) {
     case 'collateralEditing':
-    case 'usdvEditing':
+    case 'stblEditing':
       return {
         ...state,
         ...defaultManageVaultStageCategories,
@@ -42,15 +43,15 @@ export function applyManageVaultStageCategorisation(state: ManageVaultState) {
         ...defaultManageVaultStageCategories,
         isCollateralAllowanceStage: true,
       }
-    case 'usdvAllowanceWaitingForConfirmation':
-    case 'usdvAllowanceWaitingForApproval':
-    case 'usdvAllowanceInProgress':
-    case 'usdvAllowanceFailure':
-    case 'usdvAllowanceSuccess':
+    case 'stblAllowanceWaitingForConfirmation':
+    case 'stblAllowanceWaitingForApproval':
+    case 'stblAllowanceInProgress':
+    case 'stblAllowanceFailure':
+    case 'stblAllowanceSuccess':
       return {
         ...state,
         ...defaultManageVaultStageCategories,
-        isUsdvAllowanceStage: true,
+        isStblAllowanceStage: true,
       }
 
     case 'manageWaitingForConfirmation':
@@ -72,7 +73,7 @@ export interface ManageVaultConditions {
   isEditingStage: boolean
   isProxyStage: boolean
   isCollateralAllowanceStage: boolean
-  isUsdvAllowanceStage: boolean
+  isStblAllowanceStage: boolean
   isManageStage: boolean
 
   canProgress: boolean
@@ -93,16 +94,16 @@ export interface ManageVaultConditions {
   accountIsConnected: boolean
   accountIsController: boolean
 
-  depositingAllVlxBalance: boolean
+  depositingAllCoinBalance: boolean
   depositAmountExceedsCollateralBalance: boolean
   withdrawAmountExceedsFreeCollateral: boolean
   withdrawAmountExceedsFreeCollateralAtNextPrice: boolean
-  generateAmountExceedsUsdvYieldFromTotalCollateral: boolean
-  generateAmountExceedsUsdvYieldFromTotalCollateralAtNextPrice: boolean
+  generateAmountExceedsStblYieldFromTotalCollateral: boolean
+  generateAmountExceedsStblYieldFromTotalCollateralAtNextPrice: boolean
   generateAmountLessThanDebtFloor: boolean
   generateAmountExceedsDebtCeiling: boolean
   paybackAmountExceedsVaultDebt: boolean
-  paybackAmountExceedsUsdvBalance: boolean
+  paybackAmountExceedsStblBalance: boolean
 
   debtWillBeLessThanDebtFloor: boolean
   isLoadingStage: boolean
@@ -112,10 +113,10 @@ export interface ManageVaultConditions {
   customCollateralAllowanceAmountExceedsMaxUint256: boolean
   customCollateralAllowanceAmountLessThanDepositAmount: boolean
 
-  insufficientUsdvAllowance: boolean
-  customUsdvAllowanceAmountEmpty: boolean
-  customUsdvAllowanceAmountExceedsMaxUint256: boolean
-  customUsdvAllowanceAmountLessThanPaybackAmount: boolean
+  insufficientStblAllowance: boolean
+  customStblAllowanceAmountEmpty: boolean
+  customStblAllowanceAmountExceedsMaxUint256: boolean
+  customStblAllowanceAmountLessThanPaybackAmount: boolean
   withdrawCollateralOnVaultUnderDebtFloor: boolean
   depositCollateralOnVaultUnderDebtFloor: boolean
 }
@@ -140,16 +141,16 @@ export const defaultManageVaultConditions: ManageVaultConditions = {
   accountIsConnected: false,
   accountIsController: false,
 
-  depositingAllVlxBalance: false,
+  depositingAllCoinBalance: false,
   depositAmountExceedsCollateralBalance: false,
   withdrawAmountExceedsFreeCollateral: false,
   withdrawAmountExceedsFreeCollateralAtNextPrice: false,
-  generateAmountExceedsUsdvYieldFromTotalCollateral: false,
-  generateAmountExceedsUsdvYieldFromTotalCollateralAtNextPrice: false,
+  generateAmountExceedsStblYieldFromTotalCollateral: false,
+  generateAmountExceedsStblYieldFromTotalCollateralAtNextPrice: false,
   generateAmountLessThanDebtFloor: false,
   generateAmountExceedsDebtCeiling: false,
   paybackAmountExceedsVaultDebt: false,
-  paybackAmountExceedsUsdvBalance: false,
+  paybackAmountExceedsStblBalance: false,
 
   debtWillBeLessThanDebtFloor: false,
   isLoadingStage: false,
@@ -159,10 +160,10 @@ export const defaultManageVaultConditions: ManageVaultConditions = {
   customCollateralAllowanceAmountExceedsMaxUint256: false,
   customCollateralAllowanceAmountLessThanDepositAmount: false,
 
-  insufficientUsdvAllowance: false,
-  customUsdvAllowanceAmountEmpty: false,
-  customUsdvAllowanceAmountExceedsMaxUint256: false,
-  customUsdvAllowanceAmountLessThanPaybackAmount: false,
+  insufficientStblAllowance: false,
+  customStblAllowanceAmountEmpty: false,
+  customStblAllowanceAmountExceedsMaxUint256: false,
+  customStblAllowanceAmountLessThanPaybackAmount: false,
 
   withdrawCollateralOnVaultUnderDebtFloor: false,
   depositCollateralOnVaultUnderDebtFloor: false,
@@ -181,16 +182,16 @@ export function applyManageVaultConditions(state: ManageVaultState): ManageVault
     account,
     stage,
     selectedCollateralAllowanceRadio,
-    selectedUsdvAllowanceRadio,
+    selectedStblAllowanceRadio,
     collateralAllowanceAmount,
-    usdvAllowanceAmount,
+    stblAllowanceAmount,
     collateralAllowance,
-    usdvAllowance,
+    stblAllowance,
     shouldPaybackAll,
-    balanceInfo: { collateralBalance, usdvBalance },
+    balanceInfo: { collateralBalance, stblBalance },
     isEditingStage,
     isCollateralAllowanceStage,
-    isUsdvAllowanceStage,
+    isStblAllowanceStage,
     maxWithdrawAmountAtCurrentPrice,
     maxWithdrawAmountAtNextPrice,
     maxGenerateAmountAtCurrentPrice,
@@ -241,7 +242,7 @@ export function applyManageVaultConditions(state: ManageVaultState): ManageVault
 
   const depositAmountExceedsCollateralBalance = !!depositAmount?.gt(collateralBalance)
 
-  const depositingAllVlxBalance = vault.token === 'VLX' && !!depositAmount?.eq(collateralBalance)
+  const depositingAllCoinBalance = vault.token === coinName && !!depositAmount?.eq(collateralBalance)
 
   const withdrawAmountExceedsFreeCollateral = !!withdrawAmount?.gt(maxWithdrawAmountAtCurrentPrice)
 
@@ -250,12 +251,12 @@ export function applyManageVaultConditions(state: ManageVaultState): ManageVault
 
   const generateAmountExceedsDebtCeiling = !!generateAmount?.gt(ilkData.ilkDebtAvailable)
 
-  const generateAmountExceedsUsdvYieldFromTotalCollateral =
+  const generateAmountExceedsStblYieldFromTotalCollateral =
     !generateAmountExceedsDebtCeiling && !!generateAmount?.gt(maxGenerateAmountAtCurrentPrice)
 
-  const generateAmountExceedsUsdvYieldFromTotalCollateralAtNextPrice =
+  const generateAmountExceedsStblYieldFromTotalCollateralAtNextPrice =
     !generateAmountExceedsDebtCeiling &&
-    !generateAmountExceedsUsdvYieldFromTotalCollateral &&
+    !generateAmountExceedsStblYieldFromTotalCollateral &&
     !!generateAmount?.gt(maxGenerateAmountAtNextPrice)
 
   const generateAmountLessThanDebtFloor = !!(
@@ -264,7 +265,7 @@ export function applyManageVaultConditions(state: ManageVaultState): ManageVault
     generateAmount.plus(vault.debt).lt(ilkData.debtFloor)
   )
 
-  const paybackAmountExceedsUsdvBalance = !!paybackAmount?.gt(usdvBalance)
+  const paybackAmountExceedsStblBalance = !!paybackAmount?.gt(stblBalance)
   const paybackAmountExceedsVaultDebt = !!paybackAmount?.gt(vault.debt)
 
   const debtWillBeLessThanDebtFloor = !!(
@@ -277,8 +278,8 @@ export function applyManageVaultConditions(state: ManageVaultState): ManageVault
   const customCollateralAllowanceAmountEmpty =
     selectedCollateralAllowanceRadio === 'custom' && !collateralAllowanceAmount
 
-  const customUsdvAllowanceAmountEmpty =
-    selectedUsdvAllowanceRadio === 'custom' && !usdvAllowanceAmount
+  const customStblAllowanceAmountEmpty =
+    selectedStblAllowanceRadio === 'custom' && !stblAllowanceAmount
 
   const customCollateralAllowanceAmountExceedsMaxUint256 = !!(
     selectedCollateralAllowanceRadio === 'custom' && collateralAllowanceAmount?.gt(maxUint256)
@@ -291,29 +292,29 @@ export function applyManageVaultConditions(state: ManageVaultState): ManageVault
     collateralAllowanceAmount.lt(depositAmount)
   )
 
-  const customUsdvAllowanceAmountExceedsMaxUint256 = !!(
-    selectedUsdvAllowanceRadio === 'custom' && usdvAllowanceAmount?.gt(maxUint256)
+  const customStblAllowanceAmountExceedsMaxUint256 = !!(
+    selectedStblAllowanceRadio === 'custom' && stblAllowanceAmount?.gt(maxUint256)
   )
 
-  const customUsdvAllowanceAmountLessThanPaybackAmount = !!(
-    selectedUsdvAllowanceRadio === 'custom' &&
-    usdvAllowanceAmount &&
+  const customStblAllowanceAmountLessThanPaybackAmount = !!(
+    selectedStblAllowanceRadio === 'custom' &&
+    stblAllowanceAmount &&
     paybackAmount &&
-    usdvAllowanceAmount.lt(paybackAmount)
+    stblAllowanceAmount.lt(paybackAmount)
   )
 
   const insufficientCollateralAllowance =
-    vault.token !== 'VLX' &&
+    vault.token !== coinName &&
     !!(
       depositAmount &&
       !depositAmount.isZero() &&
       (!collateralAllowance || depositAmount.gt(collateralAllowance))
     )
 
-  const insufficientUsdvAllowance = !!(
+  const insufficientStblAllowance = !!(
     paybackAmount &&
     !paybackAmount.isZero() &&
-    (!usdvAllowance || paybackAmount.plus(vault.debtOffset).gt(usdvAllowance))
+    (!stblAllowance || paybackAmount.plus(vault.debtOffset).gt(stblAllowance))
   )
 
   const isLoadingStage = ([
@@ -321,8 +322,8 @@ export function applyManageVaultConditions(state: ManageVaultState): ManageVault
     'proxyWaitingForApproval',
     'collateralAllowanceWaitingForApproval',
     'collateralAllowanceInProgress',
-    'usdvAllowanceWaitingForApproval',
-    'usdvAllowanceInProgress',
+    'stblAllowanceWaitingForApproval',
+    'stblAllowanceInProgress',
     'manageInProgress',
     'manageWaitingForApproval',
   ] as ManageVaultStage[]).some((s) => s === stage)
@@ -352,10 +353,10 @@ export function applyManageVaultConditions(state: ManageVaultState): ManageVault
       depositAmountExceedsCollateralBalance ||
       withdrawAmountExceedsFreeCollateral ||
       withdrawAmountExceedsFreeCollateralAtNextPrice ||
-      depositingAllVlxBalance ||
+      depositingAllCoinBalance ||
       generateAmountExceedsDebtCeiling ||
       generateAmountLessThanDebtFloor ||
-      paybackAmountExceedsUsdvBalance ||
+      paybackAmountExceedsStblBalance ||
       paybackAmountExceedsVaultDebt ||
       withdrawCollateralOnVaultUnderDebtFloor ||
       depositCollateralOnVaultUnderDebtFloor)
@@ -366,17 +367,17 @@ export function applyManageVaultConditions(state: ManageVaultState): ManageVault
       customCollateralAllowanceAmountExceedsMaxUint256 ||
       customCollateralAllowanceAmountLessThanDepositAmount)
 
-  const usdvAllowanceProgressionDisabled =
-    isUsdvAllowanceStage &&
-    (customUsdvAllowanceAmountEmpty ||
-      customUsdvAllowanceAmountExceedsMaxUint256 ||
-      customUsdvAllowanceAmountLessThanPaybackAmount)
+  const stblAllowanceProgressionDisabled =
+    isStblAllowanceStage &&
+    (customStblAllowanceAmountEmpty ||
+      customStblAllowanceAmountExceedsMaxUint256 ||
+      customStblAllowanceAmountLessThanPaybackAmount)
 
   const canProgress = !(
     isLoadingStage ||
     editingProgressionDisabled ||
     collateralAllowanceProgressionDisabled ||
-    usdvAllowanceProgressionDisabled
+    stblAllowanceProgressionDisabled
   )
 
   const canRegress = ([
@@ -384,8 +385,8 @@ export function applyManageVaultConditions(state: ManageVaultState): ManageVault
     'proxyFailure',
     'collateralAllowanceWaitingForConfirmation',
     'collateralAllowanceFailure',
-    'usdvAllowanceWaitingForConfirmation',
-    'usdvAllowanceFailure',
+    'stblAllowanceWaitingForConfirmation',
+    'stblAllowanceFailure',
     'manageWaitingForConfirmation',
     'manageFailure',
   ] as ManageVaultStage[]).some((s) => s === stage)
@@ -408,15 +409,15 @@ export function applyManageVaultConditions(state: ManageVaultState): ManageVault
 
     accountIsConnected,
     accountIsController,
-    depositingAllVlxBalance,
+    depositingAllCoinBalance,
     generateAmountExceedsDebtCeiling,
     depositAmountExceedsCollateralBalance,
     withdrawAmountExceedsFreeCollateral,
     withdrawAmountExceedsFreeCollateralAtNextPrice,
-    generateAmountExceedsUsdvYieldFromTotalCollateral,
-    generateAmountExceedsUsdvYieldFromTotalCollateralAtNextPrice,
+    generateAmountExceedsStblYieldFromTotalCollateral: generateAmountExceedsStblYieldFromTotalCollateral,
+    generateAmountExceedsStblYieldFromTotalCollateralAtNextPrice: generateAmountExceedsStblYieldFromTotalCollateralAtNextPrice,
     generateAmountLessThanDebtFloor,
-    paybackAmountExceedsUsdvBalance,
+    paybackAmountExceedsStblBalance: paybackAmountExceedsStblBalance,
     paybackAmountExceedsVaultDebt,
     shouldPaybackAll,
     debtWillBeLessThanDebtFloor,
@@ -427,10 +428,10 @@ export function applyManageVaultConditions(state: ManageVaultState): ManageVault
     customCollateralAllowanceAmountExceedsMaxUint256,
     customCollateralAllowanceAmountLessThanDepositAmount,
 
-    insufficientUsdvAllowance,
-    customUsdvAllowanceAmountEmpty,
-    customUsdvAllowanceAmountExceedsMaxUint256,
-    customUsdvAllowanceAmountLessThanPaybackAmount,
+    insufficientStblAllowance: insufficientStblAllowance,
+    customStblAllowanceAmountEmpty: customStblAllowanceAmountEmpty,
+    customStblAllowanceAmountExceedsMaxUint256: customStblAllowanceAmountExceedsMaxUint256,
+    customStblAllowanceAmountLessThanPaybackAmount: customStblAllowanceAmountLessThanPaybackAmount,
 
     withdrawCollateralOnVaultUnderDebtFloor,
     depositCollateralOnVaultUnderDebtFloor,

@@ -5,7 +5,7 @@
         "filteringPath": "\\/v3\\/orders\\/reserve\\?timestamp=.*",
         "status": 200,
         "response": {
-            "url": "https://pay.testwyre.com/purchase?accountId=AC_TJM7VTUR2JG&reservation=ER932DDTLQTNBH9XULN9&amount=1&sourceCurrency=USD&dest=ethereum%3A0x1234567890123456789012345678901234567890&destCurrency=USDV&redirectUrl=&hideTrackBtn=1&failureRedirectUrl=",
+            "url": "https://pay.testwyre.com/purchase?accountId=AC_TJM7VTUR2JG&reservation=ER932DDTLQTNBH9XULN9&amount=1&sourceCurrency=USD&dest=ethereum%3A0x1234567890123456789012345678901234567890&destCurrency=MONE&redirectUrl=&hideTrackBtn=1&failureRedirectUrl=",
             "reservation": "FOO"
         },
         "rawHeaders": [

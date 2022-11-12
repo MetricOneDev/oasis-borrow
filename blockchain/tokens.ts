@@ -5,6 +5,7 @@ import { distinctUntilChanged, map, shareReplay, switchMap } from 'rxjs/operator
 
 import { maxUint256, tokenAllowance, tokenBalance } from './calls/erc20'
 import { CallObservable } from './calls/observe'
+import { coinName } from "./config";
 import { Context } from './network'
 import { OraclePriceData } from './prices'
 
@@ -17,10 +18,10 @@ export function createBalance$(
 ) {
   return context$.pipe(
     switchMap(({ web3 }) => {
-      if (token === 'VLX') {
+      if (token === coinName) {
         return onEveryBlock$.pipe(
           switchMap(() => bindNodeCallback(web3.eth.getBalance)(address)),
-          map((vlxBalance: string) => amountFromWei(new BigNumber(vlxBalance))),
+          map((mtrBalance: string) => amountFromWei(new BigNumber(mtrBalance))),
           distinctUntilChanged((x: BigNumber, y: BigNumber) => x.eq(y)),
           shareReplay(1),
         )
@@ -80,7 +81,7 @@ export function createAllowance$(
 ) {
   return context$.pipe(
     switchMap(() => {
-      if (token === 'VLX') return of(maxUint256)
+      if (token === coinName) return of(maxUint256)
       return tokenAllowance$({ token, owner, spender })
     }),
   )

@@ -10,6 +10,7 @@ import { Box, Flex, Grid, Heading, Text } from 'theme-ui'
 
 import { ManageVaultState } from './manageVault'
 import { ManageVaultHeading } from './ManageVaultView'
+import {stblName} from "../../blockchain/config";
 
 function VaultDetailsTableItem({
   label,
@@ -43,7 +44,7 @@ function VaultDetailsTableItem({
 function VaultDetailsTable({
   vault,
   ilkData,
-  usdvYieldFromTotalCollateral,
+  stblYieldFromTotalCollateral,
   afterDebt,
   afterFreeCollateral,
   inputAmountsEmpty,
@@ -62,12 +63,12 @@ function VaultDetailsTable({
         sx={{ border: 'light', borderRadius: 'medium', p: [3, 4] }}
       >
         <VaultDetailsTableItem
-          label={t('system.vault-usdv-debt')}
+          label={t('system.vault-stbl-debt')}
           value={
             <>
               {formatCryptoBalance(vault.debt)}
               <Text sx={{ display: 'inline', ml: 2, fontWeight: 'semiBold' }} variant="paragraph3">
-                USDV
+                `${stblName}`
               </Text>
             </>
           }
@@ -79,7 +80,7 @@ function VaultDetailsTable({
                   sx={{ display: 'inline', ml: 2, fontWeight: 'semiBold' }}
                   variant="paragraph4"
                 >
-                  USDV
+                  `${stblName}`
                 </Text>
               </>
             )
@@ -114,21 +115,21 @@ function VaultDetailsTable({
           label={t('system.available-to-generate')}
           value={
             <>
-              {formatCryptoBalance(vault.usdvYieldFromLockedCollateral)}
+              {formatCryptoBalance(vault.stblYieldFromLockedCollateral)}
               <Text sx={{ display: 'inline', ml: 2, fontWeight: 'semiBold' }} variant="paragraph3">
-                USDV
+                `${stblName}`
               </Text>
             </>
           }
           subValue={
             showAfterCalculations && (
               <>
-                {formatCryptoBalance(usdvYieldFromTotalCollateral)}
+                {formatCryptoBalance(stblYieldFromTotalCollateral)}
                 <Text
                   sx={{ display: 'inline', ml: 2, fontWeight: 'semiBold' }}
                   variant="paragraph4"
                 >
-                  USDV
+                  `${stblName}`
                 </Text>
               </>
             )

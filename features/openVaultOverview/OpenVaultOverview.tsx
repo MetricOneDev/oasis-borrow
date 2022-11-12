@@ -31,7 +31,7 @@ const ilksColumns: ColumnDef<IlkWithBalance, IlksFilterState & { isReadonly: boo
     cell: ({ ilk }) => <Text>{ilk}</Text>,
   },
   {
-    headerLabel: 'system.usdv-available',
+    headerLabel: 'system.stbl-available',
     header: ({ label, ...filters }) => (
       <TableSortHeader sx={{ ml: 'auto' }} filters={filters} sortBy="ilkDebtAvailable">
         {label}
@@ -105,7 +105,7 @@ const ilksColumns: ColumnDef<IlkWithBalance, IlksFilterState & { isReadonly: boo
               sx={{ width: '100%', maxWidth: ['100%', '150px'] }}
             >
               <Text>
-                <Trans i18nKey="no-usdv" />
+                <Trans i18nKey="no-stbl" />
               </Text>
             </Button>
           )}

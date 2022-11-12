@@ -24,30 +24,30 @@ interface WithdrawEvent extends HistoryEventBase {
 
 interface GenerateEvent extends HistoryEventBase {
   kind: 'GENERATE'
-  usdvAmount: BigNumber
+  stblAmount: BigNumber
 }
 
 interface PaybackEvent extends HistoryEventBase {
   kind: 'PAYBACK'
-  usdvAmount: BigNumber
+  stblAmount: BigNumber
 }
 
 interface DepositGenerateEvent extends HistoryEventBase {
   kind: 'DEPOSIT-GENERATE'
-  usdvAmount: BigNumber
+  stblAmount: BigNumber
   collateralAmount: BigNumber
 }
 
 interface WithdrawPaybackEvent extends HistoryEventBase {
   kind: 'WITHDRAW-PAYBACK'
-  usdvAmount: BigNumber
+  stblAmount: BigNumber
   collateralAmount: BigNumber
 }
 
 interface AuctionStartedEvent extends HistoryEventBase {
   kind: 'AUCTION_STARTED'
   collateralAmount: BigNumber
-  usdvAmount: BigNumber
+  stblAmount: BigNumber
   auctionId: string
 }
 
@@ -55,7 +55,7 @@ interface AuctionStartedV2Event extends HistoryEventBase {
   kind: 'AUCTION_STARTED_V2'
   auctionId: string
   collateralAmount: BigNumber
-  usdvAmount: BigNumber
+  stblAmount: BigNumber
   liqPenalty: BigNumber
 }
 
@@ -87,7 +87,7 @@ interface MoveSrcEvent extends HistoryEventBase {
   transferFrom: string
   transferTo: string
   collateralAmount: BigNumber
-  usdvAmount: BigNumber
+  stblAmount: BigNumber
 }
 
 interface MoveDestEvent extends HistoryEventBase {
@@ -95,7 +95,7 @@ interface MoveDestEvent extends HistoryEventBase {
   transferFrom: string
   transferTo: string
   collateralAmount: BigNumber
-  usdvAmount: BigNumber
+  stblAmount: BigNumber
 }
 
 interface MigrateEvent extends HistoryEventBase {
@@ -110,7 +110,7 @@ export interface ReturnedEvent {
   transferFrom: string | null
   transferTo: string | null
   collateralAmount: string | null
-  usdvAmount: string | null
+  stblAmount: string | null
   vaultCreator: string | null
   cdpId: string | null
 }

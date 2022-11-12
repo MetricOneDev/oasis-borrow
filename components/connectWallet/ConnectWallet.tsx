@@ -13,7 +13,7 @@ import { NetworkConnector } from '@web3-react/network-connector'
 import { PortisConnector } from '@web3-react/portis-connector'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { WalletLinkConnector } from '@web3-react/walletlink-connector'
-import { dappName, networksById, networksByName, pollingInterval } from 'blockchain/config'
+import { dappName, defaultNetworkName, networksById, networksByName, pollingInterval } from 'blockchain/config'
 import browserDetect from 'browser-detect'
 import { useAppContext } from 'components/AppContextProvider'
 import { LedgerAccountSelection } from 'components/connectWallet/LedgerAccountSelection'
@@ -46,7 +46,7 @@ const rpcUrls: { [chainId: number]: string } = mapValues(
 
 function getNetworkName(): string {
   const name = 'network';
-  const defaultNetwork = 'velas';
+  const defaultNetwork = defaultNetworkName;
   const matchesIfFound = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
   if (isNull(matchesIfFound)) {
     return defaultNetwork;
@@ -71,8 +71,8 @@ export async function getConnector(
       })
       const connectorChainId = Number.parseInt((await connector.getChainId()) as string)
       if (network !== connectorChainId) {
-        alert('Browser velas provider and URL network param do not match!')
-        throw new Error('Browser velas provider and URL network param do not match!')
+        alert(`Browser ${network} provider and URL network param do not match!`)
+        throw new Error(`Browser ${network} provider and URL network param do not match!`)
       }
       return connector
     }
@@ -430,7 +430,7 @@ export function ConnectWallet() {
         })}
         <Box sx={{ mt: 4 }}>
           <Text sx={{ fontWeight: 'semiBold', mb: 2 }} variant="paragraph2">
-            {t('new-to-velas')}
+            {t('new-to-coin')}
           </Text>
           <AppLink
             sx={{

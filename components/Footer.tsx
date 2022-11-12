@@ -7,8 +7,9 @@ import moment from 'moment'
 import { useTranslation } from 'next-i18next'
 import getConfig from 'next/config'
 import React from 'react'
-import { Box, Card, Container, Flex, Grid, Image, Link, Text } from 'theme-ui'
+import { Box, Card, Container, Flex, Grid, Link, Text } from 'theme-ui'
 
+import { defaultNetworkName } from "../blockchain/config";
 import { SelectComponents } from 'react-select/src/components'
 
 const {
@@ -28,7 +29,7 @@ const FOOTER_SECTIONS = [
       { labelKey: 'nav.terms', url: '/terms' },
       // { labelKey: 'nav.team', url: '/about' },
       // { labelKey: 'nav.careers', url: '/careers' },
-      // { labelKey: 'nav.contact', url: `${apiHost}/usdvwallet/contact` },
+      // { labelKey: 'nav.contact', url: `${apiHost}/stblwallet/contact` },
     ],
   },
   {
@@ -51,17 +52,17 @@ const FOOTER_SECTIONS = [
     links: [
       {
         labelKey: 'nav.gov',
-        url: 'https://governance.velero.finance/?network=velas',
+        url: `https://governance.velero.finance/?network=${defaultNetworkName}`,
         target: '_blank',
       },
       {
         labelKey: 'nav.liquidations',
-        url: 'https://liquidation.velero.finance/?network=velas',
+        url: `https://liquidation.velero.finance/?network=${defaultNetworkName}`,
         target: '_blank',
       },
       {
         labelKey: 'nav.save',
-        url: 'https://save.velero.finance/save?network=velas',
+        url: `https://save.velero.finance/save?network=${defaultNetworkName}`,
         target: '_blank',
       },
       { labelKey: 'nav.borrow', url: '/' },

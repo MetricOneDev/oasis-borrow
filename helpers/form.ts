@@ -29,7 +29,7 @@ export enum FormChangeKind {
   totalFieldChange = 'total',
   setMaxChange = 'setMax',
   gasPriceChange = 'gasPrice',
-  velasPriceUSDChange = 'velasPriceUSDChange',
+  coinPriceUSDChange = 'coinPriceUSDChange',
   sellAllowanceChange = 'sellAllowance',
   buyAllowanceChange = 'buyAllowance',
   formStageChange = 'stage',
@@ -42,7 +42,7 @@ export enum FormChangeKind {
   matchTypeChange = 'matchType',
   pickOfferChange = 'pickOffer',
   progress = 'progress',
-  velasBalanceChange = 'velasBalanceChange',
+  coinBalanceChange = 'coinBalanceChange',
   slippageLimitChange = 'slippageLimitChange',
   viewChange = 'viewChange',
   accountChange = 'accountChange',
@@ -104,8 +104,8 @@ export interface GasPriceChange {
   value: BigNumber
 }
 
-export interface VelasPriceUSDChange {
-  kind: FormChangeKind.velasPriceUSDChange
+export interface CoinPriceUSDChange {
+  kind: FormChangeKind.coinPriceUSDChange
   value: BigNumber
 }
 
@@ -125,9 +125,9 @@ export interface ProgressChange {
   progress?: ProgressStage
 }
 
-export interface VelasBalanceChange {
-  kind: FormChangeKind.velasBalanceChange
-  velasBalance: BigNumber
+export interface CoinBalanceChange {
+  kind: FormChangeKind.coinBalanceChange
+  coinBalance: BigNumber
 }
 
 export interface SlippageLimitChange {
@@ -149,11 +149,11 @@ export function progressChange(progress?: ProgressStage): ProgressChange {
   return { progress, kind: FormChangeKind.progress }
 }
 
-export function toVelasBalanceChange(velasBalance$: Observable<BigNumber>) {
-  return velasBalance$.pipe(
-    map((velasBalance) => ({
-      velasBalance: velasBalance,
-      kind: FormChangeKind.velasBalanceChange,
+export function toCoinBalanceChange(coinBalance$: Observable<BigNumber>) {
+  return coinBalance$.pipe(
+    map((coinBalance) => ({
+      coinBalance: coinBalance,
+      kind: FormChangeKind.coinBalanceChange,
     })),
   )
 }
@@ -170,16 +170,16 @@ export function toGasPriceChange(gasPrice$: Observable<BigNumber>): Observable<G
   )
 }
 
-export function toVelasPriceUSDChange(
-  VLXUsd$: Observable<BigNumber | undefined>,
-): Observable<VelasPriceUSDChange> {
-  return VLXUsd$.pipe(
+export function toCoinPriceUSDChange(
+  CoinUsd$: Observable<BigNumber | undefined>,
+): Observable<CoinPriceUSDChange> {
+  return CoinUsd$.pipe(
     map(
       (value) =>
         ({
           value,
-          kind: FormChangeKind.velasPriceUSDChange,
-        } as VelasPriceUSDChange),
+          kind: FormChangeKind.coinPriceUSDChange,
+        } as CoinPriceUSDChange),
     ),
   )
 }
@@ -261,8 +261,8 @@ export enum GasEstimationStatus {
 
 export interface HasGasEstimationCost {
   gasEstimationUsd?: BigNumber
-  gasEstimationVlx?: BigNumber
-  gasEstimationUsdv?: BigNumber
+  gasEstimationCoin?: BigNumber
+  gasEstimationStbl?: BigNumber
 }
 
 export interface HasGasEstimation extends HasGasEstimationCost {
@@ -280,12 +280,12 @@ export function doGasEstimation<S extends HasGasEstimation>(
 ): Observable<S> {
   return combineLatest(gasPrice$, tokenPricesInUSD$, txHelpers$).pipe(
     first(),
-    switchMap(([gasPrice, { VLX: VLXUsd, USDV: USDVUsd }, txHelpers]) => {
+    switchMap(([gasPrice, { MTR: MTRUsd, MONE: MONEUsd }, txHelpers]) => {
       if (state.gasEstimationStatus !== GasEstimationStatus.unset) {
         return of(state)
       }
 
-      const { gasEstimationVlx, gasEstimationUsd, ...stateWithoutGasEstimation } = state
+      const { gasEstimationCoin, gasEstimationUsd, ...stateWithoutGasEstimation } = state
 
       const gasCall = call(txHelpers, state)
 
@@ -299,17 +299,17 @@ export function doGasEstimation<S extends HasGasEstimation>(
       return gasCall.pipe(
         map((gasEstimation: number) => {
           const gasCost = amountFromWei(gasPrice.times(gasEstimation))
-          const gasEstimationUsd = VLXUsd ? gasCost.times(VLXUsd) : undefined
-          const gasEstimationUsdv =
-            gasEstimationUsd && USDVUsd ? gasEstimationUsd.div(USDVUsd) : undefined
+          const gasEstimationUsd = MTRUsd ? gasCost.times(MONEUsd) : undefined
+          const gasEstimationStbl =
+            gasEstimationUsd && MONEUsd ? gasEstimationUsd.div(MONEUsd) : undefined
 
           return {
             ...state,
             gasEstimation,
             gasEstimationStatus: GasEstimationStatus.calculated,
-            gasEstimationVlx: gasCost,
+            gasEstimationCoin: gasCost,
             gasEstimationUsd,
-            gasEstimationUsdv,
+            gasEstimationStbl: gasEstimationStbl,
           }
         }),
       )

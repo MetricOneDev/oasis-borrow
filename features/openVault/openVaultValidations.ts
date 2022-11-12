@@ -4,9 +4,9 @@ import { OpenVaultState } from './openVault'
 
 export type OpenVaultErrorMessage =
   | 'depositAmountExceedsCollateralBalance'
-  | 'depositingAllVlxBalance'
-  | 'generateAmountExceedsUsdvYieldFromDepositingCollateral'
-  | 'generateAmountExceedsUsdvYieldFromDepositingCollateralAtNextPrice'
+  | 'depositingAllCoinBalance'
+  | 'generateAmountExceedsStblYieldFromDepositingCollateral'
+  | 'generateAmountExceedsStblYieldFromDepositingCollateralAtNextPrice'
   | 'generateAmountExceedsDebtCeiling'
   | 'generateAmountLessThanDebtFloor'
   | 'customAllowanceAmountExceedsMaxUint256'
@@ -19,9 +19,9 @@ export function validateErrors(state: OpenVaultState): OpenVaultState {
     balanceInfo,
     stage,
     isEditingStage,
-    depositingAllVlxBalance,
-    generateAmountExceedsUsdvYieldFromDepositingCollateral,
-    generateAmountExceedsUsdvYieldFromDepositingCollateralAtNextPrice,
+    depositingAllCoinBalance,
+    generateAmountExceedsStblYieldFromDepositingCollateral,
+    generateAmountExceedsStblYieldFromDepositingCollateralAtNextPrice,
     generateAmountExceedsDebtCeiling,
     generateAmountLessThanDebtFloor,
     customAllowanceAmountExceedsMaxUint256,
@@ -34,16 +34,16 @@ export function validateErrors(state: OpenVaultState): OpenVaultState {
       errorMessages.push('depositAmountExceedsCollateralBalance')
     }
 
-    if (depositingAllVlxBalance) {
-      errorMessages.push('depositingAllVlxBalance')
+    if (depositingAllCoinBalance) {
+      errorMessages.push('depositingAllCoinBalance')
     }
 
-    if (generateAmountExceedsUsdvYieldFromDepositingCollateral) {
-      errorMessages.push('generateAmountExceedsUsdvYieldFromDepositingCollateral')
+    if (generateAmountExceedsStblYieldFromDepositingCollateral) {
+      errorMessages.push('generateAmountExceedsStblYieldFromDepositingCollateral')
     }
 
-    if (generateAmountExceedsUsdvYieldFromDepositingCollateralAtNextPrice) {
-      errorMessages.push('generateAmountExceedsUsdvYieldFromDepositingCollateralAtNextPrice')
+    if (generateAmountExceedsStblYieldFromDepositingCollateralAtNextPrice) {
+      errorMessages.push('generateAmountExceedsStblYieldFromDepositingCollateralAtNextPrice')
     }
 
     if (generateAmountExceedsDebtCeiling) {
@@ -65,7 +65,7 @@ export function validateErrors(state: OpenVaultState): OpenVaultState {
   }
 
   if (stage === 'openFailure' || stage === 'proxyFailure' || stage === 'allowanceFailure') {
-    if (state.txError?.name === 'VlxAppPleaseEnableContractData') {
+    if (state.txError?.name === 'CoinAppPleaseEnableContractData') {
       errorMessages.push('ledgerWalletContractDataDisabled')
     }
   }
@@ -84,7 +84,7 @@ export function validateWarnings(state: OpenVaultState): OpenVaultState {
   const {
     depositAmount,
     errorMessages,
-    usdvYieldFromDepositingCollateral,
+    stblYieldFromDepositingCollateral,
     ilkData,
     isEditingStage,
     vaultWillBeAtRiskLevelDanger,
@@ -98,7 +98,7 @@ export function validateWarnings(state: OpenVaultState): OpenVaultState {
   if (errorMessages.length) return { ...state, warningMessages }
 
   if (isEditingStage) {
-    if (!isNullish(depositAmount) && usdvYieldFromDepositingCollateral.lt(ilkData.debtFloor)) {
+    if (!isNullish(depositAmount) && stblYieldFromDepositingCollateral.lt(ilkData.debtFloor)) {
       warningMessages.push('potentialGenerateAmountLessThanDebtFloor')
     }
 

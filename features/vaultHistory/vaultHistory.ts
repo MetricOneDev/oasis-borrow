@@ -16,10 +16,11 @@ const query = gql`
       filter: { urn: { equalTo: $urn }, kind: { notEqualTo: "TAKE" } }
       orderBy: [TIMESTAMP_DESC, LOG_INDEX_DESC]
     ) {
-      nodes {
+      nod
+      es {
         kind
         collateralAmount
-        usdvAmount
+        stblAmount
         vaultCreator
         cdpId
         transferFrom
@@ -47,7 +48,7 @@ async function getVaultHistory(client: GraphQLClient, urn: string): Promise<Retu
 function parseBigNumbersFields(event: Partial<ReturnedEvent>): VaultEvent {
   const bigNumberFields = [
     'collateralAmount',
-    'usdvAmount',
+    'stblAmount',
     'collateralTaken',
     'coveredDebt',
     'remainingCollateral',

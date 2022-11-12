@@ -2,7 +2,7 @@ import { Dictionary } from 'ts-essentials'
 
 import * as erc20 from '../abi/erc20.json'
 import * as mcdOsm from '../abi/mcd-osm.json'
-import { contractDesc } from '../config'
+import { coinName, contractDesc } from '../config'
 
 export function getOsms(addresses: Dictionary<string>) {
   return Object.entries(addresses)
@@ -14,7 +14,7 @@ export function getOsms(addresses: Dictionary<string>) {
 export function getCollaterals(addresses: Dictionary<string>) {
   return Object.entries(addresses)
     .filter(([key]) => /PIP_.*/.test(key))
-    .filter(([key]) => key !== 'VLX')
+    .filter(([key]) => key !== 'MTR')
     .map(([key]) => key.replace('PIP_', ''))
 }
 

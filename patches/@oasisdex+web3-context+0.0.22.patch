@@ -1,44 +1,49 @@
 diff --git a/node_modules/@oasisdex/web3-context/lib/src/network.js b/node_modules/@oasisdex/web3-context/lib/src/network.js
-index 106a437..9d6a7fa 100644
+index 106a437..c035e0d 100644
 --- a/node_modules/@oasisdex/web3-context/lib/src/network.js
 +++ b/node_modules/@oasisdex/web3-context/lib/src/network.js
-@@ -6,6 +6,8 @@ exports.networkNameToId = {
+@@ -6,6 +6,11 @@ exports.networkNameToId = {
      main: 1,
      kovan: 42,
      hardhat: 2137,
++    velas: 106,
++    meter: 82,
++    metertestnet: 83,
 +    velas: 106,
 +    velastestnet: 111
  };
  const web3s = [];
  exports.contract = lodash_1.memoize((web3, { abi, address }) => new web3.eth.Contract(abi.default, address), (web3, { address }) => {
-@@ -16,7 +18,7 @@ exports.contract = lodash_1.memoize((web3, { abi, address }) => new web3.eth.Con
+@@ -16,7 +21,7 @@ exports.contract = lodash_1.memoize((web3, { abi, address }) => new web3.eth.Con
  });
  function getNetworkName() {
      const name = 'network';
 -    const defaultNetwork = 'main';
-+    const defaultNetwork = 'velas';
++    const defaultNetwork = 'meter';
      const matchesIfFound = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
      if (lodash_1.isNull(matchesIfFound)) {
          return defaultNetwork;
 diff --git a/node_modules/@oasisdex/web3-context/src/network.ts b/node_modules/@oasisdex/web3-context/src/network.ts
-index 96c854e..fe399a7 100644
+index 96c854e..73c22ff 100644
 --- a/node_modules/@oasisdex/web3-context/src/network.ts
 +++ b/node_modules/@oasisdex/web3-context/src/network.ts
-@@ -5,6 +5,8 @@ export const networkNameToId = {
+@@ -5,6 +5,10 @@ export const networkNameToId = {
    main: 1,
    kovan: 42,
    hardhat: 2137,
 +  velas: 106,
++  meter: 82,
++  metertestnet: 83,
 +  velastestnet: 111
  } as { [key: string]: number };
  
  export interface ContractDesc {
-@@ -25,7 +27,7 @@ export const contract: any = memoize(
+@@ -25,7 +29,7 @@ export const contract: any = memoize(
  
  export function getNetworkName(): string {
    const name = 'network';
 -  const defaultNetwork = 'main';
-+  const defaultNetwork = 'velas';
++  const defaultNetwork = 'meter';
    const matchesIfFound = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
    if (isNull(matchesIfFound)) {
      return defaultNetwork;

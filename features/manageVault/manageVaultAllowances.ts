@@ -5,24 +5,24 @@ import { ManageVaultChange, ManageVaultState } from './manageVault'
 
 export const allowanceDefaults: Partial<ManageVaultState> = {
   collateralAllowanceAmount: maxUint256,
-  usdvAllowanceAmount: maxUint256,
+  stblAllowanceAmount: maxUint256,
 }
 
-interface UsdvAllowanceChange {
-  kind: 'usdvAllowance'
-  usdvAllowanceAmount?: BigNumber
+interface StblAllowanceChange {
+  kind: 'stblAllowance'
+  stblAllowanceAmount?: BigNumber
 }
 
-interface UsdvAllowanceUnlimitedChange {
-  kind: 'usdvAllowanceUnlimited'
+interface StblAllowanceUnlimitedChange {
+  kind: 'stblAllowanceUnlimited'
 }
 
-interface UsdvAllowancePaybackChange {
-  kind: 'usdvAllowanceAsPaybackAmount'
+interface StblAllowancePaybackChange {
+  kind: 'stblAllowanceAsPaybackAmount'
 }
 
-interface UsdvAllowanceReset {
-  kind: 'usdvAllowanceReset'
+interface StblAllowanceReset {
+  kind: 'stblAllowanceReset'
 }
 
 interface CollateralAllowanceChange {
@@ -43,10 +43,10 @@ interface CollateralAllowanceReset {
 }
 
 export type ManageVaultAllowanceChange =
-  | UsdvAllowanceChange
-  | UsdvAllowanceUnlimitedChange
-  | UsdvAllowancePaybackChange
-  | UsdvAllowanceReset
+  | StblAllowanceChange
+  | StblAllowanceUnlimitedChange
+  | StblAllowancePaybackChange
+  | StblAllowanceReset
   | CollateralAllowanceChange
   | CollateralAllowanceUnlimitedChange
   | CollateralAllowanceDepositChange
@@ -89,39 +89,39 @@ export function applyManageVaultAllowance(
     }
   }
 
-  if (change.kind === 'usdvAllowance') {
-    const { usdvAllowanceAmount } = change
+  if (change.kind === 'stblAllowance') {
+    const { stblAllowanceAmount } = change
     return {
       ...state,
-      usdvAllowanceAmount,
+      stblAllowanceAmount: stblAllowanceAmount,
     }
   }
 
-  if (change.kind === 'usdvAllowanceAsPaybackAmount') {
+  if (change.kind === 'stblAllowanceAsPaybackAmount') {
     const {
       paybackAmount,
       vault: { debtOffset },
     } = state
     return {
       ...state,
-      selectedUsdvAllowanceRadio: 'paybackAmount',
-      usdvAllowanceAmount: paybackAmount!.plus(debtOffset),
+      selectedStblAllowanceRadio: 'paybackAmount',
+      stblAllowanceAmount: paybackAmount!.plus(debtOffset),
     }
   }
 
-  if (change.kind === 'usdvAllowanceUnlimited') {
+  if (change.kind === 'stblAllowanceUnlimited') {
     return {
       ...state,
-      selectedUsdvAllowanceRadio: 'unlimited',
-      usdvAllowanceAmount: maxUint256,
+      selectedStblAllowanceRadio: 'unlimited',
+      stblAllowanceAmount: maxUint256,
     }
   }
 
-  if (change.kind === 'usdvAllowanceReset') {
+  if (change.kind === 'stblAllowanceReset') {
     return {
       ...state,
-      selectedUsdvAllowanceRadio: 'custom',
-      usdvAllowanceAmount: undefined,
+      selectedStblAllowanceRadio: 'custom',
+      stblAllowanceAmount: undefined,
     }
   }
 

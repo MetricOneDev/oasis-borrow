@@ -12,6 +12,7 @@ import { one, zero } from 'helpers/zero'
 import { Observable, of } from 'rxjs'
 import { switchMap } from 'rxjs/operators'
 
+import { stblName } from "../../blockchain/config";
 import { mockBalanceInfo$, MockBalanceInfoProps } from './balanceInfo.mock'
 import { mockContext$ } from './context.mock'
 import { mockIlkData$, MockIlkDataProps } from './ilks.mock'
@@ -38,7 +39,7 @@ export interface MockManageVaultProps {
 
   proxyAddress?: string
   collateralAllowance?: BigNumber
-  usdvAllowance?: BigNumber
+  stblAllowance?: BigNumber
   account?: string
   status?: 'connected'
 }
@@ -59,7 +60,7 @@ export function mockManageVault$({
   vault,
   proxyAddress,
   collateralAllowance,
-                                   usdvAllowance,
+                                   stblAllowance,
   account = '0xVaultController',
   status = 'connected',
 }: MockManageVaultProps = {}): Observable<ManageVaultState> {
@@ -96,9 +97,9 @@ export function mockManageVault$({
   }
 
   function allowance$(_token: string) {
-    return _token === 'USDV'
-      ? _daiAllowance$ || usdvAllowance
-        ? of(usdvAllowance || zero)
+    return _token === stblName
+      ? _daiAllowance$ || stblAllowance
+        ? of(stblAllowance || zero)
         : of(maxUint256)
       : _collateralAllowance$ || collateralAllowance
       ? of(collateralAllowance || zero)

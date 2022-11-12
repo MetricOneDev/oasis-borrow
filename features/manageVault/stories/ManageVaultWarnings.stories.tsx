@@ -36,16 +36,16 @@ export const InsufficientCollateralAllowance = manageVaultStory({
 
 export const InsufficientDaiAllowance = manageVaultStory({
   title:
-    'Warning is shown when the user is paying back some of the debt in their vault and the allowance they have set on their proxy is less than that amount, the flow will direct the user to set the correct usdv allowance before paying back',
+    'Warning is shown when the user is paying back some of the debt in their vault and the allowance they have set on their proxy is less than that amount, the flow will direct the user to set the correct MONE allowance before paying back',
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('20'),
     debt: new BigNumber('3000'),
   },
-  usdvAllowance: new BigNumber('500'),
+  stblAllowance: new BigNumber('500'),
   proxyAddress,
 })({
-  stage: 'usdvEditing',
+  stage: 'stblEditing',
   paybackAmount: new BigNumber('600'),
 })
 
@@ -89,7 +89,7 @@ export const ConnectedAccountIsNotVaultController = manageVaultStory({
   proxyAddress,
 })({
   paybackAmount: new BigNumber('100'),
-  stage: 'usdvEditing',
+  stage: 'stblEditing',
 })
 
 export const VaultWillBeAtRiskLevelDanger = manageVaultStory({
@@ -110,7 +110,7 @@ export const VaultWillBeAtRiskLevelDanger = manageVaultStory({
   },
   proxyAddress,
 })({
-  stage: 'usdvEditing',
+  stage: 'stblEditing',
   generateAmount: new BigNumber('1500'),
 })
 
@@ -132,7 +132,7 @@ export const VaultWillBeAtRiskLevelDangerAtNextPrice = manageVaultStory({
   },
   proxyAddress,
 })({
-  stage: 'usdvEditing',
+  stage: 'stblEditing',
   generateAmount: new BigNumber('2000'),
 })
 
@@ -154,7 +154,7 @@ export const VaultWillBeAtRiskLevelWarning = manageVaultStory({
   },
   proxyAddress,
 })({
-  stage: 'usdvEditing',
+  stage: 'stblEditing',
   generateAmount: new BigNumber('1000'),
 })
 
@@ -179,7 +179,7 @@ export const VaultWillBeAtRiskLevelWarningAtNextPrice = manageVaultStory({
   },
   proxyAddress,
 })({
-  stage: 'usdvEditing',
+  stage: 'stblEditing',
   generateAmount: new BigNumber('2000'),
 })
 
@@ -296,11 +296,11 @@ export const PayingBackAllDebt = manageVaultStory({
     debt: new BigNumber('2000'),
   },
   balanceInfo: {
-    usdvBalance: new BigNumber('5000'),
+    stblBalance: new BigNumber('5000'),
   },
   proxyAddress,
 })({
-  stage: 'usdvEditing',
+  stage: 'stblEditing',
   paybackAmount: new BigNumber('2000'),
 })
 
@@ -321,18 +321,18 @@ export const DepositingAllCollateralBalance = manageVaultStory({
 })
 
 export const PayingBackAllDaiBalance = manageVaultStory({
-  title: 'Warning is shown when a user is paying back all usdv balance in their wallet',
+  title: 'Warning is shown when a user is paying back all MONE balance in their wallet',
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('20'),
     debt: new BigNumber('3000'),
   },
   balanceInfo: {
-    usdvBalance: new BigNumber('500'),
+    stblBalance: new BigNumber('500'),
   },
   proxyAddress,
 })({
-  stage: 'usdvEditing',
+  stage: 'stblEditing',
   paybackAmount: new BigNumber('500'),
 })
 
@@ -370,7 +370,7 @@ export const WithdrawingAllFreeCollateralAtNextPrice = manageVaultStory({
 
 export const GeneratingAllDaiFromIlkDebtAvailable = manageVaultStory({
   title:
-    'Warning is shown when a user is generating all usdv remaining for a given ilk which results in that ilks debt ceiling being reached',
+    'Warning is shown when a user is generating all MONE remaining for a given ilk which results in that ilks debt ceiling being reached',
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('200'),
@@ -383,12 +383,12 @@ export const GeneratingAllDaiFromIlkDebtAvailable = manageVaultStory({
   proxyAddress,
 })({
   generateAmount: new BigNumber('5000'),
-  stage: 'usdvEditing',
+  stage: 'stblEditing',
 })
 
 export const GeneratingAllDaiFromTotalCollateral = manageVaultStory({
   title:
-    'Warning is shown when a user is generating the maximum amount of usdv for the amount of collateral in the vault and being deposited',
+    'Warning is shown when a user is generating the maximum amount of MONE for the amount of collateral in the vault and being deposited',
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('200'),
@@ -402,7 +402,7 @@ export const GeneratingAllDaiFromTotalCollateral = manageVaultStory({
 
 export const GeneratingAllDaiFromTotalCollateralAtNextPrice = manageVaultStory({
   title:
-    'Warning is shown when a user is generating the maximum amount of usdv for the amount of collateral in the vault and being deposited',
+    'Warning is shown when a user is generating the maximum amount of MONE for the amount of collateral in the vault and being deposited',
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('200'),

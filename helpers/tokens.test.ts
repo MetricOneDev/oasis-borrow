@@ -7,13 +7,13 @@ describe('token input precision calculation', () => {
   it('when token price is between to 1-9.99 USD', () => {
     expect(
       calculateTokenPrecisionByValue({
-        token: 'VLX',
+        token: 'MTR',
         usdPrice: new BigNumber('1'),
       }),
     ).to.deep.equal(2)
     expect(
       calculateTokenPrecisionByValue({
-        token: 'VLX',
+        token: 'MTR',
         usdPrice: new BigNumber('9.99'),
       }),
     ).to.deep.equal(2)
@@ -21,20 +21,20 @@ describe('token input precision calculation', () => {
   it('when token price is <1 USD', () => {
     expect(
       calculateTokenPrecisionByValue({
-        token: 'VLX',
+        token: 'MTR',
         usdPrice: new BigNumber('0.1'),
       }),
     ).to.deep.equal(1)
 
     expect(
       calculateTokenPrecisionByValue({
-        token: 'VLX',
+        token: 'MTR',
         usdPrice: new BigNumber('0.001'),
       }),
     ).to.deep.equal(0)
     expect(
       calculateTokenPrecisionByValue({
-        token: 'VLX',
+        token: 'MTR',
         usdPrice: new BigNumber('0.00000000001'),
       }),
     ).to.deep.equal(0)
@@ -43,14 +43,14 @@ describe('token input precision calculation', () => {
   it('when token price is >1 USD', () => {
     expect(
       calculateTokenPrecisionByValue({
-        token: 'VLX',
+        token: 'MTR',
         usdPrice: new BigNumber('10000'),
       }),
     ).to.deep.equal(6)
 
     expect(
       calculateTokenPrecisionByValue({
-        token: 'VLX',
+        token: 'MTR',
         usdPrice: new BigNumber('1000000000'),
       }),
     ).to.deep.equal(11)

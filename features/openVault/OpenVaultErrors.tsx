@@ -23,11 +23,11 @@ export function OpenVaultErrors({
     switch (message) {
       case 'depositAmountExceedsCollateralBalance':
         return translate('deposit-amount-exceeds-collateral-balance')
-      case 'generateAmountExceedsUsdvYieldFromDepositingCollateral':
-        return translate('generate-amount-exceeds-usdv-yield-from-depositing-collateral')
-      case 'generateAmountExceedsUsdvYieldFromDepositingCollateralAtNextPrice':
+      case 'generateAmountExceedsStblYieldFromDepositingCollateral':
+        return translate('generate-amount-exceeds-stbl-yield-from-depositing-collateral')
+      case 'generateAmountExceedsStblYieldFromDepositingCollateralAtNextPrice':
         return translate(
-          'generate-amount-exceeds-usdv-yield-from-depositing-collateral-at-next-price',
+          'generate-amount-exceeds-stbl-yield-from-depositing-collateral-at-next-price',
         )
       case 'generateAmountExceedsDebtCeiling':
         return translate('generate-amount-exceeds-debt-ceiling', {
@@ -51,8 +51,8 @@ export function OpenVaultErrors({
         return translate('custom-allowance-amount-exceeds-maxuint256')
       case 'customAllowanceAmountLessThanDepositAmount':
         return translate('custom-allowance-amount-less-than-deposit-amount')
-      case 'depositingAllVlxBalance':
-        return translate('depositing-all-vlx-balance')
+      case 'depositingAllCoinBalance':
+        return translate('depositing-all-coin-balance')
       case 'ledgerWalletContractDataDisabled':
         return translate('ledger-enable-contract-data')
       default:

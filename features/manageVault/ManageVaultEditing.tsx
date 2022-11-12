@@ -5,6 +5,7 @@ import { useTranslation } from 'next-i18next'
 import React from 'react'
 import { Box, Button, Flex, Grid, Text } from 'theme-ui'
 
+import { stblName } from "../../blockchain/config";
 import { ManageVaultState } from './manageVault'
 
 function DepositInput({
@@ -49,7 +50,7 @@ function GenerateInput({
     <VaultActionInput
       action="Generate"
       amount={generateAmount}
-      token={'USDV'}
+      token={stblName}
       showMax={true}
       disabled={!accountIsController}
       maxAmount={maxGenerateAmount}
@@ -104,7 +105,7 @@ function PaybackInput({
     <VaultActionInput
       action="Payback"
       amount={paybackAmount}
-      token={'USDV'}
+      token={stblName}
       showMax={true}
       maxAmount={maxPaybackAmount}
       maxAmountLabel={'Max'}
@@ -135,7 +136,7 @@ export function ManageVaultEditing(props: ManageVaultState) {
   const disableDepositAndGenerate = paybackAmount || withdrawAmount || showPaybackAndWithdrawOption
   const disablePaybackAndWithdraw = depositAmount || generateAmount || showDepositAndGenerateOption
 
-  const inverted = stage === 'usdvEditing'
+  const inverted = stage === 'stblEditing'
 
   const showDepositAndGenerateOptionButton =
     (depositAmount || generateAmount) && accountIsController
@@ -157,7 +158,7 @@ export function ManageVaultEditing(props: ManageVaultState) {
             <Text pr={1}>
               {t('manage-vault.action-option', {
                 action: inverted ? t('vault-actions.deposit') : t('vault-actions.generate'),
-                token: inverted ? token : 'USDV',
+                token: inverted ? token : stblName,
               })}
             </Text>
           </Button>
@@ -191,7 +192,7 @@ export function ManageVaultEditing(props: ManageVaultState) {
             <Text pr={1}>
               {t('manage-vault.action-option', {
                 action: inverted ? t('vault-actions.withdraw') : t('vault-actions.payback'),
-                token: inverted ? token : 'USDV',
+                token: inverted ? token : stblName,
               })}
             </Text>
           </Button>

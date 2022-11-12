@@ -28,10 +28,10 @@ type WithdrawAmountChange = {
 }
 
 type AllowanceChange = {
-  kind: 'collateralAllowanceChange' | 'usdvAllowanceChange'
+  kind: 'collateralAllowanceChange' | 'stblAllowanceChange'
   value: {
     type:
-      | Pick<ManageVaultState, 'selectedUsdvAllowanceRadio'>
+      | Pick<ManageVaultState, 'selectedStblAllowanceRadio'>
       | Pick<ManageVaultState, 'selectedCollateralAllowanceRadio'>
     amount: BigNumber
   }
@@ -42,7 +42,7 @@ type ManageVaultConfirm = {
   value: {
     ilk: string
     collateralAmount: BigNumber
-    usdvAmount: BigNumber
+    stblAmount: BigNumber
   }
 }
 
@@ -51,7 +51,7 @@ type ManageVaultConfirmTransaction = {
   value: {
     ilk: string
     collateralAmount: BigNumber
-    usdvAmount: BigNumber
+    stblAmount: BigNumber
     txHash: string
   }
 }
@@ -62,7 +62,7 @@ export function createManageVaultAnalytics$(
 ) {
   const stageChanges = manageVaultState$.pipe(
     map((state) => state.stage),
-    filter((stage) => stage === 'usdvEditing' || stage === 'collateralEditing'),
+    filter((stage) => stage === 'stblEditing' || stage === 'collateralEditing'),
     distinctUntilChanged(isEqual),
   )
 
@@ -151,28 +151,28 @@ export function createManageVaultAnalytics$(
     })),
   )
 
-  const usdvAllowanceTypeChanges: Observable<Pick<
+  const stblAllowanceTypeChanges: Observable<Pick<
     ManageVaultState,
-    'selectedUsdvAllowanceRadio'
+    'selectedStblAllowanceRadio'
   >> = manageVaultState$.pipe(
-    filter((state) => state.stage === 'usdvAllowanceWaitingForConfirmation'),
-    map((state) => state.selectedUsdvAllowanceRadio),
+    filter((state) => state.stage === 'stblAllowanceWaitingForConfirmation'),
+    map((state) => state.selectedStblAllowanceRadio),
     distinctUntilChanged(isEqual),
   )
 
-  const usdvAllowanceAmountChanges: Observable<BigNumber> = manageVaultState$.pipe(
-    map((state) => state.usdvAllowanceAmount),
+  const stblAllowanceAmountChanges: Observable<BigNumber> = manageVaultState$.pipe(
+    map((state) => state.stblAllowanceAmount),
     filter((amount) => !!amount),
     distinctUntilChanged(isEqual),
     debounceTime(INPUT_DEBOUNCE_TIME),
   )
 
-  const usdvAllowanceChanges: Observable<AllowanceChange> = zip(
-    usdvAllowanceTypeChanges,
-    usdvAllowanceAmountChanges,
+  const stblAllowanceChanges: Observable<AllowanceChange> = zip(
+    stblAllowanceTypeChanges,
+    stblAllowanceAmountChanges,
   ).pipe(
     map(([type, amount]) => ({
-      kind: 'usdvAllowanceChange',
+      kind: 'stblAllowanceChange',
       value: {
         type,
         amount,
@@ -188,7 +188,7 @@ export function createManageVaultAnalytics$(
         ilk: ilk,
         collateralAmount:
           depositAmount || (withdrawAmount ? withdrawAmount.times(new BigNumber(-1)) : zero),
-        usdvAmount:
+        stblAmount:
           generateAmount || (paybackAmount ? paybackAmount.times(new BigNumber(-1)) : zero),
       },
     })),
@@ -211,7 +211,7 @@ export function createManageVaultAnalytics$(
           ilk: ilk,
           collateralAmount:
             depositAmount || (withdrawAmount ? withdrawAmount.times(new BigNumber(-1)) : zero),
-          usdvAmount:
+          stblAmount:
             generateAmount || (paybackAmount ? paybackAmount.times(new BigNumber(-1)) : zero),
           txHash: manageTxHash,
         },
@@ -230,12 +230,12 @@ export function createManageVaultAnalytics$(
             paybackAmountChanges,
             withdrawAmountChanges,
             collateralAllowanceChanges,
-            usdvAllowanceChanges,
+            stblAllowanceChanges,
           ),
           merge(manageVaultConfirm, manageVaultConfirmTransaction),
         ).pipe(
           tap((event) => {
-            const page = stage === 'usdvEditing' ? Pages.ManageUsdv : Pages.ManageCollateral
+            const page = stage === 'stblEditing' ? Pages.ManageStbl : Pages.ManageCollateral
             switch (event.kind) {
               case 'depositAmountChange':
                 tracker.manageVaultDepositAmount(
@@ -271,8 +271,8 @@ export function createManageVaultAnalytics$(
                   event.value.amount.toString(),
                 )
                 break
-              case 'usdvAllowanceChange':
-                tracker.manageUsdvPickAllowance(
+              case 'stblAllowanceChange':
+                tracker.manageStblPickAllowance(
                   event.value.type.toString(),
                   event.value.amount.toString(),
                 )
@@ -282,7 +282,7 @@ export function createManageVaultAnalytics$(
                   page,
                   event.value.ilk,
                   event.value.collateralAmount.toString(),
-                  event.value.usdvAmount.toString(),
+                  event.value.stblAmount.toString(),
                 )
                 break
               case 'manageVaultConfirmTransaction':
@@ -290,7 +290,7 @@ export function createManageVaultAnalytics$(
                   page,
                   event.value.ilk,
                   event.value.collateralAmount.toString(),
-                  event.value.usdvAmount.toString(),
+                  event.value.stblAmount.toString(),
                   event.value.txHash,
                 )
                 break

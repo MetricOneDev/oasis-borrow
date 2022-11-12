@@ -4,6 +4,8 @@ import { createPriceInfo$, PriceInfo } from 'features/shared/priceInfo'
 import { lastHour, nextHour } from 'helpers/time'
 import { Observable, of } from 'rxjs'
 
+import { coinName } from "../../blockchain/config";
+
 export interface MockPriceInfoProps {
   _oraclePriceData$?: Observable<OraclePriceData>
   collateralPrice?: BigNumber
@@ -30,14 +32,14 @@ export function mockPriceInfo$({
   ethChangePercentage = defaultEthChangePercentage,
   token = defaultToken,
 }: MockPriceInfoProps = {}): Observable<PriceInfo> {
-  const nextVlxPrice = ethPrice.plus(ethPrice.times(ethChangePercentage))
+  const nextCoinPrice = ethPrice.plus(ethPrice.times(ethChangePercentage))
   const nextCollateralPrice = collateralPrice.plus(
     collateralPrice.times(collateralChangePercentage),
   )
   const ethPriceInfo$ = of({
     currentPrice: ethPrice,
     isStaticPrice: false,
-    nextPrice: nextVlxPrice || ethPrice,
+    nextPrice: nextCoinPrice || ethPrice,
     currentPriceUpdate: lastHour,
     nextPriceUpdate: nextHour,
     percentageChange: ethChangePercentage,
@@ -54,7 +56,7 @@ export function mockPriceInfo$({
   })
 
   function oraclePriceData$(_token: string) {
-    return _oraclePriceData$ || _token === 'VLX' ? ethPriceInfo$ : collateralPriceInfo$
+    return _oraclePriceData$ || _token === coinName ? ethPriceInfo$ : collateralPriceInfo$
   }
   return createPriceInfo$(oraclePriceData$, token)
 }

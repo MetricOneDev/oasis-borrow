@@ -36,7 +36,7 @@ export function Logo({ sx }: { sx?: SxStyleProp }) {
         ...sx,
       }}
     >
-      VELERO
+      MetricOne
       {/*<Image src={staticFilesRuntimeUrl('/static/img/logo.svg')} />*/}
     </AppLink>
   )
@@ -134,7 +134,7 @@ function ConnectedHeader() {
 }
 
 const HEADER_LINKS = {
-  'usdv-wallet': `${apiHost}/usdvwallet`,
+  'stbl-wallet': `${apiHost}/stblwallet`,
   learn: 'https://kb.oasis.app',
   blog: 'https://blog.oasis.app',
 }
@@ -282,7 +282,7 @@ const MOBILE_MENU_SECTIONS = [
     titleKey: 'nav.products',
     links: [
       { labelKey: 'nav.oasis-borrow' },
-      // { labelKey: 'nav.usdv-wallet', url: HEADER_LINKS['usdv-wallet'] },
+      // { labelKey: 'nav.stbl-wallet', url: HEADER_LINKS['stbl-wallet'] },
     ],
   },
   {
@@ -384,9 +384,9 @@ function DisconnectedHeader() {
             {/*  /!*<AppLink*!/*/}
             {/*  /!*  variant="links.nav"*!/*/}
             {/*  /!*  sx={{ fontWeight: 'body' }}*!/*/}
-            {/*  /!*  href={HEADER_LINKS['usdv-wallet']}*!/*/}
+            {/*  /!*  href={HEADER_LINKS['stbl-wallet']}*!/*/}
             {/*  /!*>*!/*/}
-            {/*  /!*  {t('nav.usdv-wallet')}*!/*/}
+            {/*  /!*  {t('nav.stbl-wallet')}*!/*/}
             {/*  /!*</AppLink>*!/*/}
             {/*  <Text variant="links.nav" sx={{ cursor: 'default', ':hover': { color: 'primary' } }}>*/}
             {/*    {t('nav.borrow')}*/}

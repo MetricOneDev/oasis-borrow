@@ -1,8 +1,8 @@
 {
-  "name": "Velero",
-  "description": "Borrow USDV, a USD pegged first stablecoin in the Velas blockchain",
+  "name": "MetricOne",
+  "description": "Borrow MONE, a USD pegged first stablecoin in the Meter blockchain",
   "iconPath": "static/img/logo.svg",
-  "short_name": "Velero",
+  "short_name": "MetricOne",
   "display": "standalone",
   "orientation": "portrait",
   "theme_color": "#FFFFFF",

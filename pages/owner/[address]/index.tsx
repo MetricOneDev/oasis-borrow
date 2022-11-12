@@ -56,5 +56,5 @@ export default function VaultsSummary({ address }: { address: string }) {
 
 VaultsSummary.layout = AppLayout
 VaultsSummary.layoutProps = {
-  variant: 'usdvContainer',
+  variant: 'stblContainer',
 }

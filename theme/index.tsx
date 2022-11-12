@@ -633,11 +633,11 @@ const customLandingIcons = {
     ),
     viewBox: '0 0 25 25',
   },
-  landing_card_usdv: {
+  landing_card_stbl: {
     path: (
       <>
-        <circle cx="44" cy="44" r="44" fill="url(#paint0_linear_landing_card_usdv)" />
-        <circle cx="43.9999" cy="43.9997" r="36.6667" fill="url(#paint1_linear_landing_card_usdv)" />
+        <circle cx="44" cy="44" r="44" fill="url(#paint0_linear_landing_card_stbl)" />
+        <circle cx="43.9999" cy="43.9997" r="36.6667" fill="url(#paint1_linear_landing_card_stbl)" />
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
@@ -646,7 +646,7 @@ const customLandingIcons = {
         />
         <defs>
           <linearGradient
-            id="paint0_linear_landing_card_usdv"
+            id="paint0_linear_landing_card_stbl"
             x1="44"
             y1="0"
             x2="44"
@@ -657,7 +657,7 @@ const customLandingIcons = {
             <stop offset="1" stop-color="#FDC134" />
           </linearGradient>
           <linearGradient
-            id="paint1_linear_landing_card_usdv"
+            id="paint1_linear_landing_card_stbl"
             x1="43.9999"
             y1="-3.05588"
             x2="43.9999"
@@ -946,7 +946,7 @@ const oasisBaseTheme = {
       maxWidth: '712px',
       mt: 5,
     },
-    usdvContainer: {
+    stblContainer: {
       variant: 'layout.appContainer',
       maxWidth: '818px',
     },
@@ -1410,7 +1410,7 @@ const oasisBaseTheme = {
 
 export const theme = oasisBaseTheme
 
-// Duplication from theme as exporting const from package library is breaking usdv-ui website and theme-ui doesn't support yet transitions tokens :(
+// Duplication from theme as exporting const from package library is breaking stbl-ui website and theme-ui doesn't support yet transitions tokens :(
 // To refactor if they will include this support
 export const TRANSITIONS = {
   global: '150ms cubic-bezier(0.215,0.61,0.355,1)',

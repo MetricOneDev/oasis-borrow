@@ -26,7 +26,7 @@ export const EditingStage = openVaultStory({
 })
 
 export const ProxyWaitingForConfirmation = openVaultStory({
-  ilk: 'VLX-A',
+  ilk: 'MTR-A',
 })({
   stage: 'proxyWaitingForConfirmation',
   depositAmount: new BigNumber('50'),
@@ -34,7 +34,7 @@ export const ProxyWaitingForConfirmation = openVaultStory({
 })
 
 export const ProxyWaitingForApproval = openVaultStory({
-  ilk: 'VLX-A',
+  ilk: 'MTR-A',
 })({
   stage: 'proxyWaitingForApproval',
   depositAmount: new BigNumber('50'),
@@ -42,7 +42,7 @@ export const ProxyWaitingForApproval = openVaultStory({
 })
 
 export const ProxyFailure = openVaultStory({
-  ilk: 'VLX-A',
+  ilk: 'MTR-A',
 })({
   stage: 'proxyFailure',
   depositAmount: new BigNumber('50'),
@@ -50,7 +50,7 @@ export const ProxyFailure = openVaultStory({
 })
 
 export const ProxyInProgress = openVaultStory({
-  ilk: 'VLX-A',
+  ilk: 'MTR-A',
 })({
   stage: 'proxyInProgress',
   depositAmount: new BigNumber('50'),
@@ -58,7 +58,7 @@ export const ProxyInProgress = openVaultStory({
 })
 
 export const ProxySuccess = openVaultStory({
-  ilk: 'VLX-A',
+  ilk: 'MTR-A',
 })({
   stage: 'proxySuccess',
   depositAmount: new BigNumber('50'),
@@ -111,7 +111,7 @@ export const AllowanceSuccess = openVaultStory({
 
 export const OpenWaitingForConfirmation = openVaultStory({
   balanceInfo: { collateralBalance: new BigNumber('100') },
-  ilk: 'VLX-A',
+  ilk: 'MTR-A',
 })({
   stage: 'openWaitingForConfirmation',
   depositAmount: new BigNumber('50'),
@@ -120,7 +120,7 @@ export const OpenWaitingForConfirmation = openVaultStory({
 
 export const OpenWaitingForApproval = openVaultStory({
   balanceInfo: { collateralBalance: new BigNumber('100') },
-  ilk: 'VLX-A',
+  ilk: 'MTR-A',
 })({
   stage: 'openWaitingForApproval',
   depositAmount: new BigNumber('50'),
@@ -129,7 +129,7 @@ export const OpenWaitingForApproval = openVaultStory({
 
 export const OpenFailure = openVaultStory({
   balanceInfo: { collateralBalance: new BigNumber('100') },
-  ilk: 'VLX-A',
+  ilk: 'MTR-A',
 })({
   stage: 'openFailure',
   depositAmount: new BigNumber('50'),
@@ -138,7 +138,7 @@ export const OpenFailure = openVaultStory({
 
 export const OpenInProgress = openVaultStory({
   balanceInfo: { collateralBalance: new BigNumber('100') },
-  ilk: 'VLX-A',
+  ilk: 'MTR-A',
 })({
   stage: 'openInProgress',
   depositAmount: new BigNumber('50'),
@@ -147,7 +147,7 @@ export const OpenInProgress = openVaultStory({
 
 export const OpenSuccess = openVaultStory({
   balanceInfo: { collateralBalance: new BigNumber('100') },
-  ilk: 'VLX-A',
+  ilk: 'MTR-A',
 })({
   id: new BigNumber('122345'),
   stage: 'openSuccess',

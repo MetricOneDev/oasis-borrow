@@ -13,6 +13,10 @@ export const EtherscanLink = ({ children, transactionHash, network }: IEtherscan
     url = `https://evmexplorer.velas.com/tx/${transactionHash}`
   } else if (network === 'velastestnet') {
     url = `https://evmexplorer.testnet.velas.com/tx/${transactionHash}`
+  } else if (network === 'meter') {
+    url = `https://scan.meter.io/tx/${transactionHash}`
+  } else if (network === 'metertestnet') {
+    url = `https://scan-warringstakes.meter.io/tx/${transactionHash}`
   } else {
     const pathPrefix = network === 'main' ? '' : `${network}.`
     url = `https://${pathPrefix}etherscan.io/tx/${transactionHash}`

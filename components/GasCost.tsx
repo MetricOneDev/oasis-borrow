@@ -9,11 +9,12 @@ import React from 'react'
 import { Box, Flex, Text } from 'theme-ui'
 
 import { Tooltip, useTooltip } from './Tooltip'
+import { stblName, coinName } from "../blockchain/config";
 
 function getGasText({
   gasEstimationStatus,
-  gasEstimationUsdv,
-                      gasEstimationVlx,
+  gasEstimationStbl,
+  gasEstimationCoin,
   t,
 }: HasGasEstimation & { t: TFunction }) {
   switch (gasEstimationStatus) {
@@ -26,12 +27,12 @@ function getGasText({
     case GasEstimationStatus.unset:
     case undefined:
     case GasEstimationStatus.calculated:
-      return gasEstimationVlx ? (
-        <Text sx={{ display: 'inline' }}>{`${formatPrice(gasEstimationVlx, 'VLX')} VLX`}</Text>
-      ) : gasEstimationUsdv ? (
+      return gasEstimationCoin ? (
+        <Text sx={{ display: 'inline' }}>{`${formatPrice(gasEstimationCoin, coinName)} ${coinName}`}</Text>
+      ) : gasEstimationStbl ? (
         <Flex sx={{ fontSize: 5, alignItems: 'center' }}>
           <Icon name="dai" size="24px" sx={{ position: 'relative', top: '1px' }} />
-          <Text ml={1}>{`~${formatPrice(gasEstimationUsdv, 'USDV')}`}</Text>
+          <Text ml={1}>{`~${formatPrice(gasEstimationStbl, stblName)}`}</Text>
         </Flex>
       ) : (
         '--'
@@ -40,9 +41,9 @@ function getGasText({
 }
 
 export function GasCost({
-  gasEstimationUsdv,
+  gasEstimationStbl,
   gasEstimationStatus,
-  gasEstimationVlx,
+  gasEstimationCoin,
 }: HasGasEstimation) {
   const { tooltipOpen, setTooltipOpen } = useTooltip()
   const { t } = useTranslation()
@@ -62,13 +63,13 @@ export function GasCost({
             <Text sx={{ fontWeight: 'semiBold', mb: 1 }}>{t('transaction-fee')}</Text>
             <Text sx={{ fontSize: 2 }}>
               {t('transaction-fee-tooltip-desc')}{' '}
-              {getGasText({ gasEstimationStatus, gasEstimationVlx, t })}.
+              {getGasText({ gasEstimationStatus, gasEstimationCoin, t })}.
             </Text>
           </Tooltip>
         )}
       </Flex>
       <Text sx={{ textAlign: 'left' }}>
-        {getGasText({ gasEstimationStatus, gasEstimationUsdv, t })}
+        {getGasText({ gasEstimationStatus, gasEstimationStbl, t })}
       </Text>
     </Box>
   )

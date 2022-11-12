@@ -16,6 +16,7 @@ import { iif, Observable, of } from 'rxjs'
 import { filter, first, switchMap } from 'rxjs/operators'
 
 import { ManageVaultChange, ManageVaultState } from './manageVault'
+import {stblName} from "../../blockchain/config";
 
 type ProxyChange =
   | {
@@ -53,19 +54,19 @@ type CollateralAllowanceChange =
       collateralAllowance: BigNumber
     }
 
-type UsdvAllowanceChange =
-  | { kind: 'usdvAllowanceWaitingForApproval' }
+type StblAllowanceChange =
+  | { kind: 'stblAllowanceWaitingForApproval' }
   | {
-      kind: 'usdvAllowanceInProgress'
-  usdvAllowanceTxHash: string
+      kind: 'stblAllowanceInProgress'
+      stblAllowanceTxHash: string
     }
   | {
-      kind: 'usdvAllowanceFailure'
+      kind: 'stblAllowanceFailure'
       txError?: any
     }
   | {
-      kind: 'usdvAllowanceSuccess'
-      usdvAllowance: BigNumber
+      kind: 'stblAllowanceSuccess'
+      stblAllowance: BigNumber
     }
 
 type ManageChange =
@@ -85,7 +86,7 @@ type ManageChange =
 export type ManageVaultTransactionChange =
   | ProxyChange
   | CollateralAllowanceChange
-  | UsdvAllowanceChange
+  | StblAllowanceChange
   | ManageChange
 
 export function applyManageVaultTransaction(
@@ -160,34 +161,34 @@ export function applyManageVaultTransaction(
     return { ...state, stage: 'collateralAllowanceSuccess', collateralAllowance }
   }
 
-  if (change.kind === 'usdvAllowanceWaitingForApproval') {
+  if (change.kind === 'stblAllowanceWaitingForApproval') {
     return {
       ...state,
-      stage: 'usdvAllowanceWaitingForApproval',
+      stage: 'stblAllowanceWaitingForApproval',
     }
   }
 
-  if (change.kind === 'usdvAllowanceInProgress') {
-    const { usdvAllowanceTxHash } = change
+  if (change.kind === 'stblAllowanceInProgress') {
+    const { stblAllowanceTxHash } = change
     return {
       ...state,
-      usdvAllowanceTxHash,
-      stage: 'usdvAllowanceInProgress',
+      stblAllowanceTxHash: stblAllowanceTxHash,
+      stage: 'stblAllowanceInProgress',
     }
   }
 
-  if (change.kind === 'usdvAllowanceFailure') {
+  if (change.kind === 'stblAllowanceFailure') {
     const { txError } = change
     return {
       ...state,
-      stage: 'usdvAllowanceFailure',
+      stage: 'stblAllowanceFailure',
       txError,
     }
   }
 
-  if (change.kind === 'usdvAllowanceSuccess') {
-    const { usdvAllowance } = change
-    return { ...state, stage: 'usdvAllowanceSuccess', usdvAllowance }
+  if (change.kind === 'stblAllowanceSuccess') {
+    const { stblAllowance } = change
+    return { ...state, stage: 'stblAllowanceSuccess', stblAllowance: stblAllowance }
   }
 
   if (change.kind === 'manageWaitingForApproval') {
@@ -315,7 +316,7 @@ export function manageVaultWithdrawAndPayback(
     .subscribe((ch) => change(ch))
 }
 
-export function setUsdvAllowance(
+export function setStblAllowance(
   txHelpers$: Observable<TxHelpers>,
   change: (ch: ManageVaultChange) => void,
   state: ManageVaultState,
@@ -326,27 +327,27 @@ export function setUsdvAllowance(
       switchMap(({ sendWithGasEstimation }) =>
         sendWithGasEstimation(approve, {
           kind: TxMetaKind.approve,
-          token: 'USDV',
+          token: stblName,
           spender: state.proxyAddress!,
-          amount: state.usdvAllowanceAmount!,
+          amount: state.stblAllowanceAmount!,
         }).pipe(
           transactionToX<ManageVaultChange, ApproveData>(
-            { kind: 'usdvAllowanceWaitingForApproval' },
+            { kind: 'stblAllowanceWaitingForApproval' },
             (txState) =>
               of({
-                kind: 'usdvAllowanceInProgress',
-                usdvAllowanceTxHash: (txState as any).txHash as string,
+                kind: 'stblAllowanceInProgress',
+                stblAllowanceTxHash: (txState as any).txHash as string,
               }),
             (txState) =>
               of({
-                kind: 'usdvAllowanceFailure',
+                kind: 'stblAllowanceFailure',
                 txError:
                   txState.status === TxStatus.Error ||
                   txState.status === TxStatus.CancelledByTheUser
                     ? txState.error
                     : undefined,
               }),
-            (txState) => of({ kind: 'usdvAllowanceSuccess', usdvAllowance: txState.meta.amount }),
+            (txState) => of({ kind: 'stblAllowanceSuccess', stblAllowance: txState.meta.amount }),
           ),
         ),
       ),

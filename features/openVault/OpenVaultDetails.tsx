@@ -8,6 +8,7 @@ import { useTranslation } from 'next-i18next'
 import React from 'react'
 import { Box, Flex, Grid, Heading, Text } from 'theme-ui'
 
+import { stblName } from "../../blockchain/config";
 import { OpenVaultState } from './openVault'
 import { OpenVaultHeading } from './OpenVaultView'
 
@@ -50,12 +51,12 @@ export function VaultDetailsTable({
         sx={{ border: 'light', borderRadius: 'medium', p: [3, 4] }}
       >
         <VaultDetailsTableItem
-          label={t('system.vault-usdv-debt')}
+          label={t('system.vault-stbl-debt')}
           value={
             <>
               {formatCryptoBalance(generateAmount || zero)}
               <Text sx={{ display: 'inline', ml: 2, fontWeight: 'semiBold' }} variant="paragraph3">
-                USDV
+                `${stblName}`
               </Text>
             </>
           }

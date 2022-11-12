@@ -7,6 +7,8 @@ import { useTranslation } from 'next-i18next'
 import React, { useEffect, useRef, useState } from 'react'
 import { Box, Button, Flex, Grid, Heading, Text } from 'theme-ui'
 
+import { coinName, stblName } from "../../blockchain/config";
+
 type LedgerAccountSelectionProps = {
   chainId: number
   web3Context: Web3Context
@@ -114,10 +116,10 @@ export function LedgerAccountSelection({
                   <Text variant="boldBody">{formatAddress(address)}</Text>
                   <Flex sx={{ justifyContent: 'space-between' }}>
                     <Text variant="surfaceText" mr={2} sx={{ fontSize: 3 }}>
-                      {formatCryptoBalance(daiAmount)} USDV
+                      {formatCryptoBalance(daiAmount)} $`{stblName}`
                     </Text>
                     <Text variant="surfaceText" sx={{ fontSize: 3 }}>
-                      {formatCryptoBalance(ethAmount)} VLX
+                      {formatCryptoBalance(ethAmount)} $`{coinName}`
                     </Text>
                   </Flex>
                 </Grid>

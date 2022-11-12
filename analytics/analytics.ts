@@ -24,7 +24,7 @@ export enum Pages {
   OpenVaultOverview = 'OpenVaultOverview',
   VaultsOverview = 'VaultsOverview',
   ManageCollateral = 'ManageCollateral',
-  ManageUsdv = 'Usdv',
+  ManageStbl = 'Stbl',
 }
 
 export const trackingEvents = {
@@ -160,7 +160,7 @@ export const trackingEvents = {
   confirmVaultConfirm: (
     ilk: string,
     collateralAmount: string,
-    usdvAmount: string,
+    stblAmount: string,
     firstCDP: boolean | undefined,
   ) => {
     mixpanel.track('btn-click', {
@@ -168,7 +168,7 @@ export const trackingEvents = {
       product,
       ilk,
       collateralAmount,
-      usdvAmount,
+      stblAmount,
       firstCDP,
       page: Pages.VaultCreate,
       section: 'ConfirmVault',
@@ -178,7 +178,7 @@ export const trackingEvents = {
   confirmVaultConfirmTransaction: (
     ilk: string,
     collateralAmount: string,
-    usdvAmount: string,
+    stblAmount: string,
     firstCDP: boolean | undefined,
     txHash: string,
   ) => {
@@ -187,7 +187,7 @@ export const trackingEvents = {
       product,
       ilk,
       collateralAmount,
-      usdvAmount,
+      stblAmount,
       firstCDP,
       txHash,
       page: Pages.VaultCreate,
@@ -233,13 +233,13 @@ export const trackingEvents = {
     })
   },
 
-  switchToUsdv: (ControllerIsConnected: boolean) => {
+  switchToStbl: (ControllerIsConnected: boolean) => {
     mixpanel.track('btn-click', {
-      id: 'SwitchToUsdv',
+      id: 'SwitchToStbl',
       product,
       ControllerIsConnected,
       page: Pages.ManageCollateral,
-      section: 'Usdv',
+      section: 'Stbl',
     })
   },
 
@@ -248,13 +248,13 @@ export const trackingEvents = {
       id: 'SwitchToCollateral',
       product,
       ControllerIsConnected,
-      page: Pages.ManageUsdv,
+      page: Pages.ManageStbl,
       section: 'Collateral',
     })
   },
 
   manageVaultDepositAmount: (
-    page: Pages.ManageCollateral | Pages.ManageUsdv,
+    page: Pages.ManageCollateral | Pages.ManageStbl,
     amount: string,
     setMax: boolean,
   ) => {
@@ -268,7 +268,7 @@ export const trackingEvents = {
   },
 
   manageVaultGenerateAmount: (
-    page: Pages.ManageCollateral | Pages.ManageUsdv,
+    page: Pages.ManageCollateral | Pages.ManageStbl,
     amount: string,
     setMax: boolean,
   ) => {
@@ -282,7 +282,7 @@ export const trackingEvents = {
   },
 
   manageVaultWithdrawAmount: (
-    page: Pages.ManageCollateral | Pages.ManageUsdv,
+    page: Pages.ManageCollateral | Pages.ManageStbl,
     amount: string,
     setMax: boolean,
   ) => {
@@ -296,7 +296,7 @@ export const trackingEvents = {
   },
 
   manageVaultPaybackAmount: (
-    page: Pages.ManageCollateral | Pages.ManageUsdv,
+    page: Pages.ManageCollateral | Pages.ManageStbl,
     amount: string,
     setMax: boolean,
   ) => {
@@ -317,29 +317,29 @@ export const trackingEvents = {
     })
   },
 
-  // Can we distinguish if went through collateral/usdvEditing?
+  // Can we distinguish if went through collateral/stblEditing?
   manageVaultConfirm: (
-    page: Pages.ManageCollateral | Pages.ManageUsdv,
+    page: Pages.ManageCollateral | Pages.ManageStbl,
     ilk: string,
     collateralAmount: string,
-    usdvAmount: string,
+    stblAmount: string,
   ) => {
     mixpanel.track('btn-click', {
       id: 'Confirm',
       product,
       ilk,
       collateralAmount,
-      usdvAmount,
+      stblAmount,
       page,
       section: 'ConfirmVault',
     })
   },
 
   manageVaultConfirmTransaction: (
-    page: Pages.ManageCollateral | Pages.ManageUsdv,
+    page: Pages.ManageCollateral | Pages.ManageStbl,
     ilk: string,
     collateralAmount: string,
-    usdvAmount: string,
+    stblAmount: string,
     txHash: string,
   ) => {
     mixpanel.track('btn-click', {
@@ -347,7 +347,7 @@ export const trackingEvents = {
       product,
       ilk,
       collateralAmount,
-      usdvAmount,
+      stblAmount,
       txHash,
       page,
       section: 'ConfirmVault',
@@ -374,22 +374,22 @@ export const trackingEvents = {
     })
   },
 
-  manageUsdvPickAllowance: (type: string, amount: string) => {
+  manageStblPickAllowance: (type: string, amount: string) => {
     mixpanel.track('input-change', {
       id: 'PickAllowance',
       product,
       type,
       amount,
-      page: Pages.ManageUsdv,
+      page: Pages.ManageStbl,
       section: 'Allowance',
     })
   },
 
-  manageUsdvApproveAllowance: () => {
+  manageStblApproveAllowance: () => {
     mixpanel.track('btn-click', {
       id: 'ApproveAllowance',
       product,
-      page: Pages.ManageUsdv,
+      page: Pages.ManageStbl,
       section: 'Allowance',
     })
   },
@@ -414,22 +414,22 @@ export const trackingEvents = {
     })
   },
 
-  // First Confirm button when the user is on USDV and type into Generate
-  manageUsdvGenerateConfirm: () => {
+  // First Confirm button when the user is on STBL and type into Generate
+  manageStblGenerateConfirm: () => {
     mixpanel.track('btn-click', {
       id: 'Confirm',
       product,
-      page: Pages.ManageUsdv,
+      page: Pages.ManageStbl,
       section: 'Generate',
     })
   },
 
-  // Confirm button when the user is on USDV and type into Payback
-  manageUsdvPaybackConfirm: () => {
+  // Confirm button when the user is on STBL and type into Payback
+  manageStblPaybackConfirm: () => {
     mixpanel.track('btn-click', {
       id: 'Confirm',
       product,
-      page: Pages.ManageUsdv,
+      page: Pages.ManageStbl,
       section: 'Payback',
     })
   },

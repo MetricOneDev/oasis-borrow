@@ -75,7 +75,7 @@ export const paybackAndWithdrawDefaults: Partial<ManageVaultState> = {
 
 export function applyManageVaultInput(change: ManageVaultChange, state: ManageVaultState) {
   const canDeposit =
-    (state.stage === 'usdvEditing' && state.generateAmount && state.showDepositAndGenerateOption) ||
+    (state.stage === 'stblEditing' && state.generateAmount && state.showDepositAndGenerateOption) ||
     state.stage === 'collateralEditing'
 
   if (change.kind === 'deposit' && canDeposit) {
@@ -129,7 +129,7 @@ export function applyManageVaultInput(change: ManageVaultChange, state: ManageVa
     (state.stage === 'collateralEditing' &&
       state.depositAmount &&
       state.showDepositAndGenerateOption) ||
-    state.stage === 'usdvEditing'
+    state.stage === 'stblEditing'
 
   if (change.kind === 'generate' && canGenerate) {
     const { generateAmount } = change
@@ -138,7 +138,7 @@ export function applyManageVaultInput(change: ManageVaultChange, state: ManageVa
       ...state,
       generateAmount,
       ...(!generateAmount &&
-        stage === 'usdvEditing' && {
+        stage === 'stblEditing' && {
           showDepositAndGenerateOption: false,
           depositAmount: undefined,
           depositAmountUSD: undefined,
@@ -158,7 +158,7 @@ export function applyManageVaultInput(change: ManageVaultChange, state: ManageVa
   }
 
   const canWithdraw =
-    (state.stage === 'usdvEditing' && state.paybackAmount && state.showPaybackAndWithdrawOption) ||
+    (state.stage === 'stblEditing' && state.paybackAmount && state.showPaybackAndWithdrawOption) ||
     state.stage === 'collateralEditing'
 
   if (change.kind === 'withdraw' && canWithdraw) {
@@ -215,7 +215,7 @@ export function applyManageVaultInput(change: ManageVaultChange, state: ManageVa
     (state.stage === 'collateralEditing' &&
       state.withdrawAmount &&
       state.showPaybackAndWithdrawOption) ||
-    state.stage === 'usdvEditing'
+    state.stage === 'stblEditing'
 
   if (change.kind === 'payback' && canPayback) {
     const { paybackAmount } = change
@@ -224,7 +224,7 @@ export function applyManageVaultInput(change: ManageVaultChange, state: ManageVa
       ...state,
       paybackAmount,
       ...(!paybackAmount &&
-        stage === 'usdvEditing' && {
+        stage === 'stblEditing' && {
           showPaybackAndWithdrawOption: false,
           withdrawAmount: undefined,
           withdrawAmountUSD: undefined,

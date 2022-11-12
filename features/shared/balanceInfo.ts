@@ -2,12 +2,13 @@ import { BigNumber } from 'bignumber.js'
 import { combineLatest, Observable, of } from 'rxjs'
 import { map } from 'rxjs/internal/operators/map'
 
+import { coinName, stblName } from "../../blockchain/config";
 import { zero } from '../../helpers/zero'
 
 export interface BalanceInfo {
   collateralBalance: BigNumber
-  vlxBalance: BigNumber
-  usdvBalance: BigNumber
+  coinBalance: BigNumber
+  stblBalance: BigNumber
 }
 
 export function createBalanceInfo$(
@@ -17,13 +18,13 @@ export function createBalanceInfo$(
 ): Observable<BalanceInfo> {
   return combineLatest(
     address ? balance$(token, address) : of(zero),
-    address ? balance$('VLX', address) : of(zero),
-    address ? balance$('USDV', address) : of(zero),
+    address ? balance$(coinName, address) : of(zero),
+    address ? balance$(stblName, address) : of(zero),
   ).pipe(
-    map(([collateralBalance, vlxBalance, usdvBalance]) => ({
+    map(([collateralBalance, coinBalance, stblBalance]) => ({
       collateralBalance,
-      vlxBalance,
-      usdvBalance: usdvBalance,
+      coinBalance: coinBalance,
+      stblBalance: stblBalance,
     })),
   )
 }

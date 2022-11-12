@@ -17,7 +17,7 @@ import { Box, Button, Card, Flex, Grid, Heading, Text, Textarea } from 'theme-ui
 
 import { PendingTransactions, RecentTransactions } from './TransactionManagerView'
 
-function UsdvIndicator({ usdvBalance }: { usdvBalance: BigNumber | undefined }) {
+function StblIndicator({ stblBalance }: { stblBalance: BigNumber | undefined }) {
   return (
     <Flex
       sx={{
@@ -28,9 +28,9 @@ function UsdvIndicator({ usdvBalance }: { usdvBalance: BigNumber | undefined }) 
         p: 1,
       }}
     >
-      <Icon sx={{ zIndex: 1 }} name="usdv_circle_color" size={30} />
+      <Icon sx={{ zIndex: 1 }} name="stbl_circle_color" size={30} />
       <Box sx={{ mx: 2, color: 'onWarning' }}>
-        {usdvBalance ? formatCryptoBalance(usdvBalance) : '0.00'}
+        {stblBalance ? formatCryptoBalance(stblBalance) : '0.00'}
       </Box>
     </Flex>
   )
@@ -127,7 +127,7 @@ export function AccountButton() {
         onClick={() => openModal(AccountModal)}
       >
         <AccountIndicator address={context.account} />
-        <UsdvIndicator usdvBalance={accountData.usdvBalance} />
+        <StblIndicator stblBalance={accountData.stblBalance} />
       </Button>
     </Flex>
   )

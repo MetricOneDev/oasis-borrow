@@ -13,6 +13,7 @@ import {
   formatPriceUp,
   toShorthandNumber,
 } from './format'
+import {stblName} from "../../blockchain/config";
 
 export type FormatNumberProps = React.HTMLAttributes<HTMLSpanElement> & {
   value: BigNumber
@@ -133,8 +134,8 @@ export const CryptoMoney = (props: FormatAmountProps) => {
 
 export const FormatQuoteToken = (props: { token: string }) => {
   const colors: { [key: string]: string } = {
-    USDV: '#FFAC13',
-    WVLX: '#B15DFF',
+    MONE: '#FFAC13',
+    WMTR: '#B15DFF',
     // treat pegcoins in the same way
     USDC: 'green',
     TUSD: 'green',

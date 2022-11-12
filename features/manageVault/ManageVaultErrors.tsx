@@ -34,10 +34,10 @@ export function ManageVaultErrors({
           maxWithdrawAmount: formatCryptoBalance(maxWithdrawAmount),
           token,
         })
-      case 'generateAmountExceedsUsdvYieldFromTotalCollateral':
-        return translate('generate-amount-exceeds-usdv-yield-from-total-collateral')
-      case 'generateAmountExceedsUsdvYieldFromTotalCollateralAtNextPrice':
-        return translate('generate-amount-exceeds-usdv-yield-from-total-collateral-at-next-price')
+      case 'generateAmountExceedsStblYieldFromTotalCollateral':
+        return translate('generate-amount-exceeds-stbl-yield-from-total-collateral')
+      case 'generateAmountExceedsStblYieldFromTotalCollateralAtNextPrice':
+        return translate('generate-amount-exceeds-stbl-yield-from-total-collateral-at-next-price')
       case 'generateAmountExceedsDebtCeiling':
         return translate('generate-amount-exceeds-debt-ceiling', {
           maxGenerateAmount: formatCryptoBalance(maxGenerateAmount),
@@ -56,8 +56,8 @@ export function ManageVaultErrors({
             ]}
           />
         )
-      case 'paybackAmountExceedsUsdvBalance':
-        return translate('payback-amount-exceeds-usdv-balance')
+      case 'paybackAmountExceedsStblBalance':
+        return translate('payback-amount-exceeds-stbl-balance')
       case 'paybackAmountExceedsVaultDebt':
         return translate('payback-amount-exceeds-vault-debt')
       case 'debtWillBeLessThanDebtFloor':
@@ -68,12 +68,12 @@ export function ManageVaultErrors({
         return translate('custom-collateral-allowance-amount-exceeds-maxuint256')
       case 'customCollateralAllowanceAmountLessThanDepositAmount':
         return translate('custom-collateral-allowance-amount-less-than-deposit-amount')
-      case 'customUsdvAllowanceAmountExceedsMaxUint256':
-        return translate('custom-usdv-allowance-amount-exceeds-maxuint256')
-      case 'customUsdvAllowanceAmountLessThanPaybackAmount':
-        return translate('custom-usdv-allowance-amount-less-than-payback-amount')
-      case 'depositingAllVlxBalance':
-        return translate('depositing-all-vlx-balance')
+      case 'customStblAllowanceAmountExceedsMaxUint256':
+        return translate('custom-stbl-allowance-amount-exceeds-maxuint256')
+      case 'customStblAllowanceAmountLessThanPaybackAmount':
+        return translate('custom-stbl-allowance-amount-less-than-payback-amount')
+      case 'depositingAllCoinBalance':
+        return translate('depositing-all-coin-balance')
       case 'ledgerWalletContractDataDisabled':
         return translate('ledger-enable-contract-data')
       case 'withdrawCollateralOnVaultUnderDebtFloor':

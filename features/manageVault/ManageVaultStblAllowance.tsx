@@ -9,33 +9,34 @@ import React from 'react'
 import { createNumberMask } from 'text-mask-addons'
 import { Grid, Text } from 'theme-ui'
 
+import { stblName } from "../../blockchain/config";
 import { ManageVaultState } from './manageVault'
 
-export function ManageVaultUsdvAllowance({
+export function ManageVaultStblAllowance({
   stage,
-  usdvAllowanceAmount,
+  stblAllowanceAmount,
   paybackAmount,
-  updateUsdvAllowanceAmount,
-  setUsdvAllowanceAmountUnlimited,
-  setUsdvAllowanceAmountToPaybackAmount,
-  resetUsdvAllowanceAmount,
-  selectedUsdvAllowanceRadio,
+  updateStblAllowanceAmount,
+  setStblAllowanceAmountUnlimited,
+  setStblAllowanceAmountToPaybackAmount,
+  resetStblAllowanceAmount,
+  selectedStblAllowanceRadio,
 }: ManageVaultState) {
-  const canSelectRadio = stage === 'usdvAllowanceWaitingForConfirmation'
+  const canSelectRadio = stage === 'stblAllowanceWaitingForConfirmation'
 
   const { t } = useTranslation()
 
-  const isUnlimited = selectedUsdvAllowanceRadio === 'unlimited'
-  const isPayback = selectedUsdvAllowanceRadio === 'paybackAmount'
-  const isCustom = selectedUsdvAllowanceRadio === 'custom'
+  const isUnlimited = selectedStblAllowanceRadio === 'unlimited'
+  const isPayback = selectedStblAllowanceRadio === 'paybackAmount'
+  const isCustom = selectedStblAllowanceRadio === 'custom'
 
   return (
     <Grid>
       {canSelectRadio && (
         <>
           <Radio
-            onChange={setUsdvAllowanceAmountUnlimited!}
-            name="manage-vault-usdv-allowance"
+            onChange={setStblAllowanceAmountUnlimited!}
+            name="manage-vault-stbl-allowance"
             checked={isUnlimited}
           >
             <Text variant="paragraph3" sx={{ fontWeight: 'semiBold', my: '18px' }}>
@@ -43,15 +44,15 @@ export function ManageVaultUsdvAllowance({
             </Text>
           </Radio>
           <Radio
-            onChange={setUsdvAllowanceAmountToPaybackAmount!}
-            name="manage-vault-usdv-allowance"
+            onChange={setStblAllowanceAmountToPaybackAmount!}
+            name="manage-vault-stbl-allowance"
             checked={isPayback}
           >
             <Text variant="paragraph3" sx={{ fontWeight: 'semiBold', my: '18px' }}>
-              {t('usdv-paying-back', { amount: formatCryptoBalance(paybackAmount!) })}
+              {t('stbl-paying-back', { amount: formatCryptoBalance(paybackAmount!) })}
             </Text>
           </Radio>
-          <Radio onChange={resetUsdvAllowanceAmount!} name="allowance-open-form" checked={isCustom}>
+          <Radio onChange={resetStblAllowanceAmount!} name="allowance-open-form" checked={isCustom}>
             <Grid columns="2fr 2fr 1fr" sx={{ alignItems: 'center', my: 2 }}>
               <Text variant="paragraph3" sx={{ fontWeight: 'semiBold' }}>
                 {t('custom')}
@@ -68,18 +69,18 @@ export function ManageVaultUsdvAllowance({
                 }}
                 disabled={!isCustom}
                 value={
-                  usdvAllowanceAmount && isCustom
-                    ? formatAmount(usdvAllowanceAmount, getToken('USDV').symbol)
+                  stblAllowanceAmount && isCustom
+                    ? formatAmount(stblAllowanceAmount, getToken(stblName).symbol)
                     : null
-                } USDV
+                } MONE
                 mask={createNumberMask({
                   allowDecimal: true,
-                  decimalLimit: getToken('USDV').digits,
+                  decimalLimit: getToken(stblName).digits,
                   prefix: '',
                 })}
-                onChange={handleNumericInput(updateUsdvAllowanceAmount!)}
+                onChange={handleNumericInput(updateStblAllowanceAmount!)}
               />
-              <Text sx={{ fontSize: 1 }}>USDV</Text>
+              <Text sx={{ fontSize: 1 }}>`${stblName}`</Text>
             </Grid>
           </Radio>
         </>
@@ -88,28 +89,28 @@ export function ManageVaultUsdvAllowance({
   )
 }
 
-export function ManageVaultUsdvAllowanceStatus({
+export function ManageVaultStblAllowanceStatus({
   stage,
-  usdvAllowanceTxHash,
+  stblAllowanceTxHash,
   etherscan,
 }: ManageVaultState) {
   const { t } = useTranslation()
 
-  if (stage === 'usdvAllowanceInProgress') {
+  if (stage === 'stblAllowanceInProgress') {
     return (
       <TxStatusCardProgress
-        text={t('setting-allowance-for', { token: 'USDV' })}
+        text={t('setting-allowance-for', { token: stblName })}
         etherscan={etherscan!}
-        txHash={usdvAllowanceTxHash!}
+        txHash={stblAllowanceTxHash!}
       />
     )
   }
-  if (stage === 'usdvAllowanceSuccess') {
+  if (stage === 'stblAllowanceSuccess') {
     return (
       <TxStatusCardSuccess
-        text={t('set-allowance-for', { token: 'USDV' })}
+        text={t('set-allowance-for', { token: stblName })}
         etherscan={etherscan!}
-        txHash={usdvAllowanceTxHash!}
+        txHash={stblAllowanceTxHash!}
       />
     )
   }

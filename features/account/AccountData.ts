@@ -6,9 +6,11 @@ import { startWithDefault } from 'helpers/operators'
 import { combineLatest, Observable } from 'rxjs'
 import { filter, map, switchMap } from 'rxjs/operators'
 
+import { stblName } from "../../blockchain/config";
+
 export interface AccountDetails {
   numberOfVaults: number | undefined
-  usdvBalance: BigNumber | undefined
+  stblBalance: BigNumber | undefined
 }
 
 export function createAccountData(
@@ -20,12 +22,12 @@ export function createAccountData(
     filter((context): context is ContextConnected => context.status === 'connected'),
     switchMap((context) =>
       combineLatest(
-        startWithDefault(balance$('USDV', context.account), undefined),
+        startWithDefault(balance$(stblName, context.account), undefined),
         startWithDefault(vaults$(context.account).pipe(map((vault) => vault.length)), undefined),
       ).pipe(
         map(([balance, numberOfVaults]) => ({
           numberOfVaults,
-          usdvBalance: balance,
+          stblBalance: balance,
         })),
       ),
     ),

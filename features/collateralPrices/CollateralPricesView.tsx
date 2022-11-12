@@ -11,6 +11,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Grid, Heading, Text } from 'theme-ui'
 
+import { stblName } from "../../blockchain/config";
 import { CollateralPrice } from './collateralPrices'
 import {
   CollateralPricesWithFilters,
@@ -47,7 +48,7 @@ const COLLATERAL_COLUMNS: ColumnDef<CollateralPrice, CollateralPricesWithFilters
         {label}
       </TableSortHeader>
     ),
-    cell: ({ currentPrice }) => <Text>${formatAmount(currentPrice, 'USD')}</Text>,
+    cell: ({ currentPrice }) => <Text>${formatAmount(currentPrice, stblName)}</Text>,
   },
   {
     headerLabel: 'oracles.next-price',
@@ -62,7 +63,7 @@ const COLLATERAL_COLUMNS: ColumnDef<CollateralPrice, CollateralPricesWithFilters
           color: getPercentageColor(percentageChange),
         }}
       >
-        ${formatAmount(nextPrice, 'USD')}
+        ${formatAmount(nextPrice, stblName)}
       </Text>
     ),
   },

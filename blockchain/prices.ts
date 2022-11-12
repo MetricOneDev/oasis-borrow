@@ -13,6 +13,7 @@ import {
 } from 'rxjs/operators'
 
 import { getToken } from '../blockchain/tokensMetadata'
+import { coinName } from "./config";
 
 export interface Ticker {
   [label: string]: BigNumber
@@ -32,7 +33,7 @@ export function createGasPrice$(
   )
 }
 
-const tradingTokens = ['USDV', 'VLX']
+const tradingTokens = ['MONE', coinName, 'MTRG']
 
 export const tokenPricesInUSD$: Observable<Ticker> = every10Seconds$.pipe(
   switchMap(() =>

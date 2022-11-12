@@ -7,14 +7,14 @@ import { ManageVaultState } from './manageVault'
 
 function ManageVaultEditingToggle({ stage, toggle, accountIsController }: ManageVaultState) {
   const collateralVariant = stage === 'collateralEditing' ? 'outline' : 'filter'
-  const usdvVariant = stage === 'usdvEditing' ? 'outline' : 'filter'
+  const stblVariant = stage === 'stblEditing' ? 'outline' : 'filter'
   const { t } = useTranslation()
 
   function handleToggle(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     e.preventDefault()
     toggle!()
     if (stage === 'collateralEditing') {
-      trackingEvents.switchToUsdv(accountIsController)
+      trackingEvents.switchToStbl(accountIsController)
     } else {
       trackingEvents.switchToCollateral(accountIsController)
     }
@@ -26,14 +26,14 @@ function ManageVaultEditingToggle({ stage, toggle, accountIsController }: Manage
         <Button variant={collateralVariant} sx={{ py: 1 }}>
           {t('system.collateral')}
         </Button>
-        <Button variant={usdvVariant} sx={{ py: 1 }}>
-          {t('system.usdv')}
+        <Button variant={stblVariant} sx={{ py: 1 }}>
+          {t('system.stbl')}
         </Button>
       </Flex>
       <Text variant="paragraph3" sx={{ color: 'text.subtitle', lineHeight: '22px' }}>
         {stage === 'collateralEditing'
           ? t('vault-form.subtext.collateral')
-          : t('vault-form.subtext.usdv')}
+          : t('vault-form.subtext.stbl')}
       </Text>
     </Grid>
   )
@@ -58,7 +58,7 @@ export function ManageVaultFormHeader(props: ManageVaultState) {
     isEditingStage,
     isProxyStage,
     isCollateralAllowanceStage,
-    isUsdvAllowanceStage,
+    isStblAllowanceStage,
     isManageStage,
   } = props
 
@@ -75,10 +75,10 @@ export function ManageVaultFormHeader(props: ManageVaultState) {
             subtext={t('vault-form.subtext.allowance')}
           />
         )}
-        {isUsdvAllowanceStage && (
+        {isStblAllowanceStage && (
           <Header
-            header={t('vault-form.header.usdvAllowance')}
-            subtext={t('vault-form.subtext.usdvAllowance')}
+            header={t('vault-form.header.stblAllowance')}
+            subtext={t('vault-form.subtext.stblAllowance')}
           />
         )}
         {isManageStage && (

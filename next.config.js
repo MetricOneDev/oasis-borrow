@@ -101,12 +101,12 @@ module.exports = withBundleAnalyzer(
             },
             {
               source: '/dashboard',
-              destination: '/usdvwallet/dashboard',
+              destination: '/stblwallet/dashboard',
               permanent: true,
             },
             {
               source: '/(0x[a-fA-F0-9]{40}.*)',
-              destination: '/usdvwallet/dashboard',
+              destination: '/stblwallet/dashboard',
               permanent: true,
             },
           ]

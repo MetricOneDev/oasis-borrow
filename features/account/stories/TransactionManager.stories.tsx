@@ -12,6 +12,7 @@ import React from 'react'
 import { of } from 'rxjs'
 import Web3 from 'web3'
 
+import { stblName } from "../../../blockchain/config";
 import { AccountModal } from '../Account'
 import { createTransactionManager } from '../transactionManager'
 
@@ -127,7 +128,7 @@ function MockContextProvider({
   title,
 }: MockContextProviderProps) {
   const ctx = ({
-    accountData$: of({ numberofVaults: 2, usdvBalance: new BigNumber(10) }),
+    accountData$: of({ numberofVaults: 2, stblBalance: new BigNumber(10) }),
     web3Context$: web3Context ? of(web3Context) : of(protoWeb3Context),
     transactionManager$: createTransactionManager(of(transactions)),
     context$: of({
@@ -158,11 +159,11 @@ const mockTxMetaDefinitions: Pick<TxState<TxData>, 'meta'>[] = [
       proxyAddress: DEFAULT_PROXY_ADDRESS,
     },
   },
-  { meta: { kind: TxMetaKind.disapprove, token: 'USDV', spender: '0x0' } },
+  { meta: { kind: TxMetaKind.disapprove, token: stblName, spender: '0x0' } },
   {
     meta: {
       kind: TxMetaKind.approve,
-      token: 'USDV',
+      token: stblName,
       spender: '0x0',
       amount: new BigNumber(10),
     },
@@ -173,8 +174,8 @@ const mockTxMetaDefinitions: Pick<TxState<TxData>, 'meta'>[] = [
       generateAmount: new BigNumber(3000),
       depositAmount: new BigNumber(4),
       proxyAddress: DEFAULT_PROXY_ADDRESS,
-      ilk: 'VLX-A',
-      token: 'VLX',
+      ilk: 'MTR-A',
+      token: 'MTR',
     },
   },
   {
@@ -183,8 +184,8 @@ const mockTxMetaDefinitions: Pick<TxState<TxData>, 'meta'>[] = [
       generateAmount: new BigNumber(3000),
       depositAmount: new BigNumber(4),
       proxyAddress: DEFAULT_PROXY_ADDRESS,
-      ilk: 'VLX-A',
-      token: 'VLX',
+      ilk: 'MTR-A',
+      token: 'MTR',
       id: new BigNumber(312),
     },
   },
@@ -194,8 +195,8 @@ const mockTxMetaDefinitions: Pick<TxState<TxData>, 'meta'>[] = [
       withdrawAmount: new BigNumber(4),
       paybackAmount: new BigNumber(3000),
       proxyAddress: DEFAULT_PROXY_ADDRESS!,
-      ilk: 'VLX-A',
-      token: 'VLX',
+      ilk: 'MTR-A',
+      token: 'MTR',
       id: new BigNumber(3456),
       shouldPaybackAll: true,
     },
@@ -205,7 +206,7 @@ const mockTxMetaDefinitions: Pick<TxState<TxData>, 'meta'>[] = [
       kind: TxMetaKind.reclaim,
       proxyAddress: DEFAULT_PROXY_ADDRESS!,
       amount: new BigNumber(4),
-      token: 'VLX',
+      token: 'MTR',
       id: new BigNumber(3456),
     },
   },

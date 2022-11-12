@@ -11,10 +11,10 @@
             "fee": 0.58,
             "fees": {
                 "USD": 0.38,
-                "USDV": 0.2
+                "MONE": 0.2
             },
             "sourceCurrency": "USD",
-            "destCurrency": "USDV",
+            "destCurrency": "MONE",
             "sourceAmount": 2.58,
             "destAmount": 1.9638726755044145,
             "destSrn": "ethereum:0x1234567890123456789012345678901234567890",

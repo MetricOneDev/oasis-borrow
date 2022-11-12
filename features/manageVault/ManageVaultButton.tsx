@@ -5,12 +5,13 @@ import { Button, Flex, Spinner, Text } from 'theme-ui'
 import { UnreachableCaseError } from 'ts-essentials'
 
 import { ManageVaultState } from './manageVault'
+import {stblName} from "../../blockchain/config";
 
 function manageVaultButtonText(state: ManageVaultState): string {
   const { t } = useTranslation()
 
   switch (state.stage) {
-    case 'usdvEditing':
+    case 'stblEditing':
     case 'collateralEditing':
       return state.inputAmountsEmpty
         ? t('enter-an-amount')
@@ -18,23 +19,23 @@ function manageVaultButtonText(state: ManageVaultState): string {
         ? t('setup-proxy')
         : state.insufficientCollateralAllowance
         ? t('set-token-allowance', { token: state.vault.token })
-        : state.insufficientUsdvAllowance
-        ? t('set-token-allowance', { token: 'USDV' })
+        : state.insufficientStblAllowance
+        ? t('set-token-allowance', { token: stblName })
         : t('confirm')
 
     case 'proxySuccess':
       return state.insufficientCollateralAllowance
         ? t('set-token-allowance', { token: state.vault.token })
-        : state.insufficientUsdvAllowance
-        ? t('set-token-allowance', { token: 'USDV' })
+        : state.insufficientStblAllowance
+        ? t('set-token-allowance', { token: stblName })
         : t('continue')
 
     case 'collateralAllowanceSuccess':
-      return state.insufficientUsdvAllowance
-        ? t('set-token-allowance', { token: 'USDV' })
+      return state.insufficientStblAllowance
+        ? t('set-token-allowance', { token: stblName })
         : t('continue')
 
-    case 'usdvAllowanceSuccess':
+    case 'stblAllowanceSuccess':
       return t('continue')
 
     case 'proxyFailure':
@@ -52,19 +53,19 @@ function manageVaultButtonText(state: ManageVaultState): string {
         ? t('enter-allowance-amount')
         : t('set-token-allowance', { token: state.vault.token })
 
-    case 'usdvAllowanceWaitingForConfirmation':
-      return state.customUsdvAllowanceAmountEmpty
+    case 'stblAllowanceWaitingForConfirmation':
+      return state.customStblAllowanceAmountEmpty
         ? t('enter-allowance-amount')
-        : t('set-token-allowance', { token: 'USDV' })
+        : t('set-token-allowance', { token: stblName })
 
     case 'collateralAllowanceFailure':
-    case 'usdvAllowanceFailure':
+    case 'stblAllowanceFailure':
       return t('retry-allowance-approval')
 
     case 'collateralAllowanceInProgress':
     case 'collateralAllowanceWaitingForApproval':
-    case 'usdvAllowanceInProgress':
-    case 'usdvAllowanceWaitingForApproval':
+    case 'stblAllowanceInProgress':
+    case 'stblAllowanceWaitingForApproval':
       return t('approving-allowance')
 
     case 'manageWaitingForConfirmation':
@@ -115,16 +116,16 @@ export function ManageVaultButton(props: ManageVaultState) {
 
   const buttonText = manageVaultButtonText(props)
   const secondaryButtonText =
-    stage === 'usdvAllowanceFailure' || stage === 'collateralAllowanceFailure'
-      ? t('edit-token-allowance', { token: isCollateralAllowanceStage ? token : 'USDV' })
+    stage === 'stblAllowanceFailure' || stage === 'collateralAllowanceFailure'
+      ? t('edit-token-allowance', { token: isCollateralAllowanceStage ? token : stblName })
       : t('edit-vault-details')
 
   function trackEvents() {
-    if (stage === 'usdvEditing' && generateAmount && generateAmount.gt(0)) {
-      trackingEvents.manageUsdvGenerateConfirm()
+    if (stage === 'stblEditing' && generateAmount && generateAmount.gt(0)) {
+      trackingEvents.manageStblGenerateConfirm()
     }
-    if (stage === 'usdvEditing' && paybackAmount && paybackAmount.gt(0)) {
-      trackingEvents.manageUsdvPaybackConfirm()
+    if (stage === 'stblEditing' && paybackAmount && paybackAmount.gt(0)) {
+      trackingEvents.manageStblPaybackConfirm()
     }
     if (stage === 'collateralEditing' && depositAmount && depositAmount.gt(0)) {
       trackingEvents.manageCollateralDepositConfirm()
@@ -135,8 +136,8 @@ export function ManageVaultButton(props: ManageVaultState) {
     if (stage === 'collateralAllowanceWaitingForConfirmation') {
       trackingEvents.manageCollateralApproveAllowance()
     }
-    if (stage === 'usdvAllowanceWaitingForConfirmation') {
-      trackingEvents.manageUsdvApproveAllowance()
+    if (stage === 'stblAllowanceWaitingForConfirmation') {
+      trackingEvents.manageStblApproveAllowance()
     }
   }
 
@@ -173,7 +174,7 @@ export function ManageVaultButton(props: ManageVaultState) {
         <Button
           variant="textual"
           onClick={(e: React.SyntheticEvent<HTMLButtonElement>) => {
-            if (stage !== 'usdvAllowanceFailure' && stage !== 'collateralAllowanceFailure') {
+            if (stage !== 'stblAllowanceFailure' && stage !== 'collateralAllowanceFailure') {
               trackingEvents.manageVaultConfirmVaultEdit()
             }
 

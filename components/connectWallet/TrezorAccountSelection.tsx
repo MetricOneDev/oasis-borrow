@@ -11,6 +11,8 @@ import { useTranslation } from 'next-i18next'
 import React, { useEffect, useRef, useState } from 'react'
 import { Box, Button, Flex, Grid, Heading, Text } from 'theme-ui'
 
+import { coinName, stblName } from "../../blockchain/config";
+
 type TrezorAccountSelectionProps = {
   web3Context: Web3ContextConnecting | Web3ContextConnectingHWSelectAccount
   cancel: () => void
@@ -95,10 +97,10 @@ export function TrezorAccountSelection({ web3Context, cancel }: TrezorAccountSel
                   <Text variant="boldBody">{formatAddress(address)}</Text>
                   <Flex sx={{ justifyContent: 'space-between' }}>
                     <Text variant="surfaceText" mr={2} sx={{ fontSize: 3 }}>
-                      {formatCryptoBalance(daiAmount)} USDV
+                      {formatCryptoBalance(daiAmount)} `${stblName}`
                     </Text>
                     <Text variant="surfaceText" sx={{ fontSize: 3 }}>
-                      {formatCryptoBalance(ethAmount)} VLX
+                      {formatCryptoBalance(ethAmount)} `${coinName}`
                     </Text>
                   </Flex>
                 </Grid>

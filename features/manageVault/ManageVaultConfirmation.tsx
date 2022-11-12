@@ -6,6 +6,7 @@ import { useTranslation } from 'next-i18next'
 import React from 'react'
 import { Grid, Text } from 'theme-ui'
 
+import { stblName } from "../../blockchain/config";
 import { ManageVaultState } from './manageVault'
 
 export function ManageVaultConfirmation(state: ManageVaultState) {
@@ -30,8 +31,8 @@ export function ManageVaultConfirmation(state: ManageVaultState) {
   const afterBalance = formatCryptoBalance(afterCollateralBalance)
   const depositCollateral = formatCryptoBalance(depositAmount || zero)
   const withdrawingCollateral = formatCryptoBalance(withdrawAmount || zero)
-  const usdvToBeGenerated = formatCryptoBalance(generateAmount || zero)
-  const usdvPayingBack = formatCryptoBalance(paybackAmount || zero)
+  const stblToBeGenerated = formatCryptoBalance(generateAmount || zero)
+  const stblPayingBack = formatCryptoBalance(paybackAmount || zero)
 
   const afterCollRatio = afterCollateralizationRatio.eq(zero)
     ? '--'
@@ -58,10 +59,10 @@ export function ManageVaultConfirmation(state: ManageVaultState) {
         )}
         <Details.Item label={t('remaining-in-wallet')} value={`${afterBalance} ${token}`} />
         {generateAmount?.gt(zero) && (
-          <Details.Item label={t('usdv-being-generated')} value={`${usdvToBeGenerated} USDV`} />
+          <Details.Item label={t('stbl-being-generated')} value={`${stblToBeGenerated} ${stblName}`} />
         )}
         {paybackAmount?.gt(zero) && (
-          <Details.Item label={t('usdv-paying-back-label')} value={`${usdvPayingBack} USDV`} />
+          <Details.Item label={t('stbl-paying-back-label')} value={`${stblPayingBack} ${stblName}`} />
         )}
         <Details.Item
           label={t('system.collateral-ratio')}

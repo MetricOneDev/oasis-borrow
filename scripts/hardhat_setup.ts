@@ -6,7 +6,7 @@ import erc20Abi from 'blockchain/abi/erc20.json'
 import getCdpsAbi from 'blockchain/abi/get-cdps.json'
 import mcdCatAbi from 'blockchain/abi/mcd-cat.json'
 import flipAbi from 'blockchain/abi/mcd-flip.json'
-import joinUsdvAbi from 'blockchain/abi/mcd-join-usdv.json'
+import joinStblAbi from 'blockchain/abi/mcd-join-stbl.json'
 import osmAbi from 'blockchain/abi/mcd-osm.json'
 import spotAbi from 'blockchain/abi/mcd-spot.json'
 import vatAbi from 'blockchain/abi/vat.json'
@@ -14,14 +14,14 @@ import {
   CDP_MANAGER,
   GET_CDPS,
   MCD_CAT,
-  MCD_FLIP_VLX_A,
-  MCD_JOIN_USDV,
-  MCD_JOIN_VLX_A,
+  MCD_FLIP_MTR_A,
+  MCD_JOIN_STBL,
+  MCD_JOIN_MTR_A,
   MCD_JUG,
   MCD_SPOT,
-  MCD_USDV,
+  MCD_STBL,
   MCD_VAT,
-  PIP_VLX,
+  PIP_MTR,
   PROXY_ACTIONS,
   PROXY_REGISTRY,
 } from 'blockchain/addresses/mainnet.json'
@@ -34,7 +34,7 @@ import {
   GetCdps,
   McdCat,
   McdFlip,
-  McdJoinUsdv,
+  McdJoinStbl,
   McdOsm,
   McdSpot,
   Vat,
@@ -42,9 +42,10 @@ import {
 import { DsProxy } from 'types/ethers-contracts/DsProxy'
 import { DsProxyRegistry } from 'types/ethers-contracts/DsProxyRegistry'
 import Web3 from 'web3'
+import {stblName} from "../blockchain/config";
 
 BigNumber.config({ EXPONENTIAL_AT: 100000 })
-const ILK = utf8ToBytes32('VLX-A')
+const ILK = utf8ToBytes32('MTR-A')
 const wad = new BigNumber(10).pow(18)
 const ray = new BigNumber(10).pow(27)
 
@@ -112,17 +113,17 @@ async function openLockETHAndDraw(
   const proxyAction = dssProxyActionsInterface.encodeFunctionData('openLockETHAndDraw', [
     CDP_MANAGER,
     MCD_JUG,
-    MCD_JOIN_VLX_A,
-    MCD_JOIN_USDV,
+    MCD_JOIN_MTR_A,
+    MCD_JOIN_STBL,
     ILK,
-    amountToWei(generateAmount, 'USDV').toFixed(0),
+    amountToWei(generateAmount, stblName).toFixed(0),
   ])
   const dsProxy: DsProxy = new ethers.Contract(proxyAddress, dsProxyAbi, provider).connect(
     signer,
   ) as any
   await (
     await dsProxy['execute(address,bytes)'](PROXY_ACTIONS, proxyAction, {
-      value: amountToWei(collateralAmount, 'VLX').toFixed(0),
+      value: amountToWei(collateralAmount, 'MTR').toFixed(0),
       from: address,
       gasLimit: 5000000,
     })
@@ -133,7 +134,7 @@ async function openLockETHAndDraw(
 async function getPriceData(
   provider: ethers.providers.JsonRpcProvider,
 ): Promise<{ curr: BigNumber; next: BigNumber; timestamp: number; hop: number }> {
-  const osm: McdOsm = new ethers.Contract(PIP_VLX, osmAbi, provider) as any
+  const osm: McdOsm = new ethers.Contract(PIP_MTR, osmAbi, provider) as any
   const [currPriceHex] = await osm.peek({ from: MCD_SPOT })
   const [nextPriceHex] = await osm.peep({ from: MCD_SPOT })
   const zzz = await osm.zzz({ from: MCD_SPOT })
@@ -158,19 +159,19 @@ async function generateDaiForLiquidator(
   await openLockETHAndDraw(provider, signer, collateralAmount, generateAmount, proxyAddress)
 }
 
-async function joinDai(
+async function joinStbl(
   provider: ethers.providers.JsonRpcProvider,
   signer: ethers.providers.JsonRpcSigner,
   wad: BigNumber,
 ): Promise<void> {
   const address = await signer.getAddress()
-  const usdv: Erc20 = new ethers.Contract(MCD_USDV, erc20Abi, provider).connect(signer) as any
-  const joinDai: McdJoinUsdv = new ethers.Contract(MCD_JOIN_USDV, joinUsdvAbi, provider).connect(
+  const stbl: Erc20 = new ethers.Contract(MCD_STBL, erc20Abi, provider).connect(signer) as any
+  const joinStbl: McdJoinStbl = new ethers.Contract(MCD_JOIN_STBL, joinStblAbi, provider).connect(
     signer,
   ) as any
 
-  await (await usdv.approve(joinDai.address, wad.toString())).wait()
-  await (await joinDai.join(address, wad.toString())).wait()
+  await (await stbl.approve(joinStbl.address, wad.toString())).wait()
+  await (await joinStbl.join(address, wad.toString())).wait()
 }
 
 async function liquidateCDP(
@@ -182,24 +183,24 @@ async function liquidateCDP(
   // Start liquidation
   await (await cat['bite(bytes32,address)'](ILK, cdp.urn)).wait()
 
-  const flipper: McdFlip = new ethers.Contract(MCD_FLIP_VLX_A, flipAbi, provider).connect(
+  const flipper: McdFlip = new ethers.Contract(MCD_FLIP_MTR_A, flipAbi, provider).connect(
     signer,
   ) as any
   const bidId = (await flipper['kicks()']()).toNumber()
   const bid = await flipper['bids(uint256)'](bidId)
 
-  // We will open a CDP to get USDV to pay for collateral
+  // We will open a CDP to get STBL to pay for collateral
   await generateDaiForLiquidator(provider, signer)
   const vat: Vat = new ethers.Contract(MCD_VAT, vatAbi, provider).connect(signer) as any
-  // We need internal USDV, not external one so we join it in
-  await joinDai(
+  // We need internal STBL, not external one so we join it in
+  await joinStbl(
     provider,
     signer,
     new BigNumber(bid.tab.toString())
       .dividedToIntegerBy(ray)
       .plus(1) /* this plus one is used instead of rounding up */,
   )
-  // Allow flipper to spend our internal USDV
+  // Allow flipper to spend our internal STBL
   await (await vat.hope(flipper.address)).wait()
   // Make a bid
   await (await flipper.tend(bidId, bid.lot, bid.tab)).wait()
@@ -209,7 +210,7 @@ async function liquidateCDP(
 
   await (await flipper.dent(bidId, newLot.toString(), bid.tab)).wait()
 
-  // Disallow flipper to spend our internal USDV
+  // Disallow flipper to spend our internal STBL
   await (await vat.nope(flipper.address)).wait()
 
   const timestamp = (await provider.getBlock('latest')).timestamp
@@ -227,7 +228,7 @@ async function triggerPriceUpdate(
   const { timestamp, hop } = await getPriceData(provider)
   await provider.send('evm_setNextBlockTimestamp', [timestamp + hop])
 
-  const osm: McdOsm = new ethers.Contract(PIP_VLX, osmAbi, provider).connect(signer) as any
+  const osm: McdOsm = new ethers.Contract(PIP_MTR, osmAbi, provider).connect(signer) as any
   await (await osm.poke()).wait()
 
   const mcdSpot: McdSpot = new ethers.Contract(MCD_SPOT, spotAbi, provider).connect(signer) as any
@@ -242,7 +243,7 @@ async function main() {
 
   const { curr } = await getPriceData(provider)
   const userProxyAddress = await getOrCreateProxy(provider, user)
-  const collateralAmount = new BigNumber(10) // 10 VLX
+  const collateralAmount = new BigNumber(10) // 10 MTR
   const collateralAmountUSD = collateralAmount.multipliedBy(curr)
   const generateAmountUnsafe = collateralAmountUSD.dividedToIntegerBy(1.5) // 150%
   const generateAmountSafe = collateralAmountUSD.dividedToIntegerBy(2.5) // 250%

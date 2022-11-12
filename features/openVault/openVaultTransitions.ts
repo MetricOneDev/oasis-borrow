@@ -2,6 +2,7 @@ import { maxUint256 } from 'blockchain/calls/erc20'
 import { zero } from 'helpers/zero'
 
 import { OpenVaultChange, OpenVaultState } from './openVault'
+import {coinName} from "../../blockchain/config";
 
 export type OpenVaultTransitionChange =
   | {
@@ -31,7 +32,7 @@ export function applyOpenVaultTransition(
       allowance && depositAmount && allowance.gte(depositAmount)
 
     const hasAllowance =
-      state.token === 'VLX' ? true : depositAmountLessThanAllowance || openingEmptyVault
+      state.token === coinName ? true : depositAmountLessThanAllowance || openingEmptyVault
 
     const stage = !hasProxy
       ? 'proxyWaitingForConfirmation'
@@ -49,7 +50,7 @@ export function applyOpenVaultTransition(
   if (change.kind === 'progressProxy') {
     return {
       ...state,
-      stage: state.token === 'VLX' ? 'editing' : 'allowanceWaitingForConfirmation',
+      stage: state.token === coinName ? 'editing' : 'allowanceWaitingForConfirmation',
     }
   }
 

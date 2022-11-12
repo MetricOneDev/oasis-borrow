@@ -3,6 +3,7 @@ import { TxHelpers } from 'components/AppContext'
 import { zero } from 'helpers/zero'
 import { Observable } from 'rxjs'
 
+import { coinName } from "../../blockchain/config";
 import { ManageVaultChange, ManageVaultEditingStage, ManageVaultState } from './manageVault'
 import { manageVaultFormDefaults } from './manageVaultForm'
 import {
@@ -33,7 +34,7 @@ export type ManageVaultTransitionChange =
       kind: 'regressCollateralAllowance'
     }
   | {
-      kind: 'regressUsdvAllowance'
+      kind: 'regressStblAllowance'
     }
 
 export function applyManageVaultTransition(
@@ -43,7 +44,7 @@ export function applyManageVaultTransition(
   if (change.kind === 'toggleEditing') {
     const { stage } = state
     const currentEditing = stage
-    const otherEditing = (['collateralEditing', 'usdvEditing'] as ManageVaultEditingStage[]).find(
+    const otherEditing = (['collateralEditing', 'stblEditing'] as ManageVaultEditingStage[]).find(
       (editingStage) => editingStage !== currentEditing,
     ) as ManageVaultEditingStage
     return {
@@ -77,17 +78,17 @@ export function applyManageVaultTransition(
     }
   }
 
-  if (change.kind === 'regressUsdvAllowance') {
+  if (change.kind === 'regressStblAllowance') {
     const { originalEditingStage, stage } = state
 
     return {
       ...state,
-      ...(stage === 'usdvAllowanceFailure'
-        ? { stage: 'usdvAllowanceWaitingForConfirmation' }
+      ...(stage === 'stblAllowanceFailure'
+        ? { stage: 'stblAllowanceWaitingForConfirmation' }
         : {
             stage: originalEditingStage,
-            usdvAllowanceAmount: maxUint256,
-          selectedUsdvAllowanceRadio: 'unlimited',
+            stblAllowanceAmount: maxUint256,
+          selectedStblAllowanceRadio: 'unlimited',
           }),
     }
   }
@@ -108,7 +109,7 @@ export function applyManageVaultTransition(
       depositAmount,
       paybackAmount,
       collateralAllowance,
-      usdvAllowance,
+      stblAllowance,
       vault: { token, debtOffset },
     } = state
     const canProgress = !errorMessages.length
@@ -120,13 +121,13 @@ export function applyManageVaultTransition(
     const depositAmountLessThanCollateralAllowance =
       collateralAllowance && depositAmount && collateralAllowance.gte(depositAmount)
 
-    const paybackAmountLessThanUsdvAllowance =
-      usdvAllowance && paybackAmount && usdvAllowance.gte(paybackAmount.plus(debtOffset))
+    const paybackAmountLessThanStblAllowance =
+      stblAllowance && paybackAmount && stblAllowance.gte(paybackAmount.plus(debtOffset))
 
     const hasCollateralAllowance =
-      token === 'VLX' ? true : depositAmountLessThanCollateralAllowance || isDepositZero
+      token === coinName ? true : depositAmountLessThanCollateralAllowance || isDepositZero
 
-    const hasUsdvAllowance = paybackAmountLessThanUsdvAllowance || isPaybackZero
+    const hasStblAllowance = paybackAmountLessThanStblAllowance || isPaybackZero
 
     if (canProgress) {
       if (!hasProxy) {
@@ -135,8 +136,8 @@ export function applyManageVaultTransition(
       if (!hasCollateralAllowance) {
         return { ...state, stage: 'collateralAllowanceWaitingForConfirmation' }
       }
-      if (!hasUsdvAllowance) {
-        return { ...state, stage: 'usdvAllowanceWaitingForConfirmation' }
+      if (!hasStblAllowance) {
+        return { ...state, stage: 'stblAllowanceWaitingForConfirmation' }
       }
       return { ...state, stage: 'manageWaitingForConfirmation' }
     }
@@ -148,7 +149,7 @@ export function applyManageVaultTransition(
       depositAmount,
       paybackAmount,
       collateralAllowance,
-      usdvAllowance,
+      stblAllowance,
       vault: { token, debtOffset },
     } = state
     const isDepositZero = depositAmount ? depositAmount.eq(zero) : true
@@ -156,17 +157,17 @@ export function applyManageVaultTransition(
 
     const depositAmountLessThanCollateralAllowance =
       collateralAllowance && depositAmount && collateralAllowance.gte(depositAmount)
-    const paybackAmountLessThanUsdvAllowance =
-      usdvAllowance && paybackAmount && usdvAllowance.gte(paybackAmount.plus(debtOffset))
+    const paybackAmountLessThanStblAllowance =
+      stblAllowance && paybackAmount && stblAllowance.gte(paybackAmount.plus(debtOffset))
     const hasCollateralAllowance =
-      token === 'VLX' ? true : depositAmountLessThanCollateralAllowance || isDepositZero
-    const hasUsdvAllowance = paybackAmountLessThanUsdvAllowance || isPaybackZero
+      token === coinName ? true : depositAmountLessThanCollateralAllowance || isDepositZero
+    const hasStblAllowance = paybackAmountLessThanStblAllowance || isPaybackZero
 
     if (!hasCollateralAllowance) {
       return { ...state, stage: 'collateralAllowanceWaitingForConfirmation' }
     }
-    if (!hasUsdvAllowance) {
-      return { ...state, stage: 'usdvAllowanceWaitingForConfirmation' }
+    if (!hasStblAllowance) {
+      return { ...state, stage: 'stblAllowanceWaitingForConfirmation' }
     }
     return { ...state, stage: originalEditingStage }
   }
@@ -175,16 +176,16 @@ export function applyManageVaultTransition(
     const {
       originalEditingStage,
       paybackAmount,
-      usdvAllowance,
+      stblAllowance,
       vault: { debtOffset },
     } = state
     const isPaybackZero = paybackAmount ? paybackAmount.eq(zero) : true
-    const paybackAmountLessThanUsdvAllowance =
-      usdvAllowance && paybackAmount && usdvAllowance.gte(paybackAmount.plus(debtOffset))
-    const hasUsdvAllowance = paybackAmountLessThanUsdvAllowance || isPaybackZero
+    const paybackAmountLessThanStblAllowance =
+      stblAllowance && paybackAmount && stblAllowance.gte(paybackAmount.plus(debtOffset))
+    const hasStblAllowance = paybackAmountLessThanStblAllowance || isPaybackZero
 
-    if (!hasUsdvAllowance) {
-      return { ...state, stage: 'usdvAllowanceWaitingForConfirmation' }
+    if (!hasStblAllowance) {
+      return { ...state, stage: 'stblAllowanceWaitingForConfirmation' }
     }
     return { ...state, stage: originalEditingStage }
   }

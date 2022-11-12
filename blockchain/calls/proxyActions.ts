@@ -1,7 +1,7 @@
 import { BigNumber } from 'bignumber.js'
 import dsProxy from 'blockchain/abi/ds-proxy.json'
 import { TransactionDef } from 'blockchain/calls/callsHelpers'
-import { contractDesc } from 'blockchain/config'
+import { coinName, contractDesc, stblName } from 'blockchain/config'
 import { ContextConnected } from 'blockchain/network'
 import { amountToWad, amountToWei } from 'blockchain/utils'
 import { zero } from 'helpers/zero'
@@ -26,28 +26,28 @@ export function getWithdrawAndPaybackCallData(
   data: WithdrawAndPaybackData,
   context: ContextConnected,
 ) {
-  const { dssProxyActions, dssCdpManager, mcdJoinUsdv, joins, contract } = context
+  const { dssProxyActions, dssCdpManager, mcdJoinStbl, joins, contract } = context
   const { id, token, withdrawAmount, paybackAmount, ilk, shouldPaybackAll } = data
 
   if (withdrawAmount.gt(zero) && paybackAmount.gt(zero)) {
-    if (token === 'VLX') {
+    if (token === coinName) {
       if (shouldPaybackAll) {
-        return contract<DssProxyActions>(dssProxyActions).methods.wipeAllAndFreeVLX(
+        return contract<DssProxyActions>(dssProxyActions).methods.wipeAllAndFreeCoin(
           dssCdpManager.address,
           joins[ilk],
-          mcdJoinUsdv.address,
+          mcdJoinStbl.address,
           id.toString(),
           amountToWei(withdrawAmount, token).toFixed(0),
         )
       }
 
-      return contract<DssProxyActions>(dssProxyActions).methods.wipeAndFreeVLX(
+      return contract<DssProxyActions>(dssProxyActions).methods.wipeAndFreeCoin(
         dssCdpManager.address,
         joins[ilk],
-        mcdJoinUsdv.address,
+        mcdJoinStbl.address,
         id.toString(),
         amountToWei(withdrawAmount, token).toFixed(0),
-        amountToWei(paybackAmount, 'USDV').toFixed(0),
+        amountToWei(paybackAmount, stblName).toFixed(0),
       )
     }
 
@@ -55,7 +55,7 @@ export function getWithdrawAndPaybackCallData(
       return contract<DssProxyActions>(dssProxyActions).methods.wipeAllAndFreeGem(
         dssCdpManager.address,
         joins[ilk],
-        mcdJoinUsdv.address,
+        mcdJoinStbl.address,
         id.toString(),
         amountToWei(withdrawAmount, token).toFixed(0),
       )
@@ -64,16 +64,16 @@ export function getWithdrawAndPaybackCallData(
     return contract<DssProxyActions>(dssProxyActions).methods.wipeAndFreeGem(
       dssCdpManager.address,
       joins[ilk],
-      mcdJoinUsdv.address,
+      mcdJoinStbl.address,
       id.toString(),
       amountToWei(withdrawAmount, token).toFixed(0),
-      amountToWei(paybackAmount, 'USDV').toFixed(0),
+      amountToWei(paybackAmount, stblName).toFixed(0),
     )
   }
 
   if (withdrawAmount.gt(zero)) {
-    if (token === 'VLX') {
-      return contract<DssProxyActions>(dssProxyActions).methods.freeVLX(
+    if (token === coinName) {
+      return contract<DssProxyActions>(dssProxyActions).methods.freeCoin(
         dssCdpManager.address,
         joins[ilk],
         id.toString(),
@@ -92,16 +92,16 @@ export function getWithdrawAndPaybackCallData(
     if (shouldPaybackAll) {
       return contract<DssProxyActions>(dssProxyActions).methods.wipeAll(
         dssCdpManager.address,
-        mcdJoinUsdv.address,
+        mcdJoinStbl.address,
         id.toString(),
       )
     }
 
     return contract<DssProxyActions>(dssProxyActions).methods.wipe(
       dssCdpManager.address,
-      mcdJoinUsdv.address,
+      mcdJoinStbl.address,
       id.toString(),
-      amountToWei(paybackAmount, 'USDV').toFixed(0),
+      amountToWei(paybackAmount, stblName).toFixed(0),
     )
   }
 
@@ -130,35 +130,38 @@ export type DepositAndGenerateData = {
 }
 
 function getDepositAndGenerateCallData(data: DepositAndGenerateData, context: ContextConnected) {
-  const { dssProxyActions, dssCdpManager, mcdJoinUsdv, mcdJug, joins, contract } = context
+  const { dssProxyActions, dssCdpManager, mcdJoinStbl, mcdJug, joins, contract } = context
   const { id, token, depositAmount, generateAmount, ilk } = data
-
+  console.log(`dssCdpManager: `)
+  console.log(dssCdpManager)
+  console.log(`mcdJoinStbl: `)
+  console.log(mcdJoinStbl)
   if (depositAmount.gt(zero) && generateAmount.gt(zero)) {
-    if (token === 'VLX') {
-      return contract<DssProxyActions>(dssProxyActions).methods.lockVLXAndDraw(
+    if (token === coinName) {
+      return contract<DssProxyActions>(dssProxyActions).methods.lockCoinAndDraw(
         dssCdpManager.address,
         mcdJug.address,
         joins[ilk],
-        mcdJoinUsdv.address,
+        mcdJoinStbl.address,
         id.toString(),
-        amountToWei(generateAmount, 'USDV').toFixed(0),
+        amountToWei(generateAmount, stblName).toFixed(0),
       )
     }
     return contract<DssProxyActions>(dssProxyActions).methods.lockGemAndDraw(
       dssCdpManager.address,
       mcdJug.address,
       joins[ilk],
-      mcdJoinUsdv.address,
+      mcdJoinStbl.address,
       id.toString(),
       amountToWei(depositAmount, token).toFixed(0),
-      amountToWei(generateAmount, 'USDV').toFixed(0),
+      amountToWei(generateAmount, stblName).toFixed(0),
       true,
     )
   }
 
   if (depositAmount.gt(zero)) {
-    if (token === 'VLX') {
-      return contract<DssProxyActions>(dssProxyActions).methods.lockVLX(
+    if (token === coinName) {
+      return contract<DssProxyActions>(dssProxyActions).methods.lockCoin(
         dssCdpManager.address,
         joins[ilk],
         id.toString(),
@@ -177,9 +180,9 @@ function getDepositAndGenerateCallData(data: DepositAndGenerateData, context: Co
   return contract<DssProxyActions>(dssProxyActions).methods.draw(
     dssCdpManager.address,
     mcdJug.address,
-    mcdJoinUsdv.address,
+    mcdJoinStbl.address,
     id.toString(),
-    amountToWei(generateAmount, 'USDV').toFixed(0),
+    amountToWei(generateAmount, stblName).toFixed(0),
   )
 }
 
@@ -192,7 +195,7 @@ export const depositAndGenerate: TransactionDef<DepositAndGenerateData> = {
     return [dssProxyActions.address, getDepositAndGenerateCallData(data, context).encodeABI()]
   },
   options: ({ token, depositAmount }) =>
-    token === 'VLX' ? { value: amountToWei(depositAmount, 'VLX').toString() } : {},
+    token === coinName ? { value: amountToWei(depositAmount, coinName).toString() } : {},
 }
 
 export type OpenData = {
@@ -205,18 +208,23 @@ export type OpenData = {
 }
 
 function getOpenCallData(data: OpenData, context: ContextConnected) {
-  const { dssProxyActions, dssCdpManager, mcdJoinUsdv, mcdJug, joins, contract } = context
+  const { dssProxyActions, dssCdpManager, mcdJoinStbl, mcdJug, joins, contract } = context
   const { depositAmount, generateAmount, token, ilk, proxyAddress } = data
 
+  console.log(`dssCdpManager: `)
+  console.log(dssCdpManager)
+  console.log(`mcdJoinStbl: `)
+  console.log(mcdJoinStbl)
+
   if (depositAmount.gt(zero) && generateAmount.gt(zero)) {
-    if (token === 'VLX') {
-      return contract<DssProxyActions>(dssProxyActions).methods.openLockVLXAndDraw(
+    if (token === coinName) {
+      return contract<DssProxyActions>(dssProxyActions).methods.openLockCoinAndDraw(
         dssCdpManager.address,
         mcdJug.address,
         joins[ilk],
-        mcdJoinUsdv.address,
+        mcdJoinStbl.address,
         Web3.utils.utf8ToHex(ilk),
-        amountToWei(generateAmount, 'USDV').toFixed(0),
+        amountToWei(generateAmount, stblName).toFixed(0),
       )
     }
 
@@ -224,21 +232,21 @@ function getOpenCallData(data: OpenData, context: ContextConnected) {
       dssCdpManager.address,
       mcdJug.address,
       joins[ilk],
-      mcdJoinUsdv.address,
+      mcdJoinStbl.address,
       Web3.utils.utf8ToHex(ilk),
       amountToWei(depositAmount, token).toFixed(0),
-      amountToWei(generateAmount, 'USDV').toFixed(0),
+      amountToWei(generateAmount, stblName).toFixed(0),
       true,
     )
   }
 
   if (depositAmount.gt(zero) && generateAmount.isZero()) {
-    if (token === 'VLX') {
-      return contract<DssProxyActions>(dssProxyActions).methods.openLockVLXAndDraw(
+    if (token === coinName) {
+      return contract<DssProxyActions>(dssProxyActions).methods.openLockCoinAndDraw(
         dssCdpManager.address,
         mcdJug.address,
         joins[ilk],
-        mcdJoinUsdv.address,
+        mcdJoinStbl.address,
         Web3.utils.utf8ToHex(ilk),
         zero.toFixed(0),
       )
@@ -248,7 +256,7 @@ function getOpenCallData(data: OpenData, context: ContextConnected) {
       dssCdpManager.address,
       mcdJug.address,
       joins[ilk],
-      mcdJoinUsdv.address,
+      mcdJoinStbl.address,
       Web3.utils.utf8ToHex(ilk),
       amountToWei(depositAmount, token).toFixed(0),
       zero.toFixed(0),
@@ -272,7 +280,7 @@ export const open: TransactionDef<OpenData> = {
     return [dssProxyActions.address, getOpenCallData(data, context).encodeABI()]
   },
   options: ({ token, depositAmount }) =>
-    token === 'VLX' ? { value: amountToWei(depositAmount, 'VLX').toString() } : {},
+    token === coinName ? { value: amountToWei(depositAmount, coinName).toString() } : {},
 }
 
 export type ReclaimData = {
