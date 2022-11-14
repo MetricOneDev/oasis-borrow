@@ -6,8 +6,8 @@ import { zero } from '../../helpers/zero'
 
 export interface BalanceInfo {
   collateralBalance: BigNumber
-  ethBalance: BigNumber
-  daiBalance: BigNumber
+  coinBalance: BigNumber
+  stblBalance: BigNumber
 }
 
 export function createBalanceInfo$(
@@ -17,13 +17,13 @@ export function createBalanceInfo$(
 ): Observable<BalanceInfo> {
   return combineLatest(
     address ? balance$(token, address) : of(zero),
-    address ? balance$('ETH', address) : of(zero),
-    address ? balance$('DAI', address) : of(zero),
+    address ? balance$('MTR', address) : of(zero),
+    address ? balance$('MONE', address) : of(zero),
   ).pipe(
-    map(([collateralBalance, ethBalance, daiBalance]) => ({
+    map(([collateralBalance, coinBalance, stblBalance]) => ({
       collateralBalance,
-      ethBalance,
-      daiBalance,
+      coinBalance,
+      stblBalance,
     })),
   )
 }

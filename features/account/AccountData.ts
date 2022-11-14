@@ -8,7 +8,7 @@ import { filter, map, switchMap } from 'rxjs/operators'
 
 export interface AccountDetails {
   numberOfVaults: number | undefined
-  daiBalance: BigNumber | undefined
+  stblBalance: BigNumber | undefined
 }
 
 export function createAccountData(
@@ -20,12 +20,12 @@ export function createAccountData(
     filter((context): context is ContextConnected => context.status === 'connected'),
     switchMap((context) =>
       combineLatest(
-        startWithDefault(balance$('DAI', context.account), undefined),
+        startWithDefault(balance$('MONE', context.account), undefined),
         startWithDefault(vaults$(context.account).pipe(map((vault) => vault.length)), undefined),
       ).pipe(
         map(([balance, numberOfVaults]) => ({
           numberOfVaults,
-          daiBalance: balance,
+          stblBalance: balance,
         })),
       ),
     ),

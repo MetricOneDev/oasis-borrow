@@ -26,7 +26,7 @@
   "back": "Back",
   "back-to-editing": "Back to editing",
   "balance": "Balance",
-  "balance-insufficient": "Not enough Dai in your wallet",
+  "balance-insufficient": "Not enough MONE in your wallet",
   "balances": "Balances",
   "buy": "Buy",
   "careers": {
@@ -47,7 +47,7 @@
   "confirmed-proxy-deployment": "Proxy deployment confirmed",
   "connect-confirm": "Confirm in {{ connectionKind }}",
   "connect-email": "Connect with email",
-  "connect-error": "Please authorize this website to access your Ethereum account.",
+  "connect-error": "Please authorize this website to access your EVM account.",
   "connect-wallet": "Connect a wallet",
   "connect-wallet-button": "Connect Wallet",
   "connect-with": "{{ connectionKind }}",
@@ -83,10 +83,10 @@
   "creating-vault": "Creating Vault",
   "currency": "Currency",
   "custom": "Custom",
-  "dai-being-generated": "Dai being generated",
-  "dai-paying-back": "Dai paying back ({{amount}})",
-  "dai-paying-back-label": "Dai paying back",
-  "dai-savings-rate": "Dai Savings Rate",
+  "stbl-being-generated": "MONE being generated",
+  "stbl-paying-back": "MONE paying back ({{amount}})",
+  "stbl-paying-back-label": "MONE paying back",
+  "stbl-savings-rate": "MONE Savings Rate",
   "deposit": "Deposit",
   "disconnect": "Disconnect",
   "disconnect-magic": "Log out",
@@ -114,14 +114,14 @@
   "set-proxy-owner-description-pending": "Setting proxy owner",
   "set-proxy-owner-description-recent": "Set proxy owner",
   "set-proxy-owner-description-recent-failed": "Failed to set proxy owner",
-  "open-vault-description-pending": "Opening {{ ilk }} vault, depositing {{ depositAmount }} {{ token }} and generating {{ generateAmount }} DAI",
-  "open-vault-description-recent": "Opened {{ ilk }} vault, deposited {{ depositAmount }} {{ token }} and generated {{ generateAmount }} DAI",
+  "open-vault-description-pending": "Opening {{ ilk }} vault, depositing {{ depositAmount }} {{ token }} and generating {{ generateAmount }} MONE",
+  "open-vault-description-recent": "Opened {{ ilk }} vault, deposited {{ depositAmount }} {{ token }} and generated {{ generateAmount }} MONE",
   "open-vault-description-recent-failed": "Failed to open {{ ilk }} vault",
-  "deposit-generate-description-pending": "Depositing {{ depositAmount }} {{ token }} and generating {{ generateAmount }} DAI from vault {{ id }}",
-  "deposit-generate-description-recent": "Deposited {{ depositAmount }} {{ token }} and generated {{ generateAmount }} DAI from vault {{ id }}",
+  "deposit-generate-description-pending": "Depositing {{ depositAmount }} {{ token }} and generating {{ generateAmount }} MONE from vault {{ id }}",
+  "deposit-generate-description-recent": "Deposited {{ depositAmount }} {{ token }} and generated {{ generateAmount }} MONE from vault {{ id }}",
   "deposit-generate-description-recent-failed": "Failed to deposit and generate from vault {{ id }}",
-  "withdraw-payback-description-pending": "Withdrawing {{ withdrawAmount }} {{ token }} and paying back {{ paybackAmount }} DAI to vault {{ id }}",
-  "withdraw-payback-description-recent": "Withdrawn {{ withdrawAmount }} {{ token }} and payed back {{ paybackAmount }} DAI to vault {{ id }}",
+  "withdraw-payback-description-pending": "Withdrawing {{ withdrawAmount }} {{ token }} and paying back {{ paybackAmount }} MONE to vault {{ id }}",
+  "withdraw-payback-description-recent": "Withdrawn {{ withdrawAmount }} {{ token }} and payed back {{ paybackAmount }} MONE to vault {{ id }}",
   "withdraw-payback-description-recent-failed": "Failed to withdraw and payback to vault {{ id }}",
   "reclaim-collateral-description-pending": "Reclaiming {{ amount }} {{ token }} from vault {{ id }}",
   "reclaim-collateral-description-recent": "Reclaimed {{ amount }} {{ token }} from vault {{ id }}",
@@ -146,21 +146,21 @@
     "popular": "Popular assets"
   },
   "gas-estimation-error": "Error",
-  "get-dai": "Get Dai",
+  "get-stbl": "Get MONE",
   "get-started": "Get Started",
   "go-to-vault": "Go to Vault #{{id}}",
   "here": "here",
   "history": {
     "auction_finished_v2": "Auction <0>#{{auctionId}}</0> finished, <0>{{remainingCollateral}} {{token}}</0> remained",
-    "auction_started": "Auction started, <0>{{collateralAmount}} {{token}}</0> taken to cover <0>{{daiAmount}} Dai</0>",
-    "auction_started_v2": "Auction <0>#{{auctionId}}</0> started, <0>{{collateralAmount}} {{token}}</0> taken to cover <0>{{daiAmount}} Dai</0>",
+    "auction_started": "Auction started, <0>{{collateralAmount}} {{token}}</0> taken to cover <0>{{stblAmount}} MONE</0>",
+    "auction_started_v2": "Auction <0>#{{auctionId}}</0> started, <0>{{collateralAmount}} {{token}}</0> taken to cover <0>{{stblAmount}} MONE</0>",
     "deposit": "Deposited <0>{{collateralAmount}} {{token}}</0> into Vault",
-    "generate": "Generated <0>{{daiAmount}}</0> Dai from Vault",
+    "generate": "Generated <0>{{stblAmount}}</0> MONE from Vault",
     "migrate": "Vault migrated",
-    "move_dest": "Moved <0>{{collateralAmount}} {{token}}</0> and <0>{{daiAmount}}</0> Dai debt to the vault",
-    "move_src": "Moved <0>{{collateralAmount}} {{token}}</0> and <0>{{daiAmount}}</0> Dai debt from the vault",
+    "move_dest": "Moved <0>{{collateralAmount}} {{token}}</0> and <0>{{stblAmount}}</0> MONE debt to the vault",
+    "move_src": "Moved <0>{{collateralAmount}} {{token}}</0> and <0>{{stblAmount}}</0> MONE debt from the vault",
     "open": "Opened a new Vault with id <0>#{{cdpId}}</0>",
-    "payback": "Payback <0>{{daiAmount}}</0> Dai to Vault",
+    "payback": "Payback <0>{{stblAmount}}</0> MONE to Vault",
     "transfer": "Vault given to <0>{{transferTo}}</0> by <0>{{transferFrom}}</0>",
     "withdraw": "Withdrew <0>{{collateralAmount}} {{token}}</0> from Vault"
   },
@@ -172,17 +172,17 @@
   "keyWithCount_plural": "{{count}} items",
   "landing": {
     "hero": {
-      "headline": "Generate Dai using crypto as your collateral",
-      "subheader": "Open a Maker Vault, deposit your collateral, and generate Dai against it.<0/> Connect a wallet to start."
+      "headline": "Generate MONE using crypto as your collateral",
+      "subheader": "Open a MetricOne Vault, deposit your collateral, and generate MONE against it.<0/> Connect a wallet to start."
     },
     "cards": {
-      "dai": {
-        "title": "Dai Wallet",
-        "description": "Buy, send and manage Dai all in one place. Grow your Dai, access plenty of providers"
+      "stbl": {
+        "title": "MONE Wallet",
+        "description": "Buy, send and manage MONE all in one place. Grow your MONE, access plenty of providers"
       },
       "faq": {
         "title": "Have a question?",
-        "description": "Learn more about Oasis, Dai and DeFi at our FAQ’s page"
+        "description": "Learn more about Oasis, MONE and DeFi at our FAQ’s page"
       }
     }
   },
@@ -201,7 +201,7 @@
   "ledger-select-title": "Select Ledger Live or Legacy",
   "manage-vault": {
     "action-option": "{{action}} {{token}} with this transaction",
-    "dai-available": "Dai available",
+    "stbl-available": "MONE available",
     "dust-limit": "Dust Limit",
     "liquidation-fee": "Liquidation Fee",
     "min-collat-ratio": "Min. collateral ratio",
@@ -210,8 +210,8 @@
     "title": "Manage Vault",
     "action": "Manage Vault",
     "warnings": {
-      "potential-generate-amount-less-than-debt-floor": "Minimum Dai required to open a Vault is {{debtFloor}}. Please add more collateral to generate {{debtFloor}} Dai",
-      "debt-is-less-than-debt-floor": "Your current Dai debt is below the minimum of {{debtFloor}}. Because of this some Vault actions are not possible. Please generate more Dai to take you above the minimum or payback all your debt",
+      "potential-generate-amount-less-than-debt-floor": "Minimum MONE required to open a Vault is {{debtFloor}}. Please add more collateral to generate {{debtFloor}} MONE",
+      "debt-is-less-than-debt-floor": "Your current MONE debt is below the minimum of {{debtFloor}}. Because of this some Vault actions are not possible. Please generate more MONE to take you above the minimum or payback all your debt",
       "vault-will-be-at-risk-level-danger": "With this action your vault will be at a collateralization ratio very close to the minimum required",
       "vault-will-be-at-risk-level-danger-at-next-price": "With this action your vault will be at a collateralization ratio very close to the minimum required at the next price update",
       "vault-will-be-at-risk-level-warning": "With this action your vault will be at a collateralization ratio near the minimum required",
@@ -221,21 +221,21 @@
       "deposit-amount-exceeds-collateral-balance": "You cannot deposit more collateral than the amount in your wallet",
       "withdraw-amount-exceeds-free-collateral": "You cannot withdraw more than {{maxWithdrawAmount}} {{token}}",
       "withdraw-amount-exceeds-free-collateral-at-next-price": "You cannot withdraw more than {{maxWithdrawAmount}} {{token}}",
-      "generate-amount-exceeds-dai-yield-from-total-collateral": "The collateralization ratio for this Maker Vault is too low. Please generate less Dai",
-      "generate-amount-exceeds-dai-yield-from-total-collateral-at-next-price": "The collateralization ratio for this Maker Vault is too low at the next price update. Please generate less Dai",
-      "generate-amount-exceeds-debt-ceiling": "You are trying to generate more than the current debt ceiling allows. The amount of Dai that can be generated is {{maxGenerateAmount}} {{token}}",
-      "generate-amount-less-than-debt-floor": "This vault type requires a minimum of {{debtFloor}} Dai to be generated. Read more about the Minimum Vault Debt <0>here</0>.",
-      "payback-amount-exceeds-dai-balance": "You cannot payback more Dai than the amount in your wallet",
-      "payback-amount-exceeds-vault-debt": "You are trying to payback more than your Dai debt for this Maker Vault",
-      "debt-will-be-less-than-debt-floor": "The Maker Vault debt amount either must be 0 or exceed {{debtFloor}} amount of Dai. Please change your payback amount",
+      "generate-amount-exceeds-stbl-yield-from-total-collateral": "The collateralization ratio for this MetricOne Vault is too low. Please generate less MONE",
+      "generate-amount-exceeds-stbl-yield-from-total-collateral-at-next-price": "The collateralization ratio for this MetricOne Vault is too low at the next price update. Please generate less MONE",
+      "generate-amount-exceeds-debt-ceiling": "You are trying to generate more than the current debt ceiling allows. The amount of MONE that can be generated is {{maxGenerateAmount}} {{token}}",
+      "generate-amount-less-than-debt-floor": "This vault type requires a minimum of {{debtFloor}} MONE to be generated. Read more about the Minimum Vault Debt <0>here</0>.",
+      "payback-amount-exceeds-stbl-balance": "You cannot payback more MONE than the amount in your wallet",
+      "payback-amount-exceeds-vault-debt": "You are trying to payback more than your MONE debt for this MetricOne Vault",
+      "debt-will-be-less-than-debt-floor": "The MetricOne Vault debt amount either must be 0 or exceed {{debtFloor}} amount of MONE. Please change your payback amount",
       "custom-collateral-allowance-amount-exceeds-maxuint256": "Allowance too large. Please decrease custom allowance amount",
       "custom-collateral-allowance-amount-less-than-deposit-amount": "You need at least an allowance of your deposit amount to continue",
-      "custom-dai-allowance-amount-exceeds-maxuint256": "Allowance too large. Please decrease custom allowance amount",
-      "custom-dai-allowance-amount-less-than-payback-amount": "You need at least an allowance of your payback amount to continue",
-      "depositing-all-eth-balance": "You need some ETH to pay for the gas fees. Lower your deposit amount",
+      "custom-stbl-allowance-amount-exceeds-maxuint256": "Allowance too large. Please decrease custom allowance amount",
+      "custom-stbl-allowance-amount-less-than-payback-amount": "You need at least an allowance of your payback amount to continue",
+      "depositing-all-coin-balance": "You need some MTR to pay for the gas fees. Lower your deposit amount",
       "ledger-enable-contract-data": "Please enable Contract data on the Ledgers Ethereum app Settings",
-      "withdraw-collateral-on-vault-under-debt-floor": "You cannot withdraw from your vault while it is below the minimum required of {{debtFloor}} Dai. To withdraw your collateral, payback your debt fully. Learn more about the Minimum Vault Debt <0>here</0>.",
-      "deposit-collateral-on-vault-under-debt-floor": "You cannot deposit to your vault while it is below the minimum debt required of {{debtFloor}}. To add more collateral, generate Dai to get above the minimum required. Learn more about the Minimum Vault Debt here <0>here</0>)"
+      "withdraw-collateral-on-vault-under-debt-floor": "You cannot withdraw from your vault while it is below the minimum required of {{debtFloor}} MONE. To withdraw your collateral, payback your debt fully. Learn more about the Minimum Vault Debt <0>here</0>.",
+      "deposit-collateral-on-vault-under-debt-floor": "You cannot deposit to your vault while it is below the minimum debt required of {{debtFloor}}. To add more collateral, generate MONE to get above the minimum required. Learn more about the Minimum Vault Debt here <0>here</0>)"
     }
   },
   "max": "Max",
@@ -256,14 +256,14 @@
     "knowledge-centre": "Knowledge Centre",
     "learn": "Learn",
     "oracles": "Oracles",
-    "dai-wallet": "Dai Wallet",
+    "stbl-wallet": "MONE Wallet",
     "borrow": "Borrow",
     "oasis-borrow": "Oasis Borrow",
     "trade": "Trade"
   },
-  "new-to-ethereum": "New to Ethereum? ",
+  "new-to-evmnetwork": "New to Meter? ",
   "next": "Next",
-  "no-dai": "No Dai",
+  "no-stbl": "No MONE",
   "no-activity": "No activity to show",
   "notice-privacy": "By using our site you agree to our <0>Cookie Policy</0>.",
   "notification-status-complete": "Complete",
@@ -282,7 +282,7 @@
   "open-vault": {
     "title": "Open Vault",
     "warnings": {
-      "potential-generate-amount-less-than-debt-floor": "Minimum Dai required to open a Vault is {{debtFloor}}. Please add more collateral to generate {{debtFloor}} Dai",
+      "potential-generate-amount-less-than-debt-floor": "Minimum MONE required to open a Vault is {{debtFloor}}. Please add more collateral to generate {{debtFloor}} MONE",
       "vault-will-be-at-risk-level-danger": "With this action your vault will be at a collateralization ratio very close to the minimum required",
       "vault-will-be-at-risk-level-danger-at-next-price": "With this action your vault will be at a collateralization ratio very close to the minimum required at the next price update",
       "vault-will-be-at-risk-level-warning": "With this action your vault will be at a collateralization ratio near the minimum required",
@@ -290,14 +290,14 @@
     },
     "errors": {
       "deposit-amount-exceeds-collateral-balance": "You cannot deposit more collateral than the amount in your wallet",
-      "generate-amount-exceeds-dai-yield-from-depositing-collateral": "The collateralization ratio for this Maker Vault will be too low. Please generate less Dai",
-      "generate-amount-exceeds-dai-yield-from-depositing-collateral-at-next-price": "The collateralization ratio for this Maker Vault will be too low at the next price update. Please generate less Dai",
-      "generate-amount-exceeds-debt-ceiling": "You are trying to generate more than the current debt ceiling allows. The amount of Dai that can be generated is {{maxGenerateAmount}} {{token}}",
-      "generate-amount-less-than-debt-floor": "This vault type requires a minimum of {{debtFloor}} Dai to be generated. Read more about the Minimum Vault Debt <0>here</0>.",
-      "debt-will-be-less-than-debt-floor": "The Maker Vault debt amount either must be 0 or exceed {{debtFloor}} amount of Dai. Please change your payback amount",
+      "generate-amount-exceeds-stbl-yield-from-depositing-collateral": "The collateralization ratio for this MetricOne Vault will be too low. Please generate less MONE",
+      "generate-amount-exceeds-stbl-yield-from-depositing-collateral-at-next-price": "The collateralization ratio for this MetricOne Vault will be too low at the next price update. Please generate less MONE",
+      "generate-amount-exceeds-debt-ceiling": "You are trying to generate more than the current debt ceiling allows. The amount of MONE that can be generated is {{maxGenerateAmount}} {{token}}",
+      "generate-amount-less-than-debt-floor": "This vault type requires a minimum of {{debtFloor}} MONE to be generated. Read more about the Minimum Vault Debt <0>here</0>.",
+      "debt-will-be-less-than-debt-floor": "The MetricOne Vault debt amount either must be 0 or exceed {{debtFloor}} amount of MONE. Please change your payback amount",
       "custom-allowance-amount-exceeds-maxuint256": "Allowance too large. Please decrease custom allowance amount",
       "custom-allowance-amount-less-than-deposit-amount": "You need at least an allowance of your deposit amount to continue",
-      "depositing-all-eth-balance": "You need some ETH to pay for the gas fees. Lower your deposit amount",
+      "depositing-all-coin-balance": "You need some MTR to pay for the gas fees. Lower your deposit amount",
       "ledger-enable-contract-data": "Please enable Contract data on the Ledgers Ethereum app Settings"
     }
   },
@@ -306,7 +306,7 @@
   "pending-transactions": "Pending Transactions",
   "permissions": "Set permissions",
   "permissions-btn": "Set permissions",
-  "permissions-desc": "This permission allows Oasis to interact with the Dai in your wallet.",
+  "permissions-desc": "This permission allows Oasis to interact with the MONE in your wallet.",
   "powered-by": "Powered by",
   "proceed": "Proceed",
   "readonly-alert-message": "You’re currently viewing",
@@ -335,12 +335,12 @@
       "description": "Send us feedback, questions, or suggestions.",
       "title": "Contact"
     },
-    "dai": {
-      "description": "A short introduction to Dai, the smarter digital currency.",
-      "title": "Dai"
+    "stbl": {
+      "description": "A short introduction to MONE, the smarter digital currency.",
+      "title": "MONE"
     },
     "default": {
-      "description": "Borrow Dai, a USD pegged Stablecoin, using crypto as your collateral",
+      "description": "Borrow MONE, a USD pegged Stablecoin, using crypto as your collateral",
       "title": "Oasis.app"
     },
 
@@ -374,9 +374,9 @@
     "collateral-locked": "Collateral Locked",
     "collateral-ratio": "Collateral Ratio",
     "collateralization-ratio": "Collateralization Ratio",
-    "dai": "Dai",
-    "dai-available": "Dai Available",
-    "dai-debt": "Dai Debt",
+    "stbl": "MONE",
+    "stbl-available": "MONE Available",
+    "stbl-debt": "MONE Debt",
     "deposited": "Deposited",
     "in-my-wallet": "In My Wallet",
     "in-your-wallet": "In Your Wallet",
@@ -386,7 +386,7 @@
     "min-coll-ratio": "Min Coll. Ratio",
     "stability-fee": "Stability Fee",
     "type": "Type",
-    "vault-dai-debt": "Vault Dai Debt",
+    "vault-stbl-debt": "Vault MONE Debt",
     "vault-id": "Vault ID"
   },
   "token-balance": "{{token}} balance",
@@ -404,7 +404,7 @@
   "tos-welcome-updated": "We’ve updated our terms ",
   "transaction-failed": "Transaction Failed",
   "transaction-fee": "Transaction fee",
-  "transaction-fee-tooltip-desc": "Transactions fees are currently payable in ETH. The current cost of this action is approx",
+  "transaction-fee-tooltip-desc": "Transactions fees are currently payable in MTR. The current cost of this action is approx",
   "trezor-cancel": "Select another wallet",
   "trezor-error": "There was an error, please reset",
   "trezor-loading-accounts": "Loading trezor accounts...",
@@ -437,8 +437,8 @@
   },
   "ilks-list": {
     "headers": {
-      "noVaults": "Select a collateral type to create a Maker Vault and generate Dai",
-      "withVaults": "Open a new Maker Vault.<0/> Generate Dai"
+      "noVaults": "Select a collateral type to create a MetricOne Vault and generate MONE",
+      "withVaults": "Open a new MetricOne Vault.<0/> Generate MONE"
     }
   },
   "vaults-overview": {
@@ -447,13 +447,13 @@
     "headers": {
       "connected-owner-noVaults": "You have no open Vaults",
       "connected-owner-withVaults": "Your Vaults",
-      "connected-viewer-noVaults": "{{address}} currently has no Maker Vaults",
-      "connected-viewer-withVaults": "Maker Vaults overview of {{address}}",
-      "notConnected-noVaults": "{{address}} currently has no Maker Vaults.<0/> Connect your wallet and open a vault.",
-      "notConnected-withVaults": "Maker Vaults overview of {{address}}.<0/> Connect your wallet."
+      "connected-viewer-noVaults": "{{address}} currently has no MetricOne Vaults",
+      "connected-viewer-withVaults": "MetricOne Vaults overview of {{address}}",
+      "notConnected-noVaults": "{{address}} currently has no MetricOne Vaults.<0/> Connect your wallet and open a vault.",
+      "notConnected-withVaults": "MetricOne Vaults overview of {{address}}.<0/> Connect your wallet."
     },
     "number-of-vaults": "No. of Vaults",
-    "subheader-no-vaults": "Open a Maker Vault, deposit your collateral, and generate Dai against it.",
+    "subheader-no-vaults": "Open a MetricOne Vault, deposit your collateral, and generate MONE against it.",
     "total-debt": "Total debt",
     "total-locked": "Total locked",
     "vaults": "Vaults",
@@ -467,18 +467,18 @@
       "subheader2": "You can view your vaults"
     },
     "liquidating": {
-      "header1": "Your {{ collateral }} Maker Vault {{ id }} is about to get liquidated.",
-      "header2": "{{ collateral }} Maker Vault {{ id }} is about to get liquidated.",
-      "subheader1": "The next price update of {{ collateral }} will cause a liquidation on this Maker Vault unless collateral is added, or Dai is paid back.",
-      "subheader2": "Is this your Maker Vault? Please connect with address: {{ address }} and save your Maker Vault from liquidation.",
+      "header1": "Your {{ collateral }} MetricOne Vault {{ id }} is about to get liquidated.",
+      "header2": "{{ collateral }} MetricOne Vault {{ id }} is about to get liquidated.",
+      "subheader1": "The next price update of {{ collateral }} will cause a liquidation on this MetricOne Vault unless collateral is added, or MONE is paid back.",
+      "subheader2": "Is this your MetricOne Vault? Please connect with address: {{ address }} and save your MetricOne Vault from liquidation.",
       "subheader3": "This Vault is now available for liquidation and can be liquidated at anytime."
     },
     "liquidated": {
-      "header1": "Your Maker Vault got liquidated",
-      "header2": "This Maker Vault got liquidated",
-      "subheader1": "This Maker Vault has been liquidated. A portion of your collateral has been auctioned to pay back your Dai debt.",
+      "header1": "Your MetricOne Vault got liquidated",
+      "header2": "This MetricOne Vault got liquidated",
+      "subheader1": "This MetricOne Vault has been liquidated. A portion of your collateral has been auctioned to pay back your MONE debt.",
       "subheader2": "You can reclaim {{ amount }} {{ collateral }}",
-      "subheader3": "This Maker Vault has been liquidated. A portion of collateral has been auctioned to pay back the Dai debt.",
+      "subheader3": "This MetricOne Vault has been liquidated. A portion of collateral has been auctioned to pay back the MONE debt.",
       "subheader4": "If this is your vault, connect with address: {{ address }} to reclaim the remaining collateral."
     }
   },
@@ -505,17 +505,17 @@
       "edit": "Configure your Vault",
       "proxy": "Create your smart Proxy ",
       "allowance": "Set {{token}} allowance",
-      "daiAllowance": "Set DAI allowance",
+      "stblAllowance": "Set MONE allowance",
       "confirm": "Confirm vault creation",
       "confirm-manage": "Confirm vault changes"
     },
     "subtext": {
       "collateral": "Deposit or withdraw from your Vault. Save gas by combining transactions.",
-      "dai": "Generate DAI from the collateral in your vault, or payback DAI. Save gas by combining transactions.",
-      "edit": "Simulate your vault by configuring the amount of collateral to deposit, and DAI to generate.",
+      "stbl": "Generate MONE from the collateral in your vault, or payback MONE. Save gas by combining transactions.",
+      "edit": "Simulate your vault by configuring the amount of collateral to deposit, and MONE to generate.",
       "proxy": "With your smart proxy we can perform multiple actions in one transaction for your Vault. This proxy only needs to be set up once.",
       "allowance": "Specify an allowance to set a maximum on the amount of tokens the vault contracts can interact with.",
-      "daiAllowance": "Specify an allowance to set a maximum on the amount of tokens the vault contracts can interact with.",
+      "stblAllowance": "Specify an allowance to set a maximum on the amount of tokens the vault contracts can interact with.",
       "confirm": "Review and verify details of your vault."
     }
   },
@@ -528,7 +528,7 @@
   "visit-old-oasis": "Visit the old Oasis",
   "oracles": {
     "header": "Oracles",
-    "description": "Below the current and next prices of the collateral types that are accepted for Maker vaults can be viewed. Most use the Oracle Stability Module (OSM). This module updates the price just once every hour. Therefore, when a crash is happening, users still have an hour to react to the new price.",
+    "description": "Below the current and next prices of the collateral types that are accepted for MetricOne vaults can be viewed. Most use the Oracle Stability Module (OSM). This module updates the price just once every hour. Therefore, when a crash is happening, users still have an hour to react to the new price.",
     "token": "Token",
     "current-price": "Current Price",
     "next-price": "Next Price",

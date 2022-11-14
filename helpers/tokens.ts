@@ -7,7 +7,7 @@ import { Decimal } from 'decimal.js'
  * for that token, for which a single fractional unit is approximately equivalent to 0.01 USD.
  *
  * e.g:
- * 1 ETH === 10,000 USD :: Precision - 7 :: 0.0000001 ETH = 0.01 USD
+ * 1 MTR === 10,000 USD :: Precision - 7 :: 0.0000001 MTR = 0.01 USD
  */
 export function calculateTokenPrecisionByValue({
   token,

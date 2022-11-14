@@ -19,7 +19,7 @@
 # Oasis Borrow
 
 [Oasis Borrow](https://oasis.app) is the most popular user-interface to interact with the
-[Maker protocol](https://docs.makerdao.com/). It enables users to generate Dai, the most used and
+MetricOne protocol. It enables users to generate MONE, the most used and
 decentralized stablecoin, using a variety of crypto assets as collateral.
 
 <br>

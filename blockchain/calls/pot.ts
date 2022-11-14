@@ -38,6 +38,6 @@ export const potRho: CallDef<void, Date> = {
   postprocess: (result: any) => new Date(result.toNumber() * 1000),
 }
 
-export function annualDaiSavingsRate$(potDsr$: Observable<BigNumber>) {
+export function annualStblSavingsRate$(potDsr$: Observable<BigNumber>) {
   return potDsr$.pipe(map((dsr) => dsr.pow(SECONDS_PER_YEAR).minus(1).times(100)))
 }

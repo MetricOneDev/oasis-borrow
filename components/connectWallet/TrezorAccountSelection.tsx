@@ -67,7 +67,7 @@ export function TrezorAccountSelection({ web3Context, cancel }: TrezorAccountSel
     <Grid gap={4} sx={{ textAlign: 'center' }}>
       <Heading as="h1">{t('trezor-select-address')}</Heading>
       <Grid gap={3}>
-        {accounts!.map(({ address, ethAmount, daiAmount }, i) => (
+        {accounts!.map(({ address, coinAmount, stblAmount }, i) => (
           <Button
             disabled={loadingAccounts}
             key={address}
@@ -95,10 +95,10 @@ export function TrezorAccountSelection({ web3Context, cancel }: TrezorAccountSel
                   <Text variant="boldBody">{formatAddress(address)}</Text>
                   <Flex sx={{ justifyContent: 'space-between' }}>
                     <Text variant="surfaceText" mr={2} sx={{ fontSize: 3 }}>
-                      {formatCryptoBalance(daiAmount)} DAI
+                      {formatCryptoBalance(stblAmount)} MONE
                     </Text>
                     <Text variant="surfaceText" sx={{ fontSize: 3 }}>
-                      {formatCryptoBalance(ethAmount)} ETH
+                      {formatCryptoBalance(coinAmount)} MTR
                     </Text>
                   </Flex>
                 </Grid>

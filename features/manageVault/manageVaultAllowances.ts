@@ -5,24 +5,24 @@ import { ManageVaultChange, ManageVaultState } from './manageVault'
 
 export const allowanceDefaults: Partial<ManageVaultState> = {
   collateralAllowanceAmount: maxUint256,
-  daiAllowanceAmount: maxUint256,
+  stblAllowanceAmount: maxUint256,
 }
 
-interface DaiAllowanceChange {
-  kind: 'daiAllowance'
-  daiAllowanceAmount?: BigNumber
+interface StblAllowanceChange {
+  kind: 'stblAllowance'
+  stblAllowanceAmount?: BigNumber
 }
 
-interface DaiAllowanceUnlimitedChange {
-  kind: 'daiAllowanceUnlimited'
+interface StblAllowanceUnlimitedChange {
+  kind: 'stblAllowanceUnlimited'
 }
 
-interface DaiAllowancePaybackChange {
-  kind: 'daiAllowanceAsPaybackAmount'
+interface StblAllowancePaybackChange {
+  kind: 'stblAllowanceAsPaybackAmount'
 }
 
-interface DaiAllowanceReset {
-  kind: 'daiAllowanceReset'
+interface StblAllowanceReset {
+  kind: 'stblAllowanceReset'
 }
 
 interface CollateralAllowanceChange {
@@ -43,10 +43,10 @@ interface CollateralAllowanceReset {
 }
 
 export type ManageVaultAllowanceChange =
-  | DaiAllowanceChange
-  | DaiAllowanceUnlimitedChange
-  | DaiAllowancePaybackChange
-  | DaiAllowanceReset
+  | StblAllowanceChange
+  | StblAllowanceUnlimitedChange
+  | StblAllowancePaybackChange
+  | StblAllowanceReset
   | CollateralAllowanceChange
   | CollateralAllowanceUnlimitedChange
   | CollateralAllowanceDepositChange
@@ -89,39 +89,39 @@ export function applyManageVaultAllowance(
     }
   }
 
-  if (change.kind === 'daiAllowance') {
-    const { daiAllowanceAmount } = change
+  if (change.kind === 'stblAllowance') {
+    const { stblAllowanceAmount } = change
     return {
       ...state,
-      daiAllowanceAmount,
+      stblAllowanceAmount,
     }
   }
 
-  if (change.kind === 'daiAllowanceAsPaybackAmount') {
+  if (change.kind === 'stblAllowanceAsPaybackAmount') {
     const {
       paybackAmount,
       vault: { debtOffset },
     } = state
     return {
       ...state,
-      selectedDaiAllowanceRadio: 'paybackAmount',
-      daiAllowanceAmount: paybackAmount!.plus(debtOffset),
+      selectedStblAllowanceRadio: 'paybackAmount',
+      stblAllowanceAmount: paybackAmount!.plus(debtOffset),
     }
   }
 
-  if (change.kind === 'daiAllowanceUnlimited') {
+  if (change.kind === 'stblAllowanceUnlimited') {
     return {
       ...state,
-      selectedDaiAllowanceRadio: 'unlimited',
-      daiAllowanceAmount: maxUint256,
+      selectedStblAllowanceRadio: 'unlimited',
+      stblAllowanceAmount: maxUint256,
     }
   }
 
-  if (change.kind === 'daiAllowanceReset') {
+  if (change.kind === 'stblAllowanceReset') {
     return {
       ...state,
-      selectedDaiAllowanceRadio: 'custom',
-      daiAllowanceAmount: undefined,
+      selectedStblAllowanceRadio: 'custom',
+      stblAllowanceAmount: undefined,
     }
   }
 

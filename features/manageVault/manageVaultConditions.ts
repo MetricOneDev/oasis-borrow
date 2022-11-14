@@ -9,14 +9,14 @@ const defaultManageVaultStageCategories = {
   isEditingStage: false,
   isProxyStage: false,
   isCollateralAllowanceStage: false,
-  isDaiAllowanceStage: false,
+  isStblAllowanceStage: false,
   isManageStage: false,
 }
 
 export function applyManageVaultStageCategorisation(state: ManageVaultState) {
   switch (state.stage) {
     case 'collateralEditing':
-    case 'daiEditing':
+    case 'stblEditing':
       return {
         ...state,
         ...defaultManageVaultStageCategories,
@@ -42,15 +42,15 @@ export function applyManageVaultStageCategorisation(state: ManageVaultState) {
         ...defaultManageVaultStageCategories,
         isCollateralAllowanceStage: true,
       }
-    case 'daiAllowanceWaitingForConfirmation':
-    case 'daiAllowanceWaitingForApproval':
-    case 'daiAllowanceInProgress':
-    case 'daiAllowanceFailure':
-    case 'daiAllowanceSuccess':
+    case 'stblAllowanceWaitingForConfirmation':
+    case 'stblAllowanceWaitingForApproval':
+    case 'stblAllowanceInProgress':
+    case 'stblAllowanceFailure':
+    case 'stblAllowanceSuccess':
       return {
         ...state,
         ...defaultManageVaultStageCategories,
-        isDaiAllowanceStage: true,
+        isStblAllowanceStage: true,
       }
 
     case 'manageWaitingForConfirmation':
@@ -72,7 +72,7 @@ export interface ManageVaultConditions {
   isEditingStage: boolean
   isProxyStage: boolean
   isCollateralAllowanceStage: boolean
-  isDaiAllowanceStage: boolean
+  isStblAllowanceStage: boolean
   isManageStage: boolean
 
   canProgress: boolean
@@ -93,16 +93,16 @@ export interface ManageVaultConditions {
   accountIsConnected: boolean
   accountIsController: boolean
 
-  depositingAllEthBalance: boolean
+  depositingAllCoinBalance: boolean
   depositAmountExceedsCollateralBalance: boolean
   withdrawAmountExceedsFreeCollateral: boolean
   withdrawAmountExceedsFreeCollateralAtNextPrice: boolean
-  generateAmountExceedsDaiYieldFromTotalCollateral: boolean
-  generateAmountExceedsDaiYieldFromTotalCollateralAtNextPrice: boolean
+  generateAmountExceedsStblYieldFromTotalCollateral: boolean
+  generateAmountExceedsStblYieldFromTotalCollateralAtNextPrice: boolean
   generateAmountLessThanDebtFloor: boolean
   generateAmountExceedsDebtCeiling: boolean
   paybackAmountExceedsVaultDebt: boolean
-  paybackAmountExceedsDaiBalance: boolean
+  paybackAmountExceedsStblBalance: boolean
 
   debtWillBeLessThanDebtFloor: boolean
   isLoadingStage: boolean
@@ -112,10 +112,10 @@ export interface ManageVaultConditions {
   customCollateralAllowanceAmountExceedsMaxUint256: boolean
   customCollateralAllowanceAmountLessThanDepositAmount: boolean
 
-  insufficientDaiAllowance: boolean
-  customDaiAllowanceAmountEmpty: boolean
-  customDaiAllowanceAmountExceedsMaxUint256: boolean
-  customDaiAllowanceAmountLessThanPaybackAmount: boolean
+  insufficientStblAllowance: boolean
+  customStblAllowanceAmountEmpty: boolean
+  customStblAllowanceAmountExceedsMaxUint256: boolean
+  customStblAllowanceAmountLessThanPaybackAmount: boolean
   withdrawCollateralOnVaultUnderDebtFloor: boolean
   depositCollateralOnVaultUnderDebtFloor: boolean
 }
@@ -140,16 +140,16 @@ export const defaultManageVaultConditions: ManageVaultConditions = {
   accountIsConnected: false,
   accountIsController: false,
 
-  depositingAllEthBalance: false,
+  depositingAllCoinBalance: false,
   depositAmountExceedsCollateralBalance: false,
   withdrawAmountExceedsFreeCollateral: false,
   withdrawAmountExceedsFreeCollateralAtNextPrice: false,
-  generateAmountExceedsDaiYieldFromTotalCollateral: false,
-  generateAmountExceedsDaiYieldFromTotalCollateralAtNextPrice: false,
+  generateAmountExceedsStblYieldFromTotalCollateral: false,
+  generateAmountExceedsStblYieldFromTotalCollateralAtNextPrice: false,
   generateAmountLessThanDebtFloor: false,
   generateAmountExceedsDebtCeiling: false,
   paybackAmountExceedsVaultDebt: false,
-  paybackAmountExceedsDaiBalance: false,
+  paybackAmountExceedsStblBalance: false,
 
   debtWillBeLessThanDebtFloor: false,
   isLoadingStage: false,
@@ -159,10 +159,10 @@ export const defaultManageVaultConditions: ManageVaultConditions = {
   customCollateralAllowanceAmountExceedsMaxUint256: false,
   customCollateralAllowanceAmountLessThanDepositAmount: false,
 
-  insufficientDaiAllowance: false,
-  customDaiAllowanceAmountEmpty: false,
-  customDaiAllowanceAmountExceedsMaxUint256: false,
-  customDaiAllowanceAmountLessThanPaybackAmount: false,
+  insufficientStblAllowance: false,
+  customStblAllowanceAmountEmpty: false,
+  customStblAllowanceAmountExceedsMaxUint256: false,
+  customStblAllowanceAmountLessThanPaybackAmount: false,
 
   withdrawCollateralOnVaultUnderDebtFloor: false,
   depositCollateralOnVaultUnderDebtFloor: false,
@@ -181,16 +181,16 @@ export function applyManageVaultConditions(state: ManageVaultState): ManageVault
     account,
     stage,
     selectedCollateralAllowanceRadio,
-    selectedDaiAllowanceRadio,
+    selectedStblAllowanceRadio,
     collateralAllowanceAmount,
-    daiAllowanceAmount,
+    stblAllowanceAmount,
     collateralAllowance,
-    daiAllowance,
+    stblAllowance,
     shouldPaybackAll,
-    balanceInfo: { collateralBalance, daiBalance },
+    balanceInfo: { collateralBalance, stblBalance },
     isEditingStage,
     isCollateralAllowanceStage,
-    isDaiAllowanceStage,
+    isStblAllowanceStage,
     maxWithdrawAmountAtCurrentPrice,
     maxWithdrawAmountAtNextPrice,
     maxGenerateAmountAtCurrentPrice,
@@ -241,7 +241,7 @@ export function applyManageVaultConditions(state: ManageVaultState): ManageVault
 
   const depositAmountExceedsCollateralBalance = !!depositAmount?.gt(collateralBalance)
 
-  const depositingAllEthBalance = vault.token === 'ETH' && !!depositAmount?.eq(collateralBalance)
+  const depositingAllCoinBalance = vault.token === 'MTR' && !!depositAmount?.eq(collateralBalance)
 
   const withdrawAmountExceedsFreeCollateral = !!withdrawAmount?.gt(maxWithdrawAmountAtCurrentPrice)
 
@@ -250,12 +250,12 @@ export function applyManageVaultConditions(state: ManageVaultState): ManageVault
 
   const generateAmountExceedsDebtCeiling = !!generateAmount?.gt(ilkData.ilkDebtAvailable)
 
-  const generateAmountExceedsDaiYieldFromTotalCollateral =
+  const generateAmountExceedsStblYieldFromTotalCollateral =
     !generateAmountExceedsDebtCeiling && !!generateAmount?.gt(maxGenerateAmountAtCurrentPrice)
 
-  const generateAmountExceedsDaiYieldFromTotalCollateralAtNextPrice =
+  const generateAmountExceedsStblYieldFromTotalCollateralAtNextPrice =
     !generateAmountExceedsDebtCeiling &&
-    !generateAmountExceedsDaiYieldFromTotalCollateral &&
+    !generateAmountExceedsStblYieldFromTotalCollateral &&
     !!generateAmount?.gt(maxGenerateAmountAtNextPrice)
 
   const generateAmountLessThanDebtFloor = !!(
@@ -264,7 +264,7 @@ export function applyManageVaultConditions(state: ManageVaultState): ManageVault
     generateAmount.plus(vault.debt).lt(ilkData.debtFloor)
   )
 
-  const paybackAmountExceedsDaiBalance = !!paybackAmount?.gt(daiBalance)
+  const paybackAmountExceedsStblBalance = !!paybackAmount?.gt(stblBalance)
   const paybackAmountExceedsVaultDebt = !!paybackAmount?.gt(vault.debt)
 
   const debtWillBeLessThanDebtFloor = !!(
@@ -277,8 +277,8 @@ export function applyManageVaultConditions(state: ManageVaultState): ManageVault
   const customCollateralAllowanceAmountEmpty =
     selectedCollateralAllowanceRadio === 'custom' && !collateralAllowanceAmount
 
-  const customDaiAllowanceAmountEmpty =
-    selectedDaiAllowanceRadio === 'custom' && !daiAllowanceAmount
+  const customStblAllowanceAmountEmpty =
+    selectedStblAllowanceRadio === 'custom' && !stblAllowanceAmount
 
   const customCollateralAllowanceAmountExceedsMaxUint256 = !!(
     selectedCollateralAllowanceRadio === 'custom' && collateralAllowanceAmount?.gt(maxUint256)
@@ -291,29 +291,29 @@ export function applyManageVaultConditions(state: ManageVaultState): ManageVault
     collateralAllowanceAmount.lt(depositAmount)
   )
 
-  const customDaiAllowanceAmountExceedsMaxUint256 = !!(
-    selectedDaiAllowanceRadio === 'custom' && daiAllowanceAmount?.gt(maxUint256)
+  const customStblAllowanceAmountExceedsMaxUint256 = !!(
+    selectedStblAllowanceRadio === 'custom' && stblAllowanceAmount?.gt(maxUint256)
   )
 
-  const customDaiAllowanceAmountLessThanPaybackAmount = !!(
-    selectedDaiAllowanceRadio === 'custom' &&
-    daiAllowanceAmount &&
+  const customStblAllowanceAmountLessThanPaybackAmount = !!(
+    selectedStblAllowanceRadio === 'custom' &&
+    stblAllowanceAmount &&
     paybackAmount &&
-    daiAllowanceAmount.lt(paybackAmount)
+    stblAllowanceAmount.lt(paybackAmount)
   )
 
   const insufficientCollateralAllowance =
-    vault.token !== 'ETH' &&
+    vault.token !== 'MTR' &&
     !!(
       depositAmount &&
       !depositAmount.isZero() &&
       (!collateralAllowance || depositAmount.gt(collateralAllowance))
     )
 
-  const insufficientDaiAllowance = !!(
+  const insufficientStblAllowance = !!(
     paybackAmount &&
     !paybackAmount.isZero() &&
-    (!daiAllowance || paybackAmount.plus(vault.debtOffset).gt(daiAllowance))
+    (!stblAllowance || paybackAmount.plus(vault.debtOffset).gt(stblAllowance))
   )
 
   const isLoadingStage = ([
@@ -321,8 +321,8 @@ export function applyManageVaultConditions(state: ManageVaultState): ManageVault
     'proxyWaitingForApproval',
     'collateralAllowanceWaitingForApproval',
     'collateralAllowanceInProgress',
-    'daiAllowanceWaitingForApproval',
-    'daiAllowanceInProgress',
+    'stblAllowanceWaitingForApproval',
+    'stblAllowanceInProgress',
     'manageInProgress',
     'manageWaitingForApproval',
   ] as ManageVaultStage[]).some((s) => s === stage)
@@ -352,10 +352,10 @@ export function applyManageVaultConditions(state: ManageVaultState): ManageVault
       depositAmountExceedsCollateralBalance ||
       withdrawAmountExceedsFreeCollateral ||
       withdrawAmountExceedsFreeCollateralAtNextPrice ||
-      depositingAllEthBalance ||
+      depositingAllCoinBalance ||
       generateAmountExceedsDebtCeiling ||
       generateAmountLessThanDebtFloor ||
-      paybackAmountExceedsDaiBalance ||
+      paybackAmountExceedsStblBalance ||
       paybackAmountExceedsVaultDebt ||
       withdrawCollateralOnVaultUnderDebtFloor ||
       depositCollateralOnVaultUnderDebtFloor)
@@ -366,17 +366,17 @@ export function applyManageVaultConditions(state: ManageVaultState): ManageVault
       customCollateralAllowanceAmountExceedsMaxUint256 ||
       customCollateralAllowanceAmountLessThanDepositAmount)
 
-  const daiAllowanceProgressionDisabled =
-    isDaiAllowanceStage &&
-    (customDaiAllowanceAmountEmpty ||
-      customDaiAllowanceAmountExceedsMaxUint256 ||
-      customDaiAllowanceAmountLessThanPaybackAmount)
+  const stblAllowanceProgressionDisabled =
+    isStblAllowanceStage &&
+    (customStblAllowanceAmountEmpty ||
+      customStblAllowanceAmountExceedsMaxUint256 ||
+      customStblAllowanceAmountLessThanPaybackAmount)
 
   const canProgress = !(
     isLoadingStage ||
     editingProgressionDisabled ||
     collateralAllowanceProgressionDisabled ||
-    daiAllowanceProgressionDisabled
+    stblAllowanceProgressionDisabled
   )
 
   const canRegress = ([
@@ -384,8 +384,8 @@ export function applyManageVaultConditions(state: ManageVaultState): ManageVault
     'proxyFailure',
     'collateralAllowanceWaitingForConfirmation',
     'collateralAllowanceFailure',
-    'daiAllowanceWaitingForConfirmation',
-    'daiAllowanceFailure',
+    'stblAllowanceWaitingForConfirmation',
+    'stblAllowanceFailure',
     'manageWaitingForConfirmation',
     'manageFailure',
   ] as ManageVaultStage[]).some((s) => s === stage)
@@ -408,15 +408,15 @@ export function applyManageVaultConditions(state: ManageVaultState): ManageVault
 
     accountIsConnected,
     accountIsController,
-    depositingAllEthBalance,
+    depositingAllCoinBalance,
     generateAmountExceedsDebtCeiling,
     depositAmountExceedsCollateralBalance,
     withdrawAmountExceedsFreeCollateral,
     withdrawAmountExceedsFreeCollateralAtNextPrice,
-    generateAmountExceedsDaiYieldFromTotalCollateral,
-    generateAmountExceedsDaiYieldFromTotalCollateralAtNextPrice,
+    generateAmountExceedsStblYieldFromTotalCollateral,
+    generateAmountExceedsStblYieldFromTotalCollateralAtNextPrice,
     generateAmountLessThanDebtFloor,
-    paybackAmountExceedsDaiBalance,
+    paybackAmountExceedsStblBalance,
     paybackAmountExceedsVaultDebt,
     shouldPaybackAll,
     debtWillBeLessThanDebtFloor,
@@ -427,10 +427,10 @@ export function applyManageVaultConditions(state: ManageVaultState): ManageVault
     customCollateralAllowanceAmountExceedsMaxUint256,
     customCollateralAllowanceAmountLessThanDepositAmount,
 
-    insufficientDaiAllowance,
-    customDaiAllowanceAmountEmpty,
-    customDaiAllowanceAmountExceedsMaxUint256,
-    customDaiAllowanceAmountLessThanPaybackAmount,
+    insufficientStblAllowance,
+    customStblAllowanceAmountEmpty,
+    customStblAllowanceAmountExceedsMaxUint256,
+    customStblAllowanceAmountLessThanPaybackAmount,
 
     withdrawCollateralOnVaultUnderDebtFloor,
     depositCollateralOnVaultUnderDebtFloor,

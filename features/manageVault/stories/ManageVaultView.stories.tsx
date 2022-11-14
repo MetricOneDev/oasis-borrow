@@ -19,7 +19,7 @@ export const CollateralEditingStage = manageVaultStory({
   generateAmount: new BigNumber('300'),
 })
 
-export const DaiEditingStage = manageVaultStory({
+export const StblEditingStage = manageVaultStory({
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('20'),
@@ -28,7 +28,7 @@ export const DaiEditingStage = manageVaultStory({
   balanceInfo: { collateralBalance: new BigNumber('200') },
   proxyAddress,
 })({
-  stage: 'daiEditing',
+  stage: 'stblEditing',
   depositAmount: new BigNumber('2'),
   generateAmount: new BigNumber('300'),
 })
@@ -173,76 +173,76 @@ export const CollateralAllowanceSuccess = manageVaultStory({
   stage: 'collateralAllowanceSuccess',
 })
 
-export const DaiAllowanceWaitingForConfirmation = manageVaultStory({
+export const StblAllowanceWaitingForConfirmation = manageVaultStory({
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('20'),
     debt: new BigNumber('3000'),
   },
-  balanceInfo: { collateralBalance: new BigNumber('200'), daiBalance: new BigNumber('1000') },
+  balanceInfo: { collateralBalance: new BigNumber('200'), stblBalance: new BigNumber('1000') },
   proxyAddress,
-  daiAllowance: zero,
+  stblAllowance: zero,
 })({
   withdrawAmount: new BigNumber('0.5'),
   paybackAmount: new BigNumber('300'),
-  stage: 'daiAllowanceWaitingForConfirmation',
+  stage: 'stblAllowanceWaitingForConfirmation',
 })
 
-export const DaiAllowanceWaitingForApproval = manageVaultStory({
+export const StblAllowanceWaitingForApproval = manageVaultStory({
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('20'),
     debt: new BigNumber('3000'),
   },
-  balanceInfo: { collateralBalance: new BigNumber('200'), daiBalance: new BigNumber('1000') },
+  balanceInfo: { collateralBalance: new BigNumber('200'), stblBalance: new BigNumber('1000') },
   proxyAddress,
-  daiAllowance: zero,
+  stblAllowance: zero,
 })({
   withdrawAmount: new BigNumber('0.5'),
   paybackAmount: new BigNumber('300'),
-  stage: 'daiAllowanceWaitingForApproval',
+  stage: 'stblAllowanceWaitingForApproval',
 })
 
-export const DaiAllowanceFailure = manageVaultStory({
+export const StblAllowanceFailure = manageVaultStory({
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('20'),
     debt: new BigNumber('3000'),
   },
-  balanceInfo: { collateralBalance: new BigNumber('200'), daiBalance: new BigNumber('1000') },
+  balanceInfo: { collateralBalance: new BigNumber('200'), stblBalance: new BigNumber('1000') },
   proxyAddress,
-  daiAllowance: zero,
+  stblAllowance: zero,
 })({
-  stage: 'daiAllowanceFailure',
+  stage: 'stblAllowanceFailure',
   withdrawAmount: new BigNumber('0.5'),
   paybackAmount: new BigNumber('300'),
 })
 
-export const DaiAllowanceInProgress = manageVaultStory({
+export const StblAllowanceInProgress = manageVaultStory({
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('20'),
     debt: new BigNumber('3000'),
   },
-  balanceInfo: { collateralBalance: new BigNumber('200'), daiBalance: new BigNumber('1000') },
+  balanceInfo: { collateralBalance: new BigNumber('200'), stblBalance: new BigNumber('1000') },
   proxyAddress,
-  daiAllowance: zero,
+  stblAllowance: zero,
 })({
   withdrawAmount: new BigNumber('0.5'),
   paybackAmount: new BigNumber('300'),
-  stage: 'daiAllowanceInProgress',
+  stage: 'stblAllowanceInProgress',
 })
 
-export const DaiAllowanceSuccess = manageVaultStory({
+export const StblAllowanceSuccess = manageVaultStory({
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('20'),
     debt: new BigNumber('3000'),
   },
-  balanceInfo: { collateralBalance: new BigNumber('200'), daiBalance: new BigNumber('1000') },
+  balanceInfo: { collateralBalance: new BigNumber('200'), stblBalance: new BigNumber('1000') },
   proxyAddress,
 })({
-  stage: 'daiAllowanceSuccess',
+  stage: 'stblAllowanceSuccess',
   withdrawAmount: new BigNumber('0.5'),
   paybackAmount: new BigNumber('300'),
 })
@@ -253,7 +253,7 @@ export const ManageWaitingForConfirmation = manageVaultStory({
     collateral: new BigNumber('20'),
     debt: new BigNumber('3000'),
   },
-  balanceInfo: { collateralBalance: new BigNumber('200'), daiBalance: new BigNumber('1000') },
+  balanceInfo: { collateralBalance: new BigNumber('200'), stblBalance: new BigNumber('1000') },
   proxyAddress,
 })({
   stage: 'manageWaitingForConfirmation',
@@ -267,7 +267,7 @@ export const ManageWaitingForApproval = manageVaultStory({
     collateral: new BigNumber('20'),
     debt: new BigNumber('3000'),
   },
-  balanceInfo: { collateralBalance: new BigNumber('200'), daiBalance: new BigNumber('1000') },
+  balanceInfo: { collateralBalance: new BigNumber('200'), stblBalance: new BigNumber('1000') },
   proxyAddress,
 })({
   stage: 'manageWaitingForApproval',
@@ -281,7 +281,7 @@ export const ManageFailure = manageVaultStory({
     collateral: new BigNumber('20'),
     debt: new BigNumber('3000'),
   },
-  balanceInfo: { collateralBalance: new BigNumber('200'), daiBalance: new BigNumber('1000') },
+  balanceInfo: { collateralBalance: new BigNumber('200'), stblBalance: new BigNumber('1000') },
   proxyAddress,
 })({
   withdrawAmount: new BigNumber('0.5'),
@@ -295,7 +295,7 @@ export const ManageInProgress = manageVaultStory({
     collateral: new BigNumber('20'),
     debt: new BigNumber('3000'),
   },
-  balanceInfo: { collateralBalance: new BigNumber('200'), daiBalance: new BigNumber('1000') },
+  balanceInfo: { collateralBalance: new BigNumber('200'), stblBalance: new BigNumber('1000') },
   proxyAddress,
 })({
   stage: 'manageInProgress',
@@ -309,7 +309,7 @@ export const ManageSuccess = manageVaultStory({
     collateral: new BigNumber('20'),
     debt: new BigNumber('3000'),
   },
-  balanceInfo: { collateralBalance: new BigNumber('200'), daiBalance: new BigNumber('1000') },
+  balanceInfo: { collateralBalance: new BigNumber('200'), stblBalance: new BigNumber('1000') },
   proxyAddress,
 })({
   stage: 'manageSuccess',

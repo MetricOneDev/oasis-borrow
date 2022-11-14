@@ -132,9 +132,9 @@ export const DepositingAllCollateralBalance = openVaultStory({
   depositAmount: new BigNumber('10'),
 })
 
-export const GeneratingAllDaiFromIlkDebtAvailable = openVaultStory({
+export const GeneratingAllStblFromIlkDebtAvailable = openVaultStory({
   title:
-    'Warning is shown when a user is generating all dai remaining for a given ilk which results in that ilks debt ceiling being reached',
+    'Warning is shown when a user is generating all stbl remaining for a given ilk which results in that ilks debt ceiling being reached',
   ilkData: {
     debtCeiling: new BigNumber('10000'),
     ilkDebt: new BigNumber('5000'),
@@ -145,18 +145,18 @@ export const GeneratingAllDaiFromIlkDebtAvailable = openVaultStory({
   generateAmount: new BigNumber('5000'),
 })
 
-export const GeneratingAllDaiFromDepositingCollateral = openVaultStory({
+export const GeneratingAllStblFromDepositingCollateral = openVaultStory({
   title:
-    'Warning is shown when a user is generating the maximum amount of dai for the amount of collateral being deposited',
+    'Warning is shown when a user is generating the maximum amount of stbl for the amount of collateral being deposited',
   proxyAddress,
 })({
   depositAmount: new BigNumber('150'),
   generateAmount: new BigNumber('55000'),
 })
 
-export const GeneratingAllDaiFromDepositingCollateralAtNextPrice = openVaultStory({
+export const GeneratingAllStblFromDepositingCollateralAtNextPrice = openVaultStory({
   title:
-    'Warning is shown when a user is generating the maximum amount of dai for the amount of collateral being deposited',
+    'Warning is shown when a user is generating the maximum amount of stbl for the amount of collateral being deposited',
   priceInfo: {
     collateralChangePercentage: new BigNumber('-0.1'),
   },

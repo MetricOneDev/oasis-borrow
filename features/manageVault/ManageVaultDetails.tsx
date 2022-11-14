@@ -43,7 +43,7 @@ function VaultDetailsTableItem({
 function VaultDetailsTable({
   vault,
   ilkData,
-  daiYieldFromTotalCollateral,
+  stblYieldFromTotalCollateral,
   afterDebt,
   afterFreeCollateral,
   inputAmountsEmpty,
@@ -62,12 +62,12 @@ function VaultDetailsTable({
         sx={{ border: 'light', borderRadius: 'medium', p: [3, 4] }}
       >
         <VaultDetailsTableItem
-          label={t('system.vault-dai-debt')}
+          label={t('system.vault-stbl-debt')}
           value={
             <>
               {formatCryptoBalance(vault.debt)}
               <Text sx={{ display: 'inline', ml: 2, fontWeight: 'semiBold' }} variant="paragraph3">
-                DAI
+                MONE
               </Text>
             </>
           }
@@ -79,7 +79,7 @@ function VaultDetailsTable({
                   sx={{ display: 'inline', ml: 2, fontWeight: 'semiBold' }}
                   variant="paragraph4"
                 >
-                  DAI
+                  MONE
                 </Text>
               </>
             )
@@ -114,21 +114,21 @@ function VaultDetailsTable({
           label={t('system.available-to-generate')}
           value={
             <>
-              {formatCryptoBalance(vault.daiYieldFromLockedCollateral)}
+              {formatCryptoBalance(vault.stblYieldFromLockedCollateral)}
               <Text sx={{ display: 'inline', ml: 2, fontWeight: 'semiBold' }} variant="paragraph3">
-                DAI
+                MONE
               </Text>
             </>
           }
           subValue={
             showAfterCalculations && (
               <>
-                {formatCryptoBalance(daiYieldFromTotalCollateral)}
+                {formatCryptoBalance(stblYieldFromTotalCollateral)}
                 <Text
                   sx={{ display: 'inline', ml: 2, fontWeight: 'semiBold' }}
                   variant="paragraph4"
                 >
-                  DAI
+                  MONE
                 </Text>
               </>
             )

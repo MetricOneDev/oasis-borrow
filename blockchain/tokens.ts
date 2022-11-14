@@ -17,10 +17,10 @@ export function createBalance$(
 ) {
   return context$.pipe(
     switchMap(({ web3 }) => {
-      if (token === 'ETH') {
+      if (token === 'MTR') {
         return onEveryBlock$.pipe(
           switchMap(() => bindNodeCallback(web3.eth.getBalance)(address)),
-          map((ethBalance: string) => amountFromWei(new BigNumber(ethBalance))),
+          map((coinBalance: string) => amountFromWei(new BigNumber(coinBalance))),
           distinctUntilChanged((x: BigNumber, y: BigNumber) => x.eq(y)),
           shareReplay(1),
         )
@@ -80,7 +80,7 @@ export function createAllowance$(
 ) {
   return context$.pipe(
     switchMap(() => {
-      if (token === 'ETH') return of(maxUint256)
+      if (token === 'MTR') return of(maxUint256)
       return tokenAllowance$({ token, owner, spender })
     }),
   )

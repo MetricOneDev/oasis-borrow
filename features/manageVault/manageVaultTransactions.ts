@@ -53,19 +53,19 @@ type CollateralAllowanceChange =
       collateralAllowance: BigNumber
     }
 
-type DaiAllowanceChange =
-  | { kind: 'daiAllowanceWaitingForApproval' }
+type StblAllowanceChange =
+  | { kind: 'stblAllowanceWaitingForApproval' }
   | {
-      kind: 'daiAllowanceInProgress'
-      daiAllowanceTxHash: string
+      kind: 'stblAllowanceInProgress'
+      stblAllowanceTxHash: string
     }
   | {
-      kind: 'daiAllowanceFailure'
+      kind: 'stblAllowanceFailure'
       txError?: any
     }
   | {
-      kind: 'daiAllowanceSuccess'
-      daiAllowance: BigNumber
+      kind: 'stblAllowanceSuccess'
+  stblAllowance: BigNumber
     }
 
 type ManageChange =
@@ -85,7 +85,7 @@ type ManageChange =
 export type ManageVaultTransactionChange =
   | ProxyChange
   | CollateralAllowanceChange
-  | DaiAllowanceChange
+  | StblAllowanceChange
   | ManageChange
 
 export function applyManageVaultTransaction(
@@ -160,34 +160,34 @@ export function applyManageVaultTransaction(
     return { ...state, stage: 'collateralAllowanceSuccess', collateralAllowance }
   }
 
-  if (change.kind === 'daiAllowanceWaitingForApproval') {
+  if (change.kind === 'stblAllowanceWaitingForApproval') {
     return {
       ...state,
-      stage: 'daiAllowanceWaitingForApproval',
+      stage: 'stblAllowanceWaitingForApproval',
     }
   }
 
-  if (change.kind === 'daiAllowanceInProgress') {
-    const { daiAllowanceTxHash } = change
+  if (change.kind === 'stblAllowanceInProgress') {
+    const { stblAllowanceTxHash } = change
     return {
       ...state,
-      daiAllowanceTxHash,
-      stage: 'daiAllowanceInProgress',
+      stblAllowanceTxHash,
+      stage: 'stblAllowanceInProgress',
     }
   }
 
-  if (change.kind === 'daiAllowanceFailure') {
+  if (change.kind === 'stblAllowanceFailure') {
     const { txError } = change
     return {
       ...state,
-      stage: 'daiAllowanceFailure',
+      stage: 'stblAllowanceFailure',
       txError,
     }
   }
 
-  if (change.kind === 'daiAllowanceSuccess') {
-    const { daiAllowance } = change
-    return { ...state, stage: 'daiAllowanceSuccess', daiAllowance }
+  if (change.kind === 'stblAllowanceSuccess') {
+    const { stblAllowance } = change
+    return { ...state, stage: 'stblAllowanceSuccess', stblAllowance }
   }
 
   if (change.kind === 'manageWaitingForApproval') {
@@ -315,7 +315,7 @@ export function manageVaultWithdrawAndPayback(
     .subscribe((ch) => change(ch))
 }
 
-export function setDaiAllowance(
+export function setStblAllowance(
   txHelpers$: Observable<TxHelpers>,
   change: (ch: ManageVaultChange) => void,
   state: ManageVaultState,
@@ -326,27 +326,27 @@ export function setDaiAllowance(
       switchMap(({ sendWithGasEstimation }) =>
         sendWithGasEstimation(approve, {
           kind: TxMetaKind.approve,
-          token: 'DAI',
+          token: 'MONE',
           spender: state.proxyAddress!,
-          amount: state.daiAllowanceAmount!,
+          amount: state.stblAllowanceAmount!,
         }).pipe(
           transactionToX<ManageVaultChange, ApproveData>(
-            { kind: 'daiAllowanceWaitingForApproval' },
+            { kind: 'stblAllowanceWaitingForApproval' },
             (txState) =>
               of({
-                kind: 'daiAllowanceInProgress',
-                daiAllowanceTxHash: (txState as any).txHash as string,
+                kind: 'stblAllowanceInProgress',
+                stblAllowanceTxHash: (txState as any).txHash as string,
               }),
             (txState) =>
               of({
-                kind: 'daiAllowanceFailure',
+                kind: 'stblAllowanceFailure',
                 txError:
                   txState.status === TxStatus.Error ||
                   txState.status === TxStatus.CancelledByTheUser
                     ? txState.error
                     : undefined,
               }),
-            (txState) => of({ kind: 'daiAllowanceSuccess', daiAllowance: txState.meta.amount }),
+            (txState) => of({ kind: 'stblAllowanceSuccess', stblAllowance: txState.meta.amount }),
           ),
         ),
       ),

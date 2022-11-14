@@ -32,7 +32,7 @@ export function createGasPrice$(
   )
 }
 
-const tradingTokens = ['DAI', 'ETH']
+const tradingTokens = ['MONE', 'MTR']
 
 export const tokenPricesInUSD$: Observable<Ticker> = every10Seconds$.pipe(
   switchMap(() =>

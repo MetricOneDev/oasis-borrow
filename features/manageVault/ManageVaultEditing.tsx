@@ -49,7 +49,7 @@ function GenerateInput({
     <VaultActionInput
       action="Generate"
       amount={generateAmount}
-      token={'DAI'}
+      token={'MONE'}
       showMax={true}
       disabled={!accountIsController}
       maxAmount={maxGenerateAmount}
@@ -104,7 +104,7 @@ function PaybackInput({
     <VaultActionInput
       action="Payback"
       amount={paybackAmount}
-      token={'DAI'}
+      token={'MONE'}
       showMax={true}
       maxAmount={maxPaybackAmount}
       maxAmountLabel={'Max'}
@@ -135,7 +135,7 @@ export function ManageVaultEditing(props: ManageVaultState) {
   const disableDepositAndGenerate = paybackAmount || withdrawAmount || showPaybackAndWithdrawOption
   const disablePaybackAndWithdraw = depositAmount || generateAmount || showDepositAndGenerateOption
 
-  const inverted = stage === 'daiEditing'
+  const inverted = stage === 'stblEditing'
 
   const showDepositAndGenerateOptionButton =
     (depositAmount || generateAmount) && accountIsController
@@ -157,7 +157,7 @@ export function ManageVaultEditing(props: ManageVaultState) {
             <Text pr={1}>
               {t('manage-vault.action-option', {
                 action: inverted ? t('vault-actions.deposit') : t('vault-actions.generate'),
-                token: inverted ? token : 'DAI',
+                token: inverted ? token : 'MONE',
               })}
             </Text>
           </Button>
@@ -191,7 +191,7 @@ export function ManageVaultEditing(props: ManageVaultState) {
             <Text pr={1}>
               {t('manage-vault.action-option', {
                 action: inverted ? t('vault-actions.withdraw') : t('vault-actions.payback'),
-                token: inverted ? token : 'DAI',
+                token: inverted ? token : 'MONE',
               })}
             </Text>
           </Button>

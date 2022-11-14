@@ -27,9 +27,9 @@ describe('createVaultBanners$', () => {
 
   it('should assign liquidatingNextPrice banner', () => {
     const priceInfo$ = mockPriceInfo$({
-      token: 'ETH',
-      ethPrice: new BigNumber(200),
-      ethChangePercentage: new BigNumber('-0.8'),
+      token: 'MTR',
+      coinPrice: new BigNumber(200),
+      coinChangePercentage: new BigNumber('-0.8'),
     })
     const priceInfo = getStateUnpacker(priceInfo$)
     const state = getStateUnpacker(
@@ -40,7 +40,7 @@ describe('createVaultBanners$', () => {
           mockVault$({
             debt: new BigNumber(200),
             collateral: new BigNumber(2),
-            ilk: 'ETH',
+            ilk: 'MTR',
             priceInfo: priceInfo(),
           }),
         () => of([]),
@@ -59,7 +59,7 @@ describe('createVaultBanners$', () => {
           mockVault$({
             debt: new BigNumber(1000),
             collateral: new BigNumber(1),
-            ilk: 'ETH',
+            ilk: 'MTR',
           }),
         () => of([]),
         one,
@@ -80,11 +80,11 @@ describe('createVaultBanners$', () => {
               kind: 'AUCTION_STARTED',
               auctionId: '1',
               collateralAmount: new BigNumber(1),
-              daiAmount: new BigNumber(1),
+              stblAmount: new BigNumber(1),
               hash: '0x00',
               id: '1',
               timestamp: moment().toISOString(),
-              token: 'ETH',
+              token: 'MTR',
             },
           ]),
         one,
@@ -105,12 +105,12 @@ describe('createVaultBanners$', () => {
               kind: 'AUCTION_STARTED_V2',
               auctionId: '1',
               collateralAmount: new BigNumber(1),
-              daiAmount: new BigNumber(1),
+              stblAmount: new BigNumber(1),
               liqPenalty: new BigNumber(1),
               hash: '0x00',
               id: '1',
               timestamp: moment().toISOString(),
-              token: 'ETH',
+              token: 'MTR',
             },
           ]),
         one,
@@ -131,11 +131,11 @@ describe('createVaultBanners$', () => {
               kind: 'AUCTION_STARTED',
               auctionId: '1',
               collateralAmount: new BigNumber(1),
-              daiAmount: new BigNumber(1),
+              stblAmount: new BigNumber(1),
               hash: '0x00',
               id: '1',
               timestamp: moment().subtract(1.5, 'weeks').toISOString(),
-              token: 'ETH',
+              token: 'MTR',
             },
           ]),
         one,
@@ -153,7 +153,7 @@ describe('createVaultBanners$', () => {
           mockVault$({
             debt: new BigNumber(1000),
             collateral: new BigNumber(1),
-            ilk: 'ETH',
+            ilk: 'MTR',
           }),
         () =>
           of<VaultHistoryEvent[]>([
@@ -161,11 +161,11 @@ describe('createVaultBanners$', () => {
               kind: 'AUCTION_STARTED',
               auctionId: '1',
               collateralAmount: new BigNumber(1),
-              daiAmount: new BigNumber(1),
+              stblAmount: new BigNumber(1),
               hash: '0x00',
               id: '1',
               timestamp: moment().subtract(3, 'days').toISOString(),
-              token: 'ETH',
+              token: 'MTR',
             },
           ]),
         one,
@@ -176,9 +176,9 @@ describe('createVaultBanners$', () => {
 
   it('should assign liquidatingNextPrice banner even when vault was liquidated last week', () => {
     const priceInfo$ = mockPriceInfo$({
-      token: 'ETH',
-      ethPrice: new BigNumber(200),
-      ethChangePercentage: new BigNumber('-0.8'),
+      token: 'MTR',
+      coinPrice: new BigNumber(200),
+      coinChangePercentage: new BigNumber('-0.8'),
     })
     const priceInfo = getStateUnpacker(priceInfo$)
     const state = getStateUnpacker(
@@ -189,7 +189,7 @@ describe('createVaultBanners$', () => {
           mockVault$({
             debt: new BigNumber(200),
             collateral: new BigNumber(2),
-            ilk: 'ETH',
+            ilk: 'MTR',
             priceInfo: priceInfo(),
           }),
         () =>
@@ -198,11 +198,11 @@ describe('createVaultBanners$', () => {
               kind: 'AUCTION_STARTED',
               auctionId: '1',
               collateralAmount: new BigNumber(1),
-              daiAmount: new BigNumber(1),
+              stblAmount: new BigNumber(1),
               hash: '0x00',
               id: '1',
               timestamp: moment().subtract(3, 'days').toISOString(),
-              token: 'ETH',
+              token: 'MTR',
             },
           ]),
         one,

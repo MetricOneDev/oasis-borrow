@@ -12,8 +12,8 @@ import { Tooltip, useTooltip } from './Tooltip'
 
 function getGasText({
   gasEstimationStatus,
-  gasEstimationDai,
-  gasEstimationEth,
+  gasEstimationStbl,
+  gasEstimationCoin,
   t,
 }: HasGasEstimation & { t: TFunction }) {
   switch (gasEstimationStatus) {
@@ -26,12 +26,12 @@ function getGasText({
     case GasEstimationStatus.unset:
     case undefined:
     case GasEstimationStatus.calculated:
-      return gasEstimationEth ? (
-        <Text sx={{ display: 'inline' }}>{`${formatPrice(gasEstimationEth, 'ETH')} ETH`}</Text>
-      ) : gasEstimationDai ? (
+      return gasEstimationCoin ? (
+        <Text sx={{ display: 'inline' }}>{`${formatPrice(gasEstimationCoin, 'MTR')} MTR`}</Text>
+      ) : gasEstimationStbl ? (
         <Flex sx={{ fontSize: 5, alignItems: 'center' }}>
-          <Icon name="dai" size="24px" sx={{ position: 'relative', top: '1px' }} />
-          <Text ml={1}>{`~${formatPrice(gasEstimationDai, 'DAI')}`}</Text>
+          <Icon name="mone" size="24px" sx={{ position: 'relative', top: '1px' }} />
+          <Text ml={1}>{`~${formatPrice(gasEstimationStbl, 'MONE')}`}</Text>
         </Flex>
       ) : (
         '--'
@@ -40,9 +40,9 @@ function getGasText({
 }
 
 export function GasCost({
-  gasEstimationDai,
+  gasEstimationStbl,
   gasEstimationStatus,
-  gasEstimationEth,
+  gasEstimationCoin,
 }: HasGasEstimation) {
   const { tooltipOpen, setTooltipOpen } = useTooltip()
   const { t } = useTranslation()
@@ -62,13 +62,13 @@ export function GasCost({
             <Text sx={{ fontWeight: 'semiBold', mb: 1 }}>{t('transaction-fee')}</Text>
             <Text sx={{ fontSize: 2 }}>
               {t('transaction-fee-tooltip-desc')}{' '}
-              {getGasText({ gasEstimationStatus, gasEstimationEth, t })}.
+              {getGasText({ gasEstimationStatus, gasEstimationCoin, t })}.
             </Text>
           </Tooltip>
         )}
       </Flex>
       <Text sx={{ textAlign: 'left' }}>
-        {getGasText({ gasEstimationStatus, gasEstimationDai, t })}
+        {getGasText({ gasEstimationStatus, gasEstimationStbl, t })}
       </Text>
     </Box>
   )

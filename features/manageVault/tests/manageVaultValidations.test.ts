@@ -7,7 +7,7 @@ import { getStateUnpacker } from 'helpers/testHelpers'
 import { zero } from 'helpers/zero'
 
 describe('manageVaultValidations', () => {
-  it('validates if deposit amount exceeds collateral balance or depositing all ETH', () => {
+  it('validates if deposit amount exceeds collateral balance or depositing all MTR', () => {
     const depositAmountExceeds = new BigNumber('2')
     const depositAmountAll = new BigNumber('1')
 
@@ -17,7 +17,7 @@ describe('manageVaultValidations', () => {
           collateralBalance: new BigNumber('1'),
         },
         vault: {
-          ilk: 'ETH-A',
+          ilk: 'MTR-A',
         },
       }),
     )
@@ -25,7 +25,7 @@ describe('manageVaultValidations', () => {
     state().updateDeposit!(depositAmountExceeds)
     expect(state().errorMessages).to.deep.equal(['depositAmountExceedsCollateralBalance'])
     state().updateDeposit!(depositAmountAll)
-    expect(state().errorMessages).to.deep.equal(['depositingAllEthBalance'])
+    expect(state().errorMessages).to.deep.equal(['depositingAllCoinBalance'])
   })
 
   it(`validates if generate doesn't exceeds debt ceiling, debt floor`, () => {
@@ -45,10 +45,10 @@ describe('manageVaultValidations', () => {
         vault: {
           collateral: new BigNumber('9999'),
           debt: new BigNumber('1990'),
-          ilk: 'ETH-A',
+          ilk: 'MTR-A',
         },
         priceInfo: {
-          ethChangePercentage: new BigNumber(-0.1),
+          coinChangePercentage: new BigNumber(-0.1),
         },
       }),
     )
@@ -75,10 +75,10 @@ describe('manageVaultValidations', () => {
         vault: {
           collateral: new BigNumber('3'),
           debt: new BigNumber('1990'),
-          ilk: 'ETH-A',
+          ilk: 'MTR-A',
         },
         priceInfo: {
-          ethChangePercentage: new BigNumber(-0.25),
+          coinChangePercentage: new BigNumber(-0.25),
         },
       }),
     )
@@ -91,7 +91,7 @@ describe('manageVaultValidations', () => {
     state().toggleDepositAndGenerateOption!()
     state().updateGenerate!(generateAmountExceedsYield)
     expect(state().errorMessages).to.deep.equal([
-      'generateAmountExceedsDaiYieldFromTotalCollateralAtNextPrice',
+      'generateAmountExceedsStblYieldFromTotalCollateralAtNextPrice',
     ])
 
     state().updateGenerate!(generateAmountWarnings)
@@ -112,10 +112,10 @@ describe('manageVaultValidations', () => {
         vault: {
           collateral: new BigNumber('3'),
           debt: new BigNumber('1690'),
-          ilk: 'ETH-A',
+          ilk: 'MTR-A',
         },
         priceInfo: {
-          ethChangePercentage: new BigNumber(-0.1),
+          coinChangePercentage: new BigNumber(-0.1),
         },
       }),
     )
@@ -155,14 +155,14 @@ describe('manageVaultValidations', () => {
     ])
   })
 
-  it('validates custom allowance setting for dai', () => {
+  it('validates custom allowance setting for stbl', () => {
     const paybackAmount = new BigNumber('100')
     const customAllowanceAmount = new BigNumber('99')
 
     const state = getStateUnpacker(
       mockManageVault$({
         proxyAddress: DEFAULT_PROXY_ADDRESS,
-        daiAllowance: zero,
+        stblAllowance: zero,
       }),
     )
 
@@ -170,14 +170,14 @@ describe('manageVaultValidations', () => {
     state().updatePayback!(paybackAmount)
 
     state().progress!()
-    expect(state().stage).to.deep.equal('daiAllowanceWaitingForConfirmation')
-    state().resetDaiAllowanceAmount!()
-    state().updateDaiAllowanceAmount!(customAllowanceAmount)
-    expect(state().daiAllowanceAmount!).to.deep.equal(customAllowanceAmount)
-    expect(state().errorMessages).to.deep.equal(['customDaiAllowanceAmountLessThanPaybackAmount'])
+    expect(state().stage).to.deep.equal('stblAllowanceWaitingForConfirmation')
+    state().resetStblAllowanceAmount!()
+    state().updateStblAllowanceAmount!(customAllowanceAmount)
+    expect(state().stblAllowanceAmount!).to.deep.equal(customAllowanceAmount)
+    expect(state().errorMessages).to.deep.equal(['customStblAllowanceAmountLessThanPaybackAmount'])
 
-    state().updateDaiAllowanceAmount!(maxUint256.plus(new BigNumber('1')))
-    expect(state().errorMessages).to.deep.equal(['customDaiAllowanceAmountExceedsMaxUint256'])
+    state().updateStblAllowanceAmount!(maxUint256.plus(new BigNumber('1')))
+    expect(state().errorMessages).to.deep.equal(['customStblAllowanceAmountExceedsMaxUint256'])
   })
 
   it('validates payback amount', () => {
@@ -200,7 +200,7 @@ describe('manageVaultValidations', () => {
     expect(state().errorMessages).to.deep.equal(['debtWillBeLessThanDebtFloor'])
   })
 
-  it('validates if dai allowance is enough to payback whole amount and account debt offset', () => {
+  it('validates if stbl allowance is enough to payback whole amount and account debt offset', () => {
     const paybackAmount = new BigNumber('500')
 
     const state = mockManageVault({
@@ -209,7 +209,7 @@ describe('manageVaultValidations', () => {
         collateral: new BigNumber('31'),
         debt: new BigNumber('2000'),
       },
-      daiAllowance: paybackAmount,
+      stblAllowance: paybackAmount,
       priceInfo: {
         collateralPrice: new BigNumber('100'),
       },
@@ -217,16 +217,16 @@ describe('manageVaultValidations', () => {
 
     state().toggle!()
     state().updatePayback!(paybackAmount.plus(state().vault.debtOffset))
-    expect(state().insufficientDaiAllowance).to.be.true
+    expect(state().insufficientStblAllowance).to.be.true
 
     state().updatePayback!(paybackAmount.minus(state().vault.debtOffset))
-    expect(state().insufficientDaiAllowance).to.be.false
+    expect(state().insufficientStblAllowance).to.be.false
 
     state().updatePayback!(paybackAmount)
-    expect(state().insufficientDaiAllowance).to.be.true
+    expect(state().insufficientStblAllowance).to.be.true
 
     state().progress!()
-    expect(state().stage).to.deep.equal('daiAllowanceWaitingForConfirmation')
+    expect(state().stage).to.deep.equal('stblAllowanceWaitingForConfirmation')
   })
 
   it('should show meaningful message when trying to withdraw collateral on dusty vault', () => {
@@ -242,10 +242,10 @@ describe('manageVaultValidations', () => {
           collateral: new BigNumber(10),
         },
         balanceInfo: {
-          daiBalance: new BigNumber(1000),
+          stblBalance: new BigNumber(1000),
         },
         proxyAddress: DEFAULT_PROXY_ADDRESS,
-        daiAllowance: zero,
+        stblAllowance: zero,
       }),
     )
 
@@ -269,10 +269,10 @@ describe('manageVaultValidations', () => {
           collateral: new BigNumber(6),
         },
         balanceInfo: {
-          daiBalance: new BigNumber(1000),
+          stblBalance: new BigNumber(1000),
         },
         proxyAddress: DEFAULT_PROXY_ADDRESS,
-        daiAllowance: zero,
+        stblAllowance: zero,
       }),
     )
 

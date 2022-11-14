@@ -31,7 +31,7 @@ type OpenVaultConfirm = {
   value: {
     ilk: string
     collateralAmount: BigNumber
-    daiAmount: BigNumber
+    stblAmount: BigNumber
   }
 }
 
@@ -40,7 +40,7 @@ type OpenVaultConfirmTransaction = {
   value: {
     ilk: string
     collateralAmount: BigNumber
-    daiAmount: BigNumber
+    stblAmount: BigNumber
     txHash: string
   }
 }
@@ -113,7 +113,7 @@ export function createOpenVaultAnalytics$(
       value: {
         ilk: ilk,
         collateralAmount: depositAmount,
-        daiAmount: generateAmount || zero,
+        stblAmount: generateAmount || zero,
       },
     })),
     distinctUntilChanged(isEqual),
@@ -126,7 +126,7 @@ export function createOpenVaultAnalytics$(
       value: {
         ilk: ilk,
         collateralAmount: depositAmount,
-        daiAmount: generateAmount || zero,
+        stblAmount: generateAmount || zero,
         txHash: openTxHash,
       },
     })),
@@ -161,7 +161,7 @@ export function createOpenVaultAnalytics$(
               tracker.confirmVaultConfirm(
                 event.value.ilk,
                 event.value.collateralAmount.toString(),
-                event.value.daiAmount.toString(),
+                event.value.stblAmount.toString(),
                 firstCDP,
               )
               break
@@ -169,7 +169,7 @@ export function createOpenVaultAnalytics$(
               tracker.confirmVaultConfirmTransaction(
                 event.value.ilk,
                 event.value.collateralAmount.toString(),
-                event.value.daiAmount.toString(),
+                event.value.stblAmount.toString(),
                 firstCDP,
                 event.value.txHash,
               )

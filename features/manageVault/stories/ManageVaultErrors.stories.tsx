@@ -21,7 +21,7 @@ export const DepositAndWithdrawAmountsEmpty = manageVaultStory({
 
 export const GenerateAndPaybackAmountsEmpty = manageVaultStory({
   title:
-    'If both the generate and payback input fields are empty when editing "Dai" then we disable the progress button and suggest user to enter an amount',
+    'If both the generate and payback input fields are empty when editing "MONE" then we disable the progress button and suggest user to enter an amount',
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('100'),
@@ -29,7 +29,7 @@ export const GenerateAndPaybackAmountsEmpty = manageVaultStory({
   },
   proxyAddress,
 })({
-  stage: 'daiEditing',
+  stage: 'stblEditing',
 })
 
 export const DepositEmpty = manageVaultStory({
@@ -47,7 +47,7 @@ export const DepositEmpty = manageVaultStory({
 
 export const PaybackEmpty = manageVaultStory({
   title:
-    'Similar to PaybackAndWithdrawAmountsEmpty only that the connected user is not the controller of the vault. At the "Dai" editing stage they would only be able payback so we block the flow if no payback amount is set',
+    'Similar to PaybackAndWithdrawAmountsEmpty only that the connected user is not the controller of the vault. At the "MONE" editing stage they would only be able payback so we block the flow if no payback amount is set',
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('100'),
@@ -57,7 +57,7 @@ export const PaybackEmpty = manageVaultStory({
   account: '0x0',
   proxyAddress,
 })({
-  stage: 'daiEditing',
+  stage: 'stblEditing',
 })
 
 export const DepositAmountExceedsCollateralBalance = manageVaultStory({
@@ -104,9 +104,9 @@ export const WithdrawAmountExceedsFreeCollateralAtNextPrice = manageVaultStory({
   withdrawAmount: new BigNumber('6'),
 })
 
-export const GenerateAmountExceedsDaiYieldFromTotalCollateral = manageVaultStory({
+export const GenerateAmountExceedsStblYieldFromTotalCollateral = manageVaultStory({
   title:
-    'Error is shown when a user is trying to generate an amount of DAI that is greater than the maximum of dai that can be generated from the collateral already locked in the vault and the amount of collateral the user is also depositing',
+    'Error is shown when a user is trying to generate an amount of MONE that is greater than the maximum of stbl that can be generated from the collateral already locked in the vault and the amount of collateral the user is also depositing',
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('15'),
@@ -118,9 +118,9 @@ export const GenerateAmountExceedsDaiYieldFromTotalCollateral = manageVaultStory
   generateAmount: new BigNumber('4000'),
 })
 
-export const GenerateAmountExceedsDaiYieldFromTotalCollateralAtNextPrice = manageVaultStory({
+export const GenerateAmountExceedsStblYieldFromTotalCollateralAtNextPrice = manageVaultStory({
   title:
-    'Error is shown when a user is trying to generate an amount of DAI that is greater than the maximum of dai at next price update that can be generated from the collateral already locked in the vault and the amount of collateral the user is also depositing',
+    'Error is shown when a user is trying to generate an amount of MONE that is greater than the maximum of stbl at next price update that can be generated from the collateral already locked in the vault and the amount of collateral the user is also depositing',
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('15'),
@@ -137,7 +137,7 @@ export const GenerateAmountExceedsDaiYieldFromTotalCollateralAtNextPrice = manag
 
 export const GenerateAmountExceedsDebtCeiling = manageVaultStory({
   title:
-    'Error is shown where the total debt generated for an ilk is almost at the debt ceiling and the amount of dai the user wants to generate would be greater than the difference. In this example, the user has plenty of collateral in their vault to generate plenty of DAI but is blocked as there is only 1,000 DAI until the ceiling is reached',
+    'Error is shown where the total debt generated for an ilk is almost at the debt ceiling and the amount of stbl the user wants to generate would be greater than the difference. In this example, the user has plenty of collateral in their vault to generate plenty of MONE but is blocked as there is only 1,000 MONE until the ceiling is reached',
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('30'),
@@ -146,13 +146,13 @@ export const GenerateAmountExceedsDebtCeiling = manageVaultStory({
   ilkData: { ilkDebt: new BigNumber('15000'), debtCeiling: new BigNumber('16000') },
   proxyAddress,
 })({
-  stage: 'daiEditing',
+  stage: 'stblEditing',
   generateAmount: new BigNumber('2000'),
 })
 
 export const GenerateAmountLessThanDebtFloor = manageVaultStory({
   title:
-    'Error is shown when a user is generating an amount of DAI that would cause the debt outstanding in the vault to be less than the dust limit/debt floor. In more detail, if this vault has a debt of 1999 DAI and the dust limit was 2000 DAI, were the user to generate 1 DAI, then they could proceed',
+    'Error is shown when a user is generating an amount of MONE that would cause the debt outstanding in the vault to be less than the dust limit/debt floor. In more detail, if this vault has a debt of 1999 MONE and the dust limit was 2000 MONE, were the user to generate 1 MONE, then they could proceed',
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('10'),
@@ -161,7 +161,7 @@ export const GenerateAmountLessThanDebtFloor = manageVaultStory({
   ilkData: { debtFloor: new BigNumber('200') },
   proxyAddress,
 })({
-  stage: 'daiEditing',
+  stage: 'stblEditing',
   generateAmount: new BigNumber('1'),
 })
 
@@ -176,15 +176,15 @@ export const WithdrawOnVaultUnderDebtFloor = manageVaultStory({
   ilkData: { debtFloor: new BigNumber('200') },
   proxyAddress,
 })({
-  stage: 'daiEditing',
+  stage: 'stblEditing',
   withdrawAmount: new BigNumber('1'),
 })
 
 export const DepositToVaultUnderDebtFloor = manageVaultStory({
   title:
-    'Error is shown when a user is trying to deposit more collateral on a vault that is under debt floor. In this case user should first either payback all debt in order to withdraw any collateral or by depositing more collateral in order to generate this additional Dai - which must be done in the same transaction.',
+    'Error is shown when a user is trying to deposit more collateral on a vault that is under debt floor. In this case user should first either payback all debt in order to withdraw any collateral or by depositing more collateral in order to generate this additional MONE - which must be done in the same transaction.',
   vault: {
-    ilk: 'ETH-A',
+    ilk: 'MTR-A',
     collateral: new BigNumber('6'),
     debt: new BigNumber(5000),
   },
@@ -195,53 +195,53 @@ export const DepositToVaultUnderDebtFloor = manageVaultStory({
   stage: 'collateralEditing',
 })
 
-export const PaybackAmountExceedsDaiBalance = manageVaultStory({
-  title: 'Error occurs when user is trying to pay back more DAI than they have in their wallet',
+export const PaybackAmountExceedsStblBalance = manageVaultStory({
+  title: 'Error occurs when user is trying to pay back more MONE than they have in their wallet',
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('50'),
     debt: new BigNumber('9000'),
   },
-  balanceInfo: { daiBalance: new BigNumber('5000') },
+  balanceInfo: { stblBalance: new BigNumber('5000') },
   proxyAddress,
 })({
-  stage: 'daiEditing',
+  stage: 'stblEditing',
   paybackAmount: new BigNumber('6000'),
 })
 
 export const PaybackAmountExceedsVaultDebt = manageVaultStory({
-  title: 'Error occurs when the user tries to payback more DAI than exists as debt in their vault',
+  title: 'Error occurs when the user tries to payback more MONE than exists as debt in their vault',
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('100'),
     debt: new BigNumber('5000'),
   },
-  balanceInfo: { daiBalance: new BigNumber('10000') },
+  balanceInfo: { stblBalance: new BigNumber('10000') },
   proxyAddress,
 })({
-  stage: 'daiEditing',
+  stage: 'stblEditing',
   paybackAmount: new BigNumber('6000'),
 })
 
 export const PaybackAmountCausesVaultDebtToBeLessThanDebtFloor = manageVaultStory({
   title:
-    'Error occurs when the user pays back an amount of DAI which would cause the remaining vault debt to be under the dust limit but not the full amount',
+    'Error occurs when the user pays back an amount of MONE which would cause the remaining vault debt to be under the dust limit but not the full amount',
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('100'),
     debt: new BigNumber('5000'),
   },
-  balanceInfo: { daiBalance: new BigNumber('10000') },
+  balanceInfo: { stblBalance: new BigNumber('10000') },
   proxyAddress,
 })({
-  stage: 'daiEditing',
+  stage: 'stblEditing',
   paybackAmount: new BigNumber('4000'),
 })
 
-export const DepositingAllEthBalance = manageVaultStory({
-  title: 'Error occurs when a user with an ETH vault tries to deposit all their ETH into the vault',
+export const DepositingAllCoinBalance = manageVaultStory({
+  title: 'Error occurs when a user with an MTR vault tries to deposit all their MTR into the vault',
   vault: {
-    ilk: 'ETH-A',
+    ilk: 'MTR-A',
     collateral: new BigNumber('100'),
     debt: new BigNumber('5000'),
   },
@@ -260,7 +260,7 @@ export const CustomCollateralAllowanceEmpty = manageVaultStory({
     collateral: new BigNumber('100'),
     debt: new BigNumber('5000'),
   },
-  balanceInfo: { daiBalance: new BigNumber('10000') },
+  balanceInfo: { stblBalance: new BigNumber('10000') },
   proxyAddress,
 })({
   stage: 'collateralAllowanceWaitingForConfirmation',
@@ -276,7 +276,7 @@ export const CustomCollateralAllowanceAmountGreaterThanMaxUint256 = manageVaultS
     collateral: new BigNumber('100'),
     debt: new BigNumber('5000'),
   },
-  balanceInfo: { daiBalance: new BigNumber('10000') },
+  balanceInfo: { stblBalance: new BigNumber('10000') },
   proxyAddress,
 })({
   stage: 'collateralAllowanceWaitingForConfirmation',
@@ -292,7 +292,7 @@ export const CustomCollateralAllowanceAmountLessThanDepositAmount = manageVaultS
     collateral: new BigNumber('100'),
     debt: new BigNumber('5000'),
   },
-  balanceInfo: { daiBalance: new BigNumber('10000') },
+  balanceInfo: { stblBalance: new BigNumber('10000') },
   proxyAddress,
 })({
   stage: 'collateralAllowanceWaitingForConfirmation',
@@ -301,52 +301,52 @@ export const CustomCollateralAllowanceAmountLessThanDepositAmount = manageVaultS
   selectedCollateralAllowanceRadio: 'custom',
 })
 
-export const CustomDaiAllowanceEmpty = manageVaultStory({
+export const CustomStblAllowanceEmpty = manageVaultStory({
   title: 'Error should block user if the allowance they wish to set is zero',
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('100'),
     debt: new BigNumber('5000'),
   },
-  balanceInfo: { daiBalance: new BigNumber('10000') },
+  balanceInfo: { stblBalance: new BigNumber('10000') },
   proxyAddress,
 })({
-  stage: 'daiAllowanceWaitingForConfirmation',
+  stage: 'stblAllowanceWaitingForConfirmation',
   paybackAmount: new BigNumber('500'),
-  selectedDaiAllowanceRadio: 'custom',
-  daiAllowanceAmount: undefined,
+  selectedStblAllowanceRadio: 'custom',
+  stblAllowanceAmount: undefined,
 })
 
-export const CustomDaiAllowanceAmountGreaterThanMaxUint256 = manageVaultStory({
+export const CustomStblAllowanceAmountGreaterThanMaxUint256 = manageVaultStory({
   title: 'Error should block user if the allowance they wish to set a value above maxUint256',
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('100'),
     debt: new BigNumber('5000'),
   },
-  balanceInfo: { daiBalance: new BigNumber('10000') },
+  balanceInfo: { stblBalance: new BigNumber('10000') },
   proxyAddress,
 })({
-  stage: 'daiAllowanceWaitingForConfirmation',
+  stage: 'stblAllowanceWaitingForConfirmation',
   paybackAmount: new BigNumber('500'),
-  selectedDaiAllowanceRadio: 'custom',
-  daiAllowanceAmount: maxUint256.plus(one),
+  selectedStblAllowanceRadio: 'custom',
+  stblAllowanceAmount: maxUint256.plus(one),
 })
 
-export const CustomDaiAllowanceAmountLessThanDepositAmount = manageVaultStory({
+export const CustomStblAllowanceAmountLessThanDepositAmount = manageVaultStory({
   title: 'Error should block user if the allowance they wish to set a value above maxUint256',
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('100'),
     debt: new BigNumber('5000'),
   },
-  balanceInfo: { daiBalance: new BigNumber('10000') },
+  balanceInfo: { stblBalance: new BigNumber('10000') },
   proxyAddress,
 })({
-  stage: 'daiAllowanceWaitingForConfirmation',
+  stage: 'stblAllowanceWaitingForConfirmation',
   paybackAmount: new BigNumber('500'),
-  selectedDaiAllowanceRadio: 'custom',
-  daiAllowanceAmount: new BigNumber('9'),
+  selectedStblAllowanceRadio: 'custom',
+  stblAllowanceAmount: new BigNumber('9'),
 })
 
 // eslint-disable-next-line import/no-default-export

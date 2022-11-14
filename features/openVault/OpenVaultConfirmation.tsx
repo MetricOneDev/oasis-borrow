@@ -22,7 +22,7 @@ export function OpenVaultConfirmation({
   const afterBalance = formatCryptoBalance(afterCollateralBalance)
 
   const intoVault = formatCryptoBalance(depositAmount || zero)
-  const daiToBeGenerated = formatCryptoBalance(generateAmount || zero)
+  const stblToBeGenerated = formatCryptoBalance(generateAmount || zero)
   const afterCollRatio = afterCollateralizationRatio.eq(zero)
     ? '--'
     : formatPercent(afterCollateralizationRatio.times(100), { precision: 2 })
@@ -42,7 +42,7 @@ export function OpenVaultConfirmation({
         <Details.Item label={t('system.in-your-wallet')} value={`${balance} ${token}`} />
         <Details.Item label={t('moving-into-vault')} value={`${intoVault} ${token}`} />
         <Details.Item label={t('remaining-in-wallet')} value={`${afterBalance} ${token}`} />
-        <Details.Item label={t('dai-being-generated')} value={`${daiToBeGenerated} DAI`} />
+        <Details.Item label={t('stbl-being-generated')} value={`${stblToBeGenerated} MONE`} />
         <Details.Item
           label={t('system.collateral-ratio')}
           value={<Text sx={{ color: vaultRiskColor }}>{afterCollRatio}</Text>}

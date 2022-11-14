@@ -133,8 +133,8 @@ export const CryptoMoney = (props: FormatAmountProps) => {
 
 export const FormatQuoteToken = (props: { token: string }) => {
   const colors: { [key: string]: string } = {
-    DAI: '#FFAC13',
-    WETH: '#B15DFF',
+    MONE: '#FFAC13',
+    WMTR: '#B15DFF',
     // treat pegcoins in the same way
     USDC: 'green',
     TUSD: 'green',

@@ -38,7 +38,7 @@ export interface MockManageVaultProps {
 
   proxyAddress?: string
   collateralAllowance?: BigNumber
-  daiAllowance?: BigNumber
+  stblAllowance?: BigNumber
   account?: string
   status?: 'connected'
 }
@@ -59,7 +59,7 @@ export function mockManageVault$({
   vault,
   proxyAddress,
   collateralAllowance,
-  daiAllowance,
+  stblAllowance,
   account = '0xVaultController',
   status = 'connected',
 }: MockManageVaultProps = {}): Observable<ManageVaultState> {
@@ -96,9 +96,9 @@ export function mockManageVault$({
   }
 
   function allowance$(_token: string) {
-    return _token === 'DAI'
-      ? _daiAllowance$ || daiAllowance
-        ? of(daiAllowance || zero)
+    return _token === 'MONE'
+      ? _daiAllowance$ || stblAllowance
+        ? of(stblAllowance || zero)
         : of(maxUint256)
       : _collateralAllowance$ || collateralAllowance
       ? of(collateralAllowance || zero)

@@ -34,18 +34,18 @@ export const InsufficientCollateralAllowance = manageVaultStory({
   depositAmount: new BigNumber('10'),
 })
 
-export const InsufficientDaiAllowance = manageVaultStory({
+export const InsufficientStblAllowance = manageVaultStory({
   title:
-    'Warning is shown when the user is paying back some of the debt in their vault and the allowance they have set on their proxy is less than that amount, the flow will direct the user to set the correct dai allowance before paying back',
+    'Warning is shown when the user is paying back some of the debt in their vault and the allowance they have set on their proxy is less than that amount, the flow will direct the user to set the correct stbl allowance before paying back',
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('20'),
     debt: new BigNumber('3000'),
   },
-  daiAllowance: new BigNumber('500'),
+  stblAllowance: new BigNumber('500'),
   proxyAddress,
 })({
-  stage: 'daiEditing',
+  stage: 'stblEditing',
   paybackAmount: new BigNumber('600'),
 })
 
@@ -89,7 +89,7 @@ export const ConnectedAccountIsNotVaultController = manageVaultStory({
   proxyAddress,
 })({
   paybackAmount: new BigNumber('100'),
-  stage: 'daiEditing',
+  stage: 'stblEditing',
 })
 
 export const VaultWillBeAtRiskLevelDanger = manageVaultStory({
@@ -110,7 +110,7 @@ export const VaultWillBeAtRiskLevelDanger = manageVaultStory({
   },
   proxyAddress,
 })({
-  stage: 'daiEditing',
+  stage: 'stblEditing',
   generateAmount: new BigNumber('1500'),
 })
 
@@ -132,7 +132,7 @@ export const VaultWillBeAtRiskLevelDangerAtNextPrice = manageVaultStory({
   },
   proxyAddress,
 })({
-  stage: 'daiEditing',
+  stage: 'stblEditing',
   generateAmount: new BigNumber('2000'),
 })
 
@@ -154,7 +154,7 @@ export const VaultWillBeAtRiskLevelWarning = manageVaultStory({
   },
   proxyAddress,
 })({
-  stage: 'daiEditing',
+  stage: 'stblEditing',
   generateAmount: new BigNumber('1000'),
 })
 
@@ -179,7 +179,7 @@ export const VaultWillBeAtRiskLevelWarningAtNextPrice = manageVaultStory({
   },
   proxyAddress,
 })({
-  stage: 'daiEditing',
+  stage: 'stblEditing',
   generateAmount: new BigNumber('2000'),
 })
 
@@ -296,11 +296,11 @@ export const PayingBackAllDebt = manageVaultStory({
     debt: new BigNumber('2000'),
   },
   balanceInfo: {
-    daiBalance: new BigNumber('5000'),
+    stblBalance: new BigNumber('5000'),
   },
   proxyAddress,
 })({
-  stage: 'daiEditing',
+  stage: 'stblEditing',
   paybackAmount: new BigNumber('2000'),
 })
 
@@ -320,19 +320,19 @@ export const DepositingAllCollateralBalance = manageVaultStory({
   depositAmount: new BigNumber('10'),
 })
 
-export const PayingBackAllDaiBalance = manageVaultStory({
-  title: 'Warning is shown when a user is paying back all dai balance in their wallet',
+export const PayingBackAllStblBalance = manageVaultStory({
+  title: 'Warning is shown when a user is paying back all stbl balance in their wallet',
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('20'),
     debt: new BigNumber('3000'),
   },
   balanceInfo: {
-    daiBalance: new BigNumber('500'),
+    stblBalance: new BigNumber('500'),
   },
   proxyAddress,
 })({
-  stage: 'daiEditing',
+  stage: 'stblEditing',
   paybackAmount: new BigNumber('500'),
 })
 
@@ -368,9 +368,9 @@ export const WithdrawingAllFreeCollateralAtNextPrice = manageVaultStory({
   withdrawAmount: new BigNumber('16'),
 })
 
-export const GeneratingAllDaiFromIlkDebtAvailable = manageVaultStory({
+export const GeneratingAllStblFromIlkDebtAvailable = manageVaultStory({
   title:
-    'Warning is shown when a user is generating all dai remaining for a given ilk which results in that ilks debt ceiling being reached',
+    'Warning is shown when a user is generating all stbl remaining for a given ilk which results in that ilks debt ceiling being reached',
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('200'),
@@ -383,12 +383,12 @@ export const GeneratingAllDaiFromIlkDebtAvailable = manageVaultStory({
   proxyAddress,
 })({
   generateAmount: new BigNumber('5000'),
-  stage: 'daiEditing',
+  stage: 'stblEditing',
 })
 
-export const GeneratingAllDaiFromTotalCollateral = manageVaultStory({
+export const GeneratingAllStblFromTotalCollateral = manageVaultStory({
   title:
-    'Warning is shown when a user is generating the maximum amount of dai for the amount of collateral in the vault and being deposited',
+    'Warning is shown when a user is generating the maximum amount of stbl for the amount of collateral in the vault and being deposited',
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('200'),
@@ -400,9 +400,9 @@ export const GeneratingAllDaiFromTotalCollateral = manageVaultStory({
   generateAmount: new BigNumber('71700'),
 })
 
-export const GeneratingAllDaiFromTotalCollateralAtNextPrice = manageVaultStory({
+export const GeneratingAllStblFromTotalCollateralAtNextPrice = manageVaultStory({
   title:
-    'Warning is shown when a user is generating the maximum amount of dai for the amount of collateral in the vault and being deposited',
+    'Warning is shown when a user is generating the maximum amount of stbl for the amount of collateral in the vault and being deposited',
   vault: {
     ilk: 'WBTC-A',
     collateral: new BigNumber('200'),

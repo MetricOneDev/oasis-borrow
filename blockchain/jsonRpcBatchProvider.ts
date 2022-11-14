@@ -66,6 +66,8 @@ export class JsonRpcBatchProvider extends providers.JsonRpcProvider {
             batch!.forEach((inflightRequest, index) => {
               const payload = result[index]
               if (payload.error) {
+                console.error(`error id: ${payload.id}`)
+                console.error(request[index])
                 const error = new Error(payload.error.message)
                 ;(<any>error).code = payload.error.code
                 ;(<any>error).data = payload.error.data

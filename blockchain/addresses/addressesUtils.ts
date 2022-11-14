@@ -14,7 +14,7 @@ export function getOsms(addresses: Dictionary<string>) {
 export function getCollaterals(addresses: Dictionary<string>) {
   return Object.entries(addresses)
     .filter(([key]) => /PIP_.*/.test(key))
-    .filter(([key]) => key !== 'ETH')
+    .filter(([key]) => key !== 'MTR')
     .map(([key]) => key.replace('PIP_', ''))
 }
 

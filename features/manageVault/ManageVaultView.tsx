@@ -20,12 +20,12 @@ import {
   ManageVaultCollateralAllowanceStatus,
 } from './ManageVaultCollateralAllowance'
 import { ManageVaultConfirmation, ManageVaultConfirmationStatus } from './ManageVaultConfirmation'
-import { ManageVaultDaiAllowance, ManageVaultDaiAllowanceStatus } from './ManageVaultDaiAllowance'
 import { ManageVaultDetails } from './ManageVaultDetails'
 import { ManageVaultEditing } from './ManageVaultEditing'
 import { ManageVaultErrors } from './ManageVaultErrors'
 import { ManageVaultIlkDetails } from './ManageVaultIlkDetails'
 import { ManageVaultProxy } from './ManageVaultProxy'
+import { ManageVaultStblAllowance, ManageVaultStblAllowanceStatus } from './ManageVaultStblAllowance'
 import { ManageVaultWarnings } from './ManageVaultWarnings'
 
 function ManageVaultForm(props: ManageVaultState) {
@@ -33,7 +33,7 @@ function ManageVaultForm(props: ManageVaultState) {
     isEditingStage,
     isProxyStage,
     isCollateralAllowanceStage,
-    isDaiAllowanceStage,
+    isStblAllowanceStage,
     isManageStage,
     accountIsConnected,
   } = props
@@ -45,7 +45,7 @@ function ManageVaultForm(props: ManageVaultState) {
           <ManageVaultFormHeader {...props} />
           {isEditingStage && <ManageVaultEditing {...props} />}
           {isCollateralAllowanceStage && <ManageVaultCollateralAllowance {...props} />}
-          {isDaiAllowanceStage && <ManageVaultDaiAllowance {...props} />}
+          {isStblAllowanceStage && <ManageVaultStblAllowance {...props} />}
           {isManageStage && <ManageVaultConfirmation {...props} />}
           {accountIsConnected && (
             <>
@@ -56,7 +56,7 @@ function ManageVaultForm(props: ManageVaultState) {
           )}
           {isProxyStage && <ManageVaultProxy {...props} />}
           {isCollateralAllowanceStage && <ManageVaultCollateralAllowanceStatus {...props} />}
-          {isDaiAllowanceStage && <ManageVaultDaiAllowanceStatus {...props} />}
+          {isStblAllowanceStage && <ManageVaultStblAllowanceStatus {...props} />}
           {isManageStage && <ManageVaultConfirmationStatus {...props} />}
           <ManageVaultIlkDetails {...props} />
         </Grid>

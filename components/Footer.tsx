@@ -23,7 +23,7 @@ const FOOTER_SECTIONS = [
       { labelKey: 'nav.careers', url: '/careers' },
       { labelKey: 'nav.privacy', url: '/privacy' },
       { labelKey: 'nav.terms', url: '/terms' },
-      { labelKey: 'nav.contact', url: `${apiHost}/daiwallet/contact` },
+      { labelKey: 'nav.contact', url: `${apiHost}/stblwallet/contact` },
     ],
   },
   {
@@ -43,8 +43,8 @@ const FOOTER_SECTIONS = [
     titleKey: 'nav.products',
     links: [
       {
-        labelKey: 'nav.dai-wallet',
-        url: `${apiHost}/daiwallet`,
+        labelKey: 'nav.stbl-wallet',
+        url: `${apiHost}/stblwallet`,
         target: '_self',
       },
       { labelKey: 'nav.borrow', url: '/' },

@@ -152,7 +152,7 @@ export function mockIlkDataList() {
     stabilityFee: zero,
   })
   const popular = mockIlkData({
-    ilk: 'ETH-A',
+    ilk: 'MTR-A',
     ilkDebt: new BigNumber('10000000'),
   })
   const newest = mockIlkData({

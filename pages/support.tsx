@@ -153,7 +153,7 @@ function SupportPage() {
       <Box mt={6} mb={5} sx={{ textAlign: 'center' }}>
         {cantFind}
         <AppLink
-          href={`${apiHost}/daiwallet/contact`}
+          href={`${apiHost}/stblwallet/contact`}
           sx={{ color: 'primary', textDecoration: 'underline', ml: 1 }}
         >
           {contactLink}

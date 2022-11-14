@@ -10,7 +10,7 @@ function manageVaultButtonText(state: ManageVaultState): string {
   const { t } = useTranslation()
 
   switch (state.stage) {
-    case 'daiEditing':
+    case 'stblEditing':
     case 'collateralEditing':
       return state.inputAmountsEmpty
         ? t('enter-an-amount')
@@ -18,23 +18,23 @@ function manageVaultButtonText(state: ManageVaultState): string {
         ? t('setup-proxy')
         : state.insufficientCollateralAllowance
         ? t('set-token-allowance', { token: state.vault.token })
-        : state.insufficientDaiAllowance
-        ? t('set-token-allowance', { token: 'DAI' })
+        : state.insufficientStblAllowance
+        ? t('set-token-allowance', { token: 'MONE' })
         : t('confirm')
 
     case 'proxySuccess':
       return state.insufficientCollateralAllowance
         ? t('set-token-allowance', { token: state.vault.token })
-        : state.insufficientDaiAllowance
-        ? t('set-token-allowance', { token: 'DAI' })
+        : state.insufficientStblAllowance
+        ? t('set-token-allowance', { token: 'MONE' })
         : t('continue')
 
     case 'collateralAllowanceSuccess':
-      return state.insufficientDaiAllowance
-        ? t('set-token-allowance', { token: 'DAI' })
+      return state.insufficientStblAllowance
+        ? t('set-token-allowance', { token: 'MONE' })
         : t('continue')
 
-    case 'daiAllowanceSuccess':
+    case 'stblAllowanceSuccess':
       return t('continue')
 
     case 'proxyFailure':
@@ -52,19 +52,19 @@ function manageVaultButtonText(state: ManageVaultState): string {
         ? t('enter-allowance-amount')
         : t('set-token-allowance', { token: state.vault.token })
 
-    case 'daiAllowanceWaitingForConfirmation':
-      return state.customDaiAllowanceAmountEmpty
+    case 'stblAllowanceWaitingForConfirmation':
+      return state.customStblAllowanceAmountEmpty
         ? t('enter-allowance-amount')
-        : t('set-token-allowance', { token: 'DAI' })
+        : t('set-token-allowance', { token: 'MONE' })
 
     case 'collateralAllowanceFailure':
-    case 'daiAllowanceFailure':
+    case 'stblAllowanceFailure':
       return t('retry-allowance-approval')
 
     case 'collateralAllowanceInProgress':
     case 'collateralAllowanceWaitingForApproval':
-    case 'daiAllowanceInProgress':
-    case 'daiAllowanceWaitingForApproval':
+    case 'stblAllowanceInProgress':
+    case 'stblAllowanceWaitingForApproval':
       return t('approving-allowance')
 
     case 'manageWaitingForConfirmation':
@@ -115,16 +115,16 @@ export function ManageVaultButton(props: ManageVaultState) {
 
   const buttonText = manageVaultButtonText(props)
   const secondaryButtonText =
-    stage === 'daiAllowanceFailure' || stage === 'collateralAllowanceFailure'
-      ? t('edit-token-allowance', { token: isCollateralAllowanceStage ? token : 'DAI' })
+    stage === 'stblAllowanceFailure' || stage === 'collateralAllowanceFailure'
+      ? t('edit-token-allowance', { token: isCollateralAllowanceStage ? token : 'MONE' })
       : t('edit-vault-details')
 
   function trackEvents() {
-    if (stage === 'daiEditing' && generateAmount && generateAmount.gt(0)) {
-      trackingEvents.manageDaiGenerateConfirm()
+    if (stage === 'stblEditing' && generateAmount && generateAmount.gt(0)) {
+      trackingEvents.manageStblGenerateConfirm()
     }
-    if (stage === 'daiEditing' && paybackAmount && paybackAmount.gt(0)) {
-      trackingEvents.manageDaiPaybackConfirm()
+    if (stage === 'stblEditing' && paybackAmount && paybackAmount.gt(0)) {
+      trackingEvents.manageStblPaybackConfirm()
     }
     if (stage === 'collateralEditing' && depositAmount && depositAmount.gt(0)) {
       trackingEvents.manageCollateralDepositConfirm()
@@ -135,8 +135,8 @@ export function ManageVaultButton(props: ManageVaultState) {
     if (stage === 'collateralAllowanceWaitingForConfirmation') {
       trackingEvents.manageCollateralApproveAllowance()
     }
-    if (stage === 'daiAllowanceWaitingForConfirmation') {
-      trackingEvents.manageDaiApproveAllowance()
+    if (stage === 'stblAllowanceWaitingForConfirmation') {
+      trackingEvents.manageStblApproveAllowance()
     }
   }
 
@@ -173,7 +173,7 @@ export function ManageVaultButton(props: ManageVaultState) {
         <Button
           variant="textual"
           onClick={(e: React.SyntheticEvent<HTMLButtonElement>) => {
-            if (stage !== 'daiAllowanceFailure' && stage !== 'collateralAllowanceFailure') {
+            if (stage !== 'stblAllowanceFailure' && stage !== 'collateralAllowanceFailure') {
               trackingEvents.manageVaultConfirmVaultEdit()
             }
 

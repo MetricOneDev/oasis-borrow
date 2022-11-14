@@ -26,7 +26,7 @@
   "back": "返回",
   "back-to-editing": "返回编辑",
   "balance": "余额",
-  "balance-insufficient": "你钱包中的 Dai 余额不足",
+  "balance-insufficient": "你钱包中的 MONE 余额不足",
   "balances": "余额",
   "buy": "购买",
   "careers": {
@@ -74,16 +74,16 @@
   "configure-your-vault": "创建金库",
   "create-proxy": "创建代理合约",
   "create-proxy-btn": "创建代理",
-  "create-proxy-desc": "使用 Dai 存款和其他功能之前，你需要设置钱包代理。",
+  "create-proxy-desc": "使用 MONE 存款和其他功能之前，你需要设置钱包代理。",
   "create-vault": "创建金库",
   "create-your-vault": "创建你的金库",
   "creating-proxy": "正在创建代理",
   "creating-vault": "正在创建金库",
   "currency": "货币",
   "custom": "自定义",
-  "dai-being-generated": "正在生成 Dai",
-  "dai-paying-back": "正在偿还 ({{amount}}) Dai",
-  "dai-savings-rate": "Dai 存款利率",
+  "stbl-being-generated": "正在生成 MONE",
+  "stbl-paying-back": "正在偿还 ({{amount}}) MONE",
+  "stbl-savings-rate": "MONE 存款利率",
   "deposit": "存入",
   "disconnect": "断开连接",
   "disconnect-magic": "退出账户",
@@ -108,11 +108,11 @@
   "erc20-send-description-recent-failed": "发送 {{ amount }} {{ token }} 失败",
   "erc20-send-notification": "正在发送 {{ token }}",
   "erc20-send-notification-past": "已发送 {{ token }}",
-  "eth-send-description-pending": "正在发送 {{ amount }} ETH",
-  "eth-send-description-recent": "已发送 {{ amount }} ETH",
-  "eth-send-description-recent-failed": "发送 {{ amount }} ETH 失败",
-  "eth-send-notification": "正在发送 ETH",
-  "eth-send-notification-past": "已发送 ETH",
+  "coin-send-description-pending": "正在发送 {{ amount }} MTR",
+  "coin-send-description-recent": "已发送 {{ amount }} MTR",
+  "coin-send-description-recent-failed": "发送 {{ amount }} MTR 失败",
+  "coin-send-notification": "正在发送 MTR",
+  "coin-send-notification-past": "已发送 MTR",
   "event": {
     "activity": "历史记录",
     "deposit": "已存入",
@@ -132,21 +132,21 @@
     "stablecoin": "稳定币"
   },
   "gas-estimation-error": "错误",
-  "get-dai": "获得 Dai",
+  "get-stbl": "获得 MONE",
   "get-started": "现在开始",
   "go-to-vault": "前往金库 #{{id}}",
   "here": "这里",
   "history": {
     "auction_finished_v2": "拍卖 <0>#{{auctionId}}</0>  已完成，剩余 <0>{{remainingCollateral}} {{token}}</0>。",
-    "auction_started": "拍卖已开始，清算 <0>{{collateralAmount}} {{token}}</0> 以偿还 <0>{{daiAmount}} Dai</0>。",
-    "auction_started_v2": "拍卖 <0>#{{auctionId}}</0> 已开始, 清算 <0>{{collateralAmount}} {{token}}</0> 以偿还 <0>{{daiAmount}} Dai</0>。",
+    "auction_started": "拍卖已开始，清算 <0>{{collateralAmount}} {{token}}</0> 以偿还 <0>{{stblAmount}} MONE</0>。",
+    "auction_started_v2": "拍卖 <0>#{{auctionId}}</0> 已开始, 清算 <0>{{collateralAmount}} {{token}}</0> 以偿还 <0>{{stblAmount}} MONE</0>。",
     "deposit": "已将 <0>{{collateralAmount}} {{token}}</0> 存入金库。",
-    "generate": "已从金库生成 <0>{{daiAmount}}</0> Dai ",
+    "generate": "已从金库生成 <0>{{stblAmount}}</0> MONE ",
     "migrate": "金库已迁移",
-    "move_dest": "转移 <0>{{collateralAmount}} {{token}}</0> 和 <0>{{daiAmount}}</0> Dai 债务到该金库。",
-    "move_src": "从金库转移 <0>{{collateralAmount}} {{token}}</0> 和 <0>{{daiAmount}}</0> Dai 债务。",
+    "move_dest": "转移 <0>{{collateralAmount}} {{token}}</0> 和 <0>{{stblAmount}}</0> MONE 债务到该金库。",
+    "move_src": "从金库转移 <0>{{collateralAmount}} {{token}}</0> 和 <0>{{stblAmount}}</0> MONE 债务。",
     "open": "开启新的金库 ID <0>#{{cdpId}}</0>",
-    "payback": "偿还 <0>{{daiAmount}}</0> Dai 到金库",
+    "payback": "偿还 <0>{{stblAmount}}</0> MONE 到金库",
     "transfer": "金库由 <0>{{transferFrom}}</0> 转移到 <0>{{transferTo}}</0>",
     "withdraw": "从金库取回 <0>{{collateralAmount}} {{token}}</0> "
   },
@@ -158,17 +158,17 @@
   "keyWithCount_plural": "{{count}} 项",
   "landing": {
     "hero": {
-      "headline": "抵押数字资产，生成 Dai",
-      "subheader": "开启 Maker 金库，存入抵押品，生成 Dai。<0/> 连接钱包以开始。"
+      "headline": "抵押数字资产，生成 MONE",
+      "subheader": "开启 MetricOne 金库，存入抵押品，生成 MONE。<0/> 连接钱包以开始。"
     },
     "cards": {
-      "dai": {
-        "title": "Dai Wallet",
-        "description": "Buy, send and manage Dai all in one place. Grow your Dai, access plenty of providers"
+      "stbl": {
+        "title": "MONE Wallet",
+        "description": "Buy, send and manage MONE all in one place. Grow your MONE, access plenty of providers"
       },
       "faq": {
         "title": "Have a question?",
-        "description": "Learn more about Oasis, Dai and DeFi at our FAQ’s page"
+        "description": "Learn more about Oasis, MONE and DeFi at our FAQ’s page"
       }
     }
   },
@@ -180,8 +180,8 @@
   "ledger-select-title": "选择 Ledger Live 或 Legacy",
   "manage-vault": {
     "action-option": "通过该交易 {{action}} {{token}} ",
-    "dai-available": "可生成 Dai",
-    "dust-limit": "初始最低生成 Dai 数量",
+    "stbl-available": "可生成 MONE",
+    "dust-limit": "初始最低生成 MONE 数量",
     "liquidation-fee": "清算费用",
     "min-collat-ratio": "最低抵押率",
     "or": "或者",
@@ -189,8 +189,8 @@
     "title": "管理金库",
     "action": "管理金库",
     "warnings": {
-      "potential-generate-amount-less-than-debt-floor": "初次开启金库最低需要生成 {{debtFloor}} Dai。请添加更多抵押品生成 {{debtFloor}} Dai。",
-      "debt-is-less-than-debt-floor": "你当前借出的 Dai 低于最低限额  {{debtFloor}} Dai。你至少需要借出最低借 Dai 额度。",
+      "potential-generate-amount-less-than-debt-floor": "初次开启金库最低需要生成 {{debtFloor}} MONE。请添加更多抵押品生成 {{debtFloor}} MONE。",
+      "debt-is-less-than-debt-floor": "你当前借出的 MONE 低于最低限额  {{debtFloor}} MONE。你至少需要借出最低借 MONE 额度。",
       "vault-will-be-at-risk-level-danger": "当前操作会让你的金库抵押率非常接近最低要求。",
       "vault-will-be-at-risk-level-danger-at-next-price": "当前操作会让你的金库抵押率在下次喂价更新的时候非常接近最低要求。",
       "vault-will-be-at-risk-level-warning": "当前操作会让你的金库接近最低抵押率要求",
@@ -200,18 +200,18 @@
       "deposit-amount-exceeds-collateral-balance": "你无法存入超出钱包余额数量的抵押品。",
       "withdraw-amount-exceeds-free-collateral": "你最多能够取回 {{maxWithdrawAmount}} {{token}}。",
       "withdraw-amount-exceeds-free-collateral-at-next-price": "你最多能够取回  {{maxWithdrawAmount}} {{token}}。",
-      "generate-amount-exceeds-dai-yield-from-total-collateral": "该金库的抵押率过低，请尝试生成更少的 Dai。",
-      "generate-amount-exceeds-dai-yield-from-total-collateral-at-next-price": "该金库的抵押率会在下次喂价更新时过低，请尝试生成更少的 Dai。",
-      "generate-amount-exceeds-debt-ceiling": "你尝试生成 Dai 的数量超过了当前债务上限。当前最多可生成 {{maxGenerateAmount}} {{token}}。",
-      "generate-amount-less-than-debt-floor": "该金库类型最低借 Dai 金额为 {{debtFloor}} 。点击<0>这里</0>了解最低借 Dai 额度。",
-      "payback-amount-exceeds-dai-balance": "你的钱包里没有这么多 Dai 用来偿还。",
-      "payback-amount-exceeds-vault-debt": "你希望偿还的金额超出了该金库借 Dai 数量。",
-      "debt-will-be-less-than-debt-floor": "Maker 金库的最低借贷金额要么为零或者高于 {{debtFloor}} Dai。请调整你的偿还数量。",
+      "generate-amount-exceeds-stbl-yield-from-total-collateral": "该金库的抵押率过低，请尝试生成更少的 MONE。",
+      "generate-amount-exceeds-stbl-yield-from-total-collateral-at-next-price": "该金库的抵押率会在下次喂价更新时过低，请尝试生成更少的 MONE。",
+      "generate-amount-exceeds-debt-ceiling": "你尝试生成 MONE 的数量超过了当前债务上限。当前最多可生成 {{maxGenerateAmount}} {{token}}。",
+      "generate-amount-less-than-debt-floor": "该金库类型最低借 MONE 金额为 {{debtFloor}} 。点击<0>这里</0>了解最低借 MONE 额度。",
+      "payback-amount-exceeds-stbl-balance": "你的钱包里没有这么多 MONE 用来偿还。",
+      "payback-amount-exceeds-vault-debt": "你希望偿还的金额超出了该金库借 MONE 数量。",
+      "debt-will-be-less-than-debt-floor": "MetricOne 金库的最低借贷金额要么为零或者高于 {{debtFloor}} MONE。请调整你的偿还数量。",
       "custom-collateral-allowance-amount-exceeds-maxuint256": "许可额度过大，请降低自定义许可数量。",
       "custom-collateral-allowance-amount-less-than-deposit-amount": "你需要许可存入额度以继续。",
-      "custom-dai-allowance-amount-exceeds-maxuint256": "许可额度过大，请降低自定义许可数量。",
-      "custom-dai-allowance-amount-less-than-payback-amount": "你需要许可偿还额度以继续。",
-      "depositing-all-eth-balance": "你需要留一些 ETH 支付 Gas 费用，请降低你的存入数量。"
+      "custom-stbl-allowance-amount-exceeds-maxuint256": "许可额度过大，请降低自定义许可数量。",
+      "custom-stbl-allowance-amount-less-than-payback-amount": "你需要许可偿还额度以继续。",
+      "depositing-all-coin-balance": "你需要留一些 MTR 支付 Gas 费用，请降低你的存入数量。"
     }
   },
   "max": "最多",
@@ -226,7 +226,7 @@
     "terms": "条款",
     "trade": "交易"
   },
-  "new-to-ethereum": "刚接触以太坊？",
+  "new-to-evmnetwork": "刚接触以太坊？",
   "next": "下一步",
   "no-activity": "无历史记录",
   "notice-privacy": "当使用我们的网站时，即表示你同意我们的<0> Cookie 政策</0>。",
@@ -246,7 +246,7 @@
   "open-vault": {
     "title": "开启金库",
     "warnings": {
-      "potential-generate-amount-less-than-debt-floor": "初次开启金库最低需要生成 {{debtFloor}} Dai。请添加更多抵押品生成 {{debtFloor}} Dai。",
+      "potential-generate-amount-less-than-debt-floor": "初次开启金库最低需要生成 {{debtFloor}} MONE。请添加更多抵押品生成 {{debtFloor}} MONE。",
       "vault-will-be-at-risk-level-danger": "当前操作会让你的金库抵押率非常接近最低要求。",
       "vault-will-be-at-risk-level-danger-at-next-price": "当前操作会让你的金库抵押率在下次喂价更新的时候非常接近最低要求。",
       "vault-will-be-at-risk-level-warning": "当前操作会让你的金库接近最低抵押率要求。",
@@ -254,14 +254,14 @@
     },
     "errors": {
       "deposit-amount-exceeds-collateral-balance": "你无法存入超出钱包余额数量的抵押品。",
-      "generate-amount-exceeds-dai-yield-from-depositing-collateral": "该金库的抵押率过低，请尝试生成更少的 Dai。",
-      "generate-amount-exceeds-dai-yield-from-depositing-collateral-at-next-price": "该金库的抵押率会在下次喂价更新时过低，请尝试生成更少的 Dai。",
-      "generate-amount-exceeds-debt-ceiling": "你尝试生成 Dai 的数量超过了当前债务上限。当前最多可生成 {{maxGenerateAmount}} {{token}}。",
-      "generate-amount-less-than-debt-floor": "该金库类型最低借 Dai 金额为 {{debtFloor}} 。点击<0>这里</0>了解最低借 Dai 额度。",
-      "debt-will-be-less-than-debt-floor": "Maker 金库的最低借贷金额要么为零或者高于 {{debtFloor}} Dai。请调整你的偿还数量。",
+      "generate-amount-exceeds-stbl-yield-from-depositing-collateral": "该金库的抵押率过低，请尝试生成更少的 MONE。",
+      "generate-amount-exceeds-stbl-yield-from-depositing-collateral-at-next-price": "该金库的抵押率会在下次喂价更新时过低，请尝试生成更少的 MONE。",
+      "generate-amount-exceeds-debt-ceiling": "你尝试生成 MONE 的数量超过了当前债务上限。当前最多可生成 {{maxGenerateAmount}} {{token}}。",
+      "generate-amount-less-than-debt-floor": "该金库类型最低借 MONE 金额为 {{debtFloor}} 。点击<0>这里</0>了解最低借 MONE 额度。",
+      "debt-will-be-less-than-debt-floor": "MetricOne 金库的最低借贷金额要么为零或者高于 {{debtFloor}} MONE。请调整你的偿还数量。",
       "custom-allowance-amount-exceeds-maxuint256": "许可额度过大，请降低自定义许可数量。",
       "custom-allowance-amount-less-than-deposit-amount": "你需要许可存入额度以继续。",
-      "depositing-all-eth-balance": "你需要留一些 ETH 支付 Gas 费用，请降低你的存入数量。"
+      "depositing-all-coin-balance": "你需要留一些 MTR 支付 Gas 费用，请降低你的存入数量。"
     }
   },
   "or": "或者",
@@ -269,7 +269,7 @@
   "pending-transactions": "确认中交易",
   "permissions": "设置许可",
   "permissions-btn": "设置许可",
-  "permissions-desc": "这将授权 Oasis 与你钱包中的 Dai 进行交互。",
+  "permissions-desc": "这将授权 Oasis 与你钱包中的 MONE 进行交互。",
   "proceed": "继续",
   "readonly-alert-message": "你正在查看",
   "readonly-user-connecting": "可读模式下浏览...",
@@ -297,16 +297,16 @@
       "description": "告知我们反馈、问题和建议。",
       "title": "联系我们"
     },
-    "dai": {
-      "description": "智能的数字货币 Dai 的简介",
-      "title": "Dai"
+    "stbl": {
+      "description": "智能的数字货币 MONE 的简介",
+      "title": "MONE"
     },
     "default": {
-      "description": "Borrow Dai, a USD pegged Stablecoin, using crypto as your collateral",
+      "description": "Borrow MONE, a USD pegged Stablecoin, using crypto as your collateral",
       "title": "Oasis.app"
     },
     "latam500": {
-      "description": "通过 Oasis.app 上的 Latamex 购买 Dai。每月可获得价值 10 美元的 ETH，为期三个月。",
+      "description": "通过 Oasis.app 上的 Latamex 购买 MONE。每月可获得价值 10 美元的 MTR，为期三个月。",
       "title": "LATAM500"
     },
     "support": {
@@ -339,8 +339,8 @@
     "collateral-locked": "已存入抵押品",
     "collateral-ratio": "抵押率",
     "collateralization-ratio": "抵押率",
-    "dai-available": "可生成 Dai",
-    "dai-debt": "Dai 债务",
+    "stbl-available": "可生成 MONE",
+    "stbl-debt": "MONE 债务",
     "deposited": "已存入",
     "in-my-wallet": "钱包中",
     "in-your-wallet": "你的钱包中",
@@ -350,7 +350,7 @@
     "min-coll-ratio": "最低抵押率",
     "stability-fee": "稳定费率",
     "type": "类型",
-    "vault-dai-debt": "该金库 Dai 债务",
+    "vault-stbl-debt": "该金库 MONE 债务",
     "vault-id": "金库 ID"
   },
   "to-the-following-address": "至此地址",
@@ -369,7 +369,7 @@
   "tos-welcome-updated": "我们已更新条款",
   "transaction-failed": "交易失败",
   "transaction-fee": "交易费用",
-  "transaction-fee-tooltip-desc": "交易费用目前使用 ETH 支付，成本约为",
+  "transaction-fee-tooltip-desc": "交易费用目前使用 MTR 支付，成本约为",
   "trezor-cancel": "选择另一个钱包",
   "trezor-error": "遇到错误，请重试",
   "trezor-loading-accounts": "加载 Trezor 账户…",
@@ -401,8 +401,8 @@
   },
   "ilks-list": {
     "headers": {
-      "noVaults": "选择一种抵押品类型，创建 Maker 金库并生成 Dai",
-      "withVaults": "创建一个新的 Maker 金库。<0/> 生成 Dai"
+      "noVaults": "选择一种抵押品类型，创建 MetricOne 金库并生成 MONE",
+      "withVaults": "创建一个新的 MetricOne 金库。<0/> 生成 MONE"
     }
   },
   "vaults-overview": {
@@ -410,14 +410,14 @@
     "banner-header": "你正在查看 {{address}} 的金库。",
     "headers": {
       "connected-owner-noVaults": "你没有开启任何金库。",
-      "connected-owner-withVaults": "你的 Maker 金库概览",
-      "connected-viewer-noVaults": "{{address}} 地址下当前没有 Maker 金库",
-      "connected-viewer-withVaults": "{{address}} 地址下的 Maker 金库",
-      "notConnected-noVaults": "{{address}} 地址下当前没有 Maker 金库。<0/> 连接你的钱包开启金库。",
-      "notConnected-withVaults": "{{address}} 地址下的 Maker 金库。<0/> 连接你的钱包。"
+      "connected-owner-withVaults": "你的 MetricOne 金库概览",
+      "connected-viewer-noVaults": "{{address}} 地址下当前没有 MetricOne 金库",
+      "connected-viewer-withVaults": "{{address}} 地址下的 MetricOne 金库",
+      "notConnected-noVaults": "{{address}} 地址下当前没有 MetricOne 金库。<0/> 连接你的钱包开启金库。",
+      "notConnected-withVaults": "{{address}} 地址下的 MetricOne 金库。<0/> 连接你的钱包。"
     },
     "number-of-vaults": "金库数量",
-    "subheader-no-vaults": "开启 Maker 金库，存入抵押品，生成 Dai。",
+    "subheader-no-vaults": "开启 MetricOne 金库，存入抵押品，生成 MONE。",
     "total-debt": "总债务",
     "total-locked": "总锁定",
     "vaults": "所有金库",
@@ -431,15 +431,15 @@
       "subheader2": "你可以查看你的所有金库。"
     },
     "liquidating": {
-      "header1": "你的 {{ collateral }} Maker 金库 {{ id }} 即将被清算。",
-      "header2": "{{ collateral }} Maker 金库 {{ id }} 即将被清算。",
-      "subheader1": "{{ collateral }} 下一个喂价更新会造成该金库的清算，添加更多抵押品或偿还 Dai 避免清算。",
-      "subheader2": "这是你的 Maker 金库吗？请用该地址 {{ address }} 连接，避免金库清算。"
+      "header1": "你的 {{ collateral }} MetricOne 金库 {{ id }} 即将被清算。",
+      "header2": "{{ collateral }} MetricOne 金库 {{ id }} 即将被清算。",
+      "subheader1": "{{ collateral }} 下一个喂价更新会造成该金库的清算，添加更多抵押品或偿还 MONE 避免清算。",
+      "subheader2": "这是你的 MetricOne 金库吗？请用该地址 {{ address }} 连接，避免金库清算。"
     },
     "liquidated": {
-      "header1": "你的 Maker 金库已被清算。",
-      "header2": "该 Maker 金库已被清算。",
-      "subheader1": "该 Maker 金库已被清算。部分抵押品已被拍卖以偿还你的 Dai 债务。",
+      "header1": "你的 MetricOne 金库已被清算。",
+      "header2": "该 MetricOne 金库已被清算。",
+      "subheader1": "该 MetricOne 金库已被清算。部分抵押品已被拍卖以偿还你的 MONE 债务。",
       "subheader2": "你可以赎回  {{ amount }} {{ collateral }}。",
       "subheader3": "如果这是你的金库，请用该地址 {{ address }} 连接取回剩余抵押品。"
     }
@@ -470,7 +470,7 @@
       "confirm": "确认金库创建"
     },
     "subtext": {
-      "edit": "模拟输入存入抵押品数量和希望生成的 Dai 金额",
+      "edit": "模拟输入存入抵押品数量和希望生成的 MONE 金额",
       "proxy": "智能代理可以将多个步骤一笔交易完成。该操作只需要设置一次。",
       "allowance": "设置许可金库可以控制的最大代币数量。",
       "confirm": "检查并确认你的金库细节。"

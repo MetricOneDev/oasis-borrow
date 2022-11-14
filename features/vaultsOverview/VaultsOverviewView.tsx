@@ -87,13 +87,13 @@ const vaultsColumns: ColumnDef<Vault, VaultsFilterState>[] = [
     ),
   },
   {
-    headerLabel: 'system.dai-debt',
+    headerLabel: 'system.stbl-debt',
     header: ({ label, ...filters }) => (
       <TableSortHeader sx={{ ml: 'auto' }} filters={filters} sortBy="debt">
         {label}
       </TableSortHeader>
     ),
-    cell: ({ debt }) => <Text sx={{ textAlign: 'right' }}>{formatCryptoBalance(debt)} DAI</Text>,
+    cell: ({ debt }) => <Text sx={{ textAlign: 'right' }}>{formatCryptoBalance(debt)} MONE</Text>,
   },
   {
     headerLabel: '',
@@ -165,8 +165,8 @@ export function Summary({ summary }: { summary: VaultSummary }) {
             {t('vaults-overview.total-debt')}
           </Text>
           <Text variant="header2" sx={{ mt: 2 }}>
-            {formatCryptoBalance(summary.totalDaiDebt)}
-            <Text sx={{ fontSize: '20px', display: 'inline', ml: 2 }}>DAI</Text>
+            {formatCryptoBalance(summary.totalStblDebt)}
+            <Text sx={{ fontSize: '20px', display: 'inline', ml: 2 }}>MONE</Text>
           </Text>
         </Box>
         <Box sx={{ gridRow: ['initial', '2/3', 'auto'] }}>

@@ -70,10 +70,10 @@ export interface OpenVaultConditions {
   vaultWillBeAtRiskLevelDangerAtNextPrice: boolean
   vaultWillBeUnderCollateralizedAtNextPrice: boolean
 
-  depositingAllEthBalance: boolean
+  depositingAllCoinBalance: boolean
   depositAmountExceedsCollateralBalance: boolean
-  generateAmountExceedsDaiYieldFromDepositingCollateral: boolean
-  generateAmountExceedsDaiYieldFromDepositingCollateralAtNextPrice: boolean
+  generateAmountExceedsStblYieldFromDepositingCollateral: boolean
+  generateAmountExceedsStblYieldFromDepositingCollateralAtNextPrice: boolean
   generateAmountExceedsDebtCeiling: boolean
   generateAmountLessThanDebtFloor: boolean
 
@@ -99,10 +99,10 @@ export const defaultOpenVaultConditions: OpenVaultConditions = {
   vaultWillBeAtRiskLevelDangerAtNextPrice: false,
   vaultWillBeUnderCollateralizedAtNextPrice: false,
 
-  depositingAllEthBalance: false,
+  depositingAllCoinBalance: false,
   depositAmountExceedsCollateralBalance: false,
-  generateAmountExceedsDaiYieldFromDepositingCollateral: false,
-  generateAmountExceedsDaiYieldFromDepositingCollateralAtNextPrice: false,
+  generateAmountExceedsStblYieldFromDepositingCollateral: false,
+  generateAmountExceedsStblYieldFromDepositingCollateralAtNextPrice: false,
   generateAmountExceedsDebtCeiling: false,
   generateAmountLessThanDebtFloor: false,
 
@@ -126,8 +126,8 @@ export function applyOpenVaultConditions(state: OpenVaultState): OpenVaultState 
     token,
     balanceInfo: { collateralBalance },
     depositAmount,
-    daiYieldFromDepositingCollateral,
-    daiYieldFromDepositingCollateralAtNextPrice,
+    stblYieldFromDepositingCollateral,
+    stblYieldFromDepositingCollateralAtNextPrice,
     selectedAllowanceRadio,
     allowanceAmount,
     allowance,
@@ -171,16 +171,16 @@ export function applyOpenVaultConditions(state: OpenVaultState): OpenVaultState 
       !afterCollateralizationRatioAtNextPrice.isZero()
     )
 
-  const depositingAllEthBalance = token === 'ETH' && !!depositAmount?.eq(collateralBalance)
+  const depositingAllCoinBalance = token === 'MTR' && !!depositAmount?.eq(collateralBalance)
   const depositAmountExceedsCollateralBalance = !!depositAmount?.gt(collateralBalance)
 
-  const generateAmountExceedsDaiYieldFromDepositingCollateral = !!generateAmount?.gt(
-    daiYieldFromDepositingCollateral,
+  const generateAmountExceedsStblYieldFromDepositingCollateral = !!generateAmount?.gt(
+    stblYieldFromDepositingCollateral,
   )
 
-  const generateAmountExceedsDaiYieldFromDepositingCollateralAtNextPrice =
-    !generateAmountExceedsDaiYieldFromDepositingCollateral &&
-    !!generateAmount?.gt(daiYieldFromDepositingCollateralAtNextPrice)
+  const generateAmountExceedsStblYieldFromDepositingCollateralAtNextPrice =
+    !generateAmountExceedsStblYieldFromDepositingCollateral &&
+    !!generateAmount?.gt(stblYieldFromDepositingCollateralAtNextPrice)
 
   const generateAmountExceedsDebtCeiling = !!generateAmount?.gt(ilkData.ilkDebtAvailable)
 
@@ -213,7 +213,7 @@ export function applyOpenVaultConditions(state: OpenVaultState): OpenVaultState 
   )
 
   const insufficientAllowance =
-    token !== 'ETH' &&
+    token !== 'MTR' &&
     !!(depositAmount && !depositAmount.isZero() && (!allowance || depositAmount.gt(allowance)))
 
   const canProgress =
@@ -222,7 +222,7 @@ export function applyOpenVaultConditions(state: OpenVaultState): OpenVaultState 
       isLoadingStage ||
       vaultWillBeUnderCollateralized ||
       vaultWillBeUnderCollateralizedAtNextPrice ||
-      depositingAllEthBalance ||
+      depositingAllCoinBalance ||
       depositAmountExceedsCollateralBalance ||
       generateAmountExceedsDebtCeiling ||
       generateAmountLessThanDebtFloor ||
@@ -251,10 +251,10 @@ export function applyOpenVaultConditions(state: OpenVaultState): OpenVaultState 
     vaultWillBeUnderCollateralized,
     vaultWillBeUnderCollateralizedAtNextPrice,
 
-    depositingAllEthBalance,
+    depositingAllCoinBalance,
     depositAmountExceedsCollateralBalance,
-    generateAmountExceedsDaiYieldFromDepositingCollateral,
-    generateAmountExceedsDaiYieldFromDepositingCollateralAtNextPrice,
+    generateAmountExceedsStblYieldFromDepositingCollateral,
+    generateAmountExceedsStblYieldFromDepositingCollateralAtNextPrice,
     generateAmountExceedsDebtCeiling,
     generateAmountLessThanDebtFloor,
 

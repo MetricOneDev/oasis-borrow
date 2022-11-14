@@ -24,7 +24,7 @@ export enum Pages {
   OpenVaultOverview = 'OpenVaultOverview',
   VaultsOverview = 'VaultsOverview',
   ManageCollateral = 'ManageCollateral',
-  ManageDai = 'ManageDai',
+  ManageStbl = 'ManageStbl',
 }
 
 export const trackingEvents = {
@@ -160,7 +160,7 @@ export const trackingEvents = {
   confirmVaultConfirm: (
     ilk: string,
     collateralAmount: string,
-    daiAmount: string,
+    stblAmount: string,
     firstCDP: boolean | undefined,
   ) => {
     mixpanel.track('btn-click', {
@@ -168,7 +168,7 @@ export const trackingEvents = {
       product,
       ilk,
       collateralAmount,
-      daiAmount,
+      stblAmount,
       firstCDP,
       page: Pages.VaultCreate,
       section: 'ConfirmVault',
@@ -178,7 +178,7 @@ export const trackingEvents = {
   confirmVaultConfirmTransaction: (
     ilk: string,
     collateralAmount: string,
-    daiAmount: string,
+    stblAmount: string,
     firstCDP: boolean | undefined,
     txHash: string,
   ) => {
@@ -187,7 +187,7 @@ export const trackingEvents = {
       product,
       ilk,
       collateralAmount,
-      daiAmount,
+      stblAmount,
       firstCDP,
       txHash,
       page: Pages.VaultCreate,
@@ -233,13 +233,13 @@ export const trackingEvents = {
     })
   },
 
-  switchToDai: (ControllerIsConnected: boolean) => {
+  switchToStbl: (ControllerIsConnected: boolean) => {
     mixpanel.track('btn-click', {
-      id: 'SwitchToDai',
+      id: 'SwitchToStbl',
       product,
       ControllerIsConnected,
       page: Pages.ManageCollateral,
-      section: 'Dai',
+      section: 'MONE',
     })
   },
 
@@ -248,13 +248,13 @@ export const trackingEvents = {
       id: 'SwitchToCollateral',
       product,
       ControllerIsConnected,
-      page: Pages.ManageDai,
+      page: Pages.ManageStbl,
       section: 'Collateral',
     })
   },
 
   manageVaultDepositAmount: (
-    page: Pages.ManageCollateral | Pages.ManageDai,
+    page: Pages.ManageCollateral | Pages.ManageStbl,
     amount: string,
     setMax: boolean,
   ) => {
@@ -268,7 +268,7 @@ export const trackingEvents = {
   },
 
   manageVaultGenerateAmount: (
-    page: Pages.ManageCollateral | Pages.ManageDai,
+    page: Pages.ManageCollateral | Pages.ManageStbl,
     amount: string,
     setMax: boolean,
   ) => {
@@ -282,7 +282,7 @@ export const trackingEvents = {
   },
 
   manageVaultWithdrawAmount: (
-    page: Pages.ManageCollateral | Pages.ManageDai,
+    page: Pages.ManageCollateral | Pages.ManageStbl,
     amount: string,
     setMax: boolean,
   ) => {
@@ -296,7 +296,7 @@ export const trackingEvents = {
   },
 
   manageVaultPaybackAmount: (
-    page: Pages.ManageCollateral | Pages.ManageDai,
+    page: Pages.ManageCollateral | Pages.ManageStbl,
     amount: string,
     setMax: boolean,
   ) => {
@@ -317,29 +317,29 @@ export const trackingEvents = {
     })
   },
 
-  // Can we distinguish if went through collateral/daiEditing?
+  // Can we distinguish if went through collateral/stblEditing?
   manageVaultConfirm: (
-    page: Pages.ManageCollateral | Pages.ManageDai,
+    page: Pages.ManageCollateral | Pages.ManageStbl,
     ilk: string,
     collateralAmount: string,
-    daiAmount: string,
+    stblAmount: string,
   ) => {
     mixpanel.track('btn-click', {
       id: 'Confirm',
       product,
       ilk,
       collateralAmount,
-      daiAmount,
+      stblAmount,
       page,
       section: 'ConfirmVault',
     })
   },
 
   manageVaultConfirmTransaction: (
-    page: Pages.ManageCollateral | Pages.ManageDai,
+    page: Pages.ManageCollateral | Pages.ManageStbl,
     ilk: string,
     collateralAmount: string,
-    daiAmount: string,
+    stblAmount: string,
     txHash: string,
   ) => {
     mixpanel.track('btn-click', {
@@ -347,7 +347,7 @@ export const trackingEvents = {
       product,
       ilk,
       collateralAmount,
-      daiAmount,
+      stblAmount,
       txHash,
       page,
       section: 'ConfirmVault',
@@ -374,22 +374,22 @@ export const trackingEvents = {
     })
   },
 
-  manageDaiPickAllowance: (type: string, amount: string) => {
+  manageStblPickAllowance: (type: string, amount: string) => {
     mixpanel.track('input-change', {
       id: 'PickAllowance',
       product,
       type,
       amount,
-      page: Pages.ManageDai,
+      page: Pages.ManageStbl,
       section: 'Allowance',
     })
   },
 
-  manageDaiApproveAllowance: () => {
+  manageStblApproveAllowance: () => {
     mixpanel.track('btn-click', {
       id: 'ApproveAllowance',
       product,
-      page: Pages.ManageDai,
+      page: Pages.ManageStbl,
       section: 'Allowance',
     })
   },
@@ -414,22 +414,22 @@ export const trackingEvents = {
     })
   },
 
-  // First Confirm button when the user is on Dai and type into Generate
-  manageDaiGenerateConfirm: () => {
+  // First Confirm button when the user is on MONE and type into Generate
+  manageStblGenerateConfirm: () => {
     mixpanel.track('btn-click', {
       id: 'Confirm',
       product,
-      page: Pages.ManageDai,
+      page: Pages.ManageStbl,
       section: 'Generate',
     })
   },
 
-  // Confirm button when the user is on Dai and type into Payback
-  manageDaiPaybackConfirm: () => {
+  // Confirm button when the user is on MONE and type into Payback
+  manageStblPaybackConfirm: () => {
     mixpanel.track('btn-click', {
       id: 'Confirm',
       product,
-      page: Pages.ManageDai,
+      page: Pages.ManageStbl,
       section: 'Payback',
     })
   },

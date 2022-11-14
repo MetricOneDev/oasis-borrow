@@ -26,28 +26,28 @@ export function getWithdrawAndPaybackCallData(
   data: WithdrawAndPaybackData,
   context: ContextConnected,
 ) {
-  const { dssProxyActions, dssCdpManager, mcdJoinDai, joins, contract } = context
+  const { dssProxyActions, dssCdpManager, mcdJoinStbl, joins, contract } = context
   const { id, token, withdrawAmount, paybackAmount, ilk, shouldPaybackAll } = data
 
   if (withdrawAmount.gt(zero) && paybackAmount.gt(zero)) {
-    if (token === 'ETH') {
+    if (token === 'MTR') {
       if (shouldPaybackAll) {
-        return contract<DssProxyActions>(dssProxyActions).methods.wipeAllAndFreeETH(
+        return contract<DssProxyActions>(dssProxyActions).methods.wipeAllAndFreeCoin(
           dssCdpManager.address,
           joins[ilk],
-          mcdJoinDai.address,
+          mcdJoinStbl.address,
           id.toString(),
           amountToWei(withdrawAmount, token).toFixed(0),
         )
       }
 
-      return contract<DssProxyActions>(dssProxyActions).methods.wipeAndFreeETH(
+      return contract<DssProxyActions>(dssProxyActions).methods.wipeAndFreeCoin(
         dssCdpManager.address,
         joins[ilk],
-        mcdJoinDai.address,
+        mcdJoinStbl.address,
         id.toString(),
         amountToWei(withdrawAmount, token).toFixed(0),
-        amountToWei(paybackAmount, 'DAI').toFixed(0),
+        amountToWei(paybackAmount, 'MONE').toFixed(0),
       )
     }
 
@@ -55,7 +55,7 @@ export function getWithdrawAndPaybackCallData(
       return contract<DssProxyActions>(dssProxyActions).methods.wipeAllAndFreeGem(
         dssCdpManager.address,
         joins[ilk],
-        mcdJoinDai.address,
+        mcdJoinStbl.address,
         id.toString(),
         amountToWei(withdrawAmount, token).toFixed(0),
       )
@@ -64,16 +64,16 @@ export function getWithdrawAndPaybackCallData(
     return contract<DssProxyActions>(dssProxyActions).methods.wipeAndFreeGem(
       dssCdpManager.address,
       joins[ilk],
-      mcdJoinDai.address,
+      mcdJoinStbl.address,
       id.toString(),
       amountToWei(withdrawAmount, token).toFixed(0),
-      amountToWei(paybackAmount, 'DAI').toFixed(0),
+      amountToWei(paybackAmount, 'MONE').toFixed(0),
     )
   }
 
   if (withdrawAmount.gt(zero)) {
-    if (token === 'ETH') {
-      return contract<DssProxyActions>(dssProxyActions).methods.freeETH(
+    if (token === 'MTR') {
+      return contract<DssProxyActions>(dssProxyActions).methods.freeCoin(
         dssCdpManager.address,
         joins[ilk],
         id.toString(),
@@ -92,16 +92,16 @@ export function getWithdrawAndPaybackCallData(
     if (shouldPaybackAll) {
       return contract<DssProxyActions>(dssProxyActions).methods.wipeAll(
         dssCdpManager.address,
-        mcdJoinDai.address,
+        mcdJoinStbl.address,
         id.toString(),
       )
     }
 
     return contract<DssProxyActions>(dssProxyActions).methods.wipe(
       dssCdpManager.address,
-      mcdJoinDai.address,
+      mcdJoinStbl.address,
       id.toString(),
-      amountToWei(paybackAmount, 'DAI').toFixed(0),
+      amountToWei(paybackAmount, 'MONE').toFixed(0),
     )
   }
 
@@ -130,35 +130,35 @@ export type DepositAndGenerateData = {
 }
 
 function getDepositAndGenerateCallData(data: DepositAndGenerateData, context: ContextConnected) {
-  const { dssProxyActions, dssCdpManager, mcdJoinDai, mcdJug, joins, contract } = context
+  const { dssProxyActions, dssCdpManager, mcdJoinStbl, mcdJug, joins, contract } = context
   const { id, token, depositAmount, generateAmount, ilk } = data
 
   if (depositAmount.gt(zero) && generateAmount.gt(zero)) {
-    if (token === 'ETH') {
-      return contract<DssProxyActions>(dssProxyActions).methods.lockETHAndDraw(
+    if (token === 'MTR') {
+      return contract<DssProxyActions>(dssProxyActions).methods.lockCoinAndDraw(
         dssCdpManager.address,
         mcdJug.address,
         joins[ilk],
-        mcdJoinDai.address,
+        mcdJoinStbl.address,
         id.toString(),
-        amountToWei(generateAmount, 'DAI').toFixed(0),
+        amountToWei(generateAmount, 'MONE').toFixed(0),
       )
     }
     return contract<DssProxyActions>(dssProxyActions).methods.lockGemAndDraw(
       dssCdpManager.address,
       mcdJug.address,
       joins[ilk],
-      mcdJoinDai.address,
+      mcdJoinStbl.address,
       id.toString(),
       amountToWei(depositAmount, token).toFixed(0),
-      amountToWei(generateAmount, 'DAI').toFixed(0),
+      amountToWei(generateAmount, 'MONE').toFixed(0),
       true,
     )
   }
 
   if (depositAmount.gt(zero)) {
-    if (token === 'ETH') {
-      return contract<DssProxyActions>(dssProxyActions).methods.lockETH(
+    if (token === 'MTR') {
+      return contract<DssProxyActions>(dssProxyActions).methods.lockCoin(
         dssCdpManager.address,
         joins[ilk],
         id.toString(),
@@ -177,9 +177,9 @@ function getDepositAndGenerateCallData(data: DepositAndGenerateData, context: Co
   return contract<DssProxyActions>(dssProxyActions).methods.draw(
     dssCdpManager.address,
     mcdJug.address,
-    mcdJoinDai.address,
+    mcdJoinStbl.address,
     id.toString(),
-    amountToWei(generateAmount, 'DAI').toFixed(0),
+    amountToWei(generateAmount, 'MONE').toFixed(0),
   )
 }
 
@@ -192,7 +192,7 @@ export const depositAndGenerate: TransactionDef<DepositAndGenerateData> = {
     return [dssProxyActions.address, getDepositAndGenerateCallData(data, context).encodeABI()]
   },
   options: ({ token, depositAmount }) =>
-    token === 'ETH' ? { value: amountToWei(depositAmount, 'ETH').toString() } : {},
+    token === 'MTR' ? { value: amountToWei(depositAmount, 'MTR').toString() } : {},
 }
 
 export type OpenData = {
@@ -205,18 +205,18 @@ export type OpenData = {
 }
 
 function getOpenCallData(data: OpenData, context: ContextConnected) {
-  const { dssProxyActions, dssCdpManager, mcdJoinDai, mcdJug, joins, contract } = context
+  const { dssProxyActions, dssCdpManager, mcdJoinStbl, mcdJug, joins, contract } = context
   const { depositAmount, generateAmount, token, ilk, proxyAddress } = data
 
   if (depositAmount.gt(zero) && generateAmount.gt(zero)) {
-    if (token === 'ETH') {
-      return contract<DssProxyActions>(dssProxyActions).methods.openLockETHAndDraw(
+    if (token === 'MTR') {
+      return contract<DssProxyActions>(dssProxyActions).methods.openLockCoinAndDraw(
         dssCdpManager.address,
         mcdJug.address,
         joins[ilk],
-        mcdJoinDai.address,
+        mcdJoinStbl.address,
         Web3.utils.utf8ToHex(ilk),
-        amountToWei(generateAmount, 'DAI').toFixed(0),
+        amountToWei(generateAmount, 'MONE').toFixed(0),
       )
     }
 
@@ -224,21 +224,21 @@ function getOpenCallData(data: OpenData, context: ContextConnected) {
       dssCdpManager.address,
       mcdJug.address,
       joins[ilk],
-      mcdJoinDai.address,
+      mcdJoinStbl.address,
       Web3.utils.utf8ToHex(ilk),
       amountToWei(depositAmount, token).toFixed(0),
-      amountToWei(generateAmount, 'DAI').toFixed(0),
+      amountToWei(generateAmount, 'MONE').toFixed(0),
       true,
     )
   }
 
   if (depositAmount.gt(zero) && generateAmount.isZero()) {
-    if (token === 'ETH') {
-      return contract<DssProxyActions>(dssProxyActions).methods.openLockETHAndDraw(
+    if (token === 'MTR') {
+      return contract<DssProxyActions>(dssProxyActions).methods.openLockCoinAndDraw(
         dssCdpManager.address,
         mcdJug.address,
         joins[ilk],
-        mcdJoinDai.address,
+        mcdJoinStbl.address,
         Web3.utils.utf8ToHex(ilk),
         zero.toFixed(0),
       )
@@ -248,7 +248,7 @@ function getOpenCallData(data: OpenData, context: ContextConnected) {
       dssCdpManager.address,
       mcdJug.address,
       joins[ilk],
-      mcdJoinDai.address,
+      mcdJoinStbl.address,
       Web3.utils.utf8ToHex(ilk),
       amountToWei(depositAmount, token).toFixed(0),
       zero.toFixed(0),
@@ -272,7 +272,7 @@ export const open: TransactionDef<OpenData> = {
     return [dssProxyActions.address, getOpenCallData(data, context).encodeABI()]
   },
   options: ({ token, depositAmount }) =>
-    token === 'ETH' ? { value: amountToWei(depositAmount, 'ETH').toString() } : {},
+    token === 'MTR' ? { value: amountToWei(depositAmount, 'MTR').toString() } : {},
 }
 
 export type ReclaimData = {

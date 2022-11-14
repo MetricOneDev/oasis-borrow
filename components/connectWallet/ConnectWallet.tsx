@@ -58,8 +58,8 @@ export async function getConnector(
       })
       const connectorChainId = Number.parseInt((await connector.getChainId()) as string)
       if (network !== connectorChainId) {
-        alert('Browser ethereum provider and URL network param do not match!')
-        throw new Error('Browser ethereum provider and URL network param do not match!')
+        alert('Browser network provider and URL network param do not match!')
+        throw new Error('Browser network provider and URL network param do not match!')
       }
       return connector
     }
@@ -415,7 +415,7 @@ export function ConnectWallet() {
         })}
         <Box sx={{ mt: 4 }}>
           <Text sx={{ fontWeight: 'semiBold', mb: 2 }} variant="paragraph2">
-            {t('new-to-ethereum')}
+            {t('new-to-evmnetwork')}
           </Text>
           <AppLink
             sx={{

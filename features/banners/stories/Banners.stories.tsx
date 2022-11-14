@@ -18,7 +18,7 @@ export const VaultLiquidated = () => (
       <Box sx={{ mb: 3 }}>
         <Text>Owner viewing vault</Text>
         <VaultLiquidatedBanner
-          token="ETH"
+          token="MTR"
           unlockedCollateral={new BigNumber(100)}
           controller="0x00"
           id={new BigNumber(1)}
@@ -28,7 +28,7 @@ export const VaultLiquidated = () => (
       <Text>Other user viewing vault</Text>
       <Box sx={{ mb: 3 }}>
         <VaultLiquidatedBanner
-          token="ETH"
+          token="MTR"
           unlockedCollateral={new BigNumber(100)}
           controller="0x00"
           id={new BigNumber(1)}
@@ -54,7 +54,7 @@ export const VaultLiquidatingNextPrice = () => (
       <Box sx={{ mb: 3 }}>
         <Text>Owner viewing vault</Text>
         <VaultLiquidatingNextPriceBanner
-          token="ETH"
+          token="MTR"
           controller="0x00"
           id={new BigNumber(1)}
           isVaultController={true}
@@ -64,7 +64,7 @@ export const VaultLiquidatingNextPrice = () => (
       <Box sx={{ mb: 3 }}>
         <Text>Other user viewing vault</Text>
         <VaultLiquidatingNextPriceBanner
-          token="ETH"
+          token="MTR"
           controller="0x00"
           id={new BigNumber(1)}
           isVaultController={false}
@@ -81,7 +81,7 @@ export const VaultLiquidating = () => (
       <Box sx={{ mb: 3 }}>
         <Text>Owner viewing vault</Text>
         <VaultLiquidatingBanner
-          token="ETH"
+          token="MTR"
           controller="0x00"
           id={new BigNumber(1)}
           isVaultController={true}
@@ -90,7 +90,7 @@ export const VaultLiquidating = () => (
       <Text>Other user viewing vault</Text>
       <Box sx={{ mb: 3 }}>
         <VaultLiquidatingBanner
-          token="ETH"
+          token="MTR"
           controller="0x00"
           id={new BigNumber(1)}
           isVaultController={false}

@@ -5,27 +5,27 @@ import { map, shareReplay, switchMap } from 'rxjs/operators'
 
 export interface PriceInfo {
   currentCollateralPrice: BigNumber
-  currentEthPrice: BigNumber
+  currentCoinPrice: BigNumber
   nextCollateralPrice: BigNumber
-  nextEthPrice: BigNumber
+  nextCoinPrice: BigNumber
 
   dateLastCollateralPrice?: Date
   dateNextCollateralPrice?: Date
-  dateLastEthPrice?: Date
-  dateNextEthPrice?: Date
+  dateLastCoinPrice?: Date
+  dateNextCoinPrice?: Date
 
   isStaticCollateralPrice: boolean
-  isStaticEthPrice: boolean
+  isStaticCoinPrice: boolean
 
   collateralPricePercentageChange: BigNumber
-  ethPricePercentageChange: BigNumber
+  coinPricePercentageChange: BigNumber
 }
 
 export function createPriceInfo$(
   oraclePriceData$: (token: string) => Observable<OraclePriceData>,
   token: string,
 ): Observable<PriceInfo> {
-  return combineLatest(oraclePriceData$(token), oraclePriceData$('ETH')).pipe(
+  return combineLatest(oraclePriceData$(token), oraclePriceData$('MTR')).pipe(
     switchMap(
       ([
         {
@@ -37,30 +37,30 @@ export function createPriceInfo$(
           percentageChange: collateralPricePercentageChange,
         },
         {
-          currentPrice: currentEthPrice,
-          nextPrice: nextEthPrice,
-          isStaticPrice: isStaticEthPrice,
-          currentPriceUpdate: dateLastEthPrice,
-          nextPriceUpdate: dateNextEthPrice,
-          percentageChange: ethPricePercentageChange,
+          currentPrice: currentCoinPrice,
+          nextPrice: nextCoinPrice,
+          isStaticPrice: isStaticCoinPrice,
+          currentPriceUpdate: dateLastCoinPrice,
+          nextPriceUpdate: dateNextCoinPrice,
+          percentageChange: coinPricePercentageChange,
         },
       ]) =>
         of({
           currentCollateralPrice,
-          currentEthPrice,
+          currentCoinPrice,
           nextCollateralPrice,
-          nextEthPrice,
+          nextCoinPrice,
 
           dateLastCollateralPrice,
           dateNextCollateralPrice,
-          dateLastEthPrice,
-          dateNextEthPrice,
+          dateLastCoinPrice,
+          dateNextCoinPrice,
 
           isStaticCollateralPrice,
-          isStaticEthPrice,
+          isStaticCoinPrice,
 
           collateralPricePercentageChange,
-          ethPricePercentageChange,
+          coinPricePercentageChange,
         }),
     ),
     shareReplay(1),

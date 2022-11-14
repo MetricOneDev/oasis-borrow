@@ -3,7 +3,7 @@ import { WithConnection } from 'components/connectWallet/ConnectWallet'
 import { AppLayout } from 'components/Layouts'
 import { VaultBannersView } from 'features/banners/VaultsBannersView'
 import { ManageVaultView } from 'features/manageVault/ManageVaultView'
-import { VaultHistoryView } from 'features/vaultHistory/VaultHistoryView'
+// import { VaultHistoryView } from 'features/vaultHistory/VaultHistoryView'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import NotFoundPage from 'pages/404'
 import React from 'react'
@@ -34,7 +34,7 @@ export default function Vault({ id }: { id: string }) {
             <>
               <VaultBannersView id={vaultId} />
               <ManageVaultView id={vaultId} />
-              <VaultHistoryView id={vaultId} />
+              {/*<VaultHistoryView id={vaultId} />*/}
             </>
           ) : (
             <Box sx={{ position: 'relative', zIndex: 1 }}>

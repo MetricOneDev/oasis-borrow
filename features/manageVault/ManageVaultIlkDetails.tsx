@@ -16,8 +16,8 @@ export function ManageVaultIlkDetails({
   return (
     <Details>
       <Details.Item
-        label={t('manage-vault.dai-available')}
-        value={`${formatCryptoBalance(ilkDebtAvailable)} DAI`}
+        label={t('manage-vault.stbl-available')}
+        value={`${formatCryptoBalance(ilkDebtAvailable)} MONE`}
       />
       <Details.Item
         label={t('manage-vault.min-collat-ratio')}
@@ -33,7 +33,7 @@ export function ManageVaultIlkDetails({
       />
       <Details.Item
         label={t('manage-vault.dust-limit')}
-        value={`${formatCryptoBalance(debtFloor)} DAI`}
+        value={`${formatCryptoBalance(debtFloor)} MONE`}
       />
     </Details>
   )

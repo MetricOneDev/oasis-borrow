@@ -136,10 +136,10 @@ function createTxHelpers$(
 
 export function setupAppContext() {
   const chainIdToRpcUrl = mapValues(networksById, (network) => network.infuraUrl)
-  const chainIdToDAIContractDesc = mapValues(networksById, (network) => network.tokens.DAI)
+  const chainIdToSTBLContractDesc = mapValues(networksById, (network) => network.tokens.MONE)
   const [web3Context$, setupWeb3Context$] = createWeb3Context$(
     chainIdToRpcUrl,
-    chainIdToDAIContractDesc,
+    chainIdToSTBLContractDesc,
   )
 
   const account$ = createAccount$(web3Context$)

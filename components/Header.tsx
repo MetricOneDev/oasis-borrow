@@ -133,7 +133,7 @@ function ConnectedHeader() {
 }
 
 const HEADER_LINKS = {
-  'dai-wallet': `${apiHost}/daiwallet`,
+  'stbl-wallet': `${apiHost}/stblwallet`,
   learn: 'https://kb.oasis.app',
   blog: 'https://blog.oasis.app',
 }
@@ -280,7 +280,7 @@ const MOBILE_MENU_SECTIONS = [
   {
     titleKey: 'nav.products',
     links: [
-      { labelKey: 'nav.dai-wallet', url: HEADER_LINKS['dai-wallet'] },
+      { labelKey: 'nav.stbl-wallet', url: HEADER_LINKS['stbl-wallet'] },
       { labelKey: 'nav.oasis-borrow' },
     ],
   },
@@ -383,9 +383,9 @@ function DisconnectedHeader() {
               <AppLink
                 variant="links.nav"
                 sx={{ fontWeight: 'body' }}
-                href={HEADER_LINKS['dai-wallet']}
+                href={HEADER_LINKS['stbl-wallet']}
               >
-                {t('nav.dai-wallet')}
+                {t('nav.stbl-wallet')}
               </AppLink>
               <Text variant="links.nav" sx={{ cursor: 'default', ':hover': { color: 'primary' } }}>
                 {t('nav.borrow')}

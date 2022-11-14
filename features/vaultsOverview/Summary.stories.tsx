@@ -26,10 +26,10 @@ stories.add('One vault', () => {
   const summary: VaultSummary = {
     totalCollateralPrice: new BigNumber(1),
     numberOfVaults: 1,
-    totalDaiDebt: new BigNumber(1),
+    totalStblDebt: new BigNumber(1),
     vaultsAtRisk: 0,
     depositedAssetRatio: {
-      ETH: new BigNumber(1),
+      MTR: new BigNumber(1),
     },
   }
   return (
@@ -43,10 +43,10 @@ stories.add('Multiple Vaults', () => {
   const summary: VaultSummary = {
     totalCollateralPrice: new BigNumber(1),
     numberOfVaults: 3,
-    totalDaiDebt: new BigNumber(1),
+    totalStblDebt: new BigNumber(1),
     vaultsAtRisk: 0,
     depositedAssetRatio: {
-      ETH: new BigNumber(0.5),
+      MTR: new BigNumber(0.5),
       BAT: new BigNumber(0.3),
       LINK: new BigNumber(0.2),
     },
@@ -62,7 +62,7 @@ stories.add('Hidden collateral type', () => {
   const summary: VaultSummary = {
     totalCollateralPrice: new BigNumber(1),
     numberOfVaults: 10,
-    totalDaiDebt: new BigNumber(1),
+    totalStblDebt: new BigNumber(1),
     vaultsAtRisk: 0,
     depositedAssetRatio: {
       UNIV2ETHUSDT: new BigNumber(0.5),
@@ -83,10 +83,10 @@ stories.add('Vault at risk', () => {
   const summary: VaultSummary = {
     totalCollateralPrice: new BigNumber(1),
     numberOfVaults: 2,
-    totalDaiDebt: new BigNumber(1),
+    totalStblDebt: new BigNumber(1),
     vaultsAtRisk: 1,
     depositedAssetRatio: {
-      ETH: new BigNumber(0.5),
+      MTR: new BigNumber(0.5),
       BAL: new BigNumber(0.5),
     },
   }
@@ -101,10 +101,10 @@ stories.add('Handle big numbers', () => {
   const summary: VaultSummary = {
     totalCollateralPrice: new BigNumber(1000000000),
     numberOfVaults: 20,
-    totalDaiDebt: new BigNumber(100000000),
+    totalStblDebt: new BigNumber(100000000),
     vaultsAtRisk: 0,
     depositedAssetRatio: {
-      ETH: new BigNumber(0.5),
+      MTR: new BigNumber(0.5),
       BAL: new BigNumber(0.5),
     },
   }

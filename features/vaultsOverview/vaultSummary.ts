@@ -5,7 +5,7 @@ import { Dictionary } from 'ts-essentials'
 
 export interface VaultSummary {
   totalCollateralPrice: BigNumber
-  totalDaiDebt: BigNumber
+  totalStblDebt: BigNumber
   numberOfVaults: number
   vaultsAtRisk: number
   depositedAssetRatio: Dictionary<BigNumber>
@@ -15,7 +15,7 @@ function getTotalCollateralPrice(vaults: Vault[]) {
   return vaults.reduce((total, vault) => total.plus(vault.lockedCollateralUSD), new BigNumber(0))
 }
 
-function getTotalDaiDebt(vaults: Vault[]) {
+function getTotalStblDebt(vaults: Vault[]) {
   return vaults.reduce((total, vault) => total.plus(vault.debt), new BigNumber(0))
 }
 
@@ -30,7 +30,7 @@ export function getVaultsSummary(vaults: Vault[]): VaultSummary {
     numberOfVaults: vaults.length,
     vaultsAtRisk: vaults.reduce((total, vault) => (vault.atRiskLevelDanger ? total + 1 : total), 0),
     totalCollateralPrice,
-    totalDaiDebt: getTotalDaiDebt(vaults),
+    totalStblDebt: getTotalStblDebt(vaults),
     depositedAssetRatio: getAssetRatio(vaults, totalCollateralPrice),
   }
 }

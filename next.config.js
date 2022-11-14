@@ -101,12 +101,12 @@ module.exports = withBundleAnalyzer(
             },
             {
               source: '/dashboard',
-              destination: '/daiwallet/dashboard',
+              destination: '/stblwallet/dashboard',
               permanent: true,
             },
             {
               source: '/(0x[a-fA-F0-9]{40}.*)',
-              destination: '/daiwallet/dashboard',
+              destination: '/stblwallet/dashboard',
               permanent: true,
             },
           ]

@@ -86,7 +86,7 @@ export function LedgerAccountSelection({
     <Grid gap={4} sx={{ textAlign: 'center', margin: '0 auto' }}>
       <Heading as="h1">{t('ledger-select-address')}</Heading>
       <Grid gap={3}>
-        {accounts!.map(({ address, ethAmount, daiAmount }, i) => (
+        {accounts!.map(({ address, coinAmount, stblAmount }, i) => (
           <Button
             disabled={loadingAccounts}
             key={address}
@@ -114,10 +114,10 @@ export function LedgerAccountSelection({
                   <Text variant="boldBody">{formatAddress(address)}</Text>
                   <Flex sx={{ justifyContent: 'space-between' }}>
                     <Text variant="surfaceText" mr={2} sx={{ fontSize: 3 }}>
-                      {formatCryptoBalance(daiAmount)} DAI
+                      {formatCryptoBalance(stblAmount)} MONE
                     </Text>
                     <Text variant="surfaceText" sx={{ fontSize: 3 }}>
-                      {formatCryptoBalance(ethAmount)} ETH
+                      {formatCryptoBalance(coinAmount)} MTR
                     </Text>
                   </Flex>
                 </Grid>

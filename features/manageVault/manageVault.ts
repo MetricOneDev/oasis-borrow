@@ -35,7 +35,7 @@ import {
   createProxy,
   ManageVaultTransactionChange,
   setCollateralAllowance,
-  setDaiAllowance,
+  setStblAllowance,
 } from './manageVaultTransactions'
 import {
   applyManageVaultTransition,
@@ -87,7 +87,7 @@ function apply(state: ManageVaultState, change: ManageVaultChange) {
   return applyManageVaultSummary(s10)
 }
 
-export type ManageVaultEditingStage = 'collateralEditing' | 'daiEditing'
+export type ManageVaultEditingStage = 'collateralEditing' | 'stblEditing'
 
 export type ManageVaultStage =
   | ManageVaultEditingStage
@@ -101,11 +101,11 @@ export type ManageVaultStage =
   | 'collateralAllowanceInProgress'
   | 'collateralAllowanceFailure'
   | 'collateralAllowanceSuccess'
-  | 'daiAllowanceWaitingForConfirmation'
-  | 'daiAllowanceWaitingForApproval'
-  | 'daiAllowanceInProgress'
-  | 'daiAllowanceFailure'
-  | 'daiAllowanceSuccess'
+  | 'stblAllowanceWaitingForConfirmation'
+  | 'stblAllowanceWaitingForApproval'
+  | 'stblAllowanceInProgress'
+  | 'stblAllowanceFailure'
+  | 'stblAllowanceSuccess'
   | 'manageWaitingForConfirmation'
   | 'manageWaitingForApproval'
   | 'manageInProgress'
@@ -124,9 +124,9 @@ export interface MutableManageVaultState {
   generateAmount?: BigNumber
   paybackAmount?: BigNumber
   collateralAllowanceAmount?: BigNumber
-  daiAllowanceAmount?: BigNumber
+  stblAllowanceAmount?: BigNumber
   selectedCollateralAllowanceRadio: 'unlimited' | 'depositAmount' | 'custom'
-  selectedDaiAllowanceRadio: 'unlimited' | 'paybackAmount' | 'custom'
+  selectedStblAllowanceRadio: 'unlimited' | 'paybackAmount' | 'custom'
 }
 
 export interface ManageVaultEnvironment {
@@ -134,7 +134,7 @@ export interface ManageVaultEnvironment {
   accountIsController: boolean
   proxyAddress?: string
   collateralAllowance?: BigNumber
-  daiAllowance?: BigNumber
+  stblAllowance?: BigNumber
   vault: Vault
   ilkData: IlkData
   balanceInfo: BalanceInfo
@@ -161,16 +161,16 @@ interface ManageVaultFunctions {
   setCollateralAllowanceAmountUnlimited?: () => void
   setCollateralAllowanceAmountToDepositAmount?: () => void
   resetCollateralAllowanceAmount?: () => void
-  updateDaiAllowanceAmount?: (amount?: BigNumber) => void
-  setDaiAllowanceAmountUnlimited?: () => void
-  setDaiAllowanceAmountToPaybackAmount?: () => void
-  resetDaiAllowanceAmount?: () => void
+  updateStblAllowanceAmount?: (amount?: BigNumber) => void
+  setStblAllowanceAmountUnlimited?: () => void
+  setStblAllowanceAmountToPaybackAmount?: () => void
+  resetStblAllowanceAmount?: () => void
   injectStateOverride: (state: Partial<MutableManageVaultState>) => void
 }
 
 interface ManageVaultTxInfo {
   collateralAllowanceTxHash?: string
-  daiAllowanceTxHash?: string
+  stblAllowanceTxHash?: string
   proxyTxHash?: string
   manageTxHash?: string
   txError?: any
@@ -196,7 +196,7 @@ function addTransitions(
   change: (ch: ManageVaultChange) => void,
   state: ManageVaultState,
 ): ManageVaultState {
-  if (state.stage === 'collateralEditing' || state.stage === 'daiEditing') {
+  if (state.stage === 'collateralEditing' || state.stage === 'stblEditing') {
     return {
       ...state,
       updateDeposit: (depositAmount?: BigNumber) => {
@@ -280,25 +280,25 @@ function addTransitions(
   }
 
   if (
-    state.stage === 'daiAllowanceWaitingForConfirmation' ||
-    state.stage === 'daiAllowanceFailure'
+    state.stage === 'stblAllowanceWaitingForConfirmation' ||
+    state.stage === 'stblAllowanceFailure'
   ) {
     return {
       ...state,
-      updateDaiAllowanceAmount: (daiAllowanceAmount?: BigNumber) =>
-        change({ kind: 'daiAllowance', daiAllowanceAmount }),
-      setDaiAllowanceAmountUnlimited: () => change({ kind: 'daiAllowanceUnlimited' }),
-      setDaiAllowanceAmountToPaybackAmount: () => change({ kind: 'daiAllowanceAsPaybackAmount' }),
-      resetDaiAllowanceAmount: () =>
+      updateStblAllowanceAmount: (stblAllowanceAmount?: BigNumber) =>
+        change({ kind: 'stblAllowance', stblAllowanceAmount }),
+      setStblAllowanceAmountUnlimited: () => change({ kind: 'stblAllowanceUnlimited' }),
+      setStblAllowanceAmountToPaybackAmount: () => change({ kind: 'stblAllowanceAsPaybackAmount' }),
+      resetStblAllowanceAmount: () =>
         change({
-          kind: 'daiAllowanceReset',
+          kind: 'stblAllowanceReset',
         }),
-      progress: () => setDaiAllowance(txHelpers$, change, state),
-      regress: () => change({ kind: 'regressDaiAllowance' }),
+      progress: () => setStblAllowance(txHelpers$, change, state),
+      regress: () => change({ kind: 'regressStblAllowance' }),
     }
   }
 
-  if (state.stage === 'daiAllowanceSuccess') {
+  if (state.stage === 'stblAllowanceSuccess') {
     return {
       ...state,
       progress: () => change({ kind: 'backToEditing' }),
@@ -329,9 +329,9 @@ export const defaultMutableManageVaultState: MutableManageVaultState = {
   showDepositAndGenerateOption: false,
   showPaybackAndWithdrawOption: false,
   collateralAllowanceAmount: maxUint256,
-  daiAllowanceAmount: maxUint256,
+  stblAllowanceAmount: maxUint256,
   selectedCollateralAllowanceRadio: 'unlimited' as 'unlimited',
-  selectedDaiAllowanceRadio: 'unlimited' as 'unlimited',
+  selectedStblAllowanceRadio: 'unlimited' as 'unlimited',
 }
 
 export function createManageVault$(
@@ -363,12 +363,12 @@ export function createManageVault$(
                 account && proxyAddress
                   ? allowance$(vault.token, account, proxyAddress)
                   : of(undefined)
-              const daiAllowance$ =
-                account && proxyAddress ? allowance$('DAI', account, proxyAddress) : of(undefined)
+              const stblAllowance$ =
+                account && proxyAddress ? allowance$('MONE', account, proxyAddress) : of(undefined)
 
-              return combineLatest(collateralAllowance$, daiAllowance$).pipe(
+              return combineLatest(collateralAllowance$, stblAllowance$).pipe(
                 first(),
-                switchMap(([collateralAllowance, daiAllowance]) => {
+                switchMap(([collateralAllowance, stblAllowance]) => {
                   const change$ = new Subject<ManageVaultChange>()
 
                   function change(ch: ManageVaultChange) {
@@ -391,7 +391,7 @@ export function createManageVault$(
                     account,
                     proxyAddress,
                     collateralAllowance,
-                    daiAllowance,
+                    stblAllowance,
                     safeConfirmations: context.safeConfirmations,
                     etherscan: context.etherscan.url,
                     errorMessages: [],

@@ -11,31 +11,31 @@ import { Grid, Text } from 'theme-ui'
 
 import { ManageVaultState } from './manageVault'
 
-export function ManageVaultDaiAllowance({
+export function ManageVaultStblAllowance({
   stage,
-  daiAllowanceAmount,
+  stblAllowanceAmount,
   paybackAmount,
-  updateDaiAllowanceAmount,
-  setDaiAllowanceAmountUnlimited,
-  setDaiAllowanceAmountToPaybackAmount,
-  resetDaiAllowanceAmount,
-  selectedDaiAllowanceRadio,
+  updateStblAllowanceAmount,
+  setStblAllowanceAmountUnlimited,
+  setStblAllowanceAmountToPaybackAmount,
+  resetStblAllowanceAmount,
+  selectedStblAllowanceRadio,
 }: ManageVaultState) {
-  const canSelectRadio = stage === 'daiAllowanceWaitingForConfirmation'
+  const canSelectRadio = stage === 'stblAllowanceWaitingForConfirmation'
 
   const { t } = useTranslation()
 
-  const isUnlimited = selectedDaiAllowanceRadio === 'unlimited'
-  const isPayback = selectedDaiAllowanceRadio === 'paybackAmount'
-  const isCustom = selectedDaiAllowanceRadio === 'custom'
+  const isUnlimited = selectedStblAllowanceRadio === 'unlimited'
+  const isPayback = selectedStblAllowanceRadio === 'paybackAmount'
+  const isCustom = selectedStblAllowanceRadio === 'custom'
 
   return (
     <Grid>
       {canSelectRadio && (
         <>
           <Radio
-            onChange={setDaiAllowanceAmountUnlimited!}
-            name="manage-vault-dai-allowance"
+            onChange={setStblAllowanceAmountUnlimited!}
+            name="manage-vault-stbl-allowance"
             checked={isUnlimited}
           >
             <Text variant="paragraph3" sx={{ fontWeight: 'semiBold', my: '18px' }}>
@@ -43,15 +43,15 @@ export function ManageVaultDaiAllowance({
             </Text>
           </Radio>
           <Radio
-            onChange={setDaiAllowanceAmountToPaybackAmount!}
-            name="manage-vault-dai-allowance"
+            onChange={setStblAllowanceAmountToPaybackAmount!}
+            name="manage-vault-stbl-allowance"
             checked={isPayback}
           >
             <Text variant="paragraph3" sx={{ fontWeight: 'semiBold', my: '18px' }}>
-              {t('dai-paying-back', { amount: formatCryptoBalance(paybackAmount!) })}
+              {t('stbl-paying-back', { amount: formatCryptoBalance(paybackAmount!) })}
             </Text>
           </Radio>
-          <Radio onChange={resetDaiAllowanceAmount!} name="allowance-open-form" checked={isCustom}>
+          <Radio onChange={resetStblAllowanceAmount!} name="allowance-open-form" checked={isCustom}>
             <Grid columns="2fr 2fr 1fr" sx={{ alignItems: 'center', my: 2 }}>
               <Text variant="paragraph3" sx={{ fontWeight: 'semiBold' }}>
                 {t('custom')}
@@ -68,18 +68,18 @@ export function ManageVaultDaiAllowance({
                 }}
                 disabled={!isCustom}
                 value={
-                  daiAllowanceAmount && isCustom
-                    ? formatAmount(daiAllowanceAmount, getToken('DAI').symbol)
+                  stblAllowanceAmount && isCustom
+                    ? formatAmount(stblAllowanceAmount, getToken('MONE').symbol)
                     : null
                 }
                 mask={createNumberMask({
                   allowDecimal: true,
-                  decimalLimit: getToken('DAI').digits,
+                  decimalLimit: getToken('MONE').digits,
                   prefix: '',
                 })}
-                onChange={handleNumericInput(updateDaiAllowanceAmount!)}
+                onChange={handleNumericInput(updateStblAllowanceAmount!)}
               />
-              <Text sx={{ fontSize: 1 }}>DAI</Text>
+              <Text sx={{ fontSize: 1 }}>MONE</Text>
             </Grid>
           </Radio>
         </>
@@ -88,28 +88,28 @@ export function ManageVaultDaiAllowance({
   )
 }
 
-export function ManageVaultDaiAllowanceStatus({
+export function ManageVaultStblAllowanceStatus({
   stage,
-  daiAllowanceTxHash,
+  stblAllowanceTxHash,
   etherscan,
 }: ManageVaultState) {
   const { t } = useTranslation()
 
-  if (stage === 'daiAllowanceInProgress') {
+  if (stage === 'stblAllowanceInProgress') {
     return (
       <TxStatusCardProgress
-        text={t('setting-allowance-for', { token: 'DAI' })}
+        text={t('setting-allowance-for', { token: 'MONE' })}
         etherscan={etherscan!}
-        txHash={daiAllowanceTxHash!}
+        txHash={stblAllowanceTxHash!}
       />
     )
   }
-  if (stage === 'daiAllowanceSuccess') {
+  if (stage === 'stblAllowanceSuccess') {
     return (
       <TxStatusCardSuccess
-        text={t('set-allowance-for', { token: 'DAI' })}
+        text={t('set-allowance-for', { token: 'MONE' })}
         etherscan={etherscan!}
-        txHash={daiAllowanceTxHash!}
+        txHash={stblAllowanceTxHash!}
       />
     )
   }

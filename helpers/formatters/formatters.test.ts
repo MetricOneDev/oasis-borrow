@@ -139,7 +139,7 @@ describe('Formatting numbers as shorthand ones', () => {
   })
 })
 
-// **Crypto Balances (DAI, ETH, BAT etc)**
+// **Crypto Balances (MONE, MTR, BAT etc)**
 
 // - If below 0.001 - Always show <0.001
 // - If between 0.001 and 10 - always to 4 decimal places (e.g. 428.4920)
