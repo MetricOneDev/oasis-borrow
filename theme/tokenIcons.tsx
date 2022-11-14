@@ -731,7 +731,7 @@ export const tokenIcons = {
   mone_circle_color: {
     path: (
       <g>
-        <circle cx="12" cy="12" r="10" fill="url(#paint0_linear_dai)" />
+        <circle cx="12" cy="12" r="10" fill="url(#paint0_linear_mone)" />
         <path
           fillRule="evenodd"
           clipRule="evenodd"
@@ -740,7 +740,7 @@ export const tokenIcons = {
         />
         <defs>
           <linearGradient
-            id="paint0_linear_dai"
+            id="paint0_linear_mone"
             x1="12"
             y1="-0.833333"
             x2="12"

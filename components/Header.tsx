@@ -421,9 +421,9 @@ function DisconnectedHeader() {
                 sx={{ position: 'relative', left: '6px', transition: '0.2s' }}
               />
             </AppLink>
-            <LanguageDropdown
-              sx={{ '@media (max-width: 1330px)': { '.menu': { right: '-6px' } } }}
-            />
+            {/*<LanguageDropdown*/}
+            {/*  sx={{ '@media (max-width: 1330px)': { '.menu': { right: '-6px' } } }}*/}
+            {/*/>*/}
           </Grid>
         </BasicHeader>
       </Box>

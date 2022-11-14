@@ -26,7 +26,7 @@ import {
   getCollateralTokens,
   getOsms,
 } from './addresses/addressesUtils'
-import { default as mainnetAddresses } from './addresses/mainnet.json'
+import { default as meterAddresses } from './addresses/meter.json'
 import { default as meterTestnetAddresses } from './addresses/meterTestnet.json'
 
 export function contractDesc(abi: any, address: string): ContractDesc {
@@ -38,59 +38,56 @@ const infuraProjectId =
 const etherscanAPIKey =
   process.env.ETHERSCAN_API_KEY || getConfig()?.publicRuntimeConfig?.etherscan || ''
 
-const protoMain = {
-  id: '1',
-  name: 'main',
-  label: 'Mainnet',
-  infuraUrl: `https://mainnet.infura.io/v3/${infuraProjectId}`,
-  infuraUrlWS: `wss://mainnet.infura.io/ws/v3/${infuraProjectId}`,
+const protoMeter = {
+  id: '82',
+  name: 'meter',
+  label: 'Meter',
+  infuraUrl: `https://rpc.meter.io/`,
+  infuraUrlWS: `wss://ws.meter.io`,
   safeConfirmations: 10,
   otc: contractDesc(otc, '0x794e6e91555438aFc3ccF1c5076A74F42133d08D'),
-  collaterals: getCollaterals(mainnetAddresses),
+  collaterals: getCollaterals(meterAddresses),
   tokens: {
-    ...getCollateralTokens(mainnetAddresses),
-    WMTR: contractDesc(coin, mainnetAddresses['ETH']),
-    MONE: contractDesc(erc20, mainnetAddresses['MCD_STBL']),
-    MKR: contractDesc(erc20, mainnetAddresses.MCD_GOV),
+    ...getCollateralTokens(meterAddresses),
+    WMTR: contractDesc(coin, meterAddresses['MTR']),
+    MONE: contractDesc(erc20, meterAddresses['MCD_STBL']),
+    GOV: contractDesc(erc20, meterAddresses.MCD_GOV),
     CHAI: contractDesc(erc20, '0x06af07097c9eeb7fd685c692751d5c66db49c215'),
     // WBTC: contractDesc(erc20, '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599'),
   } as Dictionary<ContractDesc>,
   joins: {
-    ...getCollateralJoinContracts(mainnetAddresses),
+    ...getCollateralJoinContracts(meterAddresses),
   },
-  getCdps: contractDesc(getCdps, mainnetAddresses.GET_CDPS),
-  mcdOsms: getOsms(mainnetAddresses),
-  mcdJug: contractDesc(mcdJug, mainnetAddresses.MCD_JUG),
-  mcdPot: contractDesc(mcdPot, mainnetAddresses.MCD_POT),
-  mcdEnd: contractDesc(mcdEnd, mainnetAddresses.MCD_END),
-  mcdSpot: contractDesc(mcdSpot, mainnetAddresses.MCD_SPOT),
-  mcdDog: contractDesc(mcdDog, mainnetAddresses.MCD_DOG),
-  dssCdpManager: contractDesc(dssCdpManager, mainnetAddresses.CDP_MANAGER),
+  getCdps: contractDesc(getCdps, meterAddresses.GET_CDPS),
+  mcdOsms: getOsms(meterAddresses),
+  mcdJug: contractDesc(mcdJug, meterAddresses.MCD_JUG),
+  mcdPot: contractDesc(mcdPot, meterAddresses.MCD_POT),
+  mcdEnd: contractDesc(mcdEnd, meterAddresses.MCD_END),
+  mcdSpot: contractDesc(mcdSpot, meterAddresses.MCD_SPOT),
+  mcdDog: contractDesc(mcdDog, meterAddresses.MCD_DOG),
+  dssCdpManager: contractDesc(dssCdpManager, meterAddresses.CDP_MANAGER),
   otcSupportMethods: contractDesc(otcSupport, '0x9b3f075b12513afe56ca2ed838613b7395f57839'),
-  vat: contractDesc(vat, mainnetAddresses.MCD_VAT),
-  mcdJoinStbl: contractDesc(mcdJoinStbl, mainnetAddresses.MCD_JOIN_STBL),
-  dsProxyRegistry: contractDesc(dsProxyRegistry, mainnetAddresses.PROXY_REGISTRY),
-  dsProxyFactory: contractDesc(dsProxyFactory, mainnetAddresses.PROXY_FACTORY),
-  dssProxyActions: contractDesc(dssProxyActions, mainnetAddresses.PROXY_ACTIONS),
+  vat: contractDesc(vat, meterAddresses.MCD_VAT),
+  mcdJoinStbl: contractDesc(mcdJoinStbl, meterAddresses.MCD_JOIN_STBL),
+  dsProxyRegistry: contractDesc(dsProxyRegistry, meterAddresses.PROXY_REGISTRY),
+  dsProxyFactory: contractDesc(dsProxyFactory, meterAddresses.PROXY_FACTORY),
+  dssProxyActions: contractDesc(dssProxyActions, meterAddresses.PROXY_ACTIONS),
   etherscan: {
     url: 'https://etherscan.io',
     apiUrl: 'https://api.etherscan.io/api',
     apiKey: etherscanAPIKey || '',
   },
-  taxProxyRegistries: ['0xaa63c8683647ef91b3fdab4b4989ee9588da297b'],
-  dssProxyActionsDsr: contractDesc(
-    dssProxyActionsDsr,
-    '0x07ee93aEEa0a36FfF2A9B95dd22Bd6049EE54f26',
-  ),
+  taxProxyRegistries: [meterAddresses.PROXY_REGISTRY],
+  dssProxyActionsDsr: contractDesc(dssProxyActionsDsr, meterAddresses.PROXY_ACTIONS_DSR),
   magicLink: {
     apiKey: '',
   },
   cacheApi: 'https://oazo-bcache.new.oasis.app/api/v1',
 }
 
-export type NetworkConfig = typeof protoMain
+export type NetworkConfig = typeof protoMeter
 
-const main: NetworkConfig = protoMain
+const meter: NetworkConfig = protoMeter
 const meterTestnet: NetworkConfig = {
   id: '83',
   name: 'metertestnet',
@@ -105,7 +102,7 @@ const meterTestnet: NetworkConfig = {
     WMTR: contractDesc(coin, meterTestnetAddresses['MTR']),
     MONE: contractDesc(erc20, meterTestnetAddresses['MCD_STBL']),
     USDC: contractDesc(erc20, '0x198419c5c340e8De47ce4C0E4711A03664d42CB2'),
-    MKR: contractDesc(erc20, meterTestnetAddresses.MCD_GOV),
+    GOV: contractDesc(erc20, meterTestnetAddresses.MCD_GOV),
     CHAI: contractDesc(erc20, '0xb641957b6c29310926110848db2d464c8c3c3f38'),
     // WBTC: contractDesc(erc20, '0xA08d982C2deBa0DbE433a9C6177a219E96CeE656'),
   },
@@ -136,11 +133,12 @@ const meterTestnet: NetworkConfig = {
   magicLink: {
     apiKey: '',
   },
-  cacheApi: 'https://oazo-bcache-kovan-staging.new.oasis.app/api/v1',
+  cacheApi: '',
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const hardhat: NetworkConfig = {
-  ...protoMain,
+  ...protoMeter,
   id: '2137',
   name: 'hardhat',
   label: 'Hardhat',
@@ -149,8 +147,8 @@ const hardhat: NetworkConfig = {
   cacheApi: 'http://localhost:3001/v1',
 }
 
-export const networksById = keyBy([meterTestnet, hardhat], 'id')
-export const networksByName = keyBy([meterTestnet, hardhat], 'name')
+export const networksById = keyBy([meterTestnet, ], 'id')
+export const networksByName = keyBy([meterTestnet, ], 'name')
 
 export const dappName = 'Oasis'
 export const pollingInterval = 12000

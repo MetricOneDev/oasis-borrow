@@ -24,7 +24,7 @@ import {
   PIP_ETH,
   PROXY_ACTIONS,
   PROXY_REGISTRY,
-} from 'blockchain/addresses/mainnet.json'
+} from 'blockchain/addresses/meter.json'
 import { amountToWei } from 'blockchain/utils'
 import { ethers } from 'ethers'
 import _ from 'lodash'

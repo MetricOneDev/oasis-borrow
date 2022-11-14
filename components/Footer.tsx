@@ -19,17 +19,17 @@ const FOOTER_SECTIONS = [
   {
     titleKey: 'nav.about',
     links: [
-      { labelKey: 'nav.team', url: '/about' },
-      { labelKey: 'nav.careers', url: '/careers' },
+      // { labelKey: 'nav.team', url: '/about' },
+      // { labelKey: 'nav.careers', url: '/careers' },
       { labelKey: 'nav.privacy', url: '/privacy' },
       { labelKey: 'nav.terms', url: '/terms' },
-      { labelKey: 'nav.contact', url: `${apiHost}/stblwallet/contact` },
+      // { labelKey: 'nav.contact', url: `${apiHost}/stblwallet/contact` },
     ],
   },
   {
     titleKey: 'nav.resources',
     links: [
-      { labelKey: 'nav.blog', url: 'https://blog.oasis.app', target: '_self' },
+      // { labelKey: 'nav.blog', url: 'https://blog.oasis.app', target: '_self' },
       {
         labelKey: 'nav.faq',
         url: '/support',
@@ -42,11 +42,11 @@ const FOOTER_SECTIONS = [
   {
     titleKey: 'nav.products',
     links: [
-      {
-        labelKey: 'nav.stbl-wallet',
-        url: `${apiHost}/stblwallet`,
-        target: '_self',
-      },
+      // {
+      //   labelKey: 'nav.stbl-wallet',
+      //   url: `${apiHost}/stblwallet`,
+      //   target: '_self',
+      // },
       { labelKey: 'nav.borrow', url: '/' },
       { labelKey: 'nav.trade', url: `${apiHost}/trade`, target: '_self' },
     ],
@@ -164,7 +164,7 @@ export function Footer() {
               <AppLink href="https://discord.gg/Kc2bBB59GC" sx={{ mx: 3 }}>
                 <Icon name="discord" size="auto" width="20px" height="23px" />
               </AppLink>
-              <AppLink href="https://github.com/OasisDEX/oasis-borrow/">
+              <AppLink href="https://github.com/MetricOneDev/oasis-borrow/">
                 <Icon name="github" size="auto" width="21px" />
               </AppLink>
             </Flex>
