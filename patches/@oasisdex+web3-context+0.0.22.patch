@@ -1,0 +1,74 @@
+diff --git a/node_modules/@oasisdex/web3-context/lib/src/network.js b/node_modules/@oasisdex/web3-context/lib/src/network.js
+index 106a437..a40396d 100644
+--- a/node_modules/@oasisdex/web3-context/lib/src/network.js
++++ b/node_modules/@oasisdex/web3-context/lib/src/network.js
+@@ -5,6 +5,8 @@ const lodash_1 = require("lodash");
+ exports.networkNameToId = {
+     main: 1,
+     kovan: 42,
++    meter: 82,
++    metertestnet: 83,
+     hardhat: 2137,
+ };
+ const web3s = [];
+@@ -16,7 +18,7 @@ exports.contract = lodash_1.memoize((web3, { abi, address }) => new web3.eth.Con
+ });
+ function getNetworkName() {
+     const name = 'network';
+-    const defaultNetwork = 'main';
++    const defaultNetwork = 'meter';
+     const matchesIfFound = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+     if (lodash_1.isNull(matchesIfFound)) {
+         return defaultNetwork;
+diff --git a/node_modules/@oasisdex/web3-context/lib/src/types.d.ts b/node_modules/@oasisdex/web3-context/lib/src/types.d.ts
+index 0311502..96210d8 100644
+--- a/node_modules/@oasisdex/web3-context/lib/src/types.d.ts
++++ b/node_modules/@oasisdex/web3-context/lib/src/types.d.ts
+@@ -15,8 +15,8 @@ export interface Web3ContextConnecting {
+ }
+ export interface AccountWithBalances {
+     address: string;
+-    ethAmount: BigNumber;
+-    daiAmount: BigNumber;
++    coinAmount: BigNumber;
++    stblAmount: BigNumber;
+ }
+ export interface Web3ContextConnectingHWSelectAccount {
+     status: 'connectingHWSelectAccount';
+diff --git a/node_modules/@oasisdex/web3-context/src/network.ts b/node_modules/@oasisdex/web3-context/src/network.ts
+index 96c854e..25e29ec 100644
+--- a/node_modules/@oasisdex/web3-context/src/network.ts
++++ b/node_modules/@oasisdex/web3-context/src/network.ts
+@@ -4,6 +4,8 @@ import Web3 from 'web3';
+ export const networkNameToId = {
+   main: 1,
+   kovan: 42,
++  meter: 82,
++  metertestnet: 83,
+   hardhat: 2137,
+ } as { [key: string]: number };
+ 
+@@ -25,7 +27,7 @@ export const contract: any = memoize(
+ 
+ export function getNetworkName(): string {
+   const name = 'network';
+-  const defaultNetwork = 'main';
++  const defaultNetwork = 'meter';
+   const matchesIfFound = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+   if (isNull(matchesIfFound)) {
+     return defaultNetwork;
+diff --git a/node_modules/@oasisdex/web3-context/src/types.ts b/node_modules/@oasisdex/web3-context/src/types.ts
+index bb9489d..6c8477e 100644
+--- a/node_modules/@oasisdex/web3-context/src/types.ts
++++ b/node_modules/@oasisdex/web3-context/src/types.ts
+@@ -30,8 +30,8 @@ export interface Web3ContextConnecting {
+ 
+ export interface AccountWithBalances {
+   address: string;
+-  ethAmount: BigNumber;
+-  daiAmount: BigNumber;
++  coinAmount: BigNumber;
++  stblAmount: BigNumber;
+ }
+ 
+ export interface Web3ContextConnectingHWSelectAccount {
