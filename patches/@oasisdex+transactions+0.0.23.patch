@@ -1,0 +1,40 @@
+diff --git a/node_modules/@oasisdex/transactions/lib/src/transactions.js b/node_modules/@oasisdex/transactions/lib/src/transactions.js
+index ea2ce66..da443d1 100644
+--- a/node_modules/@oasisdex/transactions/lib/src/transactions.js
++++ b/node_modules/@oasisdex/transactions/lib/src/transactions.js
+@@ -60,12 +60,9 @@ function getTxHash(state) {
+ exports.getTxHash = getTxHash;
+ function createExternalNonce2tx(onEveryBlock$, context$, account) {
+     return rxjs_1.combineLatest([context$, onEveryBlock$.pipe(operators_1.first()), onEveryBlock$]).pipe(operators_1.switchMap(([context, firstBlock]) => ajax_1.ajax({
+-        url: `${context.etherscan.apiUrl}?module=account` +
+-            `&action=txlist` +
+-            `&address=${account}` +
+-            `&startblock=${firstBlock}` +
+-            `&sort=desc` +
+-            `&apikey=${context.etherscan.apiKey}`,
++        url: `${context.etherscan.apiUrl}/accounts/` +
++          `${account}` +
++          `/txs?page=1&limit=10`
+     })), operators_1.map(({ response }) => response.result), operators_1.map((transactions) => ramda_1.fromPairs(_.map(transactions, (tx) => [tx.nonce, { hash: tx.hash, callData: tx.input }]))), operators_1.catchError((error) => {
+         console.error(error);
+         return rxjs_1.of({});
+diff --git a/node_modules/@oasisdex/transactions/src/transactions.ts b/node_modules/@oasisdex/transactions/src/transactions.ts
+index b275001..fcc4ae9 100644
+--- a/node_modules/@oasisdex/transactions/src/transactions.ts
++++ b/node_modules/@oasisdex/transactions/src/transactions.ts
+@@ -90,12 +90,9 @@ function createExternalNonce2tx(
+     switchMap(([context, firstBlock]) =>
+       ajax({
+         url:
+-          `${context.etherscan.apiUrl}?module=account` +
+-          `&action=txlist` +
+-          `&address=${account}` +
+-          `&startblock=${firstBlock}` +
+-          `&sort=desc` +
+-          `&apikey=${context.etherscan.apiKey}`,
++          `${context.etherscan.apiUrl}/accounts/` +
++          `${account}` +
++          `/txs?page=1&limit=10`
+       }),
+     ),
+     map(({ response }) => response.result),

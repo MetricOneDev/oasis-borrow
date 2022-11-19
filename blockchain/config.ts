@@ -73,8 +73,8 @@ const protoMeter = {
   dsProxyFactory: contractDesc(dsProxyFactory, meterAddresses.PROXY_FACTORY),
   dssProxyActions: contractDesc(dssProxyActions, meterAddresses.PROXY_ACTIONS),
   etherscan: {
-    url: 'https://etherscan.io',
-    apiUrl: 'https://api.etherscan.io/api',
+    url: 'https://scan.meter.io/',
+    apiUrl: 'https://api.meter.io:8000/api',
     apiKey: etherscanAPIKey || '',
   },
   taxProxyRegistries: [meterAddresses.PROXY_REGISTRY],
@@ -124,8 +124,8 @@ const meterTestnet: NetworkConfig = {
   dsProxyFactory: contractDesc(dsProxyFactory, meterTestnetAddresses.PROXY_FACTORY),
   dssProxyActions: contractDesc(dssProxyActions, meterTestnetAddresses.PROXY_ACTIONS),
   etherscan: {
-    url: 'https://kovan.etherscan.io',
-    apiUrl: 'https://api-kovan.etherscan.io/api',
+    url: 'https://scan-warringstakes.meter.io/',
+    apiUrl: 'https://api.meter.io:4000/api',
     apiKey: etherscanAPIKey || '',
   },
   taxProxyRegistries: [meterTestnetAddresses.PROXY_REGISTRY],

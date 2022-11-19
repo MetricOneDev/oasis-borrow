@@ -1,10 +1,8 @@
 import { BigNumber } from 'bignumber.js'
-import { Context, every10Seconds$ } from 'blockchain/network'
+import { Context } from 'blockchain/network'
 import { zero } from 'helpers/zero'
-import { bindNodeCallback, combineLatest, forkJoin, iif, Observable, of } from 'rxjs'
-import { ajax } from 'rxjs/ajax'
+import { bindNodeCallback, combineLatest, iif, Observable, of } from 'rxjs'
 import {
-  catchError,
   distinctUntilChanged,
   first,
   map,
@@ -12,7 +10,7 @@ import {
   switchMap,
 } from 'rxjs/operators'
 
-import { getToken } from '../blockchain/tokensMetadata'
+import { getToken } from './tokensMetadata'
 
 export interface Ticker {
   [label: string]: BigNumber
@@ -32,37 +30,37 @@ export function createGasPrice$(
   )
 }
 
-const tradingTokens = ['MONE', 'MTR']
+// const tradingTokens = [ 'MTR']
 
-export const tokenPricesInUSD$: Observable<Ticker> = every10Seconds$.pipe(
-  switchMap(() =>
-    forkJoin(
-      tradingTokens.map((token) =>
-        ajax({
-          url: `https://api.pro.coinbase.com/products/${getToken(token).coinbaseTicker}/book`,
-          method: 'GET',
-          headers: {
-            Accept: 'application/json',
-          },
-        }).pipe(
-          map(({ response }) => {
-            const bid = new BigNumber(response.bids[0][0])
-            const ask = new BigNumber(response.asks[0][0])
-            return {
-              [token]: bid.plus(ask).div(2),
-            }
-          }),
-          catchError((error) => {
-            console.debug(`Error fetching price data: ${error}`)
-            return of({})
-          }),
-        ),
-      ),
-    ),
-  ),
-  map((prices) => prices.reduce((a, e) => ({ ...a, ...e }))),
-  shareReplay(1),
-)
+// export const tokenPricesInUSD$: Observable<Ticker> = every10Seconds$.pipe(
+//   switchMap(() =>
+//     forkJoin(
+//       tradingTokens.map((token) =>
+//         ajax({
+//           url: `https://api.pro.coinbase.com/products/${getToken(token).coinbaseTicker}/book`,
+//           method: 'GET',
+//           headers: {
+//             Accept: 'application/json',
+//           },
+//         }).pipe(
+//           map(({ response }) => {
+//             const bid = new BigNumber(response.bids[0][0])
+//             const ask = new BigNumber(response.asks[0][0])
+//             return {
+//               [token]: bid.plus(ask).div(2),
+//             }
+//           }),
+//           catchError((error) => {
+//             console.debug(`Error fetching price data: ${error}`)
+//             return of({})
+//           }),
+//         ),
+//       ),
+//     ),
+//   ),
+//   map((prices) => prices.reduce((a, e) => ({ ...a, ...e }))),
+//   shareReplay(1),
+// )
 
 export interface OraclePriceData {
   currentPrice: BigNumber

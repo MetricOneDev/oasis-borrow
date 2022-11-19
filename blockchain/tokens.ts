@@ -35,7 +35,9 @@ export function createCollateralTokens$(
   ilkToToken$: Observable<(ilk: string) => string>,
 ): Observable<string[]> {
   return combineLatest(ilks$, ilkToToken$).pipe(
-    switchMap(([ilks, ilkToToken]) => of([...new Set(ilks.map(ilkToToken))])),
+    switchMap(([ilks, ilkToToken]) => {
+      return of([...new Set(ilks.map(ilkToToken))])
+    }),
   )
 }
 

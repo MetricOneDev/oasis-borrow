@@ -17,7 +17,9 @@ function Summary({ address }: { address: string }) {
   const { vaultsOverview$, context$ } = useAppContext()
   const checksumAddress = getAddress(address.toLocaleLowerCase())
   const vaultsOverviewWithError = useObservableWithError(vaultsOverview$(checksumAddress))
+  // debugger;
   const contextWithError = useObservableWithError(context$)
+  // debugger;
 
   return (
     <WithErrorHandler error={[vaultsOverviewWithError.error, contextWithError.error]}>

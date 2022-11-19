@@ -17,10 +17,12 @@ export function createCollateralPrices$(
   return collateralTokens.pipe(
     switchMap((collateralTokens) =>
       combineLatest(
-        ...collateralTokens.map((token) =>
-          oraclePriceData$(token).pipe(
+        // ...collateralTokens.filter(token => token !== 'STBL').map((token) => {
+        ...collateralTokens.map((token) => {
+          return oraclePriceData$(token).pipe(
             switchMap((oraclePriceData) => of({ ...oraclePriceData, token })),
-          ),
+          // ),
+          )}
         ),
       ).pipe(switchMap((collateralPrices) => collateralPricesWithFilters$(collateralPrices))),
     ),
