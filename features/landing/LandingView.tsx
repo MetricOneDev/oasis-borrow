@@ -142,7 +142,7 @@ export function Hero({ sx, isConnected }: { sx?: SxStyleProp; isConnected: boole
       <Text variant="paragraph1" sx={{ mb: 4, color: 'lavender' }}>
         <Trans i18nKey="landing.hero.subheader" components={[<br />]} />
       </Text>
-      <Image sx={{ mb: 4 }} src={staticFilesRuntimeUrl('/static/img/icons_set.svg')} />
+      {/*<Image sx={{ mb: 4 }} src={staticFilesRuntimeUrl('/static/img/icons_set.svg')} />*/}
       {!isConnected && (
         <AppLink
           href="/connect"
@@ -208,7 +208,8 @@ function LandingCards() {
         py: 4,
       }}
     >
-      <LandingCard href={`${apiHost}/stblwallet`} cardKey="stbl" />
+      {/*TODO ПОМЕНЯТЬ stblwallet на что-то другое*/}
+      {/*<LandingCard href={`${apiHost}/stblwallet`} cardKey="stbl" />*/}
       <LandingCard href="/support" cardKey="faq" />
     </Grid>
   )

@@ -36,7 +36,8 @@ export function Logo({ sx }: { sx?: SxStyleProp }) {
         ...sx,
       }}
     >
-      <Image src={staticFilesRuntimeUrl('/static/img/logo.svg')} />
+      {/*<Image src={staticFilesRuntimeUrl('/static/img/logo.svg')} />*/}
+      <Text>MetricOne</Text>
     </AppLink>
   )
 }
@@ -280,15 +281,15 @@ const MOBILE_MENU_SECTIONS = [
   {
     titleKey: 'nav.products',
     links: [
-      { labelKey: 'nav.stbl-wallet', url: HEADER_LINKS['stbl-wallet'] },
+      // { labelKey: 'nav.stbl-wallet', url: HEADER_LINKS['stbl-wallet'] },
       { labelKey: 'nav.oasis-borrow' },
     ],
   },
   {
     titleKey: 'nav.resources',
     links: [
-      { labelKey: 'nav.learn', url: HEADER_LINKS['learn'] },
-      { labelKey: 'nav.blog', url: HEADER_LINKS['blog'] },
+      // { labelKey: 'nav.learn', url: HEADER_LINKS['learn'] },
+      // { labelKey: 'nav.blog', url: HEADER_LINKS['blog'] },
     ],
   },
 ]
@@ -352,10 +353,10 @@ function MobileMenu() {
               )}
             </Grid>
           ))}
-          <Grid>
-            <Text variant="links.navHeader">{t('languages')}</Text>
-            <LanguageSelect components={LangSelectMobileComponents} />
-          </Grid>
+          {/*<Grid>*/}
+            {/*<Text variant="links.navHeader">{t('languages')}</Text>*/}
+            {/*<LanguageSelect components={LangSelectMobileComponents} />*/}
+          {/*</Grid>*/}
         </Grid>
       </Box>
       <Icon
@@ -380,23 +381,23 @@ function DisconnectedHeader() {
               sx={{ transform: 'scale(85%)', display: 'inline-flex', '& *': { flexShrink: 0 } }}
             />
             <HeaderDropdown title={t('nav.products')}>
-              <AppLink
-                variant="links.nav"
-                sx={{ fontWeight: 'body' }}
-                href={HEADER_LINKS['stbl-wallet']}
-              >
-                {t('nav.stbl-wallet')}
-              </AppLink>
+              {/*<AppLink*/}
+              {/*  variant="links.nav"*/}
+              {/*  sx={{ fontWeight: 'body' }}*/}
+              {/*  href={HEADER_LINKS['stbl-wallet']}*/}
+              {/*>*/}
+              {/*  {t('nav.stbl-wallet')}*/}
+              {/*</AppLink>*/}
               <Text variant="links.nav" sx={{ cursor: 'default', ':hover': { color: 'primary' } }}>
                 {t('nav.borrow')}
               </Text>
             </HeaderDropdown>
-            <AppLink variant="links.navHeader" href={HEADER_LINKS['learn']}>
-              {t('nav.learn')}
-            </AppLink>
-            <AppLink variant="links.navHeader" href={HEADER_LINKS['blog']}>
-              {t('nav.blog')}
-            </AppLink>
+            {/*<AppLink variant="links.navHeader" href={HEADER_LINKS['learn']}>*/}
+            {/*  {t('nav.learn')}*/}
+            {/*</AppLink>*/}
+            {/*<AppLink variant="links.navHeader" href={HEADER_LINKS['blog']}>*/}
+            {/*  {t('nav.blog')}*/}
+            {/*</AppLink>*/}
           </Grid>
           <Grid sx={{ alignItems: 'center', columnGap: 3, gridAutoFlow: 'column' }}>
             <AppLink

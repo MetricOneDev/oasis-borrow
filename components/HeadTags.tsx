@@ -32,7 +32,7 @@ export function PageSEONoFollow() {
   )
 }
 
-const APP_URL = 'https://oasis.app'
+const APP_URL = 'https://vaults.metric.one'
 
 export function PageSEOTags({ title, description, url = '/', ogImage = 'og.png' }: SEOTagsType) {
   const { t } = useTranslation()
@@ -66,12 +66,12 @@ export function PageSEOTags({ title, description, url = '/', ogImage = 'og.png' 
       <meta name="twitter:card" content="summary_large_image" />
 
       <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="Oasis" />
+      <meta property="og:site_name" content="Metric" />
     </Head>
   )
 }
 
-const APP_NAME = 'Oasis'
+const APP_NAME = 'Metric'
 
 export function PWATags() {
   return (

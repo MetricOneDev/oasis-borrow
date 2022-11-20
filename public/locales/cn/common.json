@@ -3,7 +3,7 @@
   "404-message": "抱歉，页面不存在。",
   "about": {
     "heading": "About us",
-    "description": "Oasis mission is to provide the best and most trusted entry point to deploy your capital. We are building Oasis.app to let our users benefit from all of the potential in DeFi.\n\n Our team is made of passionate thinkers and builders.",
+    "description": "Metric Vaults Portal mission is to provide the best and most trusted entry point to deploy your capital. We are building Metric Vaults to let our users benefit from all of the potential in DeFi.\n\n Our team is made of passionate thinkers and builders.",
     "careers-link": "Join Us",
     "pics-title": "Meet the team"
   },
@@ -168,7 +168,7 @@
       },
       "faq": {
         "title": "Have a question?",
-        "description": "Learn more about Oasis, MONE and DeFi at our FAQ’s page"
+        "description": "Learn more about Metric Vaults, MONE and DeFi at our FAQ’s page"
       }
     }
   },
@@ -241,7 +241,7 @@
   "notification-status-sign": "签名交易",
   "of": "of",
   "one-of-some": "{{one}} of {{some}}",
-  "onramp-leave-message": "点击购买将离开 Oasis，并访问第三方网站完成购买过程。",
+  "onramp-leave-message": "点击购买将离开 Metric Vaults，并访问第三方网站完成购买过程。",
   "open-new-vault": "开启新金库",
   "open-vault": {
     "title": "开启金库",
@@ -269,7 +269,7 @@
   "pending-transactions": "确认中交易",
   "permissions": "设置许可",
   "permissions-btn": "设置许可",
-  "permissions-desc": "这将授权 Oasis 与你钱包中的 MONE 进行交互。",
+  "permissions-desc": "这将授权 Metric Vaults 与你钱包中的 MONE 进行交互。",
   "proceed": "继续",
   "readonly-alert-message": "你正在查看",
   "readonly-user-connecting": "可读模式下浏览...",
@@ -303,10 +303,10 @@
     },
     "default": {
       "description": "Borrow MONE, a USD pegged Stablecoin, using crypto as your collateral",
-      "title": "Oasis.app"
+      "title": "Metric Vaults"
     },
     "latam500": {
-      "description": "通过 Oasis.app 上的 Latamex 购买 MONE。每月可获得价值 10 美元的 MTR，为期三个月。",
+      "description": "通过 Metric Vaults 上的 Latamex 购买 MONE。每月可获得价值 10 美元的 MTR，为期三个月。",
       "title": "LATAM500"
     },
     "support": {
@@ -319,7 +319,7 @@
     },
     "about": {
       "title": "About Us",
-      "description": "Oasis mission is to provide the best and most trusted entry point to deploy your capital."
+      "description": "Metric Vaults mission is to provide the best and most trusted entry point to deploy your capital."
     }
   },
   "set-allowance-for": "设置 {{token}} 许可额度",
@@ -360,8 +360,8 @@
   "tos-accept-message": "在开始之前，你需要阅读并接受我们的服务条款。",
   "tos-accept-message-updated": "在继续之前，你需要阅读并接受我们更新后的服务条款。",
   "tos-acceptance-check-in-progress": "许可检查进行中…",
-  "tos-desc": "通过创建一个储蓄金库，我接受 Oasis",
-  "tos-jwt-signature-message": "你似乎第一次使用 Oasis.app 或正在通过新设备连接。为了安全起见，请用你的钱包签名以继续。",
+  "tos-desc": "通过创建一个储蓄金库，我接受 Metric Vaults",
+  "tos-jwt-signature-message": "你似乎第一次使用 Metric Vaults 或正在通过新设备连接。为了安全起见，请用你的钱包签名以继续。",
   "tos-read": "我已阅读并接受服务条款。",
   "tos-view": "查看服务条款",
   "tos-wallet-connection-in-progress": "正在连接钱包…",
@@ -446,7 +446,7 @@
   },
   "view": "查看",
   "view-more": "查看更多",
-  "view-on-etherscan": "在 Etherscan 上查看",
+  "view-on-etherscan": "在 MeterScan 上查看",
   "waiting-approval": "等待许可",
   "waiting-confirmation": "等待交易确认",
   "waiting-proxy-deployment": "代理部署确认中",

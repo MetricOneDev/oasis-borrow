@@ -3,7 +3,7 @@
   "404-message": "Sorry, page not found.",
   "about": {
     "heading": "About us",
-    "description": "Oasis mission is to provide the best and most trusted entry point to deploy your capital. We are building Oasis.app to let our users benefit from all of the potential in DeFi.\n\n Our team is made of passionate thinkers and builders.",
+    "description": "Metric Vaults mission is to provide the best and most trusted entry point to deploy your capital. We are building Metric Vaults to let our users benefit from all of the potential in DeFi.\n\n Our team is made of passionate thinkers and builders.",
     "careers-link": "Join Us",
     "pics-title": "Meet the team"
   },
@@ -182,7 +182,7 @@
       },
       "faq": {
         "title": "Have a question?",
-        "description": "Learn more about Oasis, MONE and DeFi at our FAQ’s page"
+        "description": "Learn more about Metric Vaults, MONE and DeFi at our FAQ’s page"
       }
     }
   },
@@ -258,7 +258,7 @@
     "oracles": "Oracles",
     "stbl-wallet": "MONE Wallet",
     "borrow": "Borrow",
-    "oasis-borrow": "Oasis Borrow",
+    "oasis-borrow": "Metric Vaults",
     "trade": "Trade"
   },
   "new-to-evmnetwork": "New to Meter? ",
@@ -277,7 +277,7 @@
   "notification-status-sign": "Sign Tx",
   "of": "of",
   "one-of-some": "{{one}} of {{some}}",
-  "onramp-leave-message": "By clicking buy, you will leave Oasis and be redirected to a third party website where you will complete the buy process.",
+  "onramp-leave-message": "By clicking buy, you will leave Metric Vaults and be redirected to a third party website where you will complete the buy process.",
   "open-new-vault": "Open new Vault",
   "open-vault": {
     "title": "Open Vault",
@@ -306,7 +306,7 @@
   "pending-transactions": "Pending Transactions",
   "permissions": "Set permissions",
   "permissions-btn": "Set permissions",
-  "permissions-desc": "This permission allows Oasis to interact with the MONE in your wallet.",
+  "permissions-desc": "This permission allows Metric Vaults to interact with the MONE in your wallet.",
   "powered-by": "Powered by",
   "proceed": "Proceed",
   "readonly-alert-message": "You’re currently viewing",
@@ -341,7 +341,7 @@
     },
     "default": {
       "description": "Borrow MONE, a USD pegged Stablecoin, using crypto as your collateral",
-      "title": "Oasis.app"
+      "title": "Metric Vaults"
     },
 
     "support": {
@@ -354,7 +354,7 @@
     },
     "about": {
       "title": "About Us",
-      "description": "Oasis mission is to provide the best and most trusted entry point to deploy your capital."
+      "description": "Metric Vaults mission is to provide the best and most trusted entry point to deploy your capital."
     }
   },
   "set-allowance-for": "Set Allowance for {{token}}",
@@ -395,8 +395,8 @@
   "tos-accept-message": "Before you can get started, you’ll need to read and accept our terms of service.",
   "tos-accept-message-updated": "Before you can continue, you’ll need to read and accept our updated terms of service.",
   "tos-acceptance-check-in-progress": "Acceptance check in progress...",
-  "tos-desc": "By creating a Savings pot, I accept Oasis",
-  "tos-jwt-signature-message": "It looks like you're new to Oasis.app or are using a new device to connect. For added security, please sign a message with your wallet to continue.",
+  "tos-desc": "By creating a Savings pot, I accept Metric Vaults",
+  "tos-jwt-signature-message": "It looks like you're new to Metric Vaults or are using a new device to connect. For added security, please sign a message with your wallet to continue.",
   "tos-read": "I have read and accept the Terms of Service.",
   "tos-view": "View Terms of Service",
   "tos-wallet-connection-in-progress": "Wallet connection in progress...",
@@ -484,7 +484,7 @@
   },
   "view": "View",
   "view-more": "View more",
-  "view-on-etherscan": "View on Etherscan",
+  "view-on-etherscan": "View on MeterScan",
   "waiting-approval": "Waiting for approval",
   "waiting-confirmation": "Waiting for transaction confirmation",
   "waiting-proxy-deployment": "Proxy deployment confirming",
@@ -523,9 +523,9 @@
   "vault-created": "Vault #{{id}} created!",
   "changing-vault": "Changing Vault",
   "your-wallet": "Your wallet",
-  "welcome": "Welcome to the new Oasis.app.",
+  "welcome": "Welcome to the new Metric Vaults.",
   "read-blog-post": "Read the blog post",
-  "visit-old-oasis": "Visit the old Oasis",
+  "visit-old-oasis": "Visit the old Metric Vaults",
   "oracles": {
     "header": "Oracles",
     "description": "Below the current and next prices of the collateral types that are accepted for MetricOne vaults can be viewed. Most use the Oracle Stability Module (OSM). This module updates the price just once every hour. Therefore, when a crash is happening, users still have an hour to react to the new price.",

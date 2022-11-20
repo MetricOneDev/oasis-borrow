@@ -82,7 +82,7 @@ const protoMeter = {
   magicLink: {
     apiKey: '',
   },
-  cacheApi: 'https://oazo-bcache.new.oasis.app/api/v1',
+  cacheApi: '',
 }
 
 export type NetworkConfig = typeof protoMeter
@@ -150,5 +150,5 @@ const hardhat: NetworkConfig = {
 export const networksById = keyBy([meterTestnet, ], 'id')
 export const networksByName = keyBy([meterTestnet, ], 'name')
 
-export const dappName = 'Oasis'
+export const dappName = 'Vaults'
 export const pollingInterval = 12000

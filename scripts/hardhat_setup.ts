@@ -121,7 +121,7 @@ async function openLockCoinAndDraw(
       '  "404-message": "Sorry, page not found.",\n' +
       '  "about": {\n' +
       '    "heading": "About us",\n' +
-      '    "description": "Oasis mission is to provide the best and most trusted entry point to deploy your capital. We are building Oasis.app to let our users benefit from all of the potential in DeFi.\\n\\n Our team is made of passionate thinkers and builders.",\n' +
+      '    "description": "Metric Vaults Portal mission is to provide the best and most trusted entry point to deploy your capital. We are building Metric Vaults to let our users benefit from all of the potential in DeFi.\\n\\n Our team is made of passionate thinkers and builders.",\n' +
       '    "careers-link": "Join Us",\n' +
       '    "pics-title": "Meet the team"\n' +
       '  },\n' +
@@ -300,7 +300,7 @@ async function openLockCoinAndDraw(
       '      },\n' +
       '      "faq": {\n' +
       '        "title": "Have a question?",\n' +
-      '        "description": "Learn more about Oasis, MONE and DeFi at our FAQ’s page"\n' +
+      '        "description": "Learn more about Metric Vaults Portal, MONE and DeFi at our FAQ’s page"\n' +
       '      }\n' +
       '    }\n' +
       '  },\n' +
@@ -376,7 +376,7 @@ async function openLockCoinAndDraw(
       '    "oracles": "Oracles",\n' +
       '    "stbl-wallet": "MONE Wallet",\n' +
       '    "borrow": "Borrow",\n' +
-      '    "oasis-borrow": "Oasis Borrow",\n' +
+      '    "oasis-borrow": "Metric Vaults Portal",\n' +
       '    "trade": "Trade"\n' +
       '  },\n' +
       '  "new-to-evmnetwork": "New to Meter? ",\n' +
@@ -395,7 +395,7 @@ async function openLockCoinAndDraw(
       '  "notification-status-sign": "Sign Tx",\n' +
       '  "of": "of",\n' +
       '  "one-of-some": "{{one}} of {{some}}",\n' +
-      '  "onramp-leave-message": "By clicking buy, you will leave Oasis and be redirected to a third party website where you will complete the buy process.",\n' +
+      '  "onramp-leave-message": "By clicking buy, you will leave Metric Vaults Portal and be redirected to a third party website where you will complete the buy process.",\n' +
       '  "open-new-vault": "Open new Vault",\n' +
       '  "open-vault": {\n' +
       '    "title": "Open Vault",\n' +
@@ -424,7 +424,7 @@ async function openLockCoinAndDraw(
       '  "pending-transactions": "Pending Transactions",\n' +
       '  "permissions": "Set permissions",\n' +
       '  "permissions-btn": "Set permissions",\n' +
-      '  "permissions-desc": "This permission allows Oasis to interact with the MONE in your wallet.",\n' +
+      '  "permissions-desc": "This permission allows Metric Vaults Portal to interact with the MONE in your wallet.",\n' +
       '  "powered-by": "Powered by",\n' +
       '  "proceed": "Proceed",\n' +
       '  "readonly-alert-message": "You’re currently viewing",\n' +
@@ -459,7 +459,7 @@ async function openLockCoinAndDraw(
       '    },\n' +
       '    "default": {\n' +
       '      "description": "Borrow MONE, a USD pegged Stablecoin, using crypto as your collateral",\n' +
-      '      "title": "Oasis.app"\n' +
+      '      "title": "Metric Vaults Portal"\n' +
       '    },\n' +
       '\n' +
       '    "support": {\n' +
@@ -472,7 +472,7 @@ async function openLockCoinAndDraw(
       '    },\n' +
       '    "about": {\n' +
       '      "title": "About Us",\n' +
-      '      "description": "Oasis mission is to provide the best and most trusted entry point to deploy your capital."\n' +
+      '      "description": "Metric Vaults Portal mission is to provide the best and most trusted entry point to deploy your capital."\n' +
       '    }\n' +
       '  },\n' +
       '  "set-allowance-for": "Set Allowance for {{token}}",\n' +
@@ -513,8 +513,8 @@ async function openLockCoinAndDraw(
       '  "tos-accept-message": "Before you can get started, you’ll need to read and accept our terms of service.",\n' +
       '  "tos-accept-message-updated": "Before you can continue, you’ll need to read and accept our updated terms of service.",\n' +
       '  "tos-acceptance-check-in-progress": "Acceptance check in progress...",\n' +
-      '  "tos-desc": "By creating a Savings pot, I accept Oasis",\n' +
-      '  "tos-jwt-signature-message": "It looks like you\'re new to Oasis.app or are using a new device to connect. For added security, please sign a message with your wallet to continue.",\n' +
+      '  "tos-desc": "By creating a Savings pot, I accept Metric Vaults Portal",\n' +
+      '  "tos-jwt-signature-message": "It looks like you\'re new to Metric Vaults Portal or are using a new device to connect. For added security, please sign a message with your wallet to continue.",\n' +
       '  "tos-read": "I have read and accept the Terms of Service.",\n' +
       '  "tos-view": "View Terms of Service",\n' +
       '  "tos-wallet-connection-in-progress": "Wallet connection in progress...",\n' +
@@ -602,7 +602,7 @@ async function openLockCoinAndDraw(
       '  },\n' +
       '  "view": "View",\n' +
       '  "view-more": "View more",\n' +
-      '  "view-on-etherscan": "View on Etherscan",\n' +
+      '  "view-on-etherscan": "View on MeterScan",\n' +
       '  "waiting-approval": "Waiting for approval",\n' +
       '  "waiting-confirmation": "Waiting for transaction confirmation",\n' +
       '  "waiting-proxy-deployment": "Proxy deployment confirming",\n' +
@@ -641,9 +641,9 @@ async function openLockCoinAndDraw(
       '  "vault-created": "Vault #{{id}} created!",\n' +
       '  "changing-vault": "Changing Vault",\n' +
       '  "your-wallet": "Your wallet",\n' +
-      '  "welcome": "Welcome to the new Oasis.app.",\n' +
+      '  "welcome": "Welcome to the new Metric Vaults Portal.",\n' +
       '  "read-blog-post": "Read the blog post",\n' +
-      '  "visit-old-oasis": "Visit the old Oasis",\n' +
+      '  "visit-old-oasis": "Visit the old Vaults Portal",\n' +
       '  "oracles": {\n' +
       '    "header": "Oracles",\n' +
       '    "description": "Below the current and next prices of the collateral types that are accepted for MetricOne vaults can be viewed. Most use the Oracle Stability Module (OSM). This module updates the price just once every hour. Therefore, when a crash is happening, users still have an hour to react to the new price.",\n' +

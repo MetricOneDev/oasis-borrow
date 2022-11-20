@@ -3,11 +3,11 @@ const sitemap = require('nextjs-sitemap-generator')
 
 try {
   sitemap({
-    baseUrl: 'https://oasis.app',
+    baseUrl: 'https://vaults.metric.one',
     pagesDirectory: `.next/server/pages`,
     targetDirectory: 'public/',
     ignoredPaths: ['/api', '404', '/[address]', '/terms', '/privacy', '/save'],
-    // other apps routes from Oasis Suite
+    // other apps routes from Vaults Suite
     extraPaths: ['/trade', '/blog'],
     nextConfigPath: `${__dirname}/next.config.js`,
     ignoreIndexFiles: true,
